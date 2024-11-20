@@ -62,7 +62,7 @@
 
 <script setup>
 import { useStockStore } from '@/stores/stock'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 
 const stockStore = useStockStore()
 const checkUsa = (stock_code) => isNaN(stock_code)
@@ -74,6 +74,7 @@ const koreanStocks = computed(() =>
 
 const usaStocks = computed(() => 
   stockStore.stocklist.filter(stock => checkUsa(stock.code))
+  
 )
 
 const getStockLogo = (code) => {
@@ -87,6 +88,10 @@ const formatPrice = (price) => {
 const moveStockItem = function (stockcode) {
 
 }
+
+onMounted(()=> {
+  console.log(stockStore.themeinfo.stocks)
+})
 </script>
 
 <style scoped>
