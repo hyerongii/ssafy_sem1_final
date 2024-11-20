@@ -29,6 +29,7 @@ const logOut = function () {
 </script>
 
 <style scoped>
+
 /* 전체 페이지 레이아웃 */
 .app-container {
   display: flex;
@@ -54,4 +55,5 @@ const logOut = function () {
   /* overflow-y: auto; 세로 스크롤 활성화 */
   flex-grow: 1; /* 남은 공간을 모두 차지하도록 설정 */
 }
+
 </style>

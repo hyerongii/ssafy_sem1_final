@@ -1,38 +1,61 @@
 <template>
-  <div>
-    <h3>관심 있는 카테고리를 최소 3개 선택하세요!</h3>
-    <div class="row">
-      <!-- 카테고리 리스트 -->
-      <div class="col-6 col-md-4 mb-3" v-for="category in categories" :key="category.value">
-        <button
-          class="btn btn-outline-primary category-btn w-100"
-          :class="{ active: selectedCategories.includes(category) }"
-          @click="toggleCategory(category)"
+  <div class="interest-container">
+    <div class="interest-box">
+      <div class="interest-header text-center mb-4">
+        <h2>나의 관심사</h2>
+        <p class="text-muted">투자 성향에 맞는 테마를 추천해드립니다</p>
+        <div class="selection-counter" :class="{ 'text-danger': selectedCategories.length < 3 }">
+          {{ selectedCategories.length }}/3 선택됨
+        </div>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center gap-3">
+        <div v-for="category in categories" 
+            :key="category.value" 
+            class="category-wrapper"
         >
-          {{ category.label }}
-        </button>
+          <button
+            class="category-btn"
+            :class="{ 'active': selectedCategories.includes(category) }"
+            @click="toggleCategory(category)"
+          >
+            <div class="circle-text">{{ category.label }}</div>
+          </button>
+        </div>
       </div>
     </div>
-
-    <!-- 선택된 카테고리 표시 및 제한 -->
-    <div class="mt-4">
-      <p v-if="selectedCategories.length < 3" class="text-danger">최소 3개의 카테고리를 선택해야 합니다.</p>
-    </div>
-
-    <!-- 다음 단계로 진행 버튼 (최소 3개 선택 시 활성화) -->
-    <!-- <button
-      class="btn btn-success mt-3"
-      :disabled="selectedCategories.length < 3"
-      @click="proceed"
-    >
-      다음 단계로 진행
-    </button> -->
   </div>
 </template>
 
 <script setup>
 import { ref, watch } from 'vue'
 import { useUserInterestStore } from '@/stores/userinterest'
+
+// const getCategoryIcon = (value) => {
+//   const iconMap = {
+//     shopping: 'bi bi-shop',
+//     fashion: 'bi bi-bag-heart',
+//     food: 'bi bi-cup-hot',
+//     pet: 'bi bi-heart',
+//     construct: 'bi bi-building',
+//     game: 'bi bi-controller',
+//     media: 'bi bi-play-circle',
+//     travel: 'bi bi-airplane',
+//     it: 'bi bi-cpu',
+//     ev: 'bi bi-ev-station',
+//     semiconductor: 'bi bi-cpu-fill',
+//     aerospace: 'bi bi-rocket',
+//     metaverse: 'bi bi-badge-vr',
+//     vr: 'bi bi-badge-3d',
+//     bankingSecurities: 'bi bi-bank',
+//     blockchain: 'bi bi-link-45deg',
+//     realestateReits: 'bi bi-houses',
+//     renewableEnergy: 'bi bi-sun',
+//     battery: 'bi bi-battery-charging'
+//   }
+//   return iconMap[value] || 'bi bi-tag'
+// }
+
 
 // 카테고리 리스트 정의
 const categories = ref([
@@ -88,16 +111,84 @@ watch(userInterestMappings, (newMappings) => {
 </script>
 
 <style scoped>
+/* .interest-container {
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+} */
+
+.interest-box {
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.selection-counter {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #f8fafc;
+  border-radius: 20px;
+  font-weight: 500;
+  margin-top: 15px;
+}
+
+.category-wrapper {
+  width: calc(33.333% - 1rem);
+  min-width: 150px;
+  max-width: 200px;
+}
+
 .category-btn {
-  border-radius:50px; /* 둥근 버튼 스타일 */
+  width: 50%;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.category-btn.active{
-background-color:#007bff;
-color:white;
+.circle-text {
+  aspect-ratio: 1;
+  width: 100%;
+  border-radius: 50%;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  color: #4a5568;
+  transition: all 0.3s ease;
+  text-align: center;
+  word-break: keep-all;
 }
 
-.btn-success[disabled]{
-  opacity: 0.5;
+.category-btn:hover .circle-text {
+  background: #edf2f7;
+  transform: scale(1.05);
+}
+
+.category-btn.active .circle-text {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .category-wrapper {
+    width: calc(50% - 1rem);
+  }
+  
+  .interest-box {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-wrapper {
+    width: calc(100% - 1rem);
+  }
 }
 </style>
