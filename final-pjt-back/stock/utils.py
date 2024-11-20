@@ -155,7 +155,7 @@ def get_current_stock_price(access_token, stock_code):
         print(f"Error getting price for stock {stock_code}: {str(e)}")
         return 0  # 에러 발생 시 0 반환
     
-def get_current_us_stock_price(access_token, stock_code):
+def get_current_us_stock_price(access_token, stock_code, stock_excd):
     """
     한국투자증권 API를 통해 미국 주식의 현재가를 조회하는 함수
     Args:
@@ -175,17 +175,17 @@ def get_current_us_stock_price(access_token, stock_code):
         "appsecret": settings.KIS_APP_SECRET,
         "tr_id": "HHDFS00000300"
     }
-    # 종목 코드의 길이에 따라 거래소 결정
-    if len(stock_code) <= 3:
-        excd = "NYS"  # 뉴욕증권거래소
-    elif len(stock_code) >= 4:
-        excd = "NAS"  # 나스닥
-    else:
-        excd = "AMS"  # 아멕스 (현재는 NYSE American)
+    # # 종목 코드의 길이에 따라 거래소 결정
+    # if len(stock_code) <= 3 or stock_code == 'RBRX'  or stock_code == 'SPOT' or stock_code == 'HST':
+    #     excd = "NYS"  # 뉴욕증권거래소
+    # elif len(stock_code) >= 4 or stock_code == 'EA':
+    #     excd = "NAS"  # 나스닥
+    # else:
+    #     excd = "AMS"  # 아멕스 (현재는 NYSE American)
 
     params = {
         "AUTH": "",
-        "EXCD": excd,  # 동적으로 설정된 거래소 코드
+        "EXCD": stock_excd,  # 동적으로 설정된 거래소 코드
         "SYMB": stock_code,
     }
 

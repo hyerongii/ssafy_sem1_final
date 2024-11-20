@@ -7,6 +7,7 @@
           "code": "UPST",
           "description": "핀테크 기업",
           "theme": 1,
+          "excd":"NAS",
           "price": 0,
           "per": "0.00",
           "pbr": "0.00",
@@ -21,6 +22,7 @@
         "fields": {
           "name": "소파이 테크놀로지",
           "code": "SOFI",
+          "excd":"NAS",
           "description": "핀테크 기업",
           "theme": 1,
           "price": 0,
@@ -37,6 +39,7 @@
         "fields": {
           "name": "로빈후드 마켓",
           "code": "HOOD",
+          "excd":"NAS",
           "description": "핀테크 기업",
           "theme": 1 ,
           "price": 0,     
@@ -69,6 +72,7 @@
         "fields": {
           "name": "테슬라",
           "code": "TSLA",
+          "excd":"NAS",
           "description": "전기자동차 및 자율주행 선도기업",
           "theme": 5 ,
           "price": 0,     
@@ -85,6 +89,7 @@
         "fields": {
           "name": "인텔",
           "code": "INTC",
+          "excd":"NAS",
           "description": "반도체 제조 기업",
           "theme": 5 ,
           "price": 0,     
@@ -101,6 +106,7 @@
         "fields": {
           "name": "알파벳 A주",
           "code": "GOOGL",
+          "excd":"NAS",
           "description": "구글의 지주회사",
           "theme": 5 ,
           "price": 0,     
@@ -117,6 +123,7 @@
         "fields": {
           "name": "워너 브로스 디스커버리",
           "code": "WBD",
+          "excd":"NAS",
           "description": "글로벌 미디어 엔터테인먼트 기업",
           "theme": 6 ,
           "price": 0,     
@@ -133,6 +140,7 @@
         "fields": {
           "name": "넷플릭스",
           "code": "NFLX",
+          "excd":"NAS",
           "description": "글로벌 스트리밍 서비스 기업",
           "theme": 6 ,
           "price": 0,     
@@ -149,6 +157,7 @@
         "fields": {
           "name": "제너럴 모터스",
           "code": "GM",
+          "excd":"NYS",
           "description": "미국의 자동차 제조 기업",
           "theme": 7 ,
           "price": 0,     
@@ -165,6 +174,7 @@
         "fields": {
           "name": "델타 에어 라인",
           "code": "DAL",
+          "excd":"NYS",
           "description": "미국의 항공사",
           "theme": 8 ,
           "price": 0,    
@@ -181,6 +191,7 @@
         "fields": {
           "name": "메리어트 인터내셔널",
           "code": "MAR",
+          "excd":"NAS",
           "description": "글로벌 호텔 체인",
           "theme": 8 ,
           "price": 0,     
@@ -197,6 +208,7 @@
         "fields": {
           "name": "인텔",
           "code": "INTC",
+          "excd":"NAS",
           "description": "반도체 및 VR 기술 기업",
           "theme": 9 ,
           "price": 0,     
@@ -213,6 +225,7 @@
         "fields": {
           "name": "알파벳 C주",
           "code": "GOOG",
+          "excd":"NAS",
           "description": "구글의 지주회사",
           "theme": 9 ,
           "price": 0,     
@@ -229,6 +242,7 @@
         "fields": {
           "name": "메타 플랫폼스",
           "code": "META",
+          "excd":"NAS",
           "description": "메타버스 선도 기업",
           "theme": 9 ,
           "price": 0,     
@@ -261,6 +275,7 @@
         "fields": {
           "name": "오토데스크",
           "code": "ADSK",
+          "excd":"NAS",
           "description": "3D 설계 소프트웨어 기업",
           "theme": 10,
           "price": 0,      
@@ -277,6 +292,7 @@
         "fields": {
           "name": "엔비디아",
           "code": "NVDA",
+          "excd":"NAS",
           "description": "그래픽 처리 장치 제조 기업",
           "theme": 10,
           "price": 0,      
@@ -293,6 +309,7 @@
         "fields": {
           "name": "유니티 소프트웨어",
           "code": "U",
+          "excd":"NYS",
           "description": "게임 엔진 개발 기업",
           "theme": 10,
           "price": 0,      
@@ -309,6 +326,7 @@
         "fields": {
           "name": "아마존닷컴",
           "code": "AMZN",
+          "excd":"NAS",
           "description": "전자상거래 및 클라우드 컴퓨팅 기업",
           "theme": 11,
           "price": 0,      
@@ -325,6 +343,7 @@
         "fields": {
           "name": "마이크로소프트",
           "code": "MSFT",
+          "excd":"NAS",
           "description": "소프트웨어 및 클라우드 서비스 기업",
           "theme": 11,
           "price": 0,      
@@ -341,6 +360,7 @@
         "fields": {
           "name": "IBM",
           "code": "IBM",
+          "excd":"NYS",
           "description": "정보 기술 및 컨설팅 기업",
           "theme": 11,
           "price": 0,      
@@ -437,6 +457,7 @@
         "fields": {
           "name": "코카콜라",
           "code": "KO",
+          "excd":"NYS",
           "description": "글로벌 음료 제조 기업",
           "theme": 23,
           "price": 0,      
@@ -453,6 +474,7 @@
         "fields": {
           "name": "펩시코",
           "code": "PEP",
+          "excd":"NAS",
           "description": "글로벌 음료 및 과자 제조 기업",
           "theme": 23,
           "price": 0,      
@@ -501,6 +523,7 @@
         "fields": {
           "name": "엑슨모빌",
           "code": "XOM",
+          "excd":"NYS",
           "description": "글로벌 에너지 기업",
           "theme": 26,
           "price": 0,      
@@ -517,6 +540,7 @@
         "fields": {
           "name": "쉐브론",
           "code": "CVX",
+          "excd":"NYS",
           "description": "글로벌 에너지 기업",
           "theme": 26,
           "price": 0,      
@@ -533,6 +557,7 @@
         "fields": {
           "name": "스냅",
           "code": "SNAP",
+          "excd":"NYS",
           "description": "소셜 미디어 플랫폼",
           "theme": 27,
           "price": 0,      
@@ -549,6 +574,7 @@
         "fields": {
           "name": "핀터레스트",
           "code": "PINS",
+          "excd":"NYS",
           "description": "이미지 기반 소셜 미디어 플랫폼",
           "theme": 27,
           "price": 0,      
@@ -565,6 +591,7 @@
         "fields": {
           "name": "코인베이스",
           "code": "COIN",
+          "excd":"NAS",
           "description": "암호화폐 거래소",
           "theme": 28,
           "price": 0,      
@@ -581,6 +608,7 @@
         "fields": {
           "name": "블록",
           "code": "SQ",
+          "excd":"NYS",
           "description": "디지털 결제 및 금융 서비스 기업",
           "theme": 28,
           "price": 0,      
@@ -597,6 +625,7 @@
         "fields": {
           "name": "월마트",
           "code": "WMT",
+          "excd":"NYS",
           "description": "글로벌 유통 기업",
           "theme": 29,
           "price": 0,      
@@ -613,6 +642,7 @@
         "fields": {
           "name": "코스트코",
           "code": "COST",
+          "excd":"NAS",
           "description": "회원제 창고형 할인점",
           "theme": 29,
           "price": 0,      
@@ -629,6 +659,7 @@
         "fields": {
           "name": "홈디포",
           "code": "HD",
+          "excd":"NYS",
           "description": "주택 개선 용품 유통업체",
           "theme": 29, 
           "price": 0,     
@@ -645,6 +676,7 @@
         "fields": {
           "name": "시스코",
           "code": "CSCO",
+          "excd":"NAS",
           "description": "네트워크 장비 제조 기업",
           "theme": 30,
           "price": 0,      
@@ -661,6 +693,7 @@
         "fields": {
           "name": "퀄컴",
           "code": "QCOM",
+          "excd":"NAS",
           "description": "무선통신 기술 기업",
           "theme": 30,
           "price": 0,      
@@ -677,6 +710,7 @@
         "fields": {
           "name": "처브",
           "code": "CB",
+          "excd":"NYS",
           "description": "온라인 반려동물 용품 유통업체",
           "theme": 31,
           "price": 0,      
@@ -693,6 +727,7 @@
         "fields": {
           "name": "아이데시코",
           "code": "IDXX",
+          "excd":"NAS",
           "description": "동물 진단기기 제조업체",
           "theme": 31,
           "price": 0,      
@@ -709,22 +744,7 @@
         "fields": {
           "name": "에스티 로더",
           "code": "EL",
-          "description": "글로벌 화장품 기업",
-          "theme": 32,
-          "price": 0,      
-          "per": "0.00",
-        "pbr": "0.00",
-        "consensus": "",
-        "eps": "0.00",
-        "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 48,
-        "fields": {
-          "name": "로레알",
-          "code": "LRLCY",
+          "excd":"NYS",
           "description": "글로벌 화장품 기업",
           "theme": 32,
           "price": 0,      
@@ -773,6 +793,7 @@
         "fields": {
           "name": "로블록스",
           "code": "RBLX", 
+          "excd":"NYS",
           "description": "온라인 게임 플랫폼",
           "theme": 3,
           "price": 0,
@@ -789,6 +810,7 @@
         "fields": {
           "name": "테이크-투 인터렉티브",
           "code": "TTWO",
+          "excd":"NAS",
           "description": "비디오 게임 제작사",
           "theme": 3,
           "price": 0,
@@ -805,6 +827,7 @@
         "fields": {
           "name": "아마존닷컴",
           "code": "AMZN",
+          "excd":"NAS",
           "description": "게임 스트리밍 서비스 제공 기업",
           "theme": 3,
           "price": 0,
@@ -821,6 +844,7 @@
         "fields": {
           "name": "일렉트로닉 아츠",
           "code": "EA",
+          "excd":"NAS",
           "description": "글로벌 게임 제작사",
           "theme": 3,
           "price": 0,
@@ -837,6 +861,7 @@
         "fields": {
           "name": "마이크로소프트",
           "code": "MSFT",
+          "excd":"NAS",
           "description": "게임 콘솔 및 게임 제작사",
           "theme": 3,
           "price": 0,
@@ -933,6 +958,7 @@
         "fields": {
           "name": "펠로톤 인터렉티브",
           "code": "PTON",
+          "excd":"NAS",
           "description": "온라인 피트니스 플랫폼",
           "theme": 2,
           "price": 0,
@@ -949,6 +975,7 @@
         "fields": {
           "name": "도어대시",
           "code": "DASH",
+          "excd":"NAS",
           "description": "음식 배달 플랫폼",
           "theme": 2,
           "price": 0,
@@ -965,6 +992,7 @@
         "fields": {
           "name": "아마존닷컴",
           "code": "AMZN",
+          "excd":"NAS",
           "description": "전자상거래 플랫폼",
           "theme": 2,
           "price": 0,
@@ -981,6 +1009,7 @@
         "fields": {
           "name": "넷플릭스",
           "code": "NFLX",
+          "excd":"NAS",
           "description": "온라인 스트리밍 서비스",
           "theme": 2,
           "price": 0,
@@ -1077,6 +1106,7 @@
         "fields": {
           "name": "테슬라",
           "code": "TSLA",
+          "excd":"NAS",
           "description": "전기차 및 클린에너지 기업",
           "theme": 4,
           "price": 0,
@@ -1093,6 +1123,7 @@
         "fields": {
           "name": "아마존닷컴",
           "code": "AMZN",
+          "excd":"NAS",
           "description": "글로벌 전자상거래 기업",
           "theme": 4,
           "price": 0,
@@ -1109,6 +1140,7 @@
         "fields": {
           "name": "엔비디아",
           "code": "NVDA",
+          "excd":"NAS",
           "description": "반도체 및 AI 기술 기업",
           "theme": 4,
           "price": 0,
@@ -1125,6 +1157,7 @@
         "fields": {
           "name": "넷플릭스",
           "code": "NFLX",
+          "excd":"NAS",
           "description": "글로벌 스트리밍 서비스 기업",
           "theme": 4,
           "price": 0,
@@ -1141,6 +1174,7 @@
         "fields": {
           "name": "스포티파이 테크놀리지",
           "code": "SPOT",
+          "excd":"NYS",
           "description": "음원 스트리밍 서비스 기업",
           "theme": 4,
           "price": 0,
@@ -1237,6 +1271,7 @@
         "fields": {
           "name": "아마존닷컴",
           "code": "AMZN", 
+          "excd":"NAS",
           "description": "글로벌 미디어 스트리밍 기업",
           "theme": 6,
           "price": 0,
@@ -1253,6 +1288,7 @@
         "fields": {
           "name": "컴캐스트",
           "code": "CMCSA",
+          "excd":"NAS",
           "description": "글로벌 미디어 및 엔터테인먼트 기업",
           "theme": 6,
           "price": 0,
@@ -1269,6 +1305,7 @@
         "fields": {
           "name": "월트 디즈니",
           "code": "DIS",
+          "excd":"NYS",
           "description": "글로벌 엔터테인먼트 기업",
           "theme": 6,
           "price": 0,
@@ -1365,6 +1402,7 @@
         "fields": {
           "name": "테슬라",
           "code": "TSLA",
+          "excd":"NAS",
           "description": "전기차 및 클린에너지 기업",
           "theme": 7,
           "price": 0,
@@ -1381,6 +1419,7 @@
         "fields": {
           "name": "포드 모터",
           "code": "F",
+          "excd":"NYS",
           "description": "글로벌 자동차 제조 기업",
           "theme": 7,
           "price": 0,
@@ -1397,6 +1436,7 @@
         "fields": {
           "name": "페라리",
           "code": "RACE",
+          "excd":"NYS",
           "description": "럭셔리 스포츠카 제조 기업",
           "theme": 7,
           "price": 0,
@@ -1413,6 +1453,7 @@
         "fields": {
           "name": "할리-데이비슨",
           "code": "HOG",
+          "excd":"NYS",
           "description": "모터사이클 제조 기업",
           "theme": 7,
           "price": 0,
@@ -1477,6 +1518,7 @@
         "fields": {
           "name": "엔비디아",
           "code": "NVDA",
+          "excd":"NAS",
           "description": "자율주행 AI칩 제조 기업",
           "theme": 5,
           "price": 0,
@@ -1493,6 +1535,7 @@
         "fields": {
           "name": "우버 테크놀로지스",
           "code": "UBER",
+          "excd":"NYS",
           "description": "자율주행 모빌리티 기업",
           "theme": 5,
           "price": 0,
@@ -1589,6 +1632,7 @@
         "fields": {
           "name": "카니발",
           "code": "CCL",
+          "excd":"NYS",
           "description": "크루즈 여행 기업",
           "theme": 8,
           "price": 0,
@@ -1605,6 +1649,7 @@
         "fields": {
           "name": "부킹 홀딩스",
           "code": "BKNG",
+          "excd":"NAS",
           "description": "온라인 여행 예약 플랫폼",
           "theme": 8,
           "price": 0,
@@ -1621,6 +1666,7 @@
         "fields": {
           "name": "힐튼 월드와이드",
           "code": "HLT",
+          "excd":"NYS",
           "description": "글로벌 호텔 체인",
           "theme": 8,
           "price": 0,
@@ -1637,6 +1683,7 @@
         "fields": {
           "name": "사우스웨스트 에어라인",
           "code": "LUV",
+          "excd":"NYS",
           "description": "미국 항공사",
           "theme": 8,
           "price": 0,
@@ -1653,6 +1700,7 @@
         "fields": {
           "name": "라스베가스 샌즈",
           "code": "LVS",
+          "excd":"NYS",
           "description": "카지노 리조트 운영 기업",
           "theme": 8,
           "price": 0,
@@ -1797,6 +1845,7 @@
         "fields": {
           "name": "메터포트",
           "code": "MTTR",
+          "excd":"NAS",
           "description": "3D 공간 데이터 플랫폼 기업",
           "theme": 10,
           "price": 0,
@@ -1813,6 +1862,7 @@
         "fields": {
           "name": "어도비",
           "code": "ADBE",
+          "excd":"NAS",
           "description": "디지털 미디어 소프트웨어 기업",
           "theme": 10,
           "price": 0,
@@ -1829,6 +1879,7 @@
         "fields": {
           "name": "메타플랫폼스",
           "code": "META",
+          "excd":"NAS",
           "description": "메타버스 선도 기업",
           "theme": 10,
           "price": 0,
@@ -1893,6 +1944,7 @@
         "fields": {
           "name": "알파벳 A주",
           "code": "GOOGL",
+          "excd":"NAS",
           "description": "AI 연구 및 개발 선도 기업",
           "theme": 11,
           "price": 0,
@@ -1909,6 +1961,7 @@
         "fields": {
           "name": "메타 플랫폼스",
           "code": "META",
+          "excd":"NAS",
           "description": "AI 기반 소셜미디어 기업",
           "theme": 11,
           "price": 0,
@@ -1973,6 +2026,7 @@
         "fields": {
           "name": "세일즈포스닷컴",
           "code": "CRM",
+          "excd":"NYS",
           "description": "클라우드 기반 CRM 솔루션 기업",
           "theme": 12,
           "price": 0,
@@ -1989,6 +2043,7 @@
         "fields": {
           "name": "알파벳 A주",
           "code": "GOOGL",
+          "excd":"NAS",
           "description": "클라우드 컴퓨팅 서비스 제공 기업",
           "theme": 12,
           "price": 0,
@@ -2005,6 +2060,7 @@
         "fields": {
           "name": "아마존닷컴",
           "code": "AMZN",
+          "excd":"NAS",
           "description": "클라우드 컴퓨팅 선도 기업",
           "theme": 12,
           "price": 0,
@@ -2021,6 +2077,7 @@
         "fields": {
           "name": "마이크로소프트",
           "code": "MSFT",
+          "excd":"NAS",
           "description": "클라우드 플랫폼 서비스 기업",
           "theme": 12,
           "price": 0,
@@ -2037,6 +2094,7 @@
         "fields": {
           "name": "IBM",
           "code": "IBM",
+          "excd":"NYS",
           "description": "클라우드 및 IT 서비스 기업",
           "theme": 12,
           "price": 0,
@@ -2133,6 +2191,7 @@
         "fields": {
           "name": "레이시온 테크놀로지스",
           "code": "RTX",
+          "excd":"NYS",
           "description": "방위산업 및 항공우주 기업",
           "theme": 13,
           "price": 0,
@@ -2149,6 +2208,7 @@
         "fields": {
           "name": "보잉",
           "code": "BA",
+          "excd":"NYS",
           "description": "항공기 제조 기업",
           "theme": 13,
           "price": 0,
@@ -2165,6 +2225,7 @@
         "fields": {
           "name": "록히드 마틴",
           "code": "LMT",
+          "excd":"NYS",
           "description": "방위산업 및 항공우주 기업",
           "theme": 13,
           "price": 0,
@@ -2181,6 +2242,7 @@
         "fields": {
           "name": "노스롭 그루먼",
           "code": "NOC",
+          "excd":"NYS",
           "description": "방위산업 및 우주항공 기업",
           "theme": 13,
           "price": 0,
@@ -2197,6 +2259,7 @@
         "fields": {
           "name": "제너럴 다이내믹스",
           "code": "GD",
+          "excd":"NYS",
           "description": "방위산업 기업",
           "theme": 13,
           "price": 0,
@@ -2293,6 +2356,7 @@
         "fields": {
           "name": "차터 커뮤니케이션스",
           "code": "CHTR",
+          "excd":"NAS",
           "description": "통신 서비스 제공 기업",
           "theme": 14,
           "price": 0,
@@ -2309,6 +2373,7 @@
         "fields": {
           "name": "T-모바일 US",
           "code": "TMUS",
+          "excd":"NAS",
           "description": "이동통신 서비스 기업",
           "theme": 14,
           "price": 0,
@@ -2325,6 +2390,7 @@
         "fields": {
           "name": "AT&T",
           "code": "T",
+          "excd":"NYS",
           "description": "통신 서비스 기업",
           "theme": 14,
           "price": 0,
@@ -2341,6 +2407,7 @@
         "fields": {
           "name": "컴캐스트",
           "code": "CMCSA",
+          "excd":"NAS",
           "description": "통신 및 미디어 기업",
           "theme": 14,
           "price": 0,
@@ -2357,6 +2424,7 @@
         "fields": {
           "name": "버라이존 커뮤니케이션스",
           "code": "VZ",
+          "excd":"NYS",
           "description": "통신 서비스 기업",
           "theme": 14,
           "price": 0,
@@ -2421,6 +2489,7 @@
         "fields": {
           "name": "쉐이크 쉑",
           "code": "SHAK",
+          "excd":"NYS",
           "description": "글로벌 햄버거 프랜차이즈",
           "theme": 15,
           "price": 0,
@@ -2437,6 +2506,7 @@
         "fields": {
           "name": "도미노 피자",
           "code": "DPZ",
+          "excd":"NYS",
           "description": "글로벌 피자 프랜차이즈",
           "theme": 15,
           "price": 0,
@@ -2453,6 +2523,7 @@
         "fields": {
           "name": "스타벅스",
           "code": "SBUX",
+          "excd":"NAS",
           "description": "글로벌 커피 프랜차이즈",
           "theme": 15,
           "price": 0,
@@ -2469,6 +2540,7 @@
         "fields": {
           "name": "얌! 브랜드",
           "code": "YUM",
+          "excd":"NYS",
           "description": "글로벌 패스트푸드 프랜차이즈",
           "theme": 15,
           "price": 0,
@@ -2485,6 +2557,7 @@
         "fields": {
           "name": "맥도날드",
           "code": "MCD",
+          "excd":"NYS",
           "description": "글로벌 패스트푸드 프랜차이즈",
           "theme": 15,
           "price": 0,
@@ -2533,6 +2606,7 @@
         "fields": {
           "name": "스포티파이 테크놀로지",
           "code": "SPOT",
+          "excd":"NYS",
           "description": "글로벌 음원 스트리밍 서비스",
           "theme": 16,
           "price": 0,
@@ -2549,6 +2623,7 @@
         "fields": {
           "name": "월트 디즈니",
           "code": "DIS",
+          "excd":"NYS",
           "description": "글로벌 미디어 스트리밍 기업",
           "theme": 16,
           "price": 0,
@@ -2565,6 +2640,7 @@
         "fields": {
           "name": "넷플릭스",
           "code": "NFLX",
+          "excd":"NAS",
           "description": "글로벌 동영상 스트리밍 서비스",
           "theme": 16,
           "price": 0,
@@ -2581,6 +2657,7 @@
         "fields": {
           "name": "알파벳 A주",
           "code": "GOOGL",
+          "excd":"NAS",
           "description": "유튜브 스트리밍 서비스 운영",
           "theme": 16,
           "price": 0,
@@ -2597,6 +2674,7 @@
         "fields": {
           "name": "아마존닷컴",
           "code": "AMZN",
+          "excd":"NAS",
           "description": "프라임 비디오 스트리밍 서비스",
           "theme": 16,
           "price": 0,
@@ -2613,6 +2691,7 @@
         "fields": {
           "name": "애플",
           "code": "AAPL",
+          "excd":"NAS",
           "description": "애플TV+ 스트리밍 서비스",
           "theme": 16,
           "price": 0,
@@ -2693,6 +2772,7 @@
         "fields": {
           "name": "랄프 로렌",
           "code": "RL",
+          "excd":"NYS",
           "description": "글로벌 패션 브랜드",
           "theme": 17,
           "price": 0,
@@ -2709,6 +2789,7 @@
         "fields": {
           "name": "VF",
           "code": "VFC",
+          "excd":"NYS",
           "description": "글로벌 의류 기업",
           "theme": 17,
           "price": 0,
@@ -2725,6 +2806,7 @@
         "fields": {
           "name": "PVH",
           "code": "PVH",
+          "excd":"NYS",
           "description": "글로벌 패션 기업",
           "theme": 17,
           "price": 0,
@@ -2741,6 +2823,7 @@
         "fields": {
           "name": "갭",
           "code": "GAP",
+          "excd":"NYS",
           "description": "글로벌 의류 소매 기업",
           "theme": 17,
           "price": 0,
@@ -2757,6 +2840,7 @@
         "fields": {
           "name": "리바이 스트라우스",
           "code": "LEVI",
+          "excd":"NYS",
           "description": "글로벌 데님 의류 기업",
           "theme": 17,
           "price": 0,
@@ -2853,6 +2937,7 @@
         "fields": {
           "name": "테슬라",
           "code": "TSLA",
+          "excd":"NAS",
           "description": "전기차 및 배터리 제조 기업",
           "theme": 18,
           "price": 0,
@@ -2869,6 +2954,7 @@
         "fields": {
           "name": "퀀텀스케이프",
           "code": "QS",
+          "excd":"NYS",
           "description": "고체 배터리 개발 기업",
           "theme": 18,
           "price": 0,
@@ -2885,6 +2971,7 @@
         "fields": {
           "name": "엔페이즈 에너지",
           "code": "ENPH",
+          "excd":"NAS",
           "description": "에너지 저장 시스템 기업",
           "theme": 18,
           "price": 0,
@@ -2901,6 +2988,7 @@
         "fields": {
           "name": "알비마리 리튬",
           "code": "ALB",
+          "excd":"NYS",
           "description": "리튬 생산 기업",
           "theme": 18,
           "price": 0,
@@ -2981,6 +3069,7 @@
         "fields": {
           "name": "엔비디아",
           "code": "NVDA",
+          "excd":"NAS",
           "description": "GPU 반도체 제조 기업",
           "theme": 19,
           "price": 0,
@@ -2997,6 +3086,7 @@
         "fields": {
           "name": "인텔",
           "code": "INTC",
+          "excd":"NAS",
           "description": "CPU 반도체 제조 기업",
           "theme": 19,
           "price": 0,
@@ -3013,6 +3103,7 @@
         "fields": {
           "name": "퀄컴",
           "code": "QCOM",
+          "excd":"NAS",
           "description": "모바일 반도체 제조 기업",
           "theme": 19,
           "price": 0,
@@ -3029,6 +3120,7 @@
         "fields": {
           "name": "AMD",
           "code": "AMD",
+          "excd":"NAS",
           "description": "CPU/GPU 반도체 제조 기업",
           "theme": 19,
           "price": 0,
@@ -3045,6 +3137,7 @@
         "fields": {
           "name": "마이크론 테크놀로지",
           "code": "MU",
+          "excd":"NAS",
           "description": "메모리 반도체 제조 기업",
           "theme": 19,
           "price": 0,
@@ -3141,6 +3234,7 @@
         "fields": {
           "name": "부킹 홀딩스",
           "code": "BKNG",
+          "excd":"NAS",
           "description": "글로벌 여행 예약 플랫폼",
           "theme": 20,
           "price": 0,
@@ -3157,6 +3251,7 @@
         "fields": {
           "name": "알파벳 A주",
           "code": "GOOGL",
+          "excd":"NAS",
           "description": "검색 및 광고 플랫폼",
           "theme": 20,
           "price": 0,
@@ -3173,6 +3268,7 @@
         "fields": {
           "name": "메타 플랫폼스",
           "code": "META",
+          "excd":"NAS",
           "description": "소셜미디어 플랫폼",
           "theme": 20,
           "price": 0,
@@ -3189,6 +3285,7 @@
         "fields": {
           "name": "애플",
           "code": "AAPL",
+          "excd":"NAS",
           "description": "앱스토어 플랫폼",
           "theme": 20,
           "price": 0,
@@ -3205,6 +3302,7 @@
         "fields": {
           "name": "우버 테크놀로지스",
           "code": "UBER",
+          "excd":"NYS",
           "description": "모빌리티 플랫폼",
           "theme": 20,
           "price": 0,
@@ -3269,6 +3367,7 @@
         "fields": {
           "name": "사이먼 프로퍼티 그룹",
           "code": "SPG",
+          "excd":"NYS",
           "description": "상업용 부동산 리츠",
           "theme": 21,
           "price": 0,
@@ -3285,6 +3384,7 @@
         "fields": {
           "name": "아발론베이 커뮤니티",
           "code": "AVB",
+          "excd":"NYS",
           "description": "주거용 부동산 리츠",
           "theme": 21,
           "price": 0,
@@ -3301,6 +3401,7 @@
         "fields": {
           "name": "에쿼티 레지덴셜",
           "code": "EQR",
+          "excd":"NYS",
           "description": "주거용 부동산 리츠",
           "theme": 21,
           "price": 0,
@@ -3317,6 +3418,7 @@
         "fields": {
           "name": "호스트 호텔 앤 리조트",
           "code": "HST",
+          "excd":"NAS",
           "description": "호텔 리츠",
           "theme": 21,
           "price": 0,
@@ -3333,6 +3435,7 @@
         "fields": {
           "name": "프로로지스",
           "code": "PLD",
+          "excd":"NYS",
           "description": "물류 부동산 리츠",
           "theme": 21,
           "price": 0,
@@ -3413,6 +3516,7 @@
         "fields": {
           "name": "셈프라에너지",
           "code": "SRE",
+          "excd":"NYS",
           "description": "청정에너지 발전 기업",
           "theme": 22,
           "price": 0,
@@ -3429,6 +3533,7 @@
         "fields": {
           "name": "에디슨 인터내셔널",
           "code": "EIX",
+          "excd":"NYS",
           "description": "전력 및 신재생에너지 기업",
           "theme": 22,
           "price": 0,
@@ -3445,6 +3550,7 @@
         "fields": {
           "name": "넥스트에라 에너지",
           "code": "NEE",
+          "excd":"NYS",
           "description": "신재생에너지 발전 기업",
           "theme": 22,
           "price": 0,
@@ -3461,6 +3567,7 @@
         "fields": {
           "name": "플러그 파워",
           "code": "PLUG",
+          "excd":"NAS",
           "description": "수소연료전지 기업",
           "theme": 22,
           "price": 0,
@@ -3557,6 +3664,7 @@
         "fields": {
           "name": "컨스텔레이션브랜드",
           "code": "STZ",
+          "excd":"NYS",
           "description": "주류 제조 기업",
           "theme": 23,
           "price": 0,
@@ -3573,6 +3681,7 @@
         "fields": {
           "name": "몬스터베버리지",
           "code": "MNST",
+          "excd":"NAS",
           "description": "에너지 음료 제조 기업",
           "theme": 23,
           "price": 0,
@@ -3589,6 +3698,7 @@
         "fields": {
           "name": "펩시코",
           "code": "PEP",
+          "excd":"NAS",
           "description": "글로벌 음료 제조 기업",
           "theme": 23,
           "price": 0,
@@ -3605,6 +3715,7 @@
         "fields": {
           "name": "코카콜라",
           "code": "KO",
+          "excd":"NYS",
           "description": "글로벌 음료 제조 기업",
           "theme": 23,
           "price": 0,
@@ -3621,6 +3732,7 @@
         "fields": {
           "name": "큐리그 닥터 페퍼",
           "code": "KDP",
+          "excd":"NAS",
           "description": "음료 제조 기업",
           "theme": 23,
           "price": 0,
@@ -3717,6 +3829,7 @@
         "fields": {
           "name": "테슬라",
           "code": "TSLA",
+          "excd":"NAS",
           "description": "프리미엄 전기차 제조 기업",
           "theme": 24,
           "price": 0,
@@ -3733,6 +3846,7 @@
         "fields": {
           "name": "PVH",
           "code": "PVH",
+          "excd":"NYS",
           "description": "글로벌 럭셔리 패션 기업",
           "theme": 24,
           "price": 0,
@@ -3749,6 +3863,7 @@
         "fields": {
           "name": "할리-데이비슨",
           "code": "HOG",
+          "excd":"NYS",
           "description": "프리미엄 모터사이클 제조 기업",
           "theme": 24,
           "price": 0,
@@ -3765,6 +3880,7 @@
         "fields": {
           "name": "페라리",
           "code": "RACE",
+          "excd":"NYS",
           "description": "슈퍼카 제조 기업",
           "theme": 24,
           "price": 0,
@@ -3781,6 +3897,7 @@
         "fields": {
           "name": "에스티 로더",
           "code": "EL",
+          "excd":"NYS",
           "description": "글로벌 럭셔리 화장품 기업",
           "theme": 24,
           "price": 0,
@@ -3877,6 +3994,7 @@
         "fields": {
           "name": "코닝",
           "code": "GLW",
+          "excd":"NYS",
           "description": "특수 유리 및 세라믹 제조 기업",
           "theme": 25,
           "price": 0,
@@ -3893,6 +4011,7 @@
         "fields": {
           "name": "듀폰",
           "code": "DD",
+          "excd":"NYS",
           "description": "화학 및 소재 과학 기업",
           "theme": 25,
           "price": 0,
@@ -3909,6 +4028,7 @@
         "fields": {
           "name": "앰코",
           "code": "AMKR",
+          "excd":"NAS",
           "description": "반도체 패키징 및 테스트 서비스 기업",
           "theme": 25,
           "price": 0,
@@ -3925,6 +4045,7 @@
         "fields": {
           "name": "다우",
           "code": "DOW",
+          "excd":"NYS",
           "description": "화학 소재 제조 기업",
           "theme": 25,
           "price": 0,
@@ -3941,6 +4062,7 @@
         "fields": {
           "name": "뉴몬트",
           "code": "NEM",
+          "excd":"NYS",
           "description": "금광 채굴 기업",
           "theme": 25,
           "price": 0,
@@ -4037,6 +4159,7 @@
         "fields": {
           "name": "쉐브론",
           "code": "CVX",
+          "excd":"NYS",
           "description": "글로벌 종합 에너지 기업",
           "theme": 26,
           "price": 0,
@@ -4053,6 +4176,7 @@
         "fields": {
           "name": "애트모스에너지",
           "code": "ATO",
+          "excd":"NYS",
           "description": "천연가스 공급 기업",
           "theme": 26,
           "price": 0,
@@ -4069,6 +4193,7 @@
         "fields": {
           "name": "엑슨모빌",
           "code": "XOM",
+          "excd":"NYS",
           "description": "글로벌 석유 에너지 기업",
           "theme": 26,
           "price": 0,
@@ -4085,6 +4210,7 @@
         "fields": {
           "name": "듀크에너지",
           "code": "DUK",
+          "excd":"NYS",
           "description": "전력 에너지 기업",
           "theme": 26,
           "price": 0,
@@ -4101,6 +4227,7 @@
         "fields": {
           "name": "넥스트에라 에너지",
           "code": "NEE",
+          "excd":"NYS",
           "description": "재생 에너지 발전 기업",
           "theme": 26,
           "price": 0,
@@ -4197,6 +4324,7 @@
         "fields": {
           "name": "스냅",
           "code": "SNAP",
+          "excd":"NYS",
           "description": "소셜미디어 플랫폼",
           "theme": 27,
           "price": 0,
@@ -4213,6 +4341,7 @@
         "fields": {
           "name": "메타 플랫폼스",
           "code": "META",
+          "excd":"NAS",
           "description": "글로벌 소셜미디어 기업",
           "theme": 27,
           "price": 0,
@@ -4229,6 +4358,7 @@
         "fields": {
           "name": "핀터레스트",
           "code": "PINS",
+          "excd":"NYS",
           "description": "이미지 기반 소셜미디어 플랫폼",
           "theme": 27,
           "price": 0,
@@ -4277,6 +4407,7 @@
         "fields": {
           "name": "엔비디아",
           "code": "NVDA",
+          "excd":"NAS",
           "description": "블록체인 채굴용 GPU 제조 기업",
           "theme": 28,
           "price": 0,
@@ -4293,6 +4424,7 @@
         "fields": {
           "name": "마이크로소프트",
           "code": "MSFT",
+          "excd":"NAS",
           "description": "엔터프라이즈 블록체인 솔루션 기업",
           "theme": 28,
           "price": 0,
@@ -4309,6 +4441,7 @@
         "fields": {
           "name": "메타 플랫폼스",
           "code": "META",
+          "excd":"NAS",
           "description": "블록체인 기반 메타버스 기업",
           "theme": 28,
           "price": 0,
@@ -4325,6 +4458,7 @@
         "fields": {
           "name": "IBM",
           "code": "IBM",
+          "excd":"NYS",
           "description": "기업용 블록체인 솔루션 기업",
           "theme": 28,
           "price": 0,
@@ -4341,6 +4475,7 @@
         "fields": {
           "name": "AMD",
           "code": "AMD",
+          "excd":"NAS",
           "description": "블록체인 채굴용 프로세서 제조 기업",
           "theme": 28,
           "price": 0,
@@ -4437,6 +4572,7 @@
         "fields": {
           "name": "월마트",
           "code": "WMT",
+          "excd":"NYS",
           "description": "글로벌 유통 기업",
           "theme": 29,
           "price": 0,
@@ -4453,6 +4589,7 @@
         "fields": {
           "name": "코스트코 홀세일",
           "code": "COST",
+          "excd":"NAS",
           "description": "회원제 창고형 유통 기업",
           "theme": 29,
           "price": 0,
@@ -4469,6 +4606,7 @@
         "fields": {
           "name": "타겟",
           "code": "TGT",
+          "excd":"NYS",
           "description": "대형 할인점 체인",
           "theme": 29,
           "price": 0,
@@ -4485,6 +4623,7 @@
         "fields": {
           "name": "홈 디포",
           "code": "HD",
+          "excd":"NYS",
           "description": "주택 개선 용품 유통 기업",
           "theme": 29,
           "price": 0,
@@ -4501,6 +4640,7 @@
         "fields": {
           "name": "달러 제너럴",
           "code": "DG",
+          "excd":"NYS",
           "description": "할인점 체인",
           "theme": 29,
           "price": 0,
@@ -4517,6 +4657,7 @@
         "fields": {
           "name": "베스트 바이",
           "code": "BBY",
+          "excd":"NYS",
           "description": "가전제품 유통 기업",
           "theme": 29,
           "price": 0,
@@ -4597,6 +4738,7 @@
         "fields": {
           "name": "PTC",
           "code": "PTC",
+          "excd":"NAS",
           "description": "IoT 소프트웨어 솔루션 기업",
           "theme": 30,
           "price": 0,
@@ -4613,6 +4755,7 @@
         "fields": {
           "name": "NXP 세미컨덕터",
           "code": "NXPI",
+          "excd":"NAS",
           "description": "IoT 반도체 제조 기업",
           "theme": 30,
           "price": 0,
@@ -4629,6 +4772,7 @@
         "fields": {
           "name": "아나로그 디바이스",
           "code": "ADI",
+          "excd":"NAS",
           "description": "아날로그 반도체 제조 기업",
           "theme": 30,
           "price": 0,
@@ -4645,6 +4789,7 @@
         "fields": {
           "name": "센서타 테크놀러지스 홀딩",
           "code": "ST",
+          "excd":"NYS",
           "description": "센서 솔루션 기업",
           "theme": 30,
           "price": 0,
@@ -4661,6 +4806,7 @@
         "fields": {
           "name": "스카이웍스 솔루션",
           "code": "SWKS",
+          "excd":"NAS",
           "description": "무선통신 반도체 기업",
           "theme": 30,
           "price": 0,
@@ -4677,6 +4823,7 @@
         "fields": {
           "name": "실리콘 레버러토리",
           "code": "SLAB",
+          "excd":"NAS",
           "description": "IoT 반도체 솔루션 기업",
           "theme": 30,
           "price": 0,
@@ -4741,6 +4888,7 @@
         "fields": {
           "name": "츄이",
           "code": "CHWY",
+          "excd":"NYS",
           "description": "온라인 반려동물용품 유통 기업",
           "theme": 31,
           "price": 0,
@@ -4757,6 +4905,7 @@
         "fields": {
           "name": "엘랑코 애니멀 헬스",
           "code": "ELAN",
+          "excd":"NYS",
           "description": "동물 의약품 제조 기업",
           "theme": 31,
           "price": 0,
@@ -4773,6 +4922,7 @@
         "fields": {
           "name": "조에티스",
           "code": "ZTS",
+          "excd":"NYS",
           "description": "동물 의약품 및 백신 제조 기업",
           "theme": 31,
           "price": 0,
@@ -4789,6 +4939,7 @@
         "fields": {
           "name": "아이덱스 래버러토리",
           "code": "IDXX",
+          "excd":"NAS",
           "description": "동물 진단기기 제조 기업",
           "theme": 31,
           "price": 0,
@@ -4853,6 +5004,7 @@
         "fields": {
           "name": "프록터 앤드 갬블",
           "code": "PG",
+          "excd":"NYS",
           "description": "글로벌 생활용품 및 뷰티 기업",
           "theme": 32,
           "price": 0,
@@ -4869,6 +5021,7 @@
         "fields": {
           "name": "얼타 뷰티",
           "code": "ULTA",
+          "excd":"NAS",
           "description": "뷰티 제품 유통 기업",
           "theme": 32,
           "price": 0,
@@ -4885,6 +5038,7 @@
         "fields": {
           "name": "존슨앤드존슨",
           "code": "JNJ",
+          "excd":"NYS",
           "description": "제약 및 생활용품 기업",
           "theme": 32,
           "price": 0,
@@ -4901,6 +5055,7 @@
         "fields": {
           "name": "코티",
           "code": "COTY",
+          "excd":"NYS",
           "description": "글로벌 화장품 기업",
           "theme": 32,
           "price": 0,
@@ -4917,6 +5072,7 @@
         "fields": {
           "name": "에스티로더",
           "code": "EL",
+          "excd":"NYS",
           "description": "글로벌 프리미엄 화장품 기업",
           "theme": 32,
           "price": 0,

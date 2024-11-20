@@ -63,10 +63,9 @@ def analyze(request):
                     for stock in stocks:
                         try:
                             if stock.code.isdecimal():
-                                print(stock.code)
                                 current_price = get_current_stock_price(user_profile.token, stock.code)
                             else:
-                                current_price = get_current_us_stock_price(user_profile.token, stock.code)
+                                current_price = get_current_us_stock_price(user_profile.token, stock.code, stock.excd)
                                 if current_price > 0:
                                     current_price = current_price * 1391.50
                                 else:
@@ -115,7 +114,7 @@ def analyze(request):
                                 print(stock.code)
                                 current_price = get_current_stock_price(user_profile.token, stock.code)
                             else:
-                                current_price = get_current_us_stock_price(user_profile.token, stock.code)
+                                current_price = get_current_us_stock_price(user_profile.token, stock.code, stock.excd)
                                 if current_price > 0:
                                     current_price = current_price * 1391.50
                                 else:
