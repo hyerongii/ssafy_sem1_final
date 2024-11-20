@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# from django.http import JsonResponse
 from rest_framework.response import Response
 from .serializers import ThemeSerializer
 from .utils import get_industry_price_series, get_theme_price_series, get_current_stock_price, get_current_us_stock_price
@@ -34,6 +33,7 @@ def analyze(request):
                 user_profile.mbti = data.get('mbti')
                 user_profile.period = data.get('period')
                 user_profile.token = get_access_token()
+                
                 user_profile.save()
             except UserProfile.DoesNotExist:
                 user_profile = UserProfile.objects.create(
@@ -58,23 +58,33 @@ def analyze(request):
 
                     theme = Theme.objects.get(name=interest_name)
                     stocks = theme.stock_set.all()
-                    print(stocks)
                     updated_stocks = []
 
                     for stock in stocks:
-                        print(stock.code)
-                        if stock.code.isdigit():
-                            current_price = get_current_stock_price(user_profile.token, stock.code)
-                        else:
-                            current_price = get_current_us_stock_price(user_profile.token, stock.code) * 1391.50
-                        if current_price > 0:  # 가격 조회 성공 시에만 업데이트
-                            stock.price = current_price
-                            stock.save()
+                        try:
+                            if stock.code.isdecimal():
+                                print(stock.code)
+                                current_price = get_current_stock_price(user_profile.token, stock.code)
+                            else:
+                                current_price = get_current_us_stock_price(user_profile.token, stock.code)
+                                if current_price > 0:
+                                    current_price = current_price * 1391.50
+                                else:
+                                    current_price = 0
+
+                            # 가격이 변경되었을 때만 저장
+                            if current_price > 0 and stock.price != current_price:  
+                                stock.price = current_price
+                                stock.save()
+
                             updated_stocks.append({
                                 "name": stock.name,
                                 "code": stock.code,
                                 "price": current_price
                             })
+                        except Exception as e:
+                            print(f"종목 {stock.code}의 가격 조회 실패: {e}")
+                            continue
 
                     theme_info = {
                         "theme_name": theme.name,
@@ -82,6 +92,7 @@ def analyze(request):
                         "description": theme.description,
                     }
                     themes_info.append(theme_info)
+
                 except Interest.DoesNotExist:
                     continue
 
@@ -99,15 +110,29 @@ def analyze(request):
                     updated_stocks = []
 
                     for stock in stocks:
-                        current_price = get_current_stock_price(user_profile.token, stock.code)
-                        if current_price > 0:  # 가격 조회 성공 시에만 업데이트
-                            stock.price = current_price
-                            stock.save()
+                        try:
+                            if stock.code.isdecimal():
+                                print(stock.code)
+                                current_price = get_current_stock_price(user_profile.token, stock.code)
+                            else:
+                                current_price = get_current_us_stock_price(user_profile.token, stock.code)
+                                if current_price > 0:
+                                    current_price = current_price * 1391.50
+                                else:
+                                    current_price = 0
+                                # current_price = get_current_us_stock_price(user_profile.token, stock.code) * 1391.50
+                            if current_price > 0 and stock.price != current_price:  
+                                stock.price = current_price
+                                stock.save()
+
                             updated_stocks.append({
                                 "name": stock.name,
                                 "code": stock.code,
                                 "price": current_price
                             })
+                        except Exception as e:
+                            print(f"종목 {stock.code}의 가격 조회 실패: {e}")
+                            continue
 
                     themes_info.append({
                         "theme_name": theme.name,

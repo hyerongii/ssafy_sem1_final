@@ -465,38 +465,6 @@
       },
       {
         "model": "stock.stock",
-        "pk": 30,
-        "fields": {
-          "name": "루이비통",
-          "code": "LVMUY",
-          "description": "글로벌 럭셔리 브랜드",
-          "theme": 24,
-          "price": 0,      
-          "per": "0.00",
-        "pbr": "0.00",
-        "consensus": "",
-        "eps": "0.00",
-        "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 31,
-        "fields": {
-          "name": "에르메스",
-          "code": "HESAY",
-          "description": "프랑스 럭셔리 브랜드",
-          "theme": 24,
-          "price": 0,      
-          "per": "0.00",
-        "pbr": "0.00",
-        "consensus": "",
-        "eps": "0.00",
-        "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
         "pk": 32,
         "fields": {
           "name": "포스코홀딩스",
@@ -708,7 +676,7 @@
         "pk": 45,
         "fields": {
           "name": "처브",
-          "code": "CHWY",
+          "code": "CB",
           "description": "온라인 반려동물 용품 유통업체",
           "theme": 31,
           "price": 0,      
@@ -1857,22 +1825,6 @@
       },
       {
         "model": "stock.stock",
-        "pk": 117,
-        "fields": {
-          "name": "롯데이노베이트",
-          "code": "347860",
-          "description": "메타버스 플랫폼 개발 기업",
-          "theme": 10,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
         "pk": 118,
         "fields": {
           "name": "메타플랫폼스",
@@ -2577,54 +2529,6 @@
       },
       {
         "model": "stock.stock",
-        "pk": 162,
-        "fields": {
-          "name": "맘스터치",
-          "code": "220630",
-          "description": "햄버거 프랜차이즈",
-          "theme": 15,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 163,
-        "fields": {
-          "name": "해마로푸드서비스",
-          "code": "220630",
-          "description": "외식 프랜차이즈",
-          "theme": 15,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 164,
-        "fields": {
-          "name": "MPK",
-          "code": "065150",
-          "description": "외식 프랜차이즈",
-          "theme": 15,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
         "pk": 165,
         "fields": {
           "name": "스포티파이 테크놀로지",
@@ -2710,22 +2614,6 @@
           "name": "애플",
           "code": "AAPL",
           "description": "애플TV+ 스트리밍 서비스",
-          "theme": 16,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 171,
-        "fields": {
-          "name": "SOOP",
-          "code": "020760",
-          "description": "음원 스트리밍 서비스",
           "theme": 16,
           "price": 0,
           "per": "0.00",
@@ -2852,7 +2740,7 @@
         "pk": 179,
         "fields": {
           "name": "갭",
-          "code": "GPS",
+          "code": "GAP",
           "description": "글로벌 의류 소매 기업",
           "theme": 17,
           "price": 0,
@@ -2995,7 +2883,7 @@
         "model": "stock.stock",
         "pk": 188,
         "fields": {
-          "name": "에너시스",
+          "name": "엔페이즈 에너지",
           "code": "ENPH",
           "description": "에너지 저장 시스템 기업",
           "theme": 18,
@@ -3013,22 +2901,6 @@
         "fields": {
           "name": "알비마리 리튬",
           "code": "ALB",
-          "description": "리튬 생산 기업",
-          "theme": 18,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 190,
-        "fields": {
-          "name": "리벤트 테크놀로지",
-          "code": "LTHM",
           "description": "리튬 생산 기업",
           "theme": 18,
           "price": 0,
@@ -3393,38 +3265,6 @@
       },
       {
         "model": "stock.stock",
-        "pk": 213,
-        "fields": {
-          "name": "컬리",
-          "code": "042662",
-          "description": "이커머스 플랫폼",
-          "theme": 20,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 214,
-        "fields": {
-          "name": "우아한형제들",
-          "code": "278940",
-          "description": "배달 플랫폼",
-          "theme": 20,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
         "pk": 215,
         "fields": {
           "name": "사이먼 프로퍼티 그룹",
@@ -3574,22 +3414,6 @@
           "name": "셈프라에너지",
           "code": "SRE",
           "description": "청정에너지 발전 기업",
-          "theme": 22,
-          "price": 0,
-          "per": "0.00",
-          "pbr": "0.00",
-          "consensus": "",
-          "eps": "0.00",
-          "logo_img": ""
-        }
-      },
-      {
-        "model": "stock.stock",
-        "pk": 225,
-        "fields": {
-          "name": "포티스",
-          "code": "FTS",
-          "description": "재생에너지 발전 기업",
           "theme": 22,
           "price": 0,
           "per": "0.00",
@@ -5183,6 +5007,4 @@
           "logo_img": ""
         }
       }
-
-
 ]

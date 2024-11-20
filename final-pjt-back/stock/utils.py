@@ -155,34 +155,6 @@ def get_current_stock_price(access_token, stock_code):
         print(f"Error getting price for stock {stock_code}: {str(e)}")
         return 0  # 에러 발생 시 0 반환
     
-def get_stock_exchange(stock_code):
-    """
-    Alpha Vantage API를 통해 주식 종목의 거래소 정보를 가져오는 함수
-    Args:
-        stock_code (str): 주식 종목 코드
-    Returns:
-        str: 거래소 정보 (예: 'United States', 'NASDAQ', 'NYSE')
-    """
-    api_key = settings.ALPHA_ACCESS_KEY
-    url = f"https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords={stock_code}&apikey={api_key}"
-
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
-
-        if "bestMatches" in data and len(data["bestMatches"]) > 0:
-            # 첫 번째 검색 결과의 거래소 정보 반환
-            exchange = data["bestMatches"][0]["4. region"]
-            return exchange
-        else:
-            return None
-
-    except Exception as e:
-        print(f"Error fetching exchange for stock {stock_code}: {str(e)}")
-        return None
-
-
 def get_current_us_stock_price(access_token, stock_code):
     """
     한국투자증권 API를 통해 미국 주식의 현재가를 조회하는 함수
@@ -203,20 +175,14 @@ def get_current_us_stock_price(access_token, stock_code):
         "appsecret": settings.KIS_APP_SECRET,
         "tr_id": "HHDFS00000300"
     }
-    # Alpha Vantage API로 거래소 정보 가져오기
-    exchange_info = get_stock_exchange(stock_code)
-
-    # 거래소 정보에 따라 EXCD 설정
-    if exchange_info == "United States" or exchange_info == "NASDAQ":
-        excd = "NAS"  # 나스닥
-    elif exchange_info == "NYSE":
+    # 종목 코드의 길이에 따라 거래소 결정
+    if len(stock_code) <= 3:
         excd = "NYS"  # 뉴욕증권거래소
-    elif exchange_info == "AMEX":
-        excd = "AMS"  # 아멕스 (현재는 NYSE American)
+    elif len(stock_code) >= 4:
+        excd = "NAS"  # 나스닥
     else:
-        print(f"Unknown exchange for stock {stock_code}: {exchange_info}")
-        return 0
-    print(excd)
+        excd = "AMS"  # 아멕스 (현재는 NYSE American)
+
     params = {
         "AUTH": "",
         "EXCD": excd,  # 동적으로 설정된 거래소 코드
@@ -228,11 +194,15 @@ def get_current_us_stock_price(access_token, stock_code):
         response.raise_for_status()
         data = response.json()
         
-        if data['rt_cd'] == '0':
-            return float(data['output']['last'])  # 현재가 반환
+        if data['rt_cd'] == '0' and 'output' in data and 'last' in data['output']:
+            last_price = data['output']['last']
+            if last_price and last_price.strip():
+                return float(last_price)
+            else:
+                raise Exception(f"Invalid price data for stock {stock_code}: {last_price}")
         else:
-            raise Exception(f"API Error: {data['msg1']}")
+            raise Exception(f"API Error: {data.get('msg1', 'Unknown error')}")
             
     except Exception as e:
         print(f"Error getting price for US stock {stock_code}: {str(e)}")
-        return 0  # 에러 발생 시 0 반환
+        return 0

@@ -19,7 +19,7 @@ load_dotenv()
 KIS_APP_KEY = os.getenv('KIS_APP_KEY')
 KIS_APP_SECRET = os.getenv('KIS_APP_SECRET')
 KIS_BASE_URL = os.getenv('KIS_BASE_URL')
-ALPHA_ACCESS_KEY = os.getenv('ALPHA_ACCESS_KEY')
+# ALPHA_ACCESS_KEY = os.getenv('ALPHA_ACCESS_KEY')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
