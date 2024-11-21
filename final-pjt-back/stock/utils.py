@@ -175,17 +175,10 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
         "appsecret": settings.KIS_APP_SECRET,
         "tr_id": "HHDFS00000300"
     }
-    # # 종목 코드의 길이에 따라 거래소 결정
-    # if len(stock_code) <= 3 or stock_code == 'RBRX'  or stock_code == 'SPOT' or stock_code == 'HST':
-    #     excd = "NYS"  # 뉴욕증권거래소
-    # elif len(stock_code) >= 4 or stock_code == 'EA':
-    #     excd = "NAS"  # 나스닥
-    # else:
-    #     excd = "AMS"  # 아멕스 (현재는 NYSE American)
 
     params = {
         "AUTH": "",
-        "EXCD": stock_excd,  # 동적으로 설정된 거래소 코드
+        "EXCD": stock_excd,
         "SYMB": stock_code,
     }
 
@@ -206,10 +199,6 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
     except Exception as e:
         print(f"Error getting price for US stock {stock_code}: {str(e)}")
         return 0
-    
-from datetime import datetime, timedelta
-
-from datetime import datetime, timedelta
 
 def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
     base_url = settings.KIS_BASE_URL
@@ -264,55 +253,279 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
 
     return sorted(chart_data, key=lambda x: x['time'])
 
-# def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
-#     base_url = settings.KIS_BASE_URL
-#     path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemconclusion"
-#     url = f"{base_url}{path}"
+def get_domestic_stock_chartdata_period(access_token, stock_code, period):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/domestic-stock/v1/quotations/inquire-daily-price"
+    url = f"{base_url}{path}"
 
-#     headers = {
-#         "Content-Type": "application/json; charset=utf-8",
-#         "authorization": f"Bearer {access_token}",  
-#         "appkey": settings.KIS_APP_KEY,
-#         "appsecret": settings.KIS_APP_SECRET,
-#         "tr_id": "FHPST01060000"
-#     }
-
-#     start_time = "090000"
-#     chart_data = []
-#     current = datetime.strptime(current_time, "%H%M%S")
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",  
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "FHKST01010400"
+    }
     
-#     while current.time() > datetime.strptime(start_time, "%H%M%S").time():
-#         params = {
-#             "FID_COND_MRKT_DIV_CODE": "J",
-#             "FID_INPUT_ISCD": stock_code,
-#             "FID_INPUT_HOUR_1": current.strftime("%H%M%S"),
-#         }
+    # period에 따른 설정값 결정
+    period_settings = {
+        'W': {'div_code': 'D', 'data_count': 5},    # 일별 데이터 5개 (1주)
+        '1M': {'div_code': 'D', 'data_count': 20},  # 일별 데이터 20개 (1달)
+        '6M': {'div_code': 'W', 'data_count': 24},  # 주별 데이터 24개 (6달)
+        '1Y': {'div_code': 'M', 'data_count': 12}   # 월별 데이터 12개 (1년)
+    }
+    
+    # 기본값 설정 (잘못된 period가 들어왔을 경우 주간 데이터 사용)
+    default = period_settings.get(period, period_settings['D'])
+    
+    params = {
+        "FID_COND_MRKT_DIV_CODE": "J",
+        "FID_INPUT_ISCD": stock_code,
+        "FID_PERIOD_DIV_CODE": default['div_code'],
+        "FID_ORG_ADJ_PRC": "1",
+    }
+    
+    chart_data = []
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
         
-#         try:
-#             response = requests.get(url, headers=headers, params=params)
-#             response.raise_for_status()
-#             data = response.json()
+        if data['rt_cd'] == '0':
+            # period에 따른 데이터 개수만큼 슬라이싱
+            for item in data['output'][:default['data_count']]:
+                chart_data.append({
+                    'date': item['stck_bsop_date'],
+                    'clpr': float(item['stck_clpr'])
+                })
+            return chart_data
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
             
-#             if data['rt_cd'] == '0':
-#                 # 데이터를 직접 chart_data에 추가
-#                 for item in data['output2']:
-#                     chart_data.append({
-#                         'time': item['stck_cntg_hour'],
-#                         'price': float(item['stck_prpr'])
-#                     })
-                
-#                 # 마지막 데이터의 시간을 기준으로 다음 요청 시간 설정
-#                 if data['output2']:  # 데이터가 있는 경우에만 처리
-#                     last_time = data['output2'][-1]['stck_cntg_hour']
-#                     current = datetime.strptime(last_time, "%H%M%S") - timedelta(seconds=1)
-#                 else:
-#                     # 데이터가 없는 경우 일정 시간만큼 이동
-#                     current = current - timedelta(minutes=10)
-#             else:
-#                 raise Exception(f"API Error: {data['msg1']}")
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return []
 
-#         except Exception as e:
-#             print(f"Error getting price for stock {stock_code} at {current}: {str(e)}")
-#             break
 
-#     return sorted(chart_data, key=lambda x: x['time'])
+def get_oversea_stock_chartdata_day(access_token,stock_code,excd):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/overseas-price/v1/quotations/inquire-time-itemchartprice"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "HHDFS76950200"
+    }
+    params = {
+        "AUTH": "",
+        "EXCD": excd,
+        "SYMB": stock_code,
+        "NMIN": "5", 
+        "PINC": "0",
+        "NREC": "120", # 5,0,120 함으로써 한국시간 기준 장 시작부터 마감까지의
+                     # 정보를 받아올 수 있음
+    }
+    chart_data = []
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['rt_cd'] == '0':
+            for item in data['output2']:
+                chart_data.append({
+                    'date': item['khms'],
+                    'clpr': float(item['last'])
+                })
+                return chart_data
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+        
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return 0  # 에러 발생 시 0 반환
+    
+def get_oversea_stock_chartdata_period(access_token, stock_code, period):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/overseas-price/v1/quotations/inquire-daily-chartprice"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "FHKST03030100"
+    }
+
+    current_date = datetime.today()
+    # period에 따라 start_date 계산
+    if period == 'W':
+        start_date = current_date - timedelta(days=5)
+    elif period == '1M':
+        start_date = current_date - timedelta(days=20) 
+    elif period == '6M':
+        start_date = current_date - timedelta(days=120)
+    elif period == '1Y':
+        start_date = current_date - timedelta(days=240)
+    else:
+        start_date = current_date
+    
+    # 날짜 형식 변환 (YYYYmmdd)
+    current_date = current_date.strftime("%Y%m%d")
+    start_date = start_date.strftime("%Y%m%d")
+
+    params = {
+        "FID_COND_MRKT_DIV_CODE": "N",
+        "FID_INPUT_ISCD": stock_code,
+        "FID_INPUT_DATE_1": start_date,
+        "FID_INPUT_DATE_2": current_date, 
+        "FID_PERIOD_DIV_CODE": "0",
+    }
+    chart_data = []
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['rt_cd'] == '0':
+            for item in data['output2']:
+                chart_data.append({
+                    'date': item['khms'],
+                    'clpr': float(item['last'])
+                })
+            return chart_data
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+        
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return 0  # 에러 발생 시 0 반환
+    
+
+def get_domestic_stock_main_info(access_token, stock_code):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/domestic-stock/v1/finance/profit-ratio"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "FHKST66430400"
+    }
+
+    params = {
+        "FID_COND_MRKT_DIV_CODE": "J",
+        "FID_INPUT_ISCD": stock_code,
+        "fid_div_cls_code": "1",
+    }
+    ratio_data = []
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        if data['rt_cd'] == '0':
+            for item in data['output']:
+                ratio_data.append({
+                    'ROI':item['cptl_ntin_rate'],
+                    'ROE':item['self_cptl_ntin_inrt'],
+                    'ROS':item['sale_ntin_rate']
+                })
+                break # 가장 최신 결산 이후의 정보만 받아옴
+            return ratio_data
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+            
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return 0  # 에러 발생 시 0 반환
+    
+
+def get_domestic_stock_consensus(access_token, stock_code):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/domestic-stock/v1/quotations/invest-opinion"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "FHKST663300C0"
+    }
+    current_date = datetime.today().strftime("%Y%m%d") 
+    params = {
+        "FID_COND_MRKT_DIV_CODE": "J",
+        "FID_INPUT_ISCD": stock_code,
+        "FID_COND_SCR_DIV_CODE": "16633",
+        "FID_DIV_CLS_CODE": "0",
+        "FID_INPUT_DATE_1": "20240101",
+        "FID_INPUT_DATE_2": current_date,
+        "fid_div_cls_code": "1",
+    }
+    consensus_data = []
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+
+        if data['rt_cd'] == '0':
+            for item in data['output']:
+                consensus_data.append({
+                    'concensus': item["invt_opnn"],
+                    'source': item["mbcr_name"]
+                })
+            return consensus_data
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+            
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return 0  # 에러 발생 시 0 반환
+    
+
+
+def get_oversea_stock_main_info(access_token, stock_code, excd):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/overseas-price/v1/quotations/price-detail"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "HHDFS76200200"
+    }
+
+    params = {
+        "AUTH": "",
+        "EXCD": excd,
+        "SYMB": stock_code,
+    }
+
+    ratio_data = []
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['rt_cd'] == '0':
+            for item in data['output']:
+                ratio_data.append({
+                    'PER': item['perx'],
+                    'PBR': item['pbrx'],
+                    'EPS': item['epsx'],
+                    'BPS': item['bpsx']
+                })
+            return ratio_data
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+            
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return []

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from .serializers import ThemeSerializer
-from .utils import get_industry_price_series, get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day
+from .utils import get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_main_info, get_domestic_stock_consensus, get_oversea_stock_main_info
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
@@ -10,7 +10,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 # 혜령 디버깅 추가
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .models import UserProfile, UserInterest, Interest, IndustryCode, Theme
+from .models import UserProfile, UserInterest, Interest, Theme, Stock
 import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -21,6 +21,7 @@ from dateutil.relativedelta import relativedelta
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([JWTAuthentication])
+# 3가지 입력값 분석해서 6가지 테마 추천
 def analyze(request):
     if request.method == 'POST':
         try:
@@ -210,7 +211,7 @@ def draw_theme_chart(request):
 # front에서 해당 종목의 code, 현재시각을 전달받음
 # 전달받은 시각 이전까지
 @api_view(['POST'])
-def chart_and_data(request):
+def d_chart_and_data(request):
     data = request.data
     stock_code = data.get('stock_code')
     current_time = data.get('current_time')
@@ -223,7 +224,87 @@ def chart_and_data(request):
         stock_code=stock_code,
         current_time=current_time,
     )
+    print(type(chart_data))
+    ratio_data = get_domestic_stock_main_info(
+        access_token=access_token,
+        stock_code=stock_code,
+    )
+    consensus_data = get_domestic_stock_consensus(
+        access_token=access_token,
+        stock_code=stock_code
+    )
     response_data = {
-        'chart_data': chart_data
+        'chart_data': chart_data,
+        'ratio_data': ratio_data,
+        'consensus_data': consensus_data
+    }
+    return Response(response_data)
+
+# front로부터 stock_code를 받음
+def o_chart_and_data(request):
+    data = request.data
+    stock_code = data.get('stock_code')
+    stock = Stock.objects.get(code=stock_code)
+    excd = stock.excd
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    access_token = user_profile.token
+
+    chart_data = get_oversea_stock_chartdata_day(
+        access_token=access_token,
+        stock_code=stock_code,
+        excd=excd
+    )
+    ratio_data = get_oversea_stock_main_info(
+        access_token=access_token,
+        stock_code=stock_code,
+        excd=excd
+    )
+
+    response_data = {
+        'chart_data': chart_data,
+        'ratio_data': ratio_data,
+    }
+    return Response(response_data)
+
+# front에게서 stock_code와 period를 받으면 함수 실행
+@api_view(['POST'])
+def d_chart_period(request):
+    data = request.data
+    stock_code = data.get('stock_code')
+    period = data.get('period')
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    access_token = user_profile.token
+
+    chart_data = get_domestic_stock_chartdata_period(
+        access_token=access_token,
+        stock_code=stock_code,
+        period=period
+    )
+    response_data = {
+        'chart_data':chart_data
+    }
+    return Response(response_data)
+
+
+# front에게서 stock_code, period를 받으면 함수 실행
+@api_view(['POST'])
+def o_chart_period(request):
+    data = request.data
+    stock_code = data.get('stock_code')
+    period = data.get('period')
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    access_token = user_profile.token
+
+    chart_data = get_oversea_stock_chartdata_period(
+        access_token=access_token,
+        stock_code=stock_code,
+        period=period
+    )
+    
+    response_data = {
+        'chart_data':chart_data
     }
     return Response(response_data)
