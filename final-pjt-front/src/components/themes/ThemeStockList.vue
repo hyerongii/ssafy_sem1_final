@@ -62,7 +62,7 @@
 
 <script setup>
 import { useStockStore } from '@/stores/stock'
-import { useStockItemStore } from '@/stores/stockitem';
+import { useStockItemStore } from '@/stores/stockitem'
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 

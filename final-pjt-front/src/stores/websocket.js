@@ -9,9 +9,13 @@ export const useWebsocketStore = defineStore('websocket', () => {
   let isRunning = true
   const authStore = useAuthStore()
   const stockCode = ref(null)
+  const requestStr = ref(null)
+  const processedData = ref(null)
 
   const webSocketStart = function (stockcode) {
     stockCode.value = stockcode
+    
+    requestStr.value = isNaN(stockcode) ? 'HDFSCNT0' : 'H0STCNT0' // 국외 : 국내
     socket.value = new WebSocket('ws://ops.koreainvestment.com:21000')
 
     socket.value.onopen = () => {
@@ -40,6 +44,7 @@ export const useWebsocketStore = defineStore('websocket', () => {
   }
 
   const sendMessage = () => {
+    const newCode = isNaN(stockCode.value) ? `DNAS${stockCode.value}` : stockCode.value
     if (socket.value && socket.value.readyState === WebSocket.OPEN) {
       socket.value.send(JSON.stringify({
         header: {
@@ -50,8 +55,8 @@ export const useWebsocketStore = defineStore('websocket', () => {
         },
         body: {
           input: {
-            tr_id: "H0STCNT0",
-            tr_key: stockCode
+            tr_id: requestStr.value,
+            tr_key: newCode
           }
         }
       }))
@@ -64,12 +69,12 @@ export const useWebsocketStore = defineStore('websocket', () => {
     return new Promise((resolve) => {
       socket.value.onmessage = (event) => {
         try {
-          const processedData = stockspurchaseDomestic(event.data)
-          if (processedData) { // null이 아닐 때만 처리
-            updateChartData(processedData)
-            console.log('Processed Data:', processedData)
+          if (isNaN(stockCode.value)){
+            // console.log(event)
+            processedData.value = stockspurchaseUsa(event.data)
           }
-          resolve(processedData)
+          else {processedData.value = stockspurchaseDomestic(event.data)}
+          resolve(processedData.value)
         } catch (error) {
           console.error('Data processing error:', error)
           resolve(null)
@@ -78,12 +83,32 @@ export const useWebsocketStore = defineStore('websocket', () => {
     })
   }
 
+  // 미국 데이터 처리 함수
+  const stockspurchaseUsa = (data) => {
+    const pValue = data.split('^')
+    const price = parseFloat(pValue[11])*(1,395.77)
+    // 시간 문자열을 타임스탬프로 변환
+    const timestamp = new Date().getTime() + (9 * 60 * 60 * 1000)
+    console.log(timestamp, price)
+    // NaN 체크 및 처리
+    if (isNaN(price)) {
+      console.warn('Invalid price value received:', pValue[11])
+      return null // 유효하지 않은 데이터는 null 반환
+    }
+    
+    return {
+      timestamp: timestamp,
+      price: price
+    }
+  }
+
+  // 국내 데이터 처리 함수
   const stockspurchaseDomestic = (data) => {
-    console.log(data)
     const pValue = data.split('^')
     const price = parseInt(pValue[2])
     // 시간 문자열을 타임스탬프로 변환
     const timestamp = new Date().getTime() + (9 * 60 * 60 * 1000)
+    onsole.log(timestamp, price)
     // NaN 체크 및 처리
     if (isNaN(price)) {
       console.warn('Invalid price value received:', pValue[2])
@@ -96,5 +121,5 @@ export const useWebsocketStore = defineStore('websocket', () => {
     }
   }
 
-return { webSocketStart }
+return { webSocketStart, socket, processedData}
 })

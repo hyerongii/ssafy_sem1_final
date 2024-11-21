@@ -275,7 +275,7 @@ def get_domestic_stock_chartdata_period(access_token, stock_code, period):
     }
     
     # 기본값 설정 (잘못된 period가 들어왔을 경우 주간 데이터 사용)
-    default = period_settings.get(period, period_settings['D'])
+    default = period_settings.get(period, period_settings['W'])
     
     params = {
         "FID_COND_MRKT_DIV_CODE": "J",
@@ -397,6 +397,7 @@ def get_oversea_stock_chartdata_period(access_token, stock_code, period):
         if data['rt_cd'] == '0':
             for item in data['output2']:
                 chart_data.append({
+                    # 혜령 : 미국주식 차트 불러올 시 date, khms 여기서 에러 발생하는중
                     'date': item['khms'],
                     'clpr': float(item['last'])
                 })
