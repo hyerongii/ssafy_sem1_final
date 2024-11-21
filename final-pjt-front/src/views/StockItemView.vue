@@ -24,19 +24,26 @@ import { useStockItemStore } from '@/stores/stockitem'
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router'
 
-// const stockItemStore = useStockItemStore()
+const stockItemStore = useStockItemStore()
 const route = useRoute()
 const stockcode = route.params.stock_id
 
 // 입력 코드 국내/해외 인지 구분하기!
 const checkDomestic = (stockcode) => isNaN(stockcode)
 
-// onMounted(()=>{
-//   const d = new Date()
-//   const currentTime = `${d.getHours()}${d.getMinutes()}${d.getSeconds()}`
-//   stockItemStore.getDayInfo(stockcode, currentTime)
-//   // console.log(currentTime)
-// })
+const getCurrentTime = () => {
+  const now = new Date()
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  const seconds = String(now.getSeconds()).padStart(2, '0')
+  return `${hours}${minutes}${seconds}`
+}
+
+onMounted(()=>{
+  const currentTime = getCurrentTime()
+  stockItemStore.getDayInfo(stockcode, currentTime)
+  // console.log(currentTime)
+})
 
 </script>
 

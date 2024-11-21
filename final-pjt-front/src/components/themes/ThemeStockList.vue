@@ -90,10 +90,10 @@ const formatPrice = (price) => {
   return price.toLocaleString('ko-KR')
 }
 
-const currentTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }))
-const timeString = currentTime.getHours().toString().padStart(2, '0') + 
-                  currentTime.getMinutes().toString().padStart(2, '0') + 
-                  currentTime.getSeconds().toString().padStart(2, '0')
+// const currentTime = new Date(new Date().toLocaleString('en-US', { timeZone: 'Asia/Seoul' }))
+// const timeString = currentTime.getHours().toString().padStart(2, '0') + 
+//                   currentTime.getMinutes().toString().padStart(2, '0') + 
+//                   currentTime.getSeconds().toString().padStart(2, '0')
 
 const moveStockItem = function (stockcode) {
   router.push({
@@ -101,7 +101,7 @@ const moveStockItem = function (stockcode) {
     params: { stock_id: stockcode }
   })
 
-  stockItemStore.getDayInfo(stockcode, timeString)
+  // stockItemStore.getDayInfo(stockcode, timeString)
 
 }
 
