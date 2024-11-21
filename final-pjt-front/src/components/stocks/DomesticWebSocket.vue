@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>실시간 주가 차트 - 해외주식</h1>
+    <h1>실시간 주가 차트 - 국내주식</h1>
     <apexchart
       width="800"
       height="400"
@@ -15,10 +15,10 @@
 import { useAuthStore } from '@/stores/auth'
 import { ref, onMounted, onUnmounted } from 'vue'
 import VueApexCharts from 'vue3-apexcharts'
-const authStore = useAuthStore()
 
-const MAX_DATA_POINTS = 50
-// const chartData = ref([])
+// url에서 주식코드 가져옴
+const stockcodeProps = defineProps({ stockcode:String })
+const authStore = useAuthStore()
 
 const chartOptions = ref({
   chart: {
@@ -26,9 +26,6 @@ const chartOptions = ref({
     animations: {
       enabled: true,
       easing: 'linear',
-      dynamicAnimation: {
-        speed: 1000
-      }
     },
     toolbar: {
       show: false
@@ -47,8 +44,7 @@ const chartOptions = ref({
     align: 'left',
   },
   xaxis: {
-    type: 'datetime',  // 시간 데이터를 위해 datetime으로 변경
-    range: MAX_DATA_POINTS * 3000, // 표시할 시간 범위
+    type: 'datetime',
     labels: {
       datetimeFormatter: {
         hour: 'HH:mm:ss'
@@ -57,8 +53,12 @@ const chartOptions = ref({
   },
   yaxis: {
     labels: {
-      formatter: (value) => value.toLocaleString()
-    }
+      formatter: (value) => Math.round(value).toLocaleString()
+    },
+    min: (min) => parseInt(min * 0.95), // 최소값보다 5% 낮게
+    max: (max) => parseInt(max * 1.05), // 최대값보다 5% 높게
+    // floating: false,
+    // decimalsInFloat: false
   },
   tooltip: {
     x: {
@@ -72,18 +72,22 @@ const series = ref([{
   data: []
 }])
 
+
+//////////////// 실시간 웹소켓 통신 데이터 받는 코드
+
+
 const socket = ref(null)
 let isRunning = true
 
-const stockspurchaseUsa = (data) => {
+const stockspurchaseDomestic = (data) => {
   const pValue = data.split('^')
-  const price = parseFloat(pValue[11])
+  const price = parseInt(pValue[2])
   // 시간 문자열을 타임스탬프로 변환
-  const timestamp = new Date().getTime()
+  const timestamp = new Date().getTime() + (9 * 60 * 60 * 1000)
   
   // NaN 체크 및 처리
   if (isNaN(price)) {
-    console.warn('Invalid price value received:', pValue[11])
+    console.warn('Invalid price value received:', pValue[2])
     return null // 유효하지 않은 데이터는 null 반환
   }
   
@@ -104,10 +108,10 @@ const updateChartData = (newData) => {
     // 데이터 포인트를 [timestamp, price] 형태로 추가
     series.value[0].data.push([newData.timestamp, newData.price])
 
-    // 최대 데이터 포인트 수 유지
-    if (series.value[0].data.length > MAX_DATA_POINTS) {
-      series.value[0].data.shift()
-    }
+    // // 최대 데이터 포인트 수 유지
+    // if (series.value[0].data.length > MAX_DATA_POINTS) {
+    //   series.value[0].data.shift()
+    // }
 
     // 시리즈 강제 업데이트
     series.value = [{
@@ -128,8 +132,8 @@ const sendMessage = () => {
       },
       body: {
         input: {
-          tr_id: 'HDFSCNT0',
-          tr_key: 'DNASAAPL'
+          tr_id: "H0STCNT0",
+          tr_key: stockcodeProps.stockcode
         }
       }
     }))
@@ -138,11 +142,12 @@ const sendMessage = () => {
 
 const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms))
 
+
 const receiveMessage = () => {
   return new Promise((resolve) => {
     socket.value.onmessage = (event) => {
       try {
-        const processedData = stockspurchaseUsa(event.data)
+        const processedData = stockspurchaseDomestic(event.data)
         if (processedData) { // null이 아닐 때만 처리
           updateChartData(processedData)
           console.log('Processed Data:', processedData)
@@ -160,11 +165,13 @@ const dataFetchLoop = async () => {
   sendMessage()
   while (isRunning) {
     await receiveMessage()
-    await sleep(3000)
+    await sleep(3000) // 3초 대기
   }
 }
 
+
 onMounted(() => {
+  // console.log(authStore.websocketToken)
   socket.value = new WebSocket('ws://ops.koreainvestment.com:21000')
 
   socket.value.onopen = () => {
@@ -189,3 +196,6 @@ onUnmounted(() => {
   }
 })
 </script>
+
+<style scoped>
+</style>

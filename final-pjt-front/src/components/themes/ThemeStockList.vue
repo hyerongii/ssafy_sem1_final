@@ -63,8 +63,11 @@
 <script setup>
 import { useStockStore } from '@/stores/stock'
 import { computed, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 
 const stockStore = useStockStore()
+const router = useRouter()
+
 const checkUsa = (stock_code) => isNaN(stock_code)
 
 // 국내/미국 주식 분리
@@ -86,7 +89,10 @@ const formatPrice = (price) => {
 }
 
 const moveStockItem = function (stockcode) {
-
+  router.push({
+    name: 'StockItemView',
+    params: { stock_id: stockcode }
+  })
 }
 
 onMounted(()=> {

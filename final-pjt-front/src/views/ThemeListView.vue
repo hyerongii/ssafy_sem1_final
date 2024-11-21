@@ -88,7 +88,7 @@ const getStockLogo = (code) => {
 const goToThemeDetail = (theme_name) => {
   router.push({
     name: 'ThemeItemView',
-    params: { id: theme_name }
+    params: { theme_id: theme_name }
   })
 }
 </script>

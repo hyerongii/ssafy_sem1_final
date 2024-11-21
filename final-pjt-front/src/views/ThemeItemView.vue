@@ -16,15 +16,15 @@
 <script setup>
 import { useStockStore } from '@/stores/stock'
 import { useRoute } from 'vue-router'
-import ThemeChart from '@/components/stocks/ThemeChart.vue'
-import ThemeStockList from '@/components/stocks/ThemeStockList.vue'
+import ThemeChart from '@/components/themes/ThemeChart.vue'
+import ThemeStockList from '@/components/themes/ThemeStockList.vue'
 import { onMounted } from 'vue'
 
 // axios post 요청 변수
 
 const route = useRoute()
 const stockStore = useStockStore()
-const theme_name = route.params.id
+const theme_name = route.params.theme_id
 const currentDate = new Date()
 
 // 페이지 접속시 store 호출하면 theme 데이터 업데이트 됨

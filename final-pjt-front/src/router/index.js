@@ -42,12 +42,12 @@ const router = createRouter({
       component: ThemeListView,
     },
     {
-      path: '/themeitem/:id',
+      path: '/themeitem/:theme_id',
       name: 'ThemeItemView',
       component: ThemeItemView,
     },
     {
-      path: '/stockitem',
+      path: '/stockitem/:stock_id',
       name: 'StockItemView',
       component: StockItemView,
     }
