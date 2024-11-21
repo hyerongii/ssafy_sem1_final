@@ -209,11 +209,12 @@ def draw_theme_chart(request):
 
 # front에서 해당 종목의 code, 현재시각을 전달받음
 # 전달받은 시각 이전까지
+@api_view(['POST'])
 def chart_and_data(request):
     data = request.data
-    stock_code = data.code
-    current_time = data.current_time
-
+    print(data)
+    stock_code = data.get('stock_code')
+    current_time = data.get('current_time')
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
@@ -225,6 +226,6 @@ def chart_and_data(request):
     )
     print(chart_data)
     response_data = {
-        'chart_data': chart_data['data']
+        'chart_data': chart_data
     }
     return Response(response_data)

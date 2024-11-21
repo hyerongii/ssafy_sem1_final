@@ -76,7 +76,6 @@ def get_theme_price_series(access_token, theme_name, start_date, end_date):
         industry_codes = IndustryCode.objects.filter(
             interest_id=theme.pk
         ).values_list('api_request_code', flat=True)
-        print(industry_codes)
         combined_data = {}
         
         # 각 업종별 데이터 수집
@@ -215,10 +214,10 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
 
     headers = {
         "Content-Type": "application/json; charset=utf-8",
-        "authorization": f"Bearer {access_token}",
+        "authorization": f"Bearer {access_token}",  
         "appkey": settings.KIS_APP_KEY,
         "appsecret": settings.KIS_APP_SECRET,
-        "tr_id": "FHKST01010100"
+        "tr_id": "FHPST01060000"
     }
 
     params = {
