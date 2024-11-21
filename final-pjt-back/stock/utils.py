@@ -322,30 +322,34 @@ def get_oversea_stock_chartdata_day(access_token,stock_code,excd):
         "AUTH": "",
         "EXCD": excd,
         "SYMB": stock_code,
-        "NMIN": "5", 
-        "PINC": "0",
-        "NREC": "120", # 5,0,120 함으로써 한국시간 기준 장 시작부터 마감까지의
-                     # 정보를 받아올 수 있음
+        "NMIN": "5",
+        # 시차가 있음...이건 추후 더 분석이 필요하다 
+        "PINC": "1",
+        "NREC": "120", # 5,0,120 함으로써 한국시간 기준 장 시작부터 마감까지의 정보를 받아올 수 있음
+        "NEXT":"",
+        "NREC":"",
+        "FILL":"",
+        "KEYB":""
+
     }
     chart_data = []
     try:
         response = requests.get(url, headers=headers, params=params)
         response.raise_for_status()
         data = response.json()
-        
         if data['rt_cd'] == '0':
             for item in data['output2']:
                 chart_data.append({
                     'date': item['khms'],
-                    'clpr': float(item['last'])
+                    'clpr': item['last']
                 })
-                return chart_data
+            return chart_data
         else:
             raise Exception(f"API Error: {data['msg1']}")
         
     except Exception as e:
         print(f"Error getting price for stock {stock_code}: {str(e)}")
-        return 0  # 에러 발생 시 0 반환
+        return []  # 에러 발생 시 0 반환
     
 def get_oversea_stock_chartdata_period(access_token, stock_code, period):
     base_url = settings.KIS_BASE_URL

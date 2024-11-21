@@ -242,11 +242,15 @@ def d_chart_and_data(request):
     return Response(response_data)
 
 # front로부터 stock_code를 받음
+# @csrf_exempt
+@api_view(['POST'])
 def o_chart_and_data(request):
     data = request.data
     stock_code = data.get('stock_code')
-    stock = Stock.objects.get(code=stock_code)
+    stock = Stock.objects.filter(code=stock_code).first()
+    print(stock)
     excd = stock.excd
+    print(excd)
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
