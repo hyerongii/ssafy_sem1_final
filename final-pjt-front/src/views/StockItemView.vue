@@ -31,12 +31,12 @@ const stockcode = route.params.stock_id
 // 입력 코드 국내/해외 인지 구분하기!
 const checkDomestic = (stockcode) => isNaN(stockcode)
 
-onMounted(()=>{
-  const d = new Date()
-  const currentTime = `${d.getHours()}${d.getMinutes()}${d.getSeconds()}`
-  stockItemStore.getDayInfo(stockcode, currentTime)
-  // console.log(currentTime)
-})
+// onMounted(()=>{
+//   const d = new Date()
+//   const currentTime = `${d.getHours()}${d.getMinutes()}${d.getSeconds()}`
+//   stockItemStore.getDayInfo(stockcode, currentTime)
+//   // console.log(currentTime)
+// })
 
 </script>
 

@@ -4,7 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from './auth'
 
-export const useStockItemStore = defineStore('stock', () => {
+export const useStockItemStore = defineStore('stockitem', () => {
   const authStore = useAuthStore()
 
   const getDayInfo = function (stockCode, currentTime) {
@@ -21,6 +21,7 @@ export const useStockItemStore = defineStore('stock', () => {
       },
     })
       .then((res) => {
+        console.log('당일 차트 데이터 받음')
         console.log(res.data)
       })
       .catch((err) => {

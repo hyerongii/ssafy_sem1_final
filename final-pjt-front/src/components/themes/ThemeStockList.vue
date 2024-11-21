@@ -62,10 +62,12 @@
 
 <script setup>
 import { useStockStore } from '@/stores/stock'
+import { useStockItemStore } from '@/stores/stockitem';
 import { computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const stockStore = useStockStore()
+const stockItemStore = useStockItemStore()
 const router = useRouter()
 
 const checkUsa = (stock_code) => isNaN(stock_code)
@@ -88,16 +90,19 @@ const formatPrice = (price) => {
   return price.toLocaleString('ko-KR')
 }
 
+const d = new Date()
+const currentTime = `${d.getHours()}${d.getMinutes()}${d.getSeconds()}`
+
 const moveStockItem = function (stockcode) {
   router.push({
     name: 'StockItemView',
     params: { stock_id: stockcode }
   })
+
+  stockItemStore.getDayInfo(stockcode, currentTime)
+
 }
 
-onMounted(()=> {
-  console.log(stockStore.themeinfo.stocks)
-})
 </script>
 
 <style scoped>
