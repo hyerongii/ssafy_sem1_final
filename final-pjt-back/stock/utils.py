@@ -1,6 +1,7 @@
 import requests
 from django.conf import settings
 from .models import Theme, IndustryCode
+from datetime import datetime, timedelta
 
 def get_industry_price_series(access_token, industry_code, start_date, end_date):
     """
@@ -206,6 +207,9 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
         print(f"Error getting price for US stock {stock_code}: {str(e)}")
         return 0
     
+from datetime import datetime, timedelta
+
+from datetime import datetime, timedelta
 
 def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
     base_url = settings.KIS_BASE_URL
@@ -220,28 +224,95 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
         "tr_id": "FHPST01060000"
     }
 
-    params = {
-        "FID_COND_MRKT_DIV_CODE": "J",
-        "FID_INPUT_ISCD": stock_code,
-        "FID_INPUT_HOUR_1": current_time,
-    }
-    try:
-        response = requests.get(url, headers=headers, params=params)
-        response.raise_for_status()
-        data = response.json()
-        
-        if data['rt_cd'] == '0':
-            price_data = []
-            for item in data['output2']:
-                price_data.append({
-                    'time': item['stck_cntg_hour'],
-                    'price': float(item['stck_prpr'])
-                })
-            return sorted(price_data, key=lambda x: x['time'])
-        else:
-            raise Exception(f"API Error: {data['msg1']}")
-            
-    except Exception as e:
-        print(f"Error getting price for stock {stock_code}: {str(e)}")
-        return []  # 에러 발생 시 빈 리스트 반환
+    # 5분 단위로 반올림
+    current = datetime.strptime(current_time, "%H%M%S")
+    current = current.replace(minute=(current.minute // 5) * 5, second=0, microsecond=0)
     
+    start_time = datetime.strptime("090000", "%H%M%S")
+    chart_data = []
+    
+    while current >= start_time:
+        params = {
+            "FID_COND_MRKT_DIV_CODE": "J",
+            "FID_INPUT_ISCD": stock_code,
+            "FID_INPUT_HOUR_1": current.strftime("%H%M%S"),
+        }
+        
+        try:
+            response = requests.get(url, headers=headers, params=params)
+            data = response.json()
+            
+            if data['rt_cd'] == '0' and data['output2']:
+                # 현재 시간대에서 가장 가까운 데이터 선택
+                closest_data = min(
+                    [item for item in data['output2'] 
+                     if datetime.strptime(item['stck_cntg_hour'], "%H%M%S") >= start_time],
+                    key=lambda item: abs(datetime.strptime(item['stck_cntg_hour'], "%H%M%S") - current),
+                    default=None
+                )
+                
+                if closest_data:
+                    chart_data.append({
+                        'time': closest_data['stck_cntg_hour'],
+                        'price': float(closest_data['stck_prpr'])
+                    })
+
+        except Exception as e:
+            print(f"Error at {current}: {str(e)}")
+        
+        current -= timedelta(minutes=5)
+
+    return sorted(chart_data, key=lambda x: x['time'])
+
+# def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
+#     base_url = settings.KIS_BASE_URL
+#     path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemconclusion"
+#     url = f"{base_url}{path}"
+
+#     headers = {
+#         "Content-Type": "application/json; charset=utf-8",
+#         "authorization": f"Bearer {access_token}",  
+#         "appkey": settings.KIS_APP_KEY,
+#         "appsecret": settings.KIS_APP_SECRET,
+#         "tr_id": "FHPST01060000"
+#     }
+
+#     start_time = "090000"
+#     chart_data = []
+#     current = datetime.strptime(current_time, "%H%M%S")
+    
+#     while current.time() > datetime.strptime(start_time, "%H%M%S").time():
+#         params = {
+#             "FID_COND_MRKT_DIV_CODE": "J",
+#             "FID_INPUT_ISCD": stock_code,
+#             "FID_INPUT_HOUR_1": current.strftime("%H%M%S"),
+#         }
+        
+#         try:
+#             response = requests.get(url, headers=headers, params=params)
+#             response.raise_for_status()
+#             data = response.json()
+            
+#             if data['rt_cd'] == '0':
+#                 # 데이터를 직접 chart_data에 추가
+#                 for item in data['output2']:
+#                     chart_data.append({
+#                         'time': item['stck_cntg_hour'],
+#                         'price': float(item['stck_prpr'])
+#                     })
+                
+#                 # 마지막 데이터의 시간을 기준으로 다음 요청 시간 설정
+#                 if data['output2']:  # 데이터가 있는 경우에만 처리
+#                     last_time = data['output2'][-1]['stck_cntg_hour']
+#                     current = datetime.strptime(last_time, "%H%M%S") - timedelta(seconds=1)
+#                 else:
+#                     # 데이터가 없는 경우 일정 시간만큼 이동
+#                     current = current - timedelta(minutes=10)
+#             else:
+#                 raise Exception(f"API Error: {data['msg1']}")
+
+#         except Exception as e:
+#             print(f"Error getting price for stock {stock_code} at {current}: {str(e)}")
+#             break
+
+#     return sorted(chart_data, key=lambda x: x['time'])

@@ -212,7 +212,6 @@ def draw_theme_chart(request):
 @api_view(['POST'])
 def chart_and_data(request):
     data = request.data
-    print(data)
     stock_code = data.get('stock_code')
     current_time = data.get('current_time')
     user = request.user
@@ -224,7 +223,6 @@ def chart_and_data(request):
         stock_code=stock_code,
         current_time=current_time,
     )
-    print(chart_data)
     response_data = {
         'chart_data': chart_data
     }
