@@ -24,7 +24,7 @@ import { useStockItemStore } from '@/stores/stockitem'
 import { onMounted } from 'vue';
 import { useRoute } from 'vue-router'
 
-const stockItemStore = useStockItemStore()
+// const stockItemStore = useStockItemStore()
 const route = useRoute()
 const stockcode = route.params.stock_id
 
