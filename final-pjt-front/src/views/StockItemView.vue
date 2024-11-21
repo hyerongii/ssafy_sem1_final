@@ -3,8 +3,8 @@
     <h1>개별 주식 종목 페이지</h1>
     <p>주식 종목 코드: {{ stockcode }}</p>
   </div>
-    <!-- 입력 코드가 국내면 -->
-    <div v-if="checkDomestic">
+    입력 코드가 국내면
+    <div v-if="!checkDomestic">
       <DomesticWebSocket
         :stockcode="stockcode"
       />
@@ -41,6 +41,7 @@ const getCurrentTime = () => {
 
 onMounted(()=>{
   const currentTime = getCurrentTime()
+  // console.log(stockcode)
   stockItemStore.getDayInfo(stockcode, currentTime)
   // console.log(currentTime)
 })

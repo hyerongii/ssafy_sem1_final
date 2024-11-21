@@ -40,7 +40,7 @@
               <div v-for="stock in usaStocks" 
                   :key="stock.code" 
                   class="stock-item">
-                <div class="d-flex align-items-center p-2 border-bottom">
+                <div class="d-flex align-items-center p-2 border-bottom" @click="moveStockItem(stock.code)">
                   <div class="stock-logo me-3">
                     <img :src="getStockLogo(stock.code)" 
                         :alt="stock.name"
