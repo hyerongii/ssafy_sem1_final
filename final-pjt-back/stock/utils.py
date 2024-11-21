@@ -206,3 +206,43 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
     except Exception as e:
         print(f"Error getting price for US stock {stock_code}: {str(e)}")
         return 0
+    
+
+def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemconclusion"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "FHKST01010100"
+    }
+
+    params = {
+        "FID_COND_MRKT_DIV_CODE": "J",
+        "FID_INPUT_ISCD": stock_code,
+        "FID_INPUT_HOUR_1": current_time,
+    }
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['rt_cd'] == '0':
+            price_data = []
+            for item in data['output2']:
+                price_data.append({
+                    'time': item['stck_cntg_hour'],
+                    'price': float(item['stck_prpr'])
+                })
+            return sorted(price_data, key=lambda x: x['time'])
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+            
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return []  # 에러 발생 시 빈 리스트 반환
+    

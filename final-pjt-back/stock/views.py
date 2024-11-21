@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from .serializers import ThemeSerializer
-from .utils import get_industry_price_series, get_theme_price_series, get_current_stock_price, get_current_us_stock_price
+from .utils import get_industry_price_series, get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
@@ -111,7 +111,6 @@ def analyze(request):
                     for stock in stocks:
                         try:
                             if stock.code.isdecimal():
-                                print(stock.code)
                                 current_price = get_current_stock_price(user_profile.token, stock.code)
                             else:
                                 current_price = get_current_us_stock_price(user_profile.token, stock.code, stock.excd)
@@ -206,3 +205,26 @@ def draw_theme_chart(request):
             'status': 'error',
             'message': str(e)
         }, status=500)
+    
+
+# front에서 해당 종목의 code, 현재시각을 전달받음
+# 전달받은 시각 이전까지
+def chart_and_data(request):
+    data = request.data
+    stock_code = data.code
+    current_time = data.current_time
+
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    access_token = user_profile.token
+
+    chart_data = get_domestic_stock_chartdata_day(
+        access_token=access_token,
+        stock_code=stock_code,
+        current_time=current_time,
+    )
+    print(chart_data)
+    response_data = {
+        'chart_data': chart_data['data']
+    }
+    return Response(response_data)
