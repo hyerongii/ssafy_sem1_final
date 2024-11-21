@@ -31,23 +31,23 @@ class UserInterest(models.Model):
     interest = models.ForeignKey(Interest, on_delete=models.CASCADE)
 
 
-class ChartPeriod(models.TextChoices):
-    DAY = 'D', '일'
-    WEEK = 'W', '주'
-    MONTH = 'M', '월'
-    YEAR = 'Y', '년'
+# class ChartPeriod(models.TextChoices):
+#     DAY = 'D', '일'
+#     WEEK = 'W', '주'
+#     MONTH = 'M', '월'
+#     YEAR = 'Y', '년'
 
-class ThemeChart(models.Model):
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
-    period = models.CharField(
-        max_length=1,
-        choices=ChartPeriod.choices,
-        default=ChartPeriod.DAY
-    )
-    f_price = models.DecimalField(max_digits=10, decimal_places=2)
+# class ThemeChart(models.Model):
+#     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+#     period = models.CharField(
+#         max_length=1,
+#         choices=ChartPeriod.choices,
+#         default=ChartPeriod.DAY
+#     )
+#     f_price = models.DecimalField(max_digits=10, decimal_places=2)
 
-    def __str__(self):
-        return f'{self.theme.name} - {self.period}'
+#     def __str__(self):
+#         return f'{self.theme.name} - {self.period}'
 
 class Stock(models.Model):
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
@@ -66,18 +66,18 @@ class Stock(models.Model):
     def __str__(self):
         return self.name
 
-class StockChart(models.Model):
-    stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    current_price = models.FloatField()
-    date = models.DateTimeField(auto_now_add=True)
-    period = models.CharField(
-        max_length=1,
-        choices=ChartPeriod.choices,
-        default=ChartPeriod.DAY
-    )
+# class StockChart(models.Model):
+#     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
+#     current_price = models.FloatField()
+#     date = models.DateTimeField(auto_now_add=True)
+#     period = models.CharField(
+#         max_length=1,
+#         choices=ChartPeriod.choices,
+#         default=ChartPeriod.DAY
+#     )
 
-    def __str__(self):
-        return f'{self.stock.name} - {self.period}'
+#     def __str__(self):
+#         return f'{self.stock.name} - {self.period}'
 
 class Article(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)

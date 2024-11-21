@@ -14,6 +14,7 @@ from .models import UserProfile, UserInterest, Interest, Theme, Stock
 import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
+import random
 
 
 # CSRF 보호 비활성화
@@ -308,3 +309,43 @@ def o_chart_period(request):
         'chart_data':chart_data
     }
     return Response(response_data)
+
+def get_same_mbti_theme(request):
+    try:
+        # 1. 현재 유저의 user_id를 조인키로 UserProfile의 mbti 조회
+        user = request.user
+        user_profile = UserProfile.objects.get(user=user)
+        me_mbti = user_profile.mbti
+        # 2. 해당 유저의 user_id를 제외한 다른 유저의 mbti가 
+        # 현재 유저의 mbti와 동일한 경우의 user_id를 리스트에 저장
+        same_mbti_user_list = UserProfile.objects.filter(
+            mbti=me_mbti
+        ).exclude(
+            user=user
+        ).values_list('user_id', flat=True)
+        # 3. 해당 리스트 중 랜덤한 user_id를 선택하여
+        # UserInterest 테이블의 interest_id를 반환
+        if same_mbti_user_list:
+            random_user_id = random.choice(same_mbti_user_list)
+            interest_ids = UserInterest.objects.filter(
+                user_id=random_user_id
+            ).values_list('interest_id', flat=True)
+            # 4. interest_id를 조인키로 
+            # Interest 테이블의 name을 리스트에 담아 반환
+            interest_names = Interest.objects.filter(
+                interest_id__in=interest_ids
+            ).values_list('name', flat=True)
+            
+            response_data = {
+                'theme_names':interest_names
+            }
+
+            return Response(response_data)
+        
+        return []
+        
+    except UserProfile.DoesNotExist:
+        return []
+    except Exception as e:
+        print(f"Error: {str(e)}")
+        return []
