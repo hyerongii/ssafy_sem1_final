@@ -1,16 +1,17 @@
 from rest_framework.response import Response
-from .serializers import ThemeSerializer
+from .serializers import ThemeSerializer, ArticleSerializer, CommentSerializer
 from django.contrib.auth import get_user_model
 from .utils import get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_main_info, get_domestic_stock_consensus, get_oversea_stock_main_info
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
 # Create your views here.
 # 혜령 디버깅 추가
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .models import UserProfile, UserInterest, Interest, Theme, Stock, Article
+from .models import UserProfile, UserInterest, Interest, Theme, Stock, Article, Comment
 import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -31,7 +32,6 @@ def analyze(request):
             user_id = user.pk
             user_for_nickname = User.objects.get(id=user_id)
             nickname = user_for_nickname.nickname
-            
             
             # UserProfile 처리
             try:
@@ -473,3 +473,78 @@ def create_stock_article(request):
             'status': 'error',
             'message': str(e)
         })
+    
+@api_view(['DELETE', 'PUT'])
+def stock_article_delete_or_put(request):
+    data = request.data
+    article_id = data.get('article_id')
+    try:
+        article = Article.objects.get(pk=article_id)
+        
+        # 작성자 본인 확인
+        if article.author.id != request.user.id:
+            return Response({'message': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
+            
+        if request.method == 'DELETE':
+            article.delete()
+            return Response({'message': '게시글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
+            
+        elif request.method == 'PUT':
+            serializer = ArticleSerializer(article, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+                
+    except Article.DoesNotExist:
+        return Response({'message': '게시글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET', 'POST'])
+def get_stock_article_detail(request):
+    data = request.data
+    article_id = data.get('article_id')
+    try:
+        article = Article.objects.get(pk=article_id)
+        
+        if request.method == 'GET':
+            comments = Comment.objects.filter(article=article)
+            serializer = CommentSerializer(comments, many=True)
+            return Response(serializer.data)
+            
+        elif request.method == 'POST':
+            serializer = CommentSerializer(data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save(
+                    article=article,
+                    user=request.user,
+                    stock=article.stock,
+                    theme=article.theme
+                )
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+                
+    except Article.DoesNotExist:
+        return Response({'message': '게시글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
+    
+@api_view(['PUT', 'DELETE'])
+def comment_update_delete(request):
+    data = request.data
+    comment_id = data.get('comment_id')
+    try:
+        comment = Comment.objects.get(pk=comment_id)
+        
+        # 작성자 본인 확인
+        if comment.user.id != request.user.id:
+            return Response({'message': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
+            
+        if request.method == 'DELETE':
+            comment.delete()
+            return Response({'message': '댓글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
+            
+        elif request.method == 'PUT':
+            serializer = CommentSerializer(comment, data=request.data)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return Response(serializer.data)
+                
+    except Comment.DoesNotExist:
+        return Response({'message': '댓글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Theme, Stock, IndustryCode, UserProfile, Interest, Article
+from .models import Theme, Stock, IndustryCode, UserProfile, Interest, Article, Comment
 
 class StockSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,6 +45,8 @@ class AnalyzeResponseSerializer(serializers.Serializer):
 class ArticleSerializer(serializers.ModelSerializer):
     like_article = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
     author = serializers.ReadOnlyField(source='author.nickname')
+    stock = serializers.PrimaryKeyRelatedField(queryset=Stock.objects.all())
+    theme = serializers.PrimaryKeyRelatedField(queryset=Theme.objects.all())
     
     class Meta:
         model = Article
@@ -60,3 +62,28 @@ class ArticleSerializer(serializers.ModelSerializer):
             'like_article'
         )
         read_only_fields = ('theme', 'like_article', 'author')
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.nickname')
+    
+    class Meta:
+        model = Comment
+        fields = (
+            'id',
+            'article',
+            'stock',
+            'theme',
+            'user',
+            'content',
+            'created_at',
+            'like_comment'
+        )
+        read_only_fields = (
+            'article',
+            'stock',
+            'theme',
+            'user',
+            'created_at',
+            'like_comment'
+        )
