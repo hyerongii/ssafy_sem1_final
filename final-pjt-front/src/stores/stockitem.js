@@ -34,9 +34,9 @@ export const useStockItemStore = defineStore('stockitem', () => {
           dayChartData.value = res.data.chart_data
           
         })
-        .then((res) => {
-          websocketStore.webSocketStart(stockCode)
-        })
+        // .then((res) => {
+        //   websocketStore.webSocketStart(stockCode)
+        // })
         .catch((err) => {
           console.log(err)
         })

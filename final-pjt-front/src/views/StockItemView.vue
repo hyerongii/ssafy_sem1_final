@@ -48,9 +48,13 @@
       </li>
     </ul>
   </div>
-
+  <div>
     <!-- 차트 컴포넌트를 표시할 router-view -->
     <RouterView></RouterView>
+  </div>
+  <div>
+    <!-- 게시글 나타내는 함수 -->
+  </div>
 </template>
 
 <script setup>
