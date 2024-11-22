@@ -2,6 +2,10 @@ import requests
 from django.conf import settings
 from .models import Theme, IndustryCode
 from datetime import datetime, timedelta
+from django.contrib.auth import get_user_model
+from django.utils import timezone
+import random
+from stock.models import UserInterest, UserProfile, Interest
 
 def get_industry_price_series(access_token, industry_code, start_date, end_date):
     """
@@ -398,8 +402,8 @@ def get_oversea_stock_chartdata_period(access_token, stock_code, period):
             for item in data['output2']:
                 chart_data.append({
                     # 혜령 : 미국주식 차트 불러올 시 date, khms 여기서 에러 발생하는중
-                    'date': item['khms'],
-                    'clpr': float(item['last'])
+                    'date': item['stck_bsop_date'],
+                    'clpr': float(item['ovrs_nmix_prpr'])
                 })
             return chart_data
         else:
@@ -534,3 +538,47 @@ def get_oversea_stock_main_info(access_token, stock_code, excd):
     except Exception as e:
         print(f"Error getting price for stock {stock_code}: {str(e)}")
         return []
+
+def create_dummy_data():
+    User = get_user_model()
+    mbti_types = ['ISTJ', 'ISFJ', 'INFJ', 'INTJ', 'ISTP', 'ISFP', 'INFP', 'INTP',
+                  'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ']
+    period_choices = ['SHORT', 'MEDIUM', 'LONG']  # ENUM 필드의 선택지에 맞게 수정
+    
+    # 20명의 더미 유저 생성
+    for i in range(2, 22):  # 1번 유저는 이미 존재하므로 2부터 시작
+        username = f'test_user_{i}'
+        email = f'test{i}@example.com'
+        
+        # User 생성
+        user = User.objects.create_user(
+            username=username,
+            email=email,
+            password='password123',
+            nickname=f'닉네임{i}',
+            date_joined=timezone.now()
+        )
+        
+        # UserProfile 생성
+        UserProfile.objects.create(
+            user=user,
+            mbti=random.choice(mbti_types),
+            period=random.choice(period_choices),
+            token='dummy_token'
+        )
+
+def create_user_interests():
+    User = get_user_model()
+    users = User.objects.all()
+    interests = Interest.objects.all()
+    
+    # 각 유저당 1~3개의 관심사 랜덤 할당
+    for user in users:
+        interest_count = random.randint(1, 3)
+        selected_interests = random.sample(list(interests), interest_count)
+        
+        for interest in selected_interests:
+            UserInterest.objects.create(
+                user=user,
+                interest=interest
+            )
