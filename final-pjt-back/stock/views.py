@@ -243,7 +243,6 @@ def d_chart_and_data(request):
         stock_code=stock_code
     )
     articles_data = get_stock_article_list(stock_code=stock_code)
-    print(articles_data)
     response_data = {
         'chart_data': chart_data,
         'ratio_data': ratio_data,

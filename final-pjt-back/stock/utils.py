@@ -205,12 +205,10 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
         return 0
 
 def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
-    # API 기본 설정
     base_url = settings.KIS_BASE_URL
     path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemconclusion"
     url = f"{base_url}{path}"
 
-    # API 요청에 필요한 헤더 설정
     headers = {
         "Content-Type": "application/json; charset=utf-8",
         "authorization": f"Bearer {access_token}",  
@@ -219,73 +217,56 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
         "tr_id": "FHPST01060000"
     }
 
-    # 현재 시간을 5분 단위로 반올림
-    # 예: 13:27:45 -> 13:25:00
+    # 현재 시간을 10분 단위로 반올림
     current = datetime.strptime(current_time, "%H%M%S")
-    current = current.replace(minute=(current.minute // 5) * 5, second=0, microsecond=0)
+    current = current.replace(minute=(current.minute // 10) * 10, second=0, microsecond=0)
     
-    # 장 시작 시간 설정 (09:00:00)
+    # 장 시작 시간을 09:05:00으로 설정
     start_time = datetime.strptime("090000", "%H%M%S")
     
-    # 전체 조회 시간 범위를 분 단위로 계산
-    # 예: 13:25 - 09:00 = 265분
-    total_minutes = (current - start_time).seconds // 60
+    # 10분 간격으로 모든 시간대 생성
+    time_slots = []
+    temp_time = start_time
+    while temp_time <= current:
+        time_slots.append(temp_time.strftime("%H%M%S"))
+        temp_time += timedelta(minutes=10)
     
-    # API가 한 번에 30개까지만 데이터를 반환하므로, 
-    # 전체 시간을 25개 구간으로 나누어 간격 계산 (여유 있게 25개로 설정)
-    # 최소 간격은 5분으로 설정
-    # 예: 265분 // 25 = 10.6분 -> 11분 간격으로 조회
-    interval_minutes = max(total_minutes // 25, 5)
-    
-    # 차트 데이터를 저장할 리스트
     chart_data = []
-    # 조회 시작 시간을 현재 시간으로 설정
-    query_time = current
-
-    # 장 시작 시간까지 반복하며 데이터 수집
-    while query_time >= start_time:
-        # API 요청 파라미터 설정
+    
+    # 15분 단위로 API 호출 (API 한 번 호출로 30개 데이터를 더 조밀하게 수신)
+    for i in range(len(time_slots)):
+        query_time = datetime.strptime(time_slots[i], "%H%M%S")
+        
         params = {
-            "FID_COND_MRKT_DIV_CODE": "J",  # 주식 시장 구분 코드
-            "FID_INPUT_ISCD": stock_code,    # 종목 코드
-            "FID_INPUT_HOUR_1": query_time.strftime("%H%M%S"),  # 조회 시간
+            "FID_COND_MRKT_DIV_CODE": "J",
+            "FID_INPUT_ISCD": stock_code,
+            "FID_INPUT_HOUR_1": query_time.strftime("%H%M%S"),
         }
         
         try:
-            # API 호출
             response = requests.get(url, headers=headers, params=params)
             data = response.json()
             
-            # API 호출 성공 및 데이터 존재하는 경우
             if data['rt_cd'] == '0' and data['output2']:
-                # 반환된 데이터 중 유효한 시간대의 데이터만 수집
-                for item in data['output2']:
-                    item_time = datetime.strptime(item['stck_cntg_hour'], "%H%M%S")
-                    # 장 시작 시간과 현재 시간 사이의 데이터만 수집
-                    if start_time <= item_time <= current:
-                        chart_data.append({
-                            'time': item['stck_cntg_hour'],
-                            'price': float(item['stck_prpr'])
-                        })
-            
-            # 다음 조회 시간으로 이동 (계산된 간격만큼 뒤로)
-            query_time -= timedelta(minutes=interval_minutes)
+                target_time = datetime.strptime(time_slots[i], "%H%M%S")
+                # 해당 시간대와 가장 가까운 데이터 찾기
+                closest_data = min(
+                    [item for item in data['output2'] 
+                     if datetime.strptime(item['stck_cntg_hour'], "%H%M%S") <= target_time],
+                    key=lambda x: abs(datetime.strptime(x['stck_cntg_hour'], "%H%M%S") - target_time),
+                    default=None
+                )
+                
+                if closest_data:
+                    chart_data.append({
+                        'time': time_slots[i],
+                        'price': float(closest_data['stck_prpr'])
+                    })
 
         except Exception as e:
             print(f"Error at {query_time}: {str(e)}")
-            # 에러 발생 시에도 다음 시간으로 이동
-            query_time -= timedelta(minutes=interval_minutes)
 
-    # 시간별 중복 데이터 제거
-    # 딕셔너리를 사용하여 같은 시간대의 데이터는 하나만 유지
-    unique_data = {}
-    for item in chart_data:
-        time_key = item['time']
-        if time_key not in unique_data:
-            unique_data[time_key] = item
-
-    # 시간 순으로 정렬하여 반환
-    return sorted(unique_data.values(), key=lambda x: x['time'])
+    return sorted(chart_data, key=lambda x: x['time'])
 
 def get_domestic_stock_chartdata_period(access_token, stock_code, period):
     base_url = settings.KIS_BASE_URL
