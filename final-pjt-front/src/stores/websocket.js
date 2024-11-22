@@ -106,9 +106,16 @@ export const useWebsocketStore = defineStore('websocket', () => {
   const stockspurchaseDomestic = (data) => {
     const pValue = data.split('^')
     const price = parseInt(pValue[2])
-    // 시간 문자열을 타임스탬프로 변환
-    const timestamp = new Date().getTime() + (9 * 60 * 60 * 1000)
-    console.log(timestamp, price)
+    // 현재 시간을 Date 객체로 변환
+    const date = new Date(new Date().getTime())
+    
+    // HH:mm:ss 형식으로 포맷팅
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+    const seconds = String(date.getSeconds()).padStart(2, '0')
+    const formattedTime = `${hours}${minutes}${seconds}`
+
+    console.log(formattedTime, price)
     // NaN 체크 및 처리
     if (isNaN(price)) {
       console.warn('Invalid price value received:', pValue[2])
@@ -116,10 +123,29 @@ export const useWebsocketStore = defineStore('websocket', () => {
     }
     
     return {
-      timestamp: timestamp,
-      price: price
+    time: formattedTime,
+    price: price
     }
   }
+
+  //   // 국내 데이터 처리 함수
+  // const stockspurchaseDomestic = (data) => {
+  //   const pValue = data.split('^')
+  //   const price = parseInt(pValue[2])
+  //   // 현재 시간을 Date 객체로 변환
+  //   const date = new Date()
+
+  //   // NaN 체크 및 처리
+  //   if (isNaN(price)) {
+  //     console.warn('Invalid price value received:', pValue[2])
+  //     return null // 유효하지 않은 데이터는 null 반환
+  //   }
+    
+  //   return {
+  //   time: date.toISOString(),
+  //   price: price
+  //   }
+  // }
 
 return { webSocketStart, socket, processedData}
 })

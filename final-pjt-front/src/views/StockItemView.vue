@@ -11,6 +11,7 @@
           :to="{ name: 'day', params: { stock_id: stockcode }}" 
           class="nav-link" 
           :class="{ active: route.name === 'day' }"
+          @click="moveDayChart(stockcode)"
         >일</RouterLink>
       </li>
       <li class="nav-item">
@@ -80,10 +81,14 @@ const movePeriodChart = function (period) {
   console.log(stockItemStore.periodChart)
 }
 
+const currentTime = getCurrentTime()
+
+const moveDayChart = function (stockcode){
+  stockItemStore.getDayInfo(stockcode, currentTime)
+}
+
 // 페이지 처음 들어왔을때는 일 데이터 받아오기
 onMounted(()=>{
-  const currentTime = getCurrentTime()
-
   // 일 차트 그리는 함수
   stockItemStore.getDayInfo(stockcode, currentTime)
 
