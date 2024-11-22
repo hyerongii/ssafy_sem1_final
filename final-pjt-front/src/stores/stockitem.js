@@ -9,11 +9,9 @@ export const useStockItemStore = defineStore('stockitem', () => {
   const authStore = useAuthStore()
   const dayChartData = ref([])
   const websocketStore = useWebsocketStore()
-  const url = ref('')
   const periodChart = ref([])
-  const articles = ref([])
-  const consensus = ref([])
-  const ratio = ref([])
+  const stockInfo = ref(null)
+
 
   const getDayInfo = function (stockCode, currentTime) { 
     const endpoint = isNaN(stockCode) ? 'o_chart' : 'd_chart'
@@ -89,16 +87,18 @@ export const useStockItemStore = defineStore('stockitem', () => {
         .then((res) => {
           console.log('주식종목정보')
           console.log(res.data)
-          articles.value = res.data.articles_data
-          ratio.value = res.data.ratio_data[0]
-          consensus.value = res.data.consensus_data[0]
+          stockInfo.value = res.data
+          // articles.value = res.data.articles_data
+          // ratio.value = res.data.ratio_data[0]
+          // 미국
+          // consensus.value = res.data.consensus_data[0]
         })
         .catch((err) => {
           console.log(err)
         })
   }
 
-  return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, periodChart, ratio, consensus, articles}
+  return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, periodChart, stockInfo}
 }
 // ,{persist: true}
 )
