@@ -219,7 +219,7 @@ def draw_theme_chart(request):
 # front에서 해당 종목의 code, 현재시각을 전달받음
 # 전달받은 시각 이전까지
 @api_view(['POST'])
-def d_chart_and_data(request):
+def d_chart(request):
 
     data = request.data
     stock_code = data.get('stock_code')
@@ -234,6 +234,19 @@ def d_chart_and_data(request):
         current_time=current_time,
     )
 
+    # articles_data = get_stock_article_list(stock_code=stock_code)
+    response_data = {
+        'chart_data': chart_data,
+    }
+    return Response(response_data)
+
+def d_main_data(request):
+    data = request.data
+    stock_code = data.get('stock_code')
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    access_token = user_profile.token
+
     ratio_data = get_domestic_stock_main_info(
         access_token=access_token,
         stock_code=stock_code,
@@ -244,7 +257,6 @@ def d_chart_and_data(request):
     )
     articles_data = get_stock_article_list(stock_code=stock_code)
     response_data = {
-        'chart_data': chart_data,
         'ratio_data': ratio_data,
         'consensus_data': consensus_data,
         'articles_data': articles_data,
@@ -254,7 +266,7 @@ def d_chart_and_data(request):
 # front로부터 stock_code를 받음
 # @csrf_exempt
 @api_view(['POST'])
-def o_chart_and_data(request):
+def o_chart(request):
     data = request.data
     stock_code = data.get('stock_code')
     stock = Stock.objects.filter(code=stock_code).first()
@@ -268,6 +280,22 @@ def o_chart_and_data(request):
         stock_code=stock_code,
         excd=excd
     )
+    articles_data = get_stock_article_list(stock_code=stock_code)
+    response_data = {
+        'chart_data': chart_data,
+        'articles_data': articles_data,
+    }
+    return Response(response_data)
+
+def o_main_data(request):
+    data = request.data
+    stock_code = data.get('stock_code')
+    stock = Stock.objects.filter(code=stock_code).first()
+    excd = stock.excd
+    user = request.user
+    user_profile = UserProfile.objects.get(user=user)
+    access_token = user_profile.token
+
     ratio_data = get_oversea_stock_main_info(
         access_token=access_token,
         stock_code=stock_code,
@@ -275,10 +303,10 @@ def o_chart_and_data(request):
     )
 
     response_data = {
-        'chart_data': chart_data,
-        'ratio_data': ratio_data,
+        'ratio_data': ratio_data
     }
     return Response(response_data)
+
 
 # front에게서 stock_code와 period를 받으면 함수 실행
 @api_view(['POST'])

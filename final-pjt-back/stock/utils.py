@@ -1,6 +1,6 @@
 import requests
 from django.conf import settings
-from .models import Theme, IndustryCode
+from .models import Theme, IndustryCode, Article, Stock
 from datetime import datetime, timedelta
 from django.contrib.auth import get_user_model
 from django.utils import timezone
@@ -337,7 +337,7 @@ def get_oversea_stock_chartdata_day(access_token,stock_code,excd):
         "AUTH": "",
         "EXCD": excd,
         "SYMB": stock_code,
-        "NMIN": "5",
+        "NMIN": "",
         # 시차가 있음...이건 추후 더 분석이 필요하다 
         "PINC": "0",
         "NREC": "120", # 5,0,120 함으로써 한국시간 기준 장 시작부터 마감까지의 정보를 받아올 수 있음
@@ -558,7 +558,7 @@ def create_dummy_data():
                   'ESTP', 'ESFP', 'ENFP', 'ENTP', 'ESTJ', 'ESFJ', 'ENFJ', 'ENTJ']
     period_choices = ['SHORT', 'MEDIUM', 'LONG']  # ENUM 필드의 선택지에 맞게 수정
     
-    # 20명의 더미 유저 생성
+    # 300명의 더미 유저 생성
     for i in range(2, 300):  # 1번 유저는 이미 존재하므로 2부터 시작
         username = f'test_user_{i}'
         email = f'test{i}@example.com'

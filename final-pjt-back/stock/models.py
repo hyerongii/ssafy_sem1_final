@@ -52,7 +52,7 @@ class Stock(models.Model):
     
 class Article(models.Model):
     stock = models.ForeignKey(Stock, on_delete=models.CASCADE)
-    theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
+    theme = models.ForeignKey(Theme, on_delete=models.CASCADE, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     
     title = models.CharField(max_length=100)
