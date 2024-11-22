@@ -342,9 +342,10 @@ def get_oversea_stock_chartdata_day(access_token,stock_code,excd):
         response.raise_for_status()
         data = response.json()
         if data['rt_cd'] == '0':
+            
             for item in data['output2']:
                 chart_data.append({
-                    'time': item['khms'],
+                    'time': item['xhms'],
                     'price': item['last']
                 })
             return chart_data
