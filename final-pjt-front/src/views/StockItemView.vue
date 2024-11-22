@@ -53,19 +53,27 @@
     <RouterView></RouterView>
   </div>
   <div>
-    <!-- 게시글 나타내는 함수 -->
+    <!-- 주식종목 정보 -->
+    <StockInfo
+    :stockcode="stockcode"
+    />
+  </div>
+  <div>
   </div>
 </template>
 
 <script setup>
-import DayStockChart from '@/components/stocks/DayStockChart.vue'
+// import DayStockChart from '@/components/stocks/DayStockChart.vue'
+import StockArticles from '@/components/stocks/StockArticles.vue'
+import StockInfo from '@/components/stocks/StockInfo.vue'
 import { useStockItemStore } from '@/stores/stockitem'
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 
 const stockItemStore = useStockItemStore()
 const route = useRoute()
 const stockcode = route.params.stock_id
+
 
 // 입력 코드 국내/해외 인지 구분하기!
 const checkDomestic = (stockcode) => isNaN(stockcode)

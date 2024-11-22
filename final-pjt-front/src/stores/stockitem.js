@@ -11,9 +11,12 @@ export const useStockItemStore = defineStore('stockitem', () => {
   const websocketStore = useWebsocketStore()
   const url = ref('')
   const periodChart = ref([])
+  const articles = ref([])
+  const consensus = ref([])
+  const ratio = ref([])
 
   const getDayInfo = function (stockCode, currentTime) { 
-    const endpoint = isNaN(stockCode) ? 'o_chart_and_data' : 'd_chart_and_data'
+    const endpoint = isNaN(stockCode) ? 'o_chart' : 'd_chart'
       
     axios({
         //통합
@@ -29,10 +32,9 @@ export const useStockItemStore = defineStore('stockitem', () => {
         },
       })
         .then((res) => {
-          console.log('당일 차트 데이터 받음')
+          console.log('당일 차트 데이터')
           console.log(res.data)
           dayChartData.value = res.data.chart_data
-          
         })
         // .then((res) => {
         //   websocketStore.webSocketStart(stockCode)
@@ -68,7 +70,35 @@ export const useStockItemStore = defineStore('stockitem', () => {
       })
   }
 
-  return {getDayInfo, dayChartData, getPeriodInfo, periodChart}
+  const getStockInfo = function (stockCode, currentTime){
+    const endpoint = isNaN(stockCode) ? 'o_main_data' : 'd_main_data'
+      
+    axios({
+        //통합
+        method: 'post',
+        url: `${authStore.API_URL}/api/v1/stock/${endpoint}/`,
+        headers: {
+          Authorization: `Bearer ${authStore.token}`,
+        },
+        data: {
+          stock_code : stockCode,
+          // 숫자형태(국내)면 current_time 추가
+          ...(!isNaN(stockCode) && { current_time: currentTime })
+        },
+      })
+        .then((res) => {
+          console.log('주식종목정보')
+          console.log(res.data)
+          articles.value = res.data.articles_data
+          ratio.value = res.data.ratio_data[0]
+          consensus.value = res.data.consensus_data[0]
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  }
+
+  return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, periodChart, ratio, consensus, articles}
 }
 // ,{persist: true}
 )
