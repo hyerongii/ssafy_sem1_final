@@ -77,29 +77,37 @@ const chartOptions = ref({
   }
 })
 
-const series = ref([{
-  name: '주가',
-  data: []
-}])
+// const series = ref([{
+//   name: '주가',
+//   data: []
+// }])
 
 
 // 초기 데이터 로드를 위한 watcher
-watch(
-  () => stockItemStore.dayChartData,
-  (newData) => {
-    if (newData && Array.isArray(newData)) {
-      const formattedData = newData.map(item => ({
-        x: new Date(item.time).getTime(), // timestamp로 변환
-        y: parseFloat(item.price)
-      }))
-      series.value = [{
-        name: '주가',
-        data: formattedData
-      }]
-    }
-  },
-  { immediate: true }
-)
+// watch(
+//   () => stockItemStore.dayChartData,
+//   (newData) => {
+//     if (newData && Array.isArray(newData)) {
+//       const formattedData = newData.map(item => ({
+//         x: new Date(item.time).getTime(), // timestamp로 변환
+//         y: parseFloat(item.price)
+//       }))
+//       series.value = [{
+//         name: '주가',
+//         data: formattedData
+//       }]
+//     }
+//   },
+//   { immediate: true }
+// )
+
+const series = computed(() => [{
+  name: '주가',
+  data: stockItemStore.dayChartData.map(item => ({
+    x: new Date(item.time).getTime(), // timestamp로 변환
+    y: parseFloat(item.price)
+  }))
+}])
 
 
 // 실시간 데이터 업데이트를 위한 watcher
@@ -112,14 +120,9 @@ watch(
         x: timestamp,
         y: parseFloat(newData.price)
       })
-      
-      // // 데이터가 100개 이상이면 첫 번째 데이터 제거
-      // if (series.value[0].data.length > 100) {
-      //   series.value[0].data.shift()
-      // }
-      
+
       // 전체 series 업데이트
-      series.value = [...series.value]
+      // series.value = [...series.value]
     }
   }
 )
