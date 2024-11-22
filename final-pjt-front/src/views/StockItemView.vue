@@ -10,7 +10,7 @@
         <RouterLink 
           :to="{ name: 'day', params: { stock_id: stockcode }}" 
           class="nav-link" 
-          :class="{ active: route.name === 'day' }"
+          :class="{ active: $route.name === 'day' || !$route.name }"
           @click="moveDayChart(stockcode)"
         >일</RouterLink>
       </li>

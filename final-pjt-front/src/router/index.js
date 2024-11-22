@@ -58,6 +58,11 @@ const router = createRouter({
       children:[
         {
           path: '',
+          redirect: to => {
+            return { name: 'day', params: { stock_id: to.params.stock_id } }}
+        },
+        {
+          path: 'day',
           name: 'day',
           component: DayStockChart,
         },
