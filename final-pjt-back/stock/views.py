@@ -240,6 +240,7 @@ def d_chart(request):
     }
     return Response(response_data)
 
+@api_view(['POST'])
 def d_main_data(request):
     data = request.data
     stock_code = data.get('stock_code')
@@ -287,6 +288,7 @@ def o_chart(request):
     }
     return Response(response_data)
 
+@api_view(['POST'])
 def o_main_data(request):
     data = request.data
     stock_code = data.get('stock_code')

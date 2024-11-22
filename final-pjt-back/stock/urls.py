@@ -5,8 +5,6 @@ urlpatterns = [
     path('token/',views.get_token),
     path('stock/analyze/',views.analyze),
     path('stock/indus_chart/',views.draw_theme_chart),
-    # 아래의 호출로 article 전체 조회(front에서는 최신순 5개만 보여주기)
-    # 커뮤니티 버튼 클릭 시 아래의 호출 재활용
     path('stock/d_chart/',views.d_chart),
     path('stock/d_main_data/',views.d_main_data),
     path('stock/o_chart/',views.o_chart),
