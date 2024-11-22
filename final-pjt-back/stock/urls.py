@@ -10,4 +10,5 @@ urlpatterns = [
     path('stock/d_chart_period/',views.d_chart_period),
     path('stock/o_chart_period/',views.o_chart_period),
     path('stock/same_mbti/',views.get_same_mbti_theme),
+    path('stock/article/create/',views.create_stock_article),
 ]

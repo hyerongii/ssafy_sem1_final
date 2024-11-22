@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Theme, Stock, IndustryCode, UserProfile, Interest
+from .models import Theme, Stock, IndustryCode, UserProfile, Interest, Article
 
 class StockSerializer(serializers.ModelSerializer):
     class Meta:
@@ -41,3 +41,22 @@ class InterestSerializer(serializers.ModelSerializer):
 class AnalyzeResponseSerializer(serializers.Serializer):
     message = serializers.CharField()
     recommended_themes = ThemeInfoSerializer(many=True)    
+
+class ArticleSerializer(serializers.ModelSerializer):
+    like_article = serializers.PrimaryKeyRelatedField(read_only=True, many=True)
+    author = serializers.ReadOnlyField(source='author.nickname')
+    
+    class Meta:
+        model = Article
+        fields = (
+            'id',
+            'stock',
+            'theme',
+            'author',
+            'title',
+            'content',
+            'created_at',
+            'updated_at',
+            'like_article'
+        )
+        read_only_fields = ('theme', 'like_article', 'author')

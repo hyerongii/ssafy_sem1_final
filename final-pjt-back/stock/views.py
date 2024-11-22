@@ -1,9 +1,10 @@
 from rest_framework.response import Response
 from .serializers import ThemeSerializer
+from django.contrib.auth import get_user_model
 from .utils import get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_main_info, get_domestic_stock_consensus, get_oversea_stock_main_info
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
 # Create your views here.
 # 혜령 디버깅 추가
@@ -15,7 +16,7 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import random
 
-
+User = get_user_model()
 # CSRF 보호 비활성화
 # @csrf_exempt
 @api_view(['POST'])
@@ -27,6 +28,10 @@ def analyze(request):
         try:
             data = json.loads(request.body)
             user = request.user
+            user_id = user.pk
+            user_for_nickname = User.objects.get(id=user_id)
+            nickname = user_for_nickname.nickname
+            
             
             # UserProfile 처리
             try:
@@ -147,6 +152,7 @@ def analyze(request):
                 "message": "저장이 완료되었습니다.",
                 "recommended_themes": themes_info,
                 "same_theme_names": same_theme_names,
+                "nickname": nickname
             })
 
         except json.JSONDecodeError:
@@ -214,7 +220,7 @@ def draw_theme_chart(request):
 # 전달받은 시각 이전까지
 @api_view(['POST'])
 def d_chart_and_data(request):
-    print('안뇽')
+
     data = request.data
     stock_code = data.get('stock_code')
     current_time = data.get('current_time')
@@ -227,7 +233,7 @@ def d_chart_and_data(request):
         stock_code=stock_code,
         current_time=current_time,
     )
-    print(type(chart_data))
+
     ratio_data = get_domestic_stock_main_info(
         access_token=access_token,
         stock_code=stock_code,
@@ -369,7 +375,6 @@ def get_same_mbti_theme(request):
     
 def get_stock_article_list(stock_code):
     try:
-        print('안뇽!!!!!!!!!!!!!!!!!!!!!!!!!!!')
         # 1. 현재 조회하고 있는 stock 확인
         stock = Stock.objects.filter(code=stock_code).first()
         
@@ -414,3 +419,58 @@ def get_stock_article_list(stock_code):
             'message': str(e),
             'articles': []
         }
+    
+@api_view(['POST'])
+# @csrf_exempt
+# @permission_classes([IsAuthenticated])
+def create_stock_article(request):
+    try:
+        data = request.data
+        stock_code = data.get('stock_code')
+        
+        # 1. 주식 정보 확인
+        stock = Stock.objects.filter(code=stock_code).first()
+        if not stock:
+            return JsonResponse({
+                'status': 'error',
+                'message': '존재하지 않는 주식 코드입니다.'
+            })
+            
+        # 2. 게시글 생성에 필요한 데이터 받아오기
+        title = data.get('title')
+        content = data.get('content')
+        
+        # 3. 필수 필드 검증
+        if not all([title, content]):
+            return JsonResponse({
+                'status': 'error',
+                'message': '필수 필드가 누락되었습니다.'
+            })
+        
+        user = request.user
+        user_id = user.pk
+        user_for_article = User.objects.get(id=user_id)
+        
+        # 4. 게시글 생성 (theme는 stock의 theme 사용)
+        article = Article.objects.create(
+            stock=stock,
+            theme=stock.theme,  # stock에 연결된 theme 사용
+            author=user_for_article,
+            title=title,
+            content=content
+        )
+        
+        # 5. 응답 데이터 구성
+        response_data = {
+            'status': 'success',
+            'article_id': article.id,
+            'message': '게시글이 성공적으로 작성되었습니다.'
+        }
+        
+        return JsonResponse(response_data)
+        
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        })

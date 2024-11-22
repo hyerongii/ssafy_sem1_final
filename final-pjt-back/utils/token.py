@@ -45,7 +45,7 @@ def get_access_token():
         response.raise_for_status()  # HTTP 에러 체크
         
         # 응답 내용 출력하여 디버깅
-        print("API Response:", response.text)
+        # print("API Response:", response.text)
         
         token_data = response.json()
         
