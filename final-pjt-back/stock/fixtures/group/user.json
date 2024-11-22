@@ -1,0 +1,21 @@
+[
+{
+  "model": "accounts.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$600000$ytcCcwgqLOjGQXOg7zKyBI$sLo2G7dixEHdOAYUYUFgTgO2k4b/bl+R5s0FJxNTw4g=",
+    "last_login": "2024-11-18T13:01:10.675Z",
+    "is_superuser": false,
+    "username": "user",
+    "first_name": "",
+    "last_name": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-11-18T13:01:10.264Z",
+    "nickname": "",
+    "email": "wlsansdlek1@me.com",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]

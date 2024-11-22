@@ -1,0 +1,219 @@
+[
+  {
+    "model": "stock.interest",
+    "pk": 1,
+    "fields": {
+      "name": "핀테크"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 2,
+    "fields": {
+      "name": "언택트경제"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 3,
+    "fields": {
+      "name": "게임월드"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 4,
+    "fields": {
+      "name": "카리스마창업자"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 5,
+    "fields": {
+      "name": "자율주행차"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 6,
+    "fields": {
+      "name": "컨텐츠강자"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 7,
+    "fields": {
+      "name": "신나는 드라이빙"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 8,
+    "fields": {
+      "name": "이번 휴가는 어디?"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 9,
+    "fields": {
+      "name": "가상현실(VR)"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 10,
+    "fields": {
+      "name": "메타버스 구현"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 11,
+    "fields": {
+      "name": "인공지능"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 12,
+    "fields": {
+      "name": "클라우드"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 13,
+    "fields": {
+      "name": "항공우주&방위산업"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 14,
+    "fields": {
+      "name": "통신"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 15,
+    "fields": {
+      "name": "프랜차이즈"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 16,
+    "fields": {
+      "name": "스트리밍의 시대"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 17,
+    "fields": {
+      "name": "어디 옷이야?"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 18,
+    "fields": {
+      "name": "리튬&배터리"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 19,
+    "fields": {
+      "name": "반도체"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 20,
+    "fields": {
+      "name": "플랫폼 대표주자"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 21,
+    "fields": {
+      "name": "건물주의 꿈"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 22,
+    "fields": {
+      "name": "클린 에너지"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 23,
+    "fields": {
+      "name": "갈증해소"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 24,
+    "fields": {
+      "name": "소비/원자재"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 25,
+    "fields": {
+      "name": "자원/에너지"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 26,
+    "fields": {
+      "name": "소셜미디어"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 27,
+    "fields": {
+      "name": "블록체인"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 28,
+    "fields": {
+      "name": "리테일/유통"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 29,
+    "fields": {
+      "name": "사물인터넷(IOT)"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 30,
+    "fields": {
+      "name": "반려동물"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 31,
+    "fields": {
+      "name": "뷰티의 세계"
+    }
+  }
+]

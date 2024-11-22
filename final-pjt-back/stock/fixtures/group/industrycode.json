@@ -1,0 +1,562 @@
+[
+    {
+      "model": "stock.industrycode",
+      "pk": 1,
+      "fields": {
+        "interest": "1",
+        "api_request_code": "0020"
+      }
+    },
+    {
+      "model": "stock.industrycode",
+      "pk": 2,
+      "fields": {
+        "interest": "1",
+        "api_request_code": "0021"
+      }
+    },
+    {
+      "model": "stock.industrycode",
+      "pk": 3,
+      "fields": {
+        "interest": "1",
+        "api_request_code": "0024"
+      }
+    },
+    {
+      "model": "stock.industrycode",
+      "pk": 4,
+      "fields": {
+        "interest": "1",
+        "api_request_code": "0025"
+      }
+    },
+    {
+      "model": "stock.industrycode",
+      "pk": 5,
+      "fields": {
+        "interest": "1",
+        "api_request_code": "0026"
+      }
+    },
+    {
+      "model": "stock.industrycode",
+      "pk": 6,
+      "fields": {
+        "interest": "2",
+        "api_request_code": "0013"
+      }
+    },
+    {
+      "model": "stock.industrycode",
+      "pk": 7,
+      "fields": {
+        "interest": "2",
+        "api_request_code": "0016"
+      }
+    },
+    {
+        "model": "stock.industrycode",
+        "pk": 8,
+        "fields": {
+          "interest": "3",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode", 
+        "pk": 9,
+        "fields": {
+          "interest": "3",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 10,
+        "fields": {
+          "interest": "3", 
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 11,
+        "fields": {
+          "interest": "4",
+          "api_request_code": "0016"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 12,
+        "fields": {
+          "interest": "4",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 13,
+        "fields": {
+          "interest": "5",
+          "api_request_code": "0012"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 14,
+        "fields": {
+          "interest": "5",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 15,
+        "fields": {
+          "interest": "5",
+          "api_request_code": "0015"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 16,
+        "fields": {
+          "interest": "6",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 17,
+        "fields": {
+          "interest": "6",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 18,
+        "fields": {
+          "interest": "7",
+          "api_request_code": "0012"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 19,
+        "fields": {
+          "interest": "7",
+          "api_request_code": "0015"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 20,
+        "fields": {
+          "interest": "8",
+          "api_request_code": "0019"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 21,
+        "fields": {
+          "interest": "8",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 22,
+        "fields": {
+          "interest": "22",
+          "api_request_code": "0017"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 23,
+        "fields": {
+          "interest": "23",
+          "api_request_code": "0005"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 24,
+        "fields": {
+          "interest": "24",
+          "api_request_code": "0008"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 25,
+        "fields": {
+          "interest": "24",
+          "api_request_code": "0010"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 26,
+        "fields": {
+          "interest": "24",
+          "api_request_code": "0011"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 27,
+        "fields": {
+          "interest": "25",
+          "api_request_code": "0008"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 28,
+        "fields": {
+          "interest": "25",
+          "api_request_code": "0017"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 29,
+        "fields": {
+          "interest": "26",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 30,
+        "fields": {
+          "interest": "26",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 31,
+        "fields": {
+          "interest": "27",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 32,
+        "fields": {
+          "interest": "27",
+          "api_request_code": "0021"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 33,
+        "fields": {
+          "interest": "27",
+          "api_request_code": "0024"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 34,
+        "fields": {
+          "interest": "28",
+          "api_request_code": "0016"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 35,
+        "fields": {
+          "interest": "29",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 36,
+        "fields": {
+          "interest": "29",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 37,
+        "fields": {
+          "interest": "30",
+          "api_request_code": "0005"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 38,
+        "fields": {
+          "interest": "30",
+          "api_request_code": "0009"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 39,
+        "fields": {
+          "interest": "30",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 40,
+        "fields": {
+          "interest": "31",
+          "api_request_code": "0008"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 41,
+        "fields": {
+          "interest": "31",
+          "api_request_code": "0016"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 42,
+        "fields": {
+          "interest": "31",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 43,
+        "fields": {
+          "interest": "9",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 44,
+        "fields": {
+          "interest": "9",
+          "api_request_code": "0014"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 45,
+        "fields": {
+          "interest": "9",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 46,
+        "fields": {
+          "interest": "10",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 47,
+        "fields": {
+          "interest": "10",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 48,
+        "fields": {
+          "interest": "10",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 49,
+        "fields": {
+          "interest": "11",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 50,
+        "fields": {
+          "interest": "11",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 51,
+        "fields": {
+          "interest": "12",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 52,
+        "fields": {
+          "interest": "12",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 53,
+        "fields": {
+          "interest": "13",
+          "api_request_code": "0012"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 54,
+        "fields": {
+          "interest": "13",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 55,
+        "fields": {
+          "interest": "13",
+          "api_request_code": "0015"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 56,
+        "fields": {
+          "interest": "14",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 57,
+        "fields": {
+          "interest": "15",
+          "api_request_code": "0005"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 58,
+        "fields": {
+          "interest": "15",
+          "api_request_code": "0016"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 59,
+        "fields": {
+          "interest": "15",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 60,
+        "fields": {
+          "interest": "16",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 61,
+        "fields": {
+          "interest": "16",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 62,
+        "fields": {
+          "interest": "17",
+          "api_request_code": "0006"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 63,
+        "fields": {
+          "interest": "17",
+          "api_request_code": "0016"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 64,
+        "fields": {
+          "interest": "18",
+          "api_request_code": "0008"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 65,
+        "fields": {
+          "interest": "18",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 66,
+        "fields": {
+          "interest": "19",
+          "api_request_code": "0013"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 67,
+        "fields": {
+          "interest": "20",
+          "api_request_code": "0016"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 68,
+        "fields": {
+          "interest": "20",
+          "api_request_code": "0020"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 69,
+        "fields": {
+          "interest": "20",
+          "api_request_code": "0026"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 70,
+        "fields": {
+          "interest": "21",
+          "api_request_code": "0018"
+        }
+      }
+  ]
