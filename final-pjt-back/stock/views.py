@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.response import Response
 from .serializers import ThemeSerializer
 from .utils import get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_main_info, get_domestic_stock_consensus, get_oversea_stock_main_info
@@ -10,7 +9,7 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 # 혜령 디버깅 추가
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-from .models import UserProfile, UserInterest, Interest, Theme, Stock
+from .models import UserProfile, UserInterest, Interest, Theme, Stock, Article
 import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
@@ -18,7 +17,7 @@ import random
 
 
 # CSRF 보호 비활성화
-@csrf_exempt
+# @csrf_exempt
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 @authentication_classes([JWTAuthentication])
@@ -120,7 +119,7 @@ def analyze(request):
                                     current_price = current_price * 1391.50
                                 else:
                                     current_price = 0
-                                # current_price = get_current_us_stock_price(user_profile.token, stock.code) * 1391.50
+
                             if current_price > 0 and stock.price != current_price:  
                                 stock.price = current_price
                                 stock.save()
@@ -133,7 +132,7 @@ def analyze(request):
                         except Exception as e:
                             print(f"종목 {stock.code}의 가격 조회 실패: {e}")
                             continue
-
+                    
                     themes_info.append({
                         "theme_name": theme.name,
                         "stocks": updated_stocks,
@@ -142,10 +141,12 @@ def analyze(request):
 
             # 6개로 제한
             themes_info = themes_info[:6]
-
+            # 나랑 동일한 mbti의 사람들은 무슨 테마를 추천받았을까?
+            same_theme_names = get_same_mbti_theme(request)
             return JsonResponse({
                 "message": "저장이 완료되었습니다.",
-                "recommended_themes": themes_info
+                "recommended_themes": themes_info,
+                "same_theme_names": same_theme_names,
             })
 
         except json.JSONDecodeError:
@@ -213,6 +214,7 @@ def draw_theme_chart(request):
 # 전달받은 시각 이전까지
 @api_view(['POST'])
 def d_chart_and_data(request):
+    print('안뇽')
     data = request.data
     stock_code = data.get('stock_code')
     current_time = data.get('current_time')
@@ -234,10 +236,13 @@ def d_chart_and_data(request):
         access_token=access_token,
         stock_code=stock_code
     )
+    articles_data = get_stock_article_list(stock_code=stock_code)
+    print(articles_data)
     response_data = {
         'chart_data': chart_data,
         'ratio_data': ratio_data,
-        'consensus_data': consensus_data
+        'consensus_data': consensus_data,
+        'articles_data': articles_data,
     }
     return Response(response_data)
 
@@ -300,7 +305,6 @@ def o_chart_period(request):
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
-    print('hello')
     chart_data = get_oversea_stock_chartdata_period(
         access_token=access_token,
         stock_code=stock_code,
@@ -311,6 +315,7 @@ def o_chart_period(request):
         'chart_data':chart_data
     }
     return Response(response_data)
+
 
 def get_same_mbti_theme(request):
     try:
@@ -325,6 +330,7 @@ def get_same_mbti_theme(request):
         ).exclude(
             user=user
         ).values_list('user_id', flat=True)
+
         # 3. 해당 리스트 중 랜덤한 user_id를 선택하여
         # UserInterest 테이블의 interest_id를 반환
         if same_mbti_user_list:
@@ -334,20 +340,77 @@ def get_same_mbti_theme(request):
             ).values_list('interest_id', flat=True)
             # 4. interest_id를 조인키로 
             # Interest 테이블의 name을 리스트에 담아 반환
-            interest_names = Interest.objects.filter(
-                interest_id__in=interest_ids
-            ).values_list('name', flat=True)
-            
-            response_data = {
-                'theme_names':interest_names
+            interest_names = list(Interest.objects.filter(
+                id__in=interest_ids
+            ).values_list('name', flat=True))
+            # 딕셔너리 형태로 반환
+            return {
+                'status': 'success',
+                'interests': interest_names
             }
-
-            return Response(response_data)
         
-        return []
+        return {
+            'status': 'success',
+            'interests': []
+        }
         
     except UserProfile.DoesNotExist:
-        return []
+        return {
+            'status': 'error',
+            'message': 'User profile not found',
+            'interests': []
+        }
     except Exception as e:
-        print(f"Error: {str(e)}")
-        return []
+        return {
+            'status': 'error',
+            'message': str(e),
+            'interests': []
+        }
+    
+def get_stock_article_list(stock_code):
+    try:
+        print('안뇽!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+        # 1. 현재 조회하고 있는 stock 확인
+        stock = Stock.objects.filter(code=stock_code).first()
+        
+        if not stock:
+            return {
+                'status': 'error',
+                'message': 'Stock not found',
+                'articles': []
+            }
+            
+        # 2. stock을 참조하고 있는 article 리스트 조회
+        articles = Article.objects.filter(
+            stock_id=stock.pk
+        ).values(
+            'id',
+            'title',
+            'content',
+            'author__nickname',  # User 모델의 nickname
+            'created_at',
+            'updated_at',
+            'like_article',
+            'theme__name'  # Theme 모델의 name
+        ).order_by('-created_at')  # 최신순 정렬
+        
+        # QuerySet을 리스트로 변환하여 JSON serializable하게 만듦
+        article_list = list(articles)
+        
+        # datetime 객체를 문자열로 변환
+        for article in article_list:
+            article['created_at'] = article['created_at'].strftime('%Y-%m-%d %H:%M:%S')
+            article['updated_at'] = article['updated_at'].strftime('%Y-%m-%d %H:%M:%S')
+        
+        return {
+            'status': 'success',
+            'stock_name': stock.name,
+            'articles': article_list
+        }
+        
+    except Exception as e:
+        return {
+            'status': 'error',
+            'message': str(e),
+            'articles': []
+        }
