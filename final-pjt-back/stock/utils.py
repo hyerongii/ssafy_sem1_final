@@ -344,8 +344,8 @@ def get_oversea_stock_chartdata_day(access_token,stock_code,excd):
         if data['rt_cd'] == '0':
             for item in data['output2']:
                 chart_data.append({
-                    'date': item['khms'],
-                    'clpr': item['last']
+                    'time': item['khms'],
+                    'price': item['last']
                 })
             return chart_data
         else:

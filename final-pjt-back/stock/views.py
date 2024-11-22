@@ -300,7 +300,7 @@ def o_chart_period(request):
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
-
+    print('hello')
     chart_data = get_oversea_stock_chartdata_period(
         access_token=access_token,
         stock_code=stock_code,
