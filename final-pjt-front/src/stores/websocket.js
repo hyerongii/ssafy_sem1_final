@@ -108,7 +108,7 @@ export const useWebsocketStore = defineStore('websocket', () => {
     const price = parseInt(pValue[2])
     // 시간 문자열을 타임스탬프로 변환
     const timestamp = new Date().getTime() + (9 * 60 * 60 * 1000)
-    onsole.log(timestamp, price)
+    console.log(timestamp, price)
     // NaN 체크 및 처리
     if (isNaN(price)) {
       console.warn('Invalid price value received:', pValue[2])

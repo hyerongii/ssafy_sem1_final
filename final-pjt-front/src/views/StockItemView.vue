@@ -85,7 +85,7 @@ onMounted(()=>{
   const currentTime = getCurrentTime()
 
   // 일 차트 그리는 함수
-  // stockItemStore.getDayInfo(stockcode, currentTime)
+  stockItemStore.getDayInfo(stockcode, currentTime)
 
 })
 

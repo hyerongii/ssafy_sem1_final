@@ -32,7 +32,7 @@ export const useStockItemStore = defineStore('stockitem', () => {
           console.log('당일 차트 데이터 받음')
           console.log(res.data)
           dayChartData.value = res.data.chart_data
-          websocketStore.webSocketStart(stockCode)
+          // websocketStore.webSocketStart(stockCode)
         })
         .catch((err) => {
           console.log(err)
