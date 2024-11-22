@@ -339,7 +339,7 @@ def get_oversea_stock_chartdata_day(access_token,stock_code,excd):
         "SYMB": stock_code,
         "NMIN": "",
         # 시차가 있음...이건 추후 더 분석이 필요하다 
-        "PINC": "0",
+        "PINC": "1",
         "NREC": "120", # 5,0,120 함으로써 한국시간 기준 장 시작부터 마감까지의 정보를 받아올 수 있음
         "NEXT":"",
         "NREC":"",
@@ -535,15 +535,14 @@ def get_oversea_stock_main_info(access_token, stock_code, excd):
         response = requests.get(url, headers=headers, params=params)
         response.raise_for_status()
         data = response.json()
-        
         if data['rt_cd'] == '0':
-            for item in data['output']:
-                ratio_data.append({
-                    'PER': item['perx'],
-                    'PBR': item['pbrx'],
-                    'EPS': item['epsx'],
-                    'BPS': item['bpsx']
-                })
+            ratio_data.append({
+                'PER': data['output']['perx'],
+                'PBR': data['output']['pbrx'],
+                'EPS': data['output']['epsx'],
+                'BPS': data['output']['bpsx']
+            })
+            print(ratio_data)
             return ratio_data
         else:
             raise Exception(f"API Error: {data['msg1']}")
