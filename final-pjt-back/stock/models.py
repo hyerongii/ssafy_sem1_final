@@ -18,6 +18,8 @@ class Theme(models.Model):
     code = models.CharField(max_length=6)
     api_request_code = models.CharField(max_length=20, null=True, blank=True)
     industry_codes = models.ManyToManyField('IndustryCode', related_name='themes')
+    def __str__(self):
+        return self.theme.name
 
 class Interest(models.Model):
     name = models.CharField(max_length=30)

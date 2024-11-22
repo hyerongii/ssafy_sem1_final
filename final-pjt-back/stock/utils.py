@@ -547,7 +547,7 @@ def create_dummy_data():
     period_choices = ['SHORT', 'MEDIUM', 'LONG']  # ENUM 필드의 선택지에 맞게 수정
     
     # 20명의 더미 유저 생성
-    for i in range(2, 22):  # 1번 유저는 이미 존재하므로 2부터 시작
+    for i in range(2, 300):  # 1번 유저는 이미 존재하므로 2부터 시작
         username = f'test_user_{i}'
         email = f'test{i}@example.com'
         

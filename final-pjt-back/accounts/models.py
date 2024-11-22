@@ -8,7 +8,7 @@ class User(AbstractUser):
         MEDIUM_TERM = 'medium', '중기'
         LONG_TERM = 'long', '장기'
     nickname = models.CharField(max_length=50)
-    email = models.EmailField(unique=True, blank=False)
+    email = models.EmailField(blank=False)
     # token = models.TextField()
     
     # period = models.CharField(
