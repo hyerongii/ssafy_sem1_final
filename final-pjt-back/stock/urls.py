@@ -16,5 +16,5 @@ urlpatterns = [
     path('stock/article/update_or_delete/',views.stock_article_delete_or_put),
     # 아래의 호출로 article detail로 이동 및 해당 게시글의 comment 전달
     path('stock/article/<int:article_pk>/',views.get_stock_article_detail),
-    path('stock/article/detail/delete_or_put',views.comment_update_delete),
+    path('stock/article/<int:comment_pk>/',views.comment_update_delete),
 ]

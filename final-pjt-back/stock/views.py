@@ -574,9 +574,9 @@ def stock_article_delete_or_put(request):
 
 @api_view(['GET', 'POST'])
 def get_stock_article_detail(request, article_pk):
+    # 1. front에서 요청 시 받은 url의 article_pk를 이용해 조회    
+    article = Article.objects.get(pk=article_pk)
     try:
-        # 1. front에서 요청 시 받은 url의 article_pk를 이용해 조회
-        article = Article.objects.get(pk=article_pk)
         if request.method == 'GET':
             # 2. 조회한 article에 관계된 comment 조회
             comments = Comment.objects.filter(article=article)
@@ -589,6 +589,7 @@ def get_stock_article_detail(request, article_pk):
                 "comments": comment_serializer.data,
             }
             return Response(response_data, status=200)
+        # 댓글 쓰기
         elif request.method == 'POST':
             serializer = CommentSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
@@ -604,25 +605,26 @@ def get_stock_article_detail(request, article_pk):
         return Response({'message': '게시글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
     
 @api_view(['PUT', 'DELETE'])
-def comment_update_delete(request):
-    data = request.data
-    comment_id = data.get('comment_id')
+def comment_update_delete(request, comment_pk):
     try:
-        comment = Comment.objects.get(pk=comment_id)
+        # 1. 댓글 조회
+        comment = Comment.objects.get(pk=comment_pk)
         
-        # 작성자 본인 확인
+        # 2. 작성자 본인 확인
         if comment.user.id != request.user.id:
             return Response({'message': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
-            
+
+        # 3. DELETE 요청 처리
         if request.method == 'DELETE':
             comment.delete()
             return Response({'message': '댓글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
-            
+        
+        # 4. PUT 요청 처리
         elif request.method == 'PUT':
-            serializer = CommentSerializer(comment, data=request.data)
+            serializer = CommentSerializer(comment, data=request.data, partial=True)  # 부분 업데이트 허용
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
-                return Response(serializer.data)
-                
+                return Response(serializer.data, status=status.HTTP_200_OK)
+    
     except Comment.DoesNotExist:
         return Response({'message': '댓글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
