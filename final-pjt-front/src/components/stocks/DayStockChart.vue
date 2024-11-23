@@ -1,10 +1,9 @@
 <template>
-  <div>
-    <h1>실시간 주가 차트</h1>
+  <div class="chart-wrapper">
     <apexchart
       ref="chart"
-      width="1000"
-      height="400"
+      width="100%"
+      height="100%"
       type="line"
       :options="chartOptions"
       :series="series"
@@ -26,6 +25,7 @@ const chartOptions = ref({
   chart: {
     id: 'realtime-stock-chart',
     events: {},
+    height: '100%',
     animations: {
       enabled: true,
       easing: 'linear',
@@ -136,4 +136,9 @@ onUnmounted(() => {
 
 
 <style scoped>
+.chart-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 300px);
+}
 </style>

@@ -10,7 +10,7 @@ export const useStockItemStore = defineStore('stockitem', () => {
   const dayChartData = ref([])
   const websocketStore = useWebsocketStore()
   const periodChart = ref([])
-  const stockInfo = ref(null)
+  const stockInfo = ref({})
 
 
   const getDayInfo = function (stockCode, currentTime) { 

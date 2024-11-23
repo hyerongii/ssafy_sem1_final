@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="chart-wrapper">
     <apexchart
-      width="1000"
-      height="400"
+      ref="chart"
+      width="100%"
+      height="100%"
       type="line"
       :options="chartOptions"
       :series="series"
@@ -19,6 +20,7 @@ const stockItemStore = useStockItemStore()
 const chartOptions = ref({
   chart: {
     id: 'realtime-stock-chart',
+    height: '100%',
     animations: {
       enabled: true,
       easing: 'linear',
@@ -75,5 +77,9 @@ const series = computed(() => [{
 </script>
 
 <style scoped>
-
+.chart-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: calc(100vh - 300px);
+}
 </style>

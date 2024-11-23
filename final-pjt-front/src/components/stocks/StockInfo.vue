@@ -1,21 +1,49 @@
 <template>
-  <div>
-    <h1>주식종목정보</h1>
-    <!-- <p>{{ consensusData.consensus }}</p>
-    <p>{{ consensusData.ratio }}</p> -->
-    <div>
+  <div class="stock-info-wrapper">
+    <div class="info-card" v-if="stockItemStore.stockInfo">
+      <!-- 재무비율 정보 섹션 -->
+      <div class="info-section" v-if="stockItemStore.stockInfo.ratio_data?.length">
+        <h3 class="section-title">재무비율 정보</h3>
+        <div class="ratio-grid">
+          <div class="ratio-card">
+            <div class="ratio-icon">ROE</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROE }}%</div>
+            <div class="ratio-label">자기자본이익률</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-icon">ROI</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROI }}%</div>
+            <div class="ratio-label">투자수익률</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-icon">ROS</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROS }}%</div>
+            <div class="ratio-label">매출액이익률</div>
+          </div>
+        </div>
+      </div>
 
+      <!-- 컨센서스 정보 섹션 -->
+      <div class="info-section" v-if="stockItemStore.stockInfo.consensus_data?.length">
+        <h3 class="section-title">컨센서스 정보</h3>
+        <div class="consensus-card">
+          <div class="consensus-header">
+            <span class="consensus-badge">
+              {{ stockItemStore.stockInfo.consensus_data[0].concensus }}
+            </span>
+            <span class="consensus-source">
+              {{ stockItemStore.stockInfo.consensus_data[0].source }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-// const consensusData = defineProps({
-//   consensus:Object,
-//   ratio:Object
-// })
 import { useStockItemStore } from '@/stores/stockitem'
-import { onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const stockItemStore = useStockItemStore()
 const stockcodeProps = defineProps({ stockcode: String })
@@ -37,5 +65,108 @@ onMounted(()=>{
 </script>
 
 <style scoped>
+.stock-info-wrapper {
+  padding: 1rem;
+}
 
+.info-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.info-section {
+  padding: 1.5rem;
+  border-bottom: 1px solid #eef2f6;
+}
+
+.info-section:last-child {
+  border-bottom: none;
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+}
+
+.ratio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.ratio-card {
+  background: #f8fafc;
+  padding: 1.2rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.ratio-card:hover {
+  transform: translateY(-2px);
+}
+
+.ratio-icon {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #3b82f6;
+  margin-bottom: 0.5rem;
+}
+
+.ratio-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 0.3rem;
+}
+
+.ratio-label {
+  font-size: 0.8rem;
+  color: #64748b;
+}
+
+.consensus-card {
+  background: #f8fafc;
+  padding: 1.2rem;
+  border-radius: 8px;
+}
+
+.consensus-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.consensus-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: #e2e8f0;
+  color: #64748b;
+}
+
+.consensus-badge.buy {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.consensus-source {
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .ratio-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+  
+  .ratio-card {
+    padding: 1rem;
+  }
+}
 </style>
