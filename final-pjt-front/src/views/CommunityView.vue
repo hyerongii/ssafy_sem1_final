@@ -10,9 +10,9 @@
     </div>
 
     <!-- 게시글 목록 -->
-    <div class="posts-container" @click="moveArticleDetail(article.id)">
+    <div class="posts-container">
       <div v-for="article in store.articles.articles_data.articles" :key="article.id" class="post-card">
-        <div>
+        <div @click="moveArticleDetail(article.id)">
           <!-- 게시글 헤더 -->
           <div class="post-header">
             <div class="user-info">
@@ -133,25 +133,6 @@ const editArticle = function (article) {
   })
 }
 
-// 댓글 조회
-const getArticleComments = function(articleId) {
-  axios({
-    method: 'get',
-    url: `${authstore.API_URL}/api/v1/stock/article/detail/`, 
-    headers: {
-      Authorization: `Bearer ${authstore.token}`,
-    },
-    data: {
-      article_id: articleId,
-    }
-  })
-    .then((res) => {
-      console.log('댓글 조회 완료')
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-}
 
 const toggleComments = function(article) {
   article.showComments = !article.showComments;
