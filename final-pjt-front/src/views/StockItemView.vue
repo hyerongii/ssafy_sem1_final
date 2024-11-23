@@ -82,43 +82,45 @@
         <div v-for="article in latestArticles" 
             :key="article.id" 
             class="post-card">
-          <!-- 작성자 프로필 -->
-          <div class="post-header">
-            <div class="profile">
-              <img :src="article.author_nickname ? `/profiles/${article.author_nickname}.jpg` : '/default-avatar.png'" 
-                  alt="프로필" 
-                  class="profile-img">
-              <div class="profile-info">
-                <span class="author">{{ article.author_nickname || '익명' }}</span>
-                <span class="time">{{ formatTime(article.created_at) }}</span>
+          <div @click="moveArticleDetail(article.id)">
+            <!-- 작성자 프로필 -->
+            <div class="post-header" >
+              <div class="profile">
+                <img :src="article.author_nickname ? `/profiles/${article.author_nickname}.jpg` : '/default-avatar.png'" 
+                    alt="프로필" 
+                    class="profile-img">
+                <div class="profile-info">
+                  <span class="author">{{ article.author_nickname || '익명' }}</span>
+                  <span class="time">{{ formatTime(article.created_at) }}</span>
+                </div>
+              </div>
+              <div class="post-menu">
+                <i class="bi bi-three-dots"></i>
               </div>
             </div>
-            <div class="post-menu">
-              <i class="bi bi-three-dots"></i>
+  
+            <!-- 게시글 내용 -->
+            <div class="post-content">
+              <h4>{{ article.title }}</h4>
+              <p>{{ article.content }}</p>
+              <!-- <div class="theme-badge">
+                # {{ article.theme__name }}
+              </div> -->
+            </div>
+  
+            <!-- 게시글 액션 -->
+            <div class="post-actions">
+              <button class="action-btn">
+                <i class="bi bi-heart"></i>
+                <span>좋아요</span>
+              </button>
+              <button class="action-btn">
+                <i class="bi bi-chat"></i>
+                <span>댓글</span>
+              </button>
             </div>
           </div>
-
-          <!-- 게시글 내용 -->
-          <div class="post-content" @click="moveArticleDetail(article.id)">
-            <h4>{{ article.title }}</h4>
-            <p>{{ article.content }}</p>
-            <div class="theme-badge">
-              # {{ article.theme__name }}
-            </div>
-          </div>
-
-          <!-- 게시글 액션 -->
-          <div class="post-actions">
-            <button class="action-btn">
-              <i class="bi bi-heart"></i>
-              <span>좋아요</span>
-            </button>
-            <button class="action-btn">
-              <i class="bi bi-chat"></i>
-              <span>댓글</span>
-            </button>
-          </div>
-        </div>
+        </div>  
       </div>
     </div>
   </div>

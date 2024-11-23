@@ -10,53 +10,55 @@
     </div>
 
     <!-- 게시글 목록 -->
-    <div class="posts-container">
+    <div class="posts-container" @click="moveArticleDetail(article.id)">
       <div v-for="article in store.articles.articles_data.articles" :key="article.id" class="post-card">
-        <!-- 게시글 헤더 -->
-        <div class="post-header" @click="moveArticleDetail(article.id)">
-          <div class="user-info">
-            <div class="user-avatar">
-              <img src="" alt="프로필" class="rounded-circle">
+        <div>
+          <!-- 게시글 헤더 -->
+          <div class="post-header">
+            <div class="user-info">
+              <div class="user-avatar">
+                <img src="" alt="프로필" class="rounded-circle">
+              </div>
+              <div class="user-details">
+                <span class="author">{{ article.author__nickname || '익명' }}</span>
+                <span class="post-time">{{ article.created_at }}</span>
+              </div>
             </div>
-            <div class="user-details">
-              <span class="author">{{ article.author__nickname || '익명' }}</span>
-              <span class="post-time">{{ article.created_at }}</span>
+            <div class="post-menu dropdown">
+              <i class="bi bi-three-dots-vertical"></i>
             </div>
           </div>
-          <div class="post-menu dropdown">
-            <i class="bi bi-three-dots-vertical"></i>
+  
+          <!-- 게시글 내용 -->
+          <div class="post-content" >
+            <h5 class="post-title">{{ article.title }}</h5>
+            <p class="post-text">{{ article.content }}</p>
+            <!-- <div class="theme-tag">
+              <span class="badge rounded-pill bg-light text-dark">
+                # {{ article.theme__name }}
+              </span>
+            </div> -->
           </div>
-        </div>
-
-        <!-- 게시글 내용 -->
-        <div class="post-content" >
-          <h5 class="post-title">{{ article.title }}</h5>
-          <p class="post-text">{{ article.content }}</p>
-          <!-- <div class="theme-tag">
-            <span class="badge rounded-pill bg-light text-dark">
-              # {{ article.theme__name }}
-            </span>
-          </div> -->
-        </div>
-
-        <!-- 게시글 액션 버튼 -->
-        <div class="post-actions">
-          <button class="action-btn">
-            <i class="bi bi-heart"></i>
-            <span>좋아요</span>
-          </button>
-          <button class="action-btn">
-            <i class="bi bi-chat"></i>
-            <span>댓글</span>
-          </button>
-          <button class="action-btn" @click="editArticle(article)">
-            <i class="bi bi-pencil"></i>
-            <span>수정</span>
-          </button>
-          <button class="action-btn" @click="deleteArticle(article.id)">
-            <i class="bi bi-trash"></i>
-            <span>삭제</span>
-          </button>
+  
+          <!-- 게시글 액션 버튼 -->
+          <div class="post-actions">
+            <button class="action-btn">
+              <i class="bi bi-heart"></i>
+              <span>좋아요</span>
+            </button>
+            <button class="action-btn">
+              <i class="bi bi-chat"></i>
+              <span>댓글</span>
+            </button>
+            <button class="action-btn" @click="editArticle(article)">
+              <i class="bi bi-pencil"></i>
+              <span>수정</span>
+            </button>
+            <button class="action-btn" @click="deleteArticle(article.id)">
+              <i class="bi bi-trash"></i>
+              <span>삭제</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -109,7 +111,8 @@ const deleteArticle = function (article_id) {
   })
     .then((res) => {
       console.log('게시글 삭제 성공')
-
+      // 게시글 목록 새로고침
+      store.getArticleInfo(stockcode, getCurrentTime())
     })
     .catch((err) => {
       console.log(err)
