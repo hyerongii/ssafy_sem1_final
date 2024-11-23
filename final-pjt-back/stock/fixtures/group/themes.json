@@ -12,7 +12,7 @@
     "model": "stock.theme",
     "pk": 2,
     "fields": {
-      "name": "언택트경제",
+      "name": "언택트 경제",
       "code": "UNT",
       "description": "비대면 비접촉 시대. 집에만 있어도 쇼핑, 영화, 음악, 음식 운동까지 마음껏 즐길 수 있게 해주는 기업"
     }
@@ -201,7 +201,7 @@
     "model": "stock.theme",
     "pk": 23,
     "fields": {
-      "name": "갈증해소",
+      "name": "갈증 해소",
       "code": "BEV",
       "description": "'목마르세요? 우리가 있잖아요!'를 외치는 음료계의 시원한 영웅들"
     }

@@ -12,12 +12,22 @@ class IndustryCodeSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ThemeSerializer(serializers.ModelSerializer):
-    stocks = StockSerializer(source='stock_set', many=True, read_only=True)
+    stocks = serializers.SerializerMethodField()
     industry_codes = IndustryCodeSerializer(many=True, read_only=True)
     
     class Meta:
         model = Theme
         fields = '__all__'
+    
+    def get_stocks(self, obj):
+        # stock_set에서 중복된 코드를 가진 주식 제거
+        unique_stocks = {}
+        for stock in obj.stock_set.all():
+            if stock.code not in unique_stocks:
+                unique_stocks[stock.code] = stock
+        
+        # 중복이 제거된 주식들을 직렬화
+        return StockSerializer(unique_stocks.values(), many=True).data
 
 
 class ThemeInfoSerializer(serializers.ModelSerializer):

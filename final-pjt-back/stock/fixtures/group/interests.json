@@ -10,7 +10,7 @@
     "model": "stock.interest",
     "pk": 2,
     "fields": {
-      "name": "언택트경제"
+      "name": "언택트 경제"
     }
   },
   {
@@ -157,61 +157,68 @@
     "model": "stock.interest",
     "pk": 23,
     "fields": {
-      "name": "갈증해소"
+      "name": "갈증 해소"
     }
   },
   {
     "model": "stock.interest",
     "pk": 24,
     "fields": {
-      "name": "소비/원자재"
+      "name": "갈증해소"
     }
   },
   {
     "model": "stock.interest",
     "pk": 25,
     "fields": {
-      "name": "자원/에너지"
+      "name": "소비/원자재"
     }
   },
   {
     "model": "stock.interest",
     "pk": 26,
     "fields": {
-      "name": "소셜미디어"
+      "name": "자원/에너지"
     }
   },
   {
     "model": "stock.interest",
     "pk": 27,
     "fields": {
-      "name": "블록체인"
+      "name": "소셜미디어"
     }
   },
   {
     "model": "stock.interest",
     "pk": 28,
     "fields": {
-      "name": "리테일/유통"
+      "name": "블록체인"
     }
   },
   {
     "model": "stock.interest",
     "pk": 29,
     "fields": {
-      "name": "사물인터넷(IOT)"
+      "name": "리테일/유통"
     }
   },
   {
     "model": "stock.interest",
     "pk": 30,
     "fields": {
-      "name": "반려동물"
+      "name": "사물인터넷(IOT)"
     }
   },
   {
     "model": "stock.interest",
     "pk": 31,
+    "fields": {
+      "name": "반려동물"
+    }
+  },
+  {
+    "model": "stock.interest",
+    "pk": 32,
     "fields": {
       "name": "뷰티의 세계"
     }

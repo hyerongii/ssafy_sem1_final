@@ -558,5 +558,29 @@
           "interest": "21",
           "api_request_code": "0018"
         }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 71,
+        "fields": {
+          "interest": "32",
+          "api_request_code": "0008"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 72,
+        "fields": {
+          "interest": "32",
+          "api_request_code": "0016"
+        }
+      },
+      {
+        "model": "stock.industrycode",
+        "pk": 73,
+        "fields": {
+          "interest": "32",
+          "api_request_code": "0026"
+        }
       }
   ]

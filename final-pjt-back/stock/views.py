@@ -16,6 +16,8 @@ import json
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 import random
+from django.db import transaction
+from django.core.exceptions import ObjectDoesNotExist
 
 User = get_user_model()
 # CSRF 보호 비활성화
@@ -24,143 +26,125 @@ User = get_user_model()
 @permission_classes([IsAuthenticated])
 @authentication_classes([JWTAuthentication])
 # 3가지 입력값 분석해서 6가지 테마 추천
+@transaction.atomic
 def analyze(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            user = request.user
-            user_id = user.pk
-            user_for_nickname = User.objects.get(id=user_id)
-            nickname = user_for_nickname.nickname
-            
-            # UserProfile 처리
+    if request.method != 'POST':
+        return JsonResponse({"error": "GET 요청은 허용되지 않습니다."}, status=405)
+
+    try:
+        data = json.loads(request.body)
+        user = request.user
+        nickname = user.nickname
+
+        # UserProfile 처리
+        user_profile, created = UserProfile.objects.update_or_create(
+            user=user,
+            defaults={
+                'mbti': data.get('mbti'),
+                'period': data.get('period'),
+                'token': get_access_token()
+            }
+        )
+
+        # Interest 처리
+        interest_names = data.get('interest', [])
+        UserInterest.objects.filter(user=user).delete()
+
+        # Interest 객체들을 이름으로 조회
+        interests = Interest.objects.filter(name__in=interest_names)
+
+        # 이름과 ID를 매핑하는 딕셔너리 생성
+        interest_id_map = {interest.name: interest.id for interest in interests}
+
+        # UserInterest 객체 생성
+        user_interests = [
+            UserInterest(user=user, interest_id=interest_id_map.get(interest_name))
+            for interest_name in interest_names
+            if interest_name in interest_id_map
+        ]
+
+        # bulk_create를 사용하여 한 번에 생성
+        UserInterest.objects.bulk_create(user_interests)
+
+        # 테마 및 주식 정보 수집
+        all_stocks = {}  # 전역 주식 정보 저장
+        processed_stocks = set()  # 전역 수준에서 처리된 주식 코드 추적
+        themes_info = []
+        theme_names = set(interest_names)
+
+        # 필요한 경우 추가 테마 선택
+        if len(theme_names) < 6:
+            additional_themes = Theme.objects.exclude(name__in=theme_names).order_by('?')[:6-len(theme_names)]
+            theme_names.update(theme.name for theme in additional_themes)
+
+        for theme_name in theme_names:
             try:
-                user_profile = UserProfile.objects.get(user=user)
-                user_profile.mbti = data.get('mbti')
-                user_profile.period = data.get('period')
-                user_profile.token = get_access_token()
-                
-                user_profile.save()
-            except UserProfile.DoesNotExist:
-                user_profile = UserProfile.objects.create(
-                    user=user,
-                    mbti=data.get('mbti'),
-                    period=data.get('period'),
-                    token=get_access_token()
-                )
+                theme = Theme.objects.get(name=theme_name)
+                unique_stocks = {}  # 테마 내 중복 제거용 임시 딕셔너리
 
-            # Interest 처리
-            interest_names = data.get('interest', [])
-            UserInterest.objects.filter(user=user).delete()
-            themes_info = []
-
-            for interest_name in interest_names:
-                try:
-                    interest = Interest.objects.get(name=interest_name)
-                    UserInterest.objects.create(
-                        user=user,
-                        interest=interest
-                    )
-
-                    theme = Theme.objects.get(name=interest_name)
-                    stocks = theme.stock_set.all()
-                    updated_stocks = []
-
-                    for stock in stocks:
+                # 먼저 모든 주식 정보를 수집
+                for stock in theme.stock_set.all():
+                    if stock.code not in unique_stocks:  # 테마 내 중복 체크
                         try:
-                            if stock.code.isdecimal():
-                                current_price = get_current_stock_price(user_profile.token, stock.code)
+                            if stock.code not in processed_stocks:  # 전역 중복 체크
+                                current_price = get_stock_price(user_profile.token, stock)
+                                if current_price > 0 and stock.price != current_price:
+                                    stock.price = current_price
+                                    stock.save()
+
+                                stock_info = {
+                                    "name": stock.name,
+                                    "code": stock.code,
+                                    "price": current_price,
+                                    "id": stock.id
+                                }
+                                all_stocks[stock.code] = stock_info
+                                processed_stocks.add(stock.code)
                             else:
-                                current_price = get_current_us_stock_price(user_profile.token, stock.code, stock.excd)
-                                if current_price > 0:
-                                    current_price = current_price * 1391.50
-                                else:
-                                    current_price = 0
+                                stock_info = all_stocks[stock.code]
 
-                            # 가격이 변경되었을 때만 저장
-                            if current_price > 0 and stock.price != current_price:  
-                                stock.price = current_price
-                                stock.save()
+                            unique_stocks[stock.code] = stock_info
 
-                            updated_stocks.append({
-                                "name": stock.name,
-                                "code": stock.code,
-                                "price": current_price
-                            })
                         except Exception as e:
                             print(f"종목 {stock.code}의 가격 조회 실패: {e}")
                             continue
 
-                    theme_info = {
-                        "theme_name": theme.name,
-                        "stocks": updated_stocks,
-                        "description": theme.description,
-                    }
-                    themes_info.append(theme_info)
+                # 테마별 정보를 한 번만 추가
+                themes_info.append({
+                    "theme_name": theme.name,
+                    "stocks": list(unique_stocks.values()),
+                    "description": theme.description,
+                })
+  
+            except ObjectDoesNotExist:
+                print(f"테마 {theme_name}을/를 찾을 수 없습니다.")
 
-                except Interest.DoesNotExist:
-                    continue
+        # 6개로 제한
+        themes_info = themes_info[:6]
 
-            # themes_info 길이 조정
-            if len(themes_info) < 6:
-                current_themes = [theme["theme_name"] for theme in themes_info]
-                needed = 6 - len(themes_info)
-                
-                additional_themes = Theme.objects.exclude(
-                    name__in=current_themes
-                ).prefetch_related('stock_set')[:needed]
+        # 동일한 MBTI 사용자의 테마 추천
+        same_theme_names = get_same_mbti_theme(request)
 
-                for theme in additional_themes:
-                    stocks = theme.stock_set.all()
-                    updated_stocks = []
+        return JsonResponse({
+            "message": "저장이 완료되었습니다.",
+            "recommended_themes": themes_info,
+            "same_theme_names": same_theme_names,
+            "nickname": nickname
+        })
 
-                    for stock in stocks:
-                        try:
-                            if stock.code.isdecimal():
-                                current_price = get_current_stock_price(user_profile.token, stock.code)
-                            else:
-                                current_price = get_current_us_stock_price(user_profile.token, stock.code, stock.excd)
-                                if current_price > 0:
-                                    current_price = current_price * 1391.50
-                                else:
-                                    current_price = 0
+    except json.JSONDecodeError:
+        return JsonResponse({"error": "잘못된 JSON 형식입니다."}, status=400)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=400)
 
-                            if current_price > 0 and stock.price != current_price:  
-                                stock.price = current_price
-                                stock.save()
-
-                            updated_stocks.append({
-                                "name": stock.name,
-                                "code": stock.code,
-                                "price": current_price
-                            })
-                        except Exception as e:
-                            print(f"종목 {stock.code}의 가격 조회 실패: {e}")
-                            continue
-                    
-                    themes_info.append({
-                        "theme_name": theme.name,
-                        "stocks": updated_stocks,
-                        "description": theme.description,
-                    })
-
-            # 6개로 제한
-            themes_info = themes_info[:6]
-            # 나랑 동일한 mbti의 사람들은 무슨 테마를 추천받았을까?
-            same_theme_names = get_same_mbti_theme(request)
-            return JsonResponse({
-                "message": "저장이 완료되었습니다.",
-                "recommended_themes": themes_info,
-                "same_theme_names": same_theme_names,
-                "nickname": nickname
-            })
-
-        except json.JSONDecodeError:
-            return JsonResponse({"error": "잘못된 JSON 형식입니다."}, status=400)
-        except Exception as e:
-            return JsonResponse({"error": str(e)}, status=400)
-
-    return JsonResponse({"error": "GET 요청은 허용되지 않습니다."}, status=405)
+def get_stock_price(token, stock):
+    if stock.code.isdecimal():
+        current_price = get_current_stock_price(token, stock.code)
+    else:
+        current_price = get_current_us_stock_price(token, stock.code, stock.excd)
+        if current_price > 0:
+            current_price = current_price * 1391.50
+    return max(current_price, 0)
 
 def get_token(request):
     websocket_token = get_access_to_websocket()
@@ -175,6 +159,7 @@ def draw_theme_chart(request):
         access_token = user_profile.token
         theme_name = data.get('theme_name')
         end_date = data.get('end_date')
+        
         # end_date를 datetime 객체로 변환
         end_date_obj = datetime.strptime(end_date, '%Y%m%d')
         
@@ -186,6 +171,19 @@ def draw_theme_chart(request):
         
         # 테마 정보 가져오기
         theme = Theme.objects.get(name=theme_name)
+        
+        # 중복 제거를 위한 처리
+        stocks = theme.stock_set.all()
+        unique_stocks = {}
+        
+        for stock in stocks:
+            # 동일한 코드를 가진 주식이 없는 경우에만 추가
+            if stock.code not in unique_stocks:
+                unique_stocks[stock.code] = stock
+        
+        # Theme 객체의 stock_set을 중복이 제거된 주식들로 업데이트
+        theme.stock_set.set(unique_stocks.values())
+        
         theme_serializer = ThemeSerializer(theme)
         
         # 차트 데이터 가져오기

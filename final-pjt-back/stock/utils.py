@@ -86,7 +86,6 @@ def get_theme_price_series(access_token, theme_name, start_date, end_date):
         # 각 업종별 데이터 수집
         for code in industry_codes:
             data = get_industry_price_series(access_token, code, start_date, end_date)
-            # print(data)
             # 각 날짜별 데이터 통합
             for item in data['data']:
                 date = item['date']
@@ -500,7 +499,7 @@ def get_domestic_stock_consensus(access_token, stock_code):
                     'concensus': item["invt_opnn"],
                     'source': item["mbcr_name"]
                 })
-                break
+                
             return consensus_data
         else:
             raise Exception(f"API Error: {data['msg1']}")
@@ -542,7 +541,6 @@ def get_oversea_stock_main_info(access_token, stock_code, excd):
                 'EPS': data['output']['epsx'],
                 'BPS': data['output']['bpsx']
             })
-            print(ratio_data)
             return ratio_data
         else:
             raise Exception(f"API Error: {data['msg1']}")
