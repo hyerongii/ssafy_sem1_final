@@ -11,6 +11,7 @@ export const useStockItemStore = defineStore('stockitem', () => {
   const websocketStore = useWebsocketStore()
   const periodChart = ref([])
   const stockInfo = ref({})
+  const articles = ref([])
 
 
   const getDayInfo = function (stockCode, currentTime) { 
@@ -89,17 +90,14 @@ export const useStockItemStore = defineStore('stockitem', () => {
           console.log('주식종목정보')
           console.log(res.data)
           stockInfo.value = res.data
-          // articles.value = res.data.articles_data
-          // ratio.value = res.data.ratio_data[0]
-          // 미국
-          // consensus.value = res.data.consensus_data[0]
+          articles.value = res.data.articles_data
         })
         .catch((err) => {
           console.log(err)
         })
   }
 
-  return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, periodChart, stockInfo}
+  return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, periodChart, stockInfo, articles}
 }
 // ,{persist: true}
 )

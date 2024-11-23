@@ -2,19 +2,18 @@
   <div class="stock-info-wrapper">
     <div class="info-card" v-if="stockItemStore.stockInfo">
       <!-- 재무비율 정보 섹션 -->
-      <div class="info-section" v-if="stockItemStore.stockInfo.ratio_data?.length">
+      <div class="info-section" v-if="stockItemStore.stockInfo.ratio_data">
         <h3 class="section-title">재무비율 정보</h3>
         <div class="ratio-grid">
-          {{ stockItemStore.stockInfo.ratio_data }}
           <div class="ratio-card">
             <div class="ratio-icon">PER</div>
             <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data.PER }}</div>
-            <div class="ratio-label">주당순자산</div>
+            <div class="ratio-label">주가수익비율</div>
           </div>
           <div class="ratio-card">
             <div class="ratio-icon">PBR</div>
             <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data.PBR }}</div>
-            <div class="ratio-label">주가수익비율</div>
+            <div class="ratio-label">주가순자산비율</div>
           </div>
           <div class="ratio-card">
             <div class="ratio-icon">EPS</div>
@@ -28,9 +27,11 @@
       <div class="info-section" v-if="stockItemStore.stockInfo.consensus_data?.length">
         <h3 class="section-title">컨센서스 정보</h3>
         <div class="consensus-card">
-          <div class="consensus-header" v-for="consensus in stockItemStore.stockInfo.consensus_data.slice(0, 5)">
-            <span class="consensus-badge">
-              {{ consensus.concensus }}
+          <div class="consensus-header" 
+              v-for="consensus in uniqueConsensus" 
+              :key="consensus.source">
+            <span class="consensus-badge" :class="getConsensusClass(consensus.concensus)">
+              {{ formatConsensus(consensus.concensus) }}
             </span>
             <span class="consensus-source">
               {{ consensus.source }}
@@ -62,6 +63,57 @@ const currentTime = getCurrentTime()
 onMounted(()=>{
   stockItemStore.getStockInfo(stockcodeProps.stockcode, currentTime)
 })
+
+// 컨센서스 정보 처리
+
+// 중복되지 않는 컨센서스 데이터 계산
+// 중복되지 않는 최신 5개의 컨센서스 데이터 계산
+const uniqueConsensus = computed(() => {
+  if (!stockItemStore.stockInfo.consensus_data) return []
+  
+  const uniqueSources = new Map()
+  stockItemStore.stockInfo.consensus_data
+    .filter(item => item.concensus !== "분석대상제외") // 분석대상제외 필터링
+    .forEach(item => {
+      if (!uniqueSources.has(item.source)) {
+        uniqueSources.set(item.source, item)
+      }
+    })
+  
+  // Map의 값들을 배열로 변환하고 최신 5개만 반환
+  return Array.from(uniqueSources.values())
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) // 날짜 기준 내림차순 정렬
+    .slice(0, 5) // 최신 5개만 선택
+})
+
+// 컨센서스 텍스트 포맷팅
+const formatConsensus = (consensus) => {
+  const buyTerms = ['BUY', '매수', 'Trading Buy', 'Outperform']
+  const sellTerms = ['SELL', '매도', 'Trading Sell', 'Underperform']
+  const holdTerms = ['HOLD', '보유', 'Neutral']
+
+  const consensusLower = consensus?.toLowerCase()
+  
+  if (buyTerms.some(term => consensusLower?.includes(term.toLowerCase()))) {
+    return '매수 추천'
+  } else if (sellTerms.some(term => consensusLower?.includes(term.toLowerCase()))) {
+    return '매도 추천'
+  } else if (holdTerms.some(term => consensusLower?.includes(term.toLowerCase()))) {
+    return '보유 추천'
+  }
+  return consensus
+}
+
+// 컨센서스 클래스 반환
+const getConsensusClass = (consensus) => {
+  const consensusLower = consensus?.toLowerCase()
+  if (consensusLower?.includes('buy') || consensusLower?.includes('매수')) {
+    return 'buy'
+  } else if (consensusLower?.includes('sell') || consensusLower?.includes('매도')) {
+    return 'sell'
+  }
+  return ''
+}
 
 </script>
 

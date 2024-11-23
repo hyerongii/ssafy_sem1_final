@@ -43,9 +43,6 @@ const chartOptions = ref({
   dataLabels: { // 이 부분 추가
     enabled: false
   },
-  markers: { // 이 부분 추가
-    size: 0
-  },
   stroke: {
     curve: 'smooth',
     width: 3,

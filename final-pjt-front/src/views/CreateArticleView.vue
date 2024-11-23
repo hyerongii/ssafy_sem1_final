@@ -42,6 +42,7 @@ const createArticle = function () {
   })
     .then((res) => {
       console.log('게시글 작성 성공')
+      router.push({name:'CommunityView', params:{stock_id : stockcode}})
     })
     .catch((err) => {
       console.log(err)
