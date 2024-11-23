@@ -33,7 +33,7 @@
                 <div class="comment-content w-100">
                   <div class="d-flex justify-content-between align-items-center mb-1">
                     <small class="text-muted">{{ comment.user }}</small>
-                    <div class="comment-actions">
+                    <div class="comment-actions" v-if="comment.user === userNickname">
                       <button class="btn btn-sm btn-link text-muted" @click="startEdit(comment)">
                         <i class="bi-pencil-square"></i>
                       </button>
@@ -91,6 +91,7 @@ const route = useRoute()
 const articleId = route.params.article_id
 const comment = ref('')
 const article = ref(null)
+const userNickname = ref(null)
 
 const startEdit = (comment) => {
   comment.isEditing = true;
@@ -190,8 +191,26 @@ const deleteComment = function(commentId) {
     })
 }
 
+const getUserInfo = function() {
+  axios({
+    method: 'get',
+    url: `${authstore.API_URL}/api/v1/user_info/${authstore.user.pk}/`,
+    headers: {
+      Authorization: `Bearer ${authstore.token}`,
+    },
+  })
+    .then((res) => {
+      userNickname.value = res.data.nickname
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+
 onMounted(() => {
   getArticleDetail(articleId)
+  getUserInfo()
 })
 
 </script>

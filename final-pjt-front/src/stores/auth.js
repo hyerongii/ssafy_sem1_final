@@ -46,6 +46,8 @@ export const useAuthStore = defineStore('auth', () => {
       .then((res) => {
         token.value = res.data.access
         console.log(res.data)
+        // 유저정보 저장
+        user.value = res.data.user
         // 로그인 성공하면 다음 페이지로 이동 가능하게,,!
         router.push({ name: 'HomeView'})
       })

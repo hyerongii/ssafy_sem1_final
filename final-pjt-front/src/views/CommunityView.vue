@@ -46,18 +46,21 @@
               <i class="bi bi-heart"></i>
               <span>좋아요</span>
             </button>
-            <button class="action-btn">
+            <button class="action-btn" @click="moveArticleDetail(article.id)">
               <i class="bi bi-chat"></i>
               <span>댓글</span>
             </button>
-            <button class="action-btn" @click="editArticle(article)">
-              <i class="bi bi-pencil"></i>
-              <span>수정</span>
-            </button>
-            <button class="action-btn" @click="deleteArticle(article.id)">
-              <i class="bi bi-trash"></i>
-              <span>삭제</span>
-            </button>
+            <!-- 작성자와 현재 로그인한 사용자가 같을 때만 수정/삭제 버튼 표시 -->
+            <template v-if="article.author__nickname === userNickname">
+              <button class="action-btn" @click.stop="editArticle(article)">
+                <i class="bi bi-pencil"></i>
+                <span>수정</span>
+              </button>
+              <button class="action-btn" @click.stop="deleteArticle(article.id)">
+                <i class="bi bi-trash"></i>
+                <span>삭제</span>
+              </button>
+            </template>
           </div>
       </div>
     </div>
@@ -68,14 +71,15 @@
 import { useAuthStore } from '@/stores/auth'
 import { useStockItemStore } from '@/stores/stockitem'
 import axios from 'axios'
-import { onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
+const authstore = useAuthStore()
 const route = useRoute()
 const router = useRouter()
 const store = useStockItemStore()
 const stockcode = route.params.stock_id
-const authstore = useAuthStore()
+const userNickname = ref(null)
 
 const getCurrentTime = () => {
   const now = new Date()
@@ -88,8 +92,10 @@ const getCurrentTime = () => {
 const currentTime = getCurrentTime()
 
 onMounted(() => {
-  store.getArticleInfo(stockcode, currentTime)
   console.log(store.articles)
+  store.getArticleInfo(stockcode, currentTime)
+  console.log(authstore.user.pk)
+  getUserInfo()
 })
 
 const articleCreate = function () {
@@ -130,6 +136,24 @@ const editArticle = function (article) {
       content: article.content
     }
   })
+}
+
+const getUserInfo = function() {
+  axios({
+    method: 'get',
+    url: `${authstore.API_URL}/api/v1/user_info/${authstore.user.pk}/`,
+    headers: {
+      Authorization: `Bearer ${authstore.token}`,
+    },
+  })
+    .then((res) => {
+      console.log('유저정보조회완료')
+      console.log(res.data)
+      userNickname.value = res.data.nickname
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 }
 
 
