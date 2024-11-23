@@ -177,11 +177,19 @@ def draw_theme_chart(request):
         unique_stocks = {}
         
         for stock in stocks:
-            stock_info = get_stocks_info(access_token,stock.code,stock.excd)
-            stock.per = stock_info[0]['PER']
-            stock.pbr = stock_info[0]['PBR']
-            stock.eps = stock_info[0]['EPS']
-            stock.save()
+            # 1. Stock 모델을 조회해 stock.code가 동일한 모든 인스턴스 파악
+            duplicate_stocks = Stock.objects.filter(code=stock.code)
+            # 2. 해당 인스턴스의 모든 stock.per / stock.pbr / stock.eps 수정
+            stock_info = get_stocks_info(access_token, stock.code, stock.excd)
+            per = stock_info[0]['PER']
+            pbr = stock_info[0]['PBR']
+            eps = stock_info[0]['EPS']
+            
+            for duplicate_stock in duplicate_stocks:
+                duplicate_stock.per = per
+                duplicate_stock.pbr = pbr
+                duplicate_stock.eps = eps
+                duplicate_stock.save()
             # 동일한 코드를 가진 주식이 없는 경우에만 추가
             if stock.code not in unique_stocks:
                 unique_stocks[stock.code] = stock
@@ -244,13 +252,12 @@ def d_chart(request):
 @api_view(['POST'])
 def d_main_data(request):
     data = request.data
-    stock_id = data.get('stock_id')
     stock_code = data.get('stock_code')
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
 
-    stock = Stock.objects.get(id=stock_id)
+    stock = Stock.objects.filter(code=stock_code).first()
     ratio_data = {
         'PER': stock.per,
         'PBR': stock.pbr,
