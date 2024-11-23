@@ -69,32 +69,59 @@ export const useStockItemStore = defineStore('stockitem', () => {
       })
   }
 
-  const getStockInfo = function (stockCode, currentTime){
-    const endpoint = isNaN(stockCode) ? 'o_main_data' : 'd_main_data'
-      
+  // const getStockInfo = function (stockCode, currentTime){
+  //   const endpoint = isNaN(stockCode) ? 'o_main_data' : 'd_main_data'
+
+  //   axios({
+  //       //통합
+  //       method: 'post',
+  //       url: `${authStore.API_URL}/api/v1/stock/${endpoint}/`,
+  //       headers: {
+  //         Authorization: `Bearer ${authStore.token}`,
+  //       },
+  //       data: {
+  //         stock_code : stockCode,
+  //         // 숫자형태(국내)면 current_time 추가
+  //         // stock_id :
+  //         ...(!isNaN(stockCode) && { current_time: currentTime })
+  //       },
+  //     })
+  //       .then((res) => {
+  //         console.log('주식종목정보')
+  //         console.log(res.data)
+  //         stockInfo.value = res.data
+  //         articles.value = res.data.articles_data
+  //       })
+  //       .catch((err) => {
+  //         console.log(err)
+  //       })
+  // }
+
+  const getStockInfo = function (stockCode, currentTime) {
+    // 한 번만 결정되도록 먼저 체크
+    const isNumeric = !isNaN(stockCode)
+    const endpoint = isNumeric ? 'd_main_data' : 'o_main_data'
+    
+    const data = {
+      stock_code: stockCode,
+      ...(isNumeric && { current_time: currentTime })
+    }
+  
     axios({
-        //통합
-        method: 'post',
-        url: `${authStore.API_URL}/api/v1/stock/${endpoint}/`,
-        headers: {
-          Authorization: `Bearer ${authStore.token}`,
-        },
-        data: {
-          stock_code : stockCode,
-          // 숫자형태(국내)면 current_time 추가
-          // stock_id :
-          ...(!isNaN(stockCode) && { current_time: currentTime })
-        },
-      })
-        .then((res) => {
-          console.log('주식종목정보')
-          console.log(res.data)
-          stockInfo.value = res.data
-          articles.value = res.data.articles_data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      method: 'post',
+      url: `${authStore.API_URL}/api/v1/stock/${endpoint}/`,
+      headers: {
+        Authorization: `Bearer ${authStore.token}`,
+      },
+      data
+    })
+    .then((res) => {
+      stockInfo.value = res.data
+      articles.value = res.data.articles_data
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }
 
   return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, periodChart, stockInfo, articles}

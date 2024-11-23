@@ -19,7 +19,7 @@
               <img src="" alt="프로필" class="rounded-circle">
             </div>
             <div class="user-details">
-              <span class="author">{{ article.author_nickname || '익명' }}</span>
+              <span class="author">{{ article.author__nickname || '익명' }}</span>
               <span class="post-time">{{ article.created_at }}</span>
             </div>
           </div>
@@ -34,7 +34,7 @@
           <p class="post-text">{{ article.content }}</p>
           <div class="theme-tag">
             <span class="badge rounded-pill bg-light text-dark">
-              # {{ article.theme_name }}
+              # {{ article.theme__name }}
             </span>
           </div>
         </div>
@@ -48,10 +48,6 @@
           <button class="action-btn">
             <i class="bi bi-chat"></i>
             <span>댓글</span>
-          </button>
-          <button class="action-btn">
-            <i class="bi bi-share"></i>
-            <span>공유</span>
           </button>
         </div>
       </div>

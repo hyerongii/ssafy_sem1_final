@@ -59,11 +59,6 @@ const getCurrentTime = () => {
 }
 const currentTime = getCurrentTime()
 
-// 페이지 처음 들어왔을때는 일 데이터 받아오기
-onMounted(()=>{
-  stockItemStore.getStockInfo(stockcodeProps.stockcode, currentTime)
-})
-
 // 컨센서스 정보 처리
 
 // 중복되지 않는 컨센서스 데이터 계산

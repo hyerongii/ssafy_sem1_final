@@ -106,8 +106,6 @@ const moveStockItem = function (stockcode) {
     params: { stock_id: stockcode }
   })
 
-  // stockItemStore.getDayInfo(stockcode, currentTime)
-
 }
 
 </script>
