@@ -8,6 +8,7 @@ export const useAuthStore = defineStore('auth', () => {
   const token = ref(null)
   const router = useRouter()
   const websocketToken = ref(null)
+  const user = ref(null)
   
   const signUp = function (payload) {
     const {username, password1, password2, email, nickname } = payload
@@ -44,6 +45,7 @@ export const useAuthStore = defineStore('auth', () => {
     })
       .then((res) => {
         token.value = res.data.access
+        console.log(res.data)
         // 로그인 성공하면 다음 페이지로 이동 가능하게,,!
         router.push({ name: 'HomeView'})
       })
@@ -78,6 +80,7 @@ export const useAuthStore = defineStore('auth', () => {
         token.value = null
         // 로컬 스토리지나 쿠키에 저장된 토큰 제거
         localStorage.removeItem('token')
+        user.value = null  // 로그아웃 시 사용자 정보도 초기화
         // 홈 페이지나 로그인 페이지로 리다이렉트
         router.push({ name: 'HomeView' })
       })
@@ -88,6 +91,6 @@ export const useAuthStore = defineStore('auth', () => {
 
   const isAuthenticated = computed(() => !!token.value)
 
-  return { signUp, logIn, logOut, API_URL, token, isAuthenticated, websocketToken }
+  return { signUp, logIn, logOut, API_URL, token, isAuthenticated, websocketToken, user }
 },{persist: true}
 )

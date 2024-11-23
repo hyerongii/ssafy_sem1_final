@@ -9,15 +9,15 @@
               <div class="d-flex align-items-center">
                 <img src="" alt="프로필" class="rounded-circle" style="width: 40px; height: 40px;">
                 <div class="ms-3">
-                  <h6 class="mb-0">{{ article?.author }}</h6>
-                  <small class="text-muted">{{ article?.created_at }}</small>
+                  <h6 class="mb-0">{{ article?.article.author }}</h6>
+                  <small class="text-muted">{{ article?.article.created_at }}</small>
                 </div>
               </div>
             </div>
           </div>
           <div class="card-body">
-            <h4 class="card-title">{{ article?.title }}</h4>
-            <p class="card-text">{{ article?.content }}</p>
+            <h4 class="card-title">{{ article?.article.title }}</h4>
+            <p class="card-text">{{ article?.article.content }}</p>
           </div>
         </div>
 
@@ -29,10 +29,31 @@
           <!-- 댓글 목록 -->
           <ul class="list-group list-group-flush">
             <li v-for="comment in article?.comments" :key="comment.id" class="list-group-item">
-              <div class="d-flex justify-content-between">
-                <div>
-                  <h6 class="mb-1">{{ comment.author }}</h6>
-                  <p class="mb-1">{{ comment.content }}</p>
+              <div class="d-flex justify-content-between align-items-start">
+                <div class="comment-content w-100">
+                  <div class="d-flex justify-content-between align-items-center mb-1">
+                    <small class="text-muted">{{ comment.user }}</small>
+                    <div class="comment-actions">
+                      <button class="btn btn-sm btn-link text-muted" @click="startEdit(comment)">
+                        <i class="bi-pencil-square"></i>
+                      </button>
+                      <button class="btn btn-sm btn-link text-danger" @click="deleteComment(comment.id)">
+                        <i class="bi-trash"></i>
+                      </button>
+                    </div>
+                  </div>
+                  <div v-if="comment.isEditing">
+                    <div class="input-group mb-2">
+                      <textarea 
+                        v-model="comment.editContent" 
+                        class="form-control"
+                        rows="2"
+                      ></textarea>
+                      <button class="btn btn-outline-primary" @click="saveEdit(comment)">저장</button>
+                      <button class="btn btn-outline-secondary" @click="cancelEdit(comment)">취소</button>
+                    </div>
+                  </div>
+                  <p v-else class="comment-text mb-1">{{ comment.content }}</p>
                   <small class="text-muted">{{ comment.created_at }}</small>
                 </div>
               </div>
@@ -71,6 +92,22 @@ const articleId = route.params.article_id
 const comment = ref('')
 const article = ref(null)
 
+const startEdit = (comment) => {
+  comment.isEditing = true;
+  comment.editContent = comment.content;
+}
+
+const cancelEdit = (comment) => {
+  comment.isEditing = false;
+  comment.editContent = '';
+}
+
+const saveEdit = (comment) => {
+  editComment(comment.id, comment.editContent);
+  comment.isEditing = false;
+}
+
+
 // 게시글 상세 조회
 const getArticleDetail = function(articleId) {
   axios({
@@ -82,7 +119,8 @@ const getArticleDetail = function(articleId) {
   })
     .then((res) => {
       console.log('상세 조회 완료')
-      console.log(res)
+      console.log(res.data)
+      article.value = res.data
     })
     .catch((err) => {
       console.log(err)
@@ -104,6 +142,47 @@ const submitComment = function(articleId, commentText) {
     .then((res) => {
       console.log('댓글 작성 완료')
       comment.value = ''
+      getArticleDetail(articleId)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+// 댓글 수정
+const editComment = function(commentId, commentText) {
+  if (!commentText?.trim()) return;
+  
+  axios({
+    method: 'put',
+    url: `${authstore.API_URL}/api/v1/stock/comment/${commentId}/`,
+    headers: {
+      Authorization: `Bearer ${authstore.token}`,
+    },
+    data: {
+      content: commentText
+    }
+  })
+    .then(() => {
+      getArticleDetail(articleId)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+// 댓글 삭제
+const deleteComment = function(commentId) {
+  if (!confirm('댓글을 삭제하시겠습니까?')) return;
+  
+  axios({
+    method: 'delete',
+    url: `${authstore.API_URL}/api/v1/stock/comment/${commentId}/`,
+    headers: {
+      Authorization: `Bearer ${authstore.token}`,
+    }
+  })
+    .then(() => {
       getArticleDetail(articleId)
     })
     .catch((err) => {
@@ -135,5 +214,28 @@ onMounted(() => {
 .form-control:focus {
   box-shadow: none;
   border-color: #ced4da;
+}
+
+.comment-text {
+  font-size: 1rem;
+  color: #212529;
+}
+
+.comment-actions {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.list-group-item:hover .comment-actions {
+  opacity: 1;
+}
+
+.btn-link {
+  padding: 0.25rem 0.5rem;
+  text-decoration: none;
+}
+
+.comment-content {
+  width: 100%;
 }
 </style>

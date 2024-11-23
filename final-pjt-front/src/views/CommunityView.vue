@@ -39,7 +39,7 @@
               </span>
             </div> -->
           </div>
-  
+        </div>
           <!-- 게시글 액션 버튼 -->
           <div class="post-actions">
             <button class="action-btn">
@@ -59,7 +59,6 @@
               <span>삭제</span>
             </button>
           </div>
-        </div>
       </div>
     </div>
   </div>
