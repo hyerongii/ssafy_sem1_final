@@ -515,14 +515,41 @@ def create_stock_article(request):
             'message': str(e)
         })
     
+# @api_view(['DELETE', 'PUT'])
+# def stock_article_delete_or_put(request):
+#     data = request.data
+#     article_id = data.get('article_id')
+#     try:
+#         article = Article.objects.get(pk=article_id)
+        
+#         # 작성자 본인 확인
+#         if article.author.id != request.user.id:
+#             return Response({'message': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
+            
+#         if request.method == 'DELETE':
+#             article.delete()
+#             return Response({'message': '게시글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
+            
+#         elif request.method == 'PUT':
+#             serializer = ArticleSerializer(article, data=request.data)
+#             if serializer.is_valid(raise_exception=True):
+#                 serializer.save()
+#                 return Response(serializer.data)
+                
+#     except Article.DoesNotExist:
+#         return Response({'message': '게시글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
+
 @api_view(['DELETE', 'PUT'])
 def stock_article_delete_or_put(request):
     data = request.data
     article_id = data.get('article_id')
+    
+    if not article_id:
+        return Response({'message': 'article_id is required'}, status=status.HTTP_400_BAD_REQUEST)
+    
     try:
         article = Article.objects.get(pk=article_id)
         
-        # 작성자 본인 확인
         if article.author.id != request.user.id:
             return Response({'message': '권한이 없습니다.'}, status=status.HTTP_403_FORBIDDEN)
             
@@ -531,13 +558,19 @@ def stock_article_delete_or_put(request):
             return Response({'message': '게시글이 삭제되었습니다.'}, status=status.HTTP_204_NO_CONTENT)
             
         elif request.method == 'PUT':
-            serializer = ArticleSerializer(article, data=request.data)
+            update_data = {
+                'title': data.get('title'),
+                'content': data.get('content'),
+                'stock_code': data.get('stock_code')
+            }
+            serializer = ArticleSerializer(article, data=update_data, partial=True)
             if serializer.is_valid(raise_exception=True):
                 serializer.save()
                 return Response(serializer.data)
                 
     except Article.DoesNotExist:
         return Response({'message': '게시글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
+
 
 @api_view(['GET', 'POST'])
 def get_stock_article_detail(request):

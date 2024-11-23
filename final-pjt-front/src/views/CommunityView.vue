@@ -49,8 +49,12 @@
             <i class="bi bi-chat"></i>
             <span>댓글</span>
           </button>
+          <button class="action-btn" @click="editArticle(article)">
+            <i class="bi bi-pencil"></i>
+            <span>수정</span>
+          </button>
           <button class="action-btn" @click="deleteArticle(article.id)">
-            <i class="bi bi-chat"></i>
+            <i class="bi bi-trash"></i>
             <span>삭제</span>
           </button>
         </div>
@@ -94,7 +98,7 @@ const articleCreate = function () {
 // 게시글 삭제
 const deleteArticle = function (article_id) {
   axios({
-    method: 'post',
+    method: 'delete',
     url: `${authstore.API_URL}/api/v1/stock/article/update_or_delete/`,
     headers: {
       Authorization: `Bearer ${authstore.token}`,
@@ -105,12 +109,25 @@ const deleteArticle = function (article_id) {
   })
     .then((res) => {
       console.log('게시글 삭제 성공')
+
     })
     .catch((err) => {
       console.log(err)
     })
 }
 
+const editArticle = function (article) {
+  router.push({
+    name: 'CreateArticleView', 
+    params: { stock_id: stockcode },
+    query: {
+      edit: true,
+      articleId: article.id,
+      title: article.title,
+      content: article.content
+    }
+  })
+}
 
 </script>
 
