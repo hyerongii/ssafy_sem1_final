@@ -468,7 +468,6 @@ def create_stock_article(request):
     try:
         data = request.data
         stock_code = data.get('stock_code')
-        
         # 1. 주식 정보 확인
         stock = Stock.objects.filter(code=stock_code).first()
         if not stock:
@@ -539,7 +538,6 @@ def stock_article_delete_or_put(request):
                 
     except Article.DoesNotExist:
         return Response({'message': '게시글을 찾을 수 없습니다.'}, status=status.HTTP_404_NOT_FOUND)
-
 
 @api_view(['GET', 'POST'])
 def get_stock_article_detail(request):
