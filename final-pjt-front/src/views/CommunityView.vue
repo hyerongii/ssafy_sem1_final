@@ -13,7 +13,7 @@
     <div class="posts-container">
       <div v-for="article in store.articles.articles_data.articles" :key="article.id" class="post-card">
         <!-- 게시글 헤더 -->
-        <div class="post-header">
+        <div class="post-header" @click="moveArticleDetail(article.id)">
           <div class="user-info">
             <div class="user-avatar">
               <img src="" alt="프로필" class="rounded-circle">
@@ -29,7 +29,7 @@
         </div>
 
         <!-- 게시글 내용 -->
-        <div class="post-content">
+        <div class="post-content" >
           <h5 class="post-title">{{ article.title }}</h5>
           <p class="post-text">{{ article.content }}</p>
           <!-- <div class="theme-tag">
@@ -87,7 +87,7 @@ const getCurrentTime = () => {
 const currentTime = getCurrentTime()
 
 onMounted(() => {
-store.getArticleInfo(stockcode, currentTime)
+  store.getArticleInfo(stockcode, currentTime)
   console.log(store.articles)
 })
 
@@ -116,6 +116,7 @@ const deleteArticle = function (article_id) {
     })
 }
 
+// 게시글 수정
 const editArticle = function (article) {
   router.push({
     name: 'CreateArticleView', 
@@ -127,6 +128,37 @@ const editArticle = function (article) {
       content: article.content
     }
   })
+}
+
+// 댓글 조회
+const getArticleComments = function(articleId) {
+  axios({
+    method: 'get',
+    url: `${authstore.API_URL}/api/v1/stock/article/detail/`, 
+    headers: {
+      Authorization: `Bearer ${authstore.token}`,
+    },
+    data: {
+      article_id: articleId,
+    }
+  })
+    .then((res) => {
+      console.log('댓글 조회 완료')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
+const toggleComments = function(article) {
+  article.showComments = !article.showComments;
+  if (article.showComments && !article.comments) {
+    getArticleComments(article.id);
+  }
+}
+
+const moveArticleDetail = function (articleId) {
+  router.push({name: 'ArticleDetailView', params:{ article_id : articleId }})
 }
 
 </script>

@@ -99,7 +99,7 @@
           </div>
 
           <!-- 게시글 내용 -->
-          <div class="post-content">
+          <div class="post-content" @click="moveArticleDetail(article.id)">
             <h4>{{ article.title }}</h4>
             <p>{{ article.content }}</p>
             <div class="theme-badge">
@@ -208,6 +208,10 @@ const formatTime = (timestamp) => {
   }
   // 그 외
   return `${kstDate.getMonth() + 1}월 ${kstDate.getDate()}일`
+}
+
+const moveArticleDetail = function (articleId) {
+  router.push({name: 'ArticleDetailView', params:{ article_id : articleId }})
 }
 
 </script>

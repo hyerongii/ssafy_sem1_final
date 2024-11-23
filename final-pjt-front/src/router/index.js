@@ -14,6 +14,7 @@ import SixMonthStockChart from '@/components/stocks/SixMonthStockChart.vue'
 import YearStockChart from '@/components/stocks/YearStockChart.vue'
 import CommunityView from '@/views/CommunityView.vue'
 import CreateArticleView from '@/views/CreateArticleView.vue'
+import ArticleDetailView from '@/views/ArticleDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -99,6 +100,11 @@ const router = createRouter({
       path: '/:stock_id/create',
       name: 'CreateArticleView',
       component: CreateArticleView,
+    },
+    {
+      path : '/community/:article_id',
+      name : 'ArticleDetailView',
+      component : ArticleDetailView,
     }
   ],
 })
