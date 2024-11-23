@@ -222,7 +222,11 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
     
     # 장 시작 시간을 09:00:00으로 설정
     start_time = datetime.strptime("090000", "%H%M%S")
+    end_time = datetime.strptime("160000", "%H%M%S")
     
+    if current > end_time:
+        current = end_time  
+
     # 10분 간격으로 모든 시간대 생성
     time_slots = []
     temp_time = start_time
@@ -266,6 +270,51 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
             print(f"Error at {query_time}: {str(e)}")
 
     return sorted(chart_data, key=lambda x: x['time'])
+
+def get_d_stock_chart_data_day(access_token, stock_code, current_time):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/domestic-stock/v1/quotations/inquire-time-dailychartprice"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",  
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "FHKST03010230"
+    }
+    params = {
+    "FID_COND_MRKT_DIV_CODE": "J",
+    "FID_INPUT_ISCD": stock_code,
+    "FID_INPUT_DATE_1": "20241123",
+    "FID_INPUT_HOUR_1": current_time,
+    "FID_PW_DATA_INCU_YN": "Y",
+    "FID_FAKE_TICK_INCU_YN": "N",
+    }
+
+    chart_data = []
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+
+        if data['rt_cd'] == '0':
+            # period에 따른 데이터 개수만큼 슬라이싱
+            for item in data['output2']:
+                chart_data.append({
+                    'time': item['stck_cntg_hour'],
+                    'price': float(item['stck_prpr'])
+                })
+            return chart_data
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+            
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return []
+
+
+
 
 def get_domestic_stock_chartdata_period(access_token, stock_code, period):
     base_url = settings.KIS_BASE_URL
