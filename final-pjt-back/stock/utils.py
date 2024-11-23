@@ -220,7 +220,7 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
     current = datetime.strptime(current_time, "%H%M%S")
     current = current.replace(minute=(current.minute // 10) * 10, second=0, microsecond=0)
     
-    # 장 시작 시간을 09:05:00으로 설정
+    # 장 시작 시간을 09:00:00으로 설정
     start_time = datetime.strptime("090000", "%H%M%S")
     
     # 10분 간격으로 모든 시간대 생성
@@ -232,7 +232,7 @@ def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
     
     chart_data = []
     
-    # 15분 단위로 API 호출 (API 한 번 호출로 30개 데이터를 더 조밀하게 수신)
+    # 10분 단위로 API 호출 (API 한 번 호출로 30개 데이터를 더 조밀하게 수신)
     for i in range(len(time_slots)):
         query_time = datetime.strptime(time_slots[i], "%H%M%S")
         
@@ -592,3 +592,86 @@ def create_user_interests():
                 user=user,
                 interest=interest
             )
+
+# 각각의 주식의 정보를 업데이트
+def get_stocks_info(access_token,stock_code,excd):
+    # 국내 주식의 경우
+    if stock_code.isdecimal():
+        base_url = settings.KIS_BASE_URL
+        path = "/uapi/domestic-stock/v1/quotations/inquire-price"
+        url = f"{base_url}{path}"
+
+        headers = {
+            "Content-Type": "application/json; charset=utf-8",
+            "authorization": f"Bearer {access_token}",
+            "appkey": settings.KIS_APP_KEY,
+            "appsecret": settings.KIS_APP_SECRET,
+            "tr_id": "FHKST01010100"
+        }
+
+        params = {
+            "FID_COND_MRKT_DIV_CODE": "J",
+            "FID_INPUT_ISCD": stock_code,
+        }
+
+        result_data = []
+        
+        try:
+            response = requests.get(url, headers=headers, params=params)
+            response.raise_for_status()
+            data = response.json()
+
+            if data['rt_cd'] == '0':
+                result_data.append({
+                    'PER': data['output']['per'],
+                    'PBR': data['output']['pbr'],
+                    'EPS': data['output']['eps'],
+                    'BPS': data['output']['bps'],
+                })
+                return result_data
+            else:
+                raise Exception(f"API Error: {data['msg1']}")
+            
+        except Exception as e:
+            print(f"Error getting price for stock {stock_code}: {str(e)}")
+            return 0  # 에러 발생 시 0 반환
+    else:
+
+        base_url = settings.KIS_BASE_URL
+        path = "/uapi/overseas-price/v1/quotations/price-detail"
+        url = f"{base_url}{path}"
+
+        headers = {
+            "Content-Type": "application/json; charset=utf-8",
+            "authorization": f"Bearer {access_token}",
+            "appkey": settings.KIS_APP_KEY,
+            "appsecret": settings.KIS_APP_SECRET,
+            "tr_id": "HHDFS76200200"
+        }
+
+        params = {
+            "AUTH": "",
+            "EXCD": excd,
+            "SYMB": stock_code,
+        }
+
+        result_data = []
+        try:
+            response = requests.get(url, headers=headers, params=params)
+            response.raise_for_status()
+            data = response.json()
+            if data['rt_cd'] == '0':
+                
+                result_data.append({
+                    'PER': data['output']['perx'],
+                    'PBR': data['output']['pbrx'],
+                    'EPS': data['output']['epsx'],
+                    'BPS': data['output']['bpsx']
+                })
+                return result_data
+            else:
+                raise Exception(f"API Error: {data['msg1']}")
+                
+        except Exception as e:
+            print(f"Error getting price for stock {stock_code}: {str(e)}")
+            return []

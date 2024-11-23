@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from .serializers import ThemeSerializer, ArticleSerializer, CommentSerializer
 from django.contrib.auth import get_user_model
-from .utils import get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_main_info, get_domestic_stock_consensus, get_oversea_stock_main_info
+from .utils import get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_consensus, get_oversea_stock_main_info, get_stocks_info
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
@@ -177,6 +177,11 @@ def draw_theme_chart(request):
         unique_stocks = {}
         
         for stock in stocks:
+            stock_info = get_stocks_info(access_token,stock.code,stock.excd)
+            stock.per = stock_info[0]['PER']
+            stock.pbr = stock_info[0]['PBR']
+            stock.eps = stock_info[0]['EPS']
+            stock.save()
             # 동일한 코드를 가진 주식이 없는 경우에만 추가
             if stock.code not in unique_stocks:
                 unique_stocks[stock.code] = stock
@@ -231,8 +236,6 @@ def d_chart(request):
         stock_code=stock_code,
         current_time=current_time,
     )
-
-    # articles_data = get_stock_article_list(stock_code=stock_code)
     response_data = {
         'chart_data': chart_data,
     }
@@ -241,15 +244,19 @@ def d_chart(request):
 @api_view(['POST'])
 def d_main_data(request):
     data = request.data
+    stock_id = data.get('stock_id')
     stock_code = data.get('stock_code')
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
 
-    ratio_data = get_domestic_stock_main_info(
-        access_token=access_token,
-        stock_code=stock_code,
-    )
+    stock = Stock.objects.get(id=stock_id)
+    ratio_data = {
+        'PER': stock.per,
+        'PBR': stock.pbr,
+        'EPS': stock.eps,
+    }
+
     consensus_data = get_domestic_stock_consensus(
         access_token=access_token,
         stock_code=stock_code
@@ -295,7 +302,7 @@ def o_main_data(request):
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
-
+    
     ratio_data = get_oversea_stock_main_info(
         access_token=access_token,
         stock_code=stock_code,
