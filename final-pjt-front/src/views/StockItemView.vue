@@ -59,7 +59,12 @@
       <!-- 종목 정보 섹션 (오른쪽) -->
       <div class="col-lg-4">
         <div class="stock-info-container">
-          <StockInfo/>
+          <div v-if="isNaN(stockcode)">
+            <UsaStockInfo/>
+          </div>
+          <div v-else>
+            <DomesticStockInfo/>
+          </div>
         </div>
       </div>
     </div>
@@ -67,7 +72,7 @@
     <div class="row mt-4">
       <div class="col-12">
         <div class="community-container">
-          <h3 class="community-title">커뮤니티</h3>
+          <h3 class="community-title" @click="moveCommunity">커뮤니티</h3>
           <div class="articles-grid">
             <div v-for="article in stockItemStore.stockInfo.articles_data?.articles" 
                 :key="article.id" 
@@ -91,9 +96,8 @@
 </template>
 
 <script setup>
-// import DayStockChart from '@/components/stocks/DayStockChart.vue'
-import StockArticles from '@/components/stocks/StockArticles.vue'
-import StockInfo from '@/components/stocks/StockInfo.vue'
+import DomesticStockInfo from '@/components/stocks/DomesticStockInfo.vue'
+import UsaStockInfo from '@/components/stocks/UsaStockInfo.vue'
 import { useStockItemStore } from '@/stores/stockitem'
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute } from 'vue-router'
@@ -133,6 +137,10 @@ stockItemStore.getStockInfo(stockcode, currentTime)
   // 일 차트 그리기
 stockItemStore.getDayInfo(stockcode, currentTime)
 })
+
+const moveCommunity = function () {
+
+}
 
 </script>
 

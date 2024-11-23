@@ -6,34 +6,24 @@
         <h3 class="section-title">재무비율 정보</h3>
         <div class="ratio-grid">
           <div class="ratio-card">
-            <div class="ratio-icon">ROE</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROE }}%</div>
-            <div class="ratio-label">자기자본이익률</div>
+            <div class="ratio-icon">PER</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].PER }}</div>
+            <div class="ratio-label">주가수익비율</div>
           </div>
           <div class="ratio-card">
-            <div class="ratio-icon">ROI</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROI }}%</div>
-            <div class="ratio-label">투자수익률</div>
+            <div class="ratio-icon">PBR</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].PBR }}</div>
+            <div class="ratio-label">주가순자산비율</div>
           </div>
           <div class="ratio-card">
-            <div class="ratio-icon">ROS</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROS }}%</div>
-            <div class="ratio-label">매출액이익률</div>
+            <div class="ratio-icon">EPS</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].EPS }}</div>
+            <div class="ratio-label">주당순이익</div>
           </div>
-        </div>
-      </div>
-
-      <!-- 컨센서스 정보 섹션 -->
-      <div class="info-section" v-if="stockItemStore.stockInfo.consensus_data?.length">
-        <h3 class="section-title">컨센서스 정보</h3>
-        <div class="consensus-card">
-          <div class="consensus-header">
-            <span class="consensus-badge">
-              {{ stockItemStore.stockInfo.consensus_data[0].concensus }}
-            </span>
-            <span class="consensus-source">
-              {{ stockItemStore.stockInfo.consensus_data[0].source }}
-            </span>
+          <div class="ratio-card">
+            <div class="ratio-icon">BPS</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].BPS }}</div>
+            <div class="ratio-label">주당순자산</div>
           </div>
         </div>
       </div>
@@ -93,13 +83,13 @@ onMounted(()=>{
 
 .ratio-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
 .ratio-card {
   background: #f8fafc;
-  padding: 1.2rem;
+  padding: 1.0rem;
   border-radius: 8px;
   text-align: center;
   transition: transform 0.2s;
