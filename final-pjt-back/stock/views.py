@@ -1,12 +1,13 @@
 from rest_framework.response import Response
-from .serializers import ThemeSerializer, ArticleSerializer, CommentSerializer
+from .serializers import ThemeSerializer, ArticleSerializer, CommentSerializer, UserSerializer
 from django.contrib.auth import get_user_model
 from .utils import get_d_stock_chart_data_day, get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_day, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_consensus, get_oversea_stock_main_info, get_stocks_info
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.shortcuts import get_object_or_404
 # Create your views here.
 # 혜령 디버깅 추가
 from django.views.decorators.csrf import csrf_exempt
@@ -19,7 +20,15 @@ import random
 from django.db import transaction
 from django.core.exceptions import ObjectDoesNotExist
 
+
 User = get_user_model()
+
+@api_view(['GET'])
+def get_user_info(request, user_pk):
+    user = get_object_or_404(User, pk=user_pk)  # user_pk로 User 객체 가져오기 (없으면 404 반환)
+    serializer = UserSerializer(user)  # User 객체를 직렬화
+    return Response(serializer.data)  # JSON 형태로 반환
+
 # CSRF 보호 비활성화
 # @csrf_exempt
 @api_view(['POST'])
@@ -37,7 +46,7 @@ def analyze(request):
         nickname = user.nickname
 
         # UserProfile 처리
-        user_profile, created = UserProfile.objects.update_or_create(
+        user_profile= UserProfile.objects.update_or_create(
             user=user,
             defaults={
                 'mbti': data.get('mbti'),
@@ -147,6 +156,8 @@ def get_stock_price(token, stock):
     return max(current_price, 0)
 
 def get_token(request):
+    user = request.user
+    
     websocket_token = get_access_to_websocket()
     return JsonResponse({'websocket_token': websocket_token})
 

@@ -3,6 +3,7 @@ from . import views
 
 urlpatterns = [
     path('token/',views.get_token),
+    path('user_info/<int:user_pk>/',views.get_user_info),
     path('stock/analyze/',views.analyze),
     path('stock/indus_chart/',views.draw_theme_chart),
     path('stock/d_chart/',views.d_chart),
