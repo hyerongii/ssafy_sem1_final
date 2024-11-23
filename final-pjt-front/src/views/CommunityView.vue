@@ -1,9 +1,9 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5" v-if="store.articles?.articles_data">
     <div class="community-header">
-      <h1 class="text-center mb-4">커뮤니티</h1>
+      <h1 class="text-center mb-4">{{ store.articles?.articles_data?.stock_name }} 주주님들 모이세요!</h1>
       <div class="d-flex justify-content-end mb-4">
-        <button class="btn btn-primary rounded-pill px-4">
+        <button class="btn btn-primary rounded-pill px-4" @click="articleCreate">
           <i class="bi bi-pencil-fill me-2"></i>글 작성하기
         </button>
       </div>
@@ -11,7 +11,7 @@
 
     <!-- 게시글 목록 -->
     <div class="posts-container">
-      <div v-for="article in store.articles" :key="article.id" class="post-card">
+      <div v-for="article in store.articles.articles_data.articles" :key="article.id" class="post-card">
         <!-- 게시글 헤더 -->
         <div class="post-header">
           <div class="user-info">
@@ -32,11 +32,11 @@
         <div class="post-content">
           <h5 class="post-title">{{ article.title }}</h5>
           <p class="post-text">{{ article.content }}</p>
-          <div class="theme-tag">
+          <!-- <div class="theme-tag">
             <span class="badge rounded-pill bg-light text-dark">
               # {{ article.theme__name }}
             </span>
-          </div>
+          </div> -->
         </div>
 
         <!-- 게시글 액션 버튼 -->
@@ -49,6 +49,10 @@
             <i class="bi bi-chat"></i>
             <span>댓글</span>
           </button>
+          <button class="action-btn" @click="deleteArticle(article.id)">
+            <i class="bi bi-chat"></i>
+            <span>삭제</span>
+          </button>
         </div>
       </div>
     </div>
@@ -56,14 +60,57 @@
 </template>
 
 <script setup>
-import { useStockItemStore } from '@/stores/stockitem';
-import { useUserInterestStore } from '@/stores/userinterest'
-import { onMounted } from 'vue';
+import { useAuthStore } from '@/stores/auth'
+import { useStockItemStore } from '@/stores/stockitem'
+import axios from 'axios'
+import { onMounted } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
 
+const route = useRoute()
+const router = useRouter()
 const store = useStockItemStore()
+const stockcode = route.params.stock_id
+const authstore = useAuthStore()
+
+const getCurrentTime = () => {
+  const now = new Date()
+  const hours = String(now.getHours()).padStart(2, '0')
+  const minutes = String(now.getMinutes()).padStart(2, '0')
+  const seconds = String(now.getSeconds()).padStart(2, '0')
+  return `${hours}${minutes}${seconds}`
+}
+
+const currentTime = getCurrentTime()
+
 onMounted(() => {
-  store.getStockInfo()
-})  
+store.getArticleInfo(stockcode, currentTime)
+  console.log(store.articles)
+})
+
+const articleCreate = function () {
+  router.push({name: 'CreateArticleView', params: {stock_id : stockcode}})
+}
+
+// 게시글 삭제
+const deleteArticle = function (article_id) {
+  axios({
+    method: 'post',
+    url: `${authstore.API_URL}/api/v1/stock/article/update_or_delete/`,
+    headers: {
+      Authorization: `Bearer ${authstore.token}`,
+    },
+    data: {
+      article_id: article_id, 
+    }
+  })
+    .then((res) => {
+      console.log('게시글 삭제 성공')
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
+
 
 </script>
 

@@ -69,33 +69,32 @@ export const useStockItemStore = defineStore('stockitem', () => {
       })
   }
 
-  // const getStockInfo = function (stockCode, currentTime){
-  //   const endpoint = isNaN(stockCode) ? 'o_main_data' : 'd_main_data'
+  const getArticleInfo = function (stockCode, currentTime){
+    const endpoint = isNaN(stockCode) ? 'o_main_data' : 'd_main_data'
 
-  //   axios({
-  //       //통합
-  //       method: 'post',
-  //       url: `${authStore.API_URL}/api/v1/stock/${endpoint}/`,
-  //       headers: {
-  //         Authorization: `Bearer ${authStore.token}`,
-  //       },
-  //       data: {
-  //         stock_code : stockCode,
-  //         // 숫자형태(국내)면 current_time 추가
-  //         // stock_id :
-  //         ...(!isNaN(stockCode) && { current_time: currentTime })
-  //       },
-  //     })
-  //       .then((res) => {
-  //         console.log('주식종목정보')
-  //         console.log(res.data)
-  //         stockInfo.value = res.data
-  //         articles.value = res.data.articles_data
-  //       })
-  //       .catch((err) => {
-  //         console.log(err)
-  //       })
-  // }
+    axios({
+        //통합
+        method: 'post',
+        url: `${authStore.API_URL}/api/v1/stock/${endpoint}/`,
+        headers: {
+          Authorization: `Bearer ${authStore.token}`,
+        },
+        data: {
+          stock_code : stockCode,
+          // 숫자형태(국내)면 current_time 추가
+          // stock_id :
+          ...(!isNaN(stockCode) && { current_time: currentTime })
+        },
+      })
+        .then((res) => {
+          console.log('게시글 정보')
+          console.log(res.data)
+          articles.value = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+  }
 
   const getStockInfo = function (stockCode, currentTime) {
     // 한 번만 결정되도록 먼저 체크
@@ -116,15 +115,16 @@ export const useStockItemStore = defineStore('stockitem', () => {
       data
     })
     .then((res) => {
+      console.log('주식종목정보')
+      console.log(res.data)
       stockInfo.value = res.data
-      articles.value = res.data.articles_data
     })
     .catch((err) => {
       console.log(err)
     })
   }
 
-  return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, periodChart, stockInfo, articles}
+  return {getDayInfo, dayChartData, getPeriodInfo, getStockInfo, getArticleInfo, periodChart, stockInfo, articles}
 }
 // ,{persist: true}
 )
