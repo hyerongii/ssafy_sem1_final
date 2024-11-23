@@ -5,20 +5,21 @@
       <div class="info-section" v-if="stockItemStore.stockInfo.ratio_data?.length">
         <h3 class="section-title">재무비율 정보</h3>
         <div class="ratio-grid">
+          {{ stockItemStore.stockInfo.ratio_data }}
           <div class="ratio-card">
-            <div class="ratio-icon">ROE</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].PER }}</div>
+            <div class="ratio-icon">PER</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data.PER }}</div>
+            <div class="ratio-label">주당순자산</div>
+          </div>
+          <div class="ratio-card">
+            <div class="ratio-icon">PBR</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data.PBR }}</div>
             <div class="ratio-label">주가수익비율</div>
           </div>
           <div class="ratio-card">
-            <div class="ratio-icon">ROI</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].EPS }}</div>
+            <div class="ratio-icon">EPS</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data.EPS }}</div>
             <div class="ratio-label">주당순이익</div>
-          </div>
-          <div class="ratio-card">
-            <div class="ratio-icon">ROS</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].BPS }}</div>
-            <div class="ratio-label">주당순자산</div>
           </div>
         </div>
       </div>

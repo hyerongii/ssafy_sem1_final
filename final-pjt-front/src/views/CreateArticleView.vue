@@ -17,28 +17,34 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
+import axios from 'axios'
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
 const authstore = useAuthStore()
 const router = useRouter()
 const title = ref(null)
 const content = ref(null)
+const stockcode = route.params.stock_id
 
 const createArticle = function () {
   axios({
     method: 'post',
     url: `${authstore.API_URL}/api/v1/stock/article/create/`,
     headers: {
-      Authorization: `Bearer ${store.token}`,
+      Authorization: `Bearer ${authstore.token}`,
     },
     data: {
+      stock_code: stockcode, 
       title: title.value,
       content: content.value
     }
   })
     .then((res) => {
       console.log('게시글 작성 성공')
+    })
+    .catch((err) => {
+      console.log(err)
     })
 }
 

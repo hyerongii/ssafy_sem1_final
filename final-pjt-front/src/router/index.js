@@ -91,12 +91,12 @@ const router = createRouter({
       ]
     },
     {
-      path: '/community',
+      path: '/:stock_id/community',
       name: 'CommunityView',
       component: CommunityView,
     },
     {
-      path: '/create/:stock_id',
+      path: '/:stock_id/create',
       name: 'CreateArticleView',
       component: CreateArticleView,
     }
