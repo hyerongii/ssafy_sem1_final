@@ -573,17 +573,22 @@ def stock_article_delete_or_put(request):
 
 
 @api_view(['GET', 'POST'])
-def get_stock_article_detail(request):
-    data = request.data
-    article_id = data.get('article_id')
+def get_stock_article_detail(request, article_pk):
     try:
-        article = Article.objects.get(pk=article_id)
-        
+        # 1. front에서 요청 시 받은 url의 article_pk를 이용해 조회
+        article = Article.objects.get(pk=article_pk)
         if request.method == 'GET':
+            # 2. 조회한 article에 관계된 comment 조회
             comments = Comment.objects.filter(article=article)
-            serializer = CommentSerializer(comments, many=True)
-            return Response(serializer.data)
-            
+            # 3. 직렬화
+            article_serializer = ArticleSerializer(article)
+            comment_serializer = CommentSerializer(comments, many=True)
+            # 4. Response 데이터 구성
+            response_data = {
+                "article": article_serializer.data,
+                "comments": comment_serializer.data,
+            }
+            return Response(response_data, status=200)
         elif request.method == 'POST':
             serializer = CommentSerializer(data=request.data)
             if serializer.is_valid(raise_exception=True):
