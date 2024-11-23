@@ -13,6 +13,8 @@ export const useUserInterestStore = defineStore('interest', () => {
   const userperiod = ref(null)
 
   const recommendthemes = ref([])
+  const samethemes = ref([])
+  const nickname = ref('')
 
   const analyze = function () {
 
@@ -35,11 +37,12 @@ export const useUserInterestStore = defineStore('interest', () => {
         // 추천 테마 6개 리스트 반환
 
         recommendthemes.value = res.data.recommended_themes
+        samethemes.value = res.data.same_theme_names
+        nickname.value = res.data.nickname
         console.log(res.data)
 
         // 테마리스트페이지로 이동
         router.push({ name: 'ThemeListView'})
-        // console.log(recommendthemes.value)
 
       })
       .catch((err) => {
@@ -47,7 +50,7 @@ export const useUserInterestStore = defineStore('interest', () => {
       })
   }
 
-  return {analyze, usermbti, userinterest, userperiod, recommendthemes}
+  return {analyze, usermbti, userinterest, userperiod, recommendthemes, samethemes, nickname}
 }
 // ,{persist: true}
 )

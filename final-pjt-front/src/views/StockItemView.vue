@@ -68,11 +68,16 @@
         </div>
       </div>
     </div>
-      <!-- 커뮤니티 섹션 -->
+    <!-- 커뮤니티 섹션 -->
     <div class="row mt-4">
       <div class="col-12">
         <div class="community-container">
-          <h3 class="community-title" @click="moveCommunity">커뮤니티</h3>
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3 class="community-title" @click="moveCommunity">커뮤니티</h3>
+            <button class="btn btn-primary rounded-pill px-4" @click="writeArticle">
+              <i class="bi bi-pencil-fill me-2"></i>글 작성하기
+            </button>
+          </div>
           <div class="articles-grid">
             <div v-for="article in stockItemStore.stockInfo.articles_data?.articles" 
                 :key="article.id" 
@@ -100,10 +105,11 @@ import DomesticStockInfo from '@/components/stocks/DomesticStockInfo.vue'
 import UsaStockInfo from '@/components/stocks/UsaStockInfo.vue'
 import { useStockItemStore } from '@/stores/stockitem'
 import { computed, onMounted, ref, watch } from 'vue'
-import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 
 const stockItemStore = useStockItemStore()
 const route = useRoute()
+const router = useRouter()
 const stockcode = route.params.stock_id
 
 // 입력 코드 국내/해외 인지 구분하기!
@@ -139,7 +145,15 @@ stockItemStore.getDayInfo(stockcode, currentTime)
 })
 
 const moveCommunity = function () {
+  router.push({ name: 'CommunityView'})
+}
 
+const writeArticle = () => {
+  // 글 작성 페이지로 이동하는 로직 구현
+  router.push({
+    name: 'CreateArticleView',
+    params: { stock_id: stockcode }
+  })
 }
 
 </script>
@@ -181,5 +195,17 @@ h1 {
   font-size: 1.8rem;
   color: #333;
   margin-left: 0.5rem;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  border: none;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 </style>

@@ -12,6 +12,8 @@ import WeekStockChart from '@/components/stocks/WeekStockChart.vue'
 import MonthStockChart from '@/components/stocks/MonthStockChart.vue'
 import SixMonthStockChart from '@/components/stocks/SixMonthStockChart.vue'
 import YearStockChart from '@/components/stocks/YearStockChart.vue'
+import CommunityView from '@/views/CommunityView.vue'
+import CreateArticleView from '@/views/CreateArticleView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -87,6 +89,16 @@ const router = createRouter({
           component: YearStockChart,
         },
       ]
+    },
+    {
+      path: '/community',
+      name: 'CommunityView',
+      component: CommunityView,
+    },
+    {
+      path: '/create/:stock_id',
+      name: 'CreateArticleView',
+      component: CreateArticleView,
     }
   ],
 })

@@ -81,6 +81,7 @@ export const useStockItemStore = defineStore('stockitem', () => {
         data: {
           stock_code : stockCode,
           // 숫자형태(국내)면 current_time 추가
+          // stock_id :
           ...(!isNaN(stockCode) && { current_time: currentTime })
         },
       })

@@ -7,18 +7,18 @@
         <div class="ratio-grid">
           <div class="ratio-card">
             <div class="ratio-icon">ROE</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROE }}</div>
-            <div class="ratio-label">자기자본이익</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].PER }}</div>
+            <div class="ratio-label">주가수익비율</div>
           </div>
           <div class="ratio-card">
             <div class="ratio-icon">ROI</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROI }}</div>
-            <div class="ratio-label">투자수익</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].EPS }}</div>
+            <div class="ratio-label">주당순이익</div>
           </div>
           <div class="ratio-card">
             <div class="ratio-icon">ROS</div>
-            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].ROS }}</div>
-            <div class="ratio-label">매출액이익</div>
+            <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].BPS }}</div>
+            <div class="ratio-label">주당순자산</div>
           </div>
         </div>
       </div>
