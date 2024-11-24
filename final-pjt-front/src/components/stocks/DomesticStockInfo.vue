@@ -23,11 +23,11 @@
         </div>
       </div>
 
-      <!-- 컨센서스 정보 섹션 -->
-      <div class="info-section" v-if="stockItemStore.stockInfo.consensus_data?.length">
+      <!-- 컨센서스 정보 섹션 수정 -->
+      <div class="info-section">
         <h3 class="section-title">컨센서스 정보</h3>
         <div class="consensus-card">
-          <div class="consensus-header" 
+          <div v-if="stockItemStore.stockInfo.consensus_data?.length" class="consensus-header" 
               v-for="consensus in uniqueConsensus" 
               :key="consensus.source">
             <span class="consensus-badge" :class="getConsensusClass(consensus.concensus)">
@@ -36,6 +36,10 @@
             <span class="consensus-source">
               {{ consensus.source }}
             </span>
+          </div>
+          <div v-else class="no-data-message">
+            <i class="bi bi-info-circle"></i>
+            <p>해당 종목은 컨센서스 정보를 제공하지 않습니다.</p>
           </div>
         </div>
       </div>
@@ -216,5 +220,25 @@ const getConsensusClass = (consensus) => {
   .ratio-card {
     padding: 1rem;
   }
+}
+
+.no-data-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.no-data-message i {
+  font-size: 1.2rem;
+  color: #94a3b8;
+}
+
+.no-data-message p {
+  margin: 0;
+  font-size: 0.95rem;
 }
 </style>

@@ -27,6 +27,16 @@
           </div>
         </div>
       </div>
+      <!-- 재무비율 정보 섹션 아래에 추가 -->
+      <div class="info-section">
+        <h3 class="section-title">컨센서스 정보</h3>
+        <div class="consensus-card">
+          <div class="no-data-message">
+            <i class="bi bi-info-circle"></i>
+            <p>미국 주식 종목의 경우 컨센서스 정보를 제공하지 않습니다.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -153,5 +163,25 @@ const currentTime = getCurrentTime()
   .ratio-card {
     padding: 1rem;
   }
+}
+
+.no-data-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  color: #64748b;
+  text-align: center;
+}
+
+.no-data-message i {
+  font-size: 1.2rem;
+  color: #94a3b8;
+}
+
+.no-data-message p {
+  margin: 0;
+  font-size: 0.95rem;
 }
 </style>

@@ -14,7 +14,8 @@
             <li class="nav-item">
               <RouterLink 
                 :to="{ name: 'day', params: { stock_id: stockcode }}" 
-                class="nav-link" 
+                class="nav-link"
+                replace 
                 :class="{ active: $route.name === 'day' || !$route.name }"
               >일</RouterLink>
             </li>
@@ -22,6 +23,7 @@
             <RouterLink 
                 :to="{ name: 'week', params: { stock_id: stockcode }}" 
                 class="nav-link" 
+                replace
                 :class="{ active: $route.name === 'week' }"
                 @click="movePeriodChart('W')"
               >주</RouterLink>
@@ -30,6 +32,7 @@
             <RouterLink 
                 :to="{ name: 'month', params: { stock_id: stockcode }}" 
                 class="nav-link" 
+                replace
                 :class="{ active: $route.name === 'month' }"
                 @click="movePeriodChart('1M')"
               >월</RouterLink>
@@ -38,6 +41,7 @@
             <RouterLink 
                 :to="{ name: 'sixmonth', params: { stock_id: stockcode }}" 
                 class="nav-link" 
+                replace
                 :class="{ active: $route.name === 'sixmonth' }"
                 @click="movePeriodChart('6M')"
               >6개월</RouterLink>
@@ -46,6 +50,7 @@
             <RouterLink 
                 :to="{ name: 'year', params: { stock_id: stockcode }}" 
                 class="nav-link" 
+                replace
                 :class="{ active: $route.name === 'year' }"
                 @click="movePeriodChart('1Y')"
               >년</RouterLink>
@@ -164,11 +169,11 @@ const currentTime = getCurrentTime()
 // }
 
 // 페이지 처음 들어왔을때
-onMounted(() => {
+onMounted(() => { 
   // 종목 정보 먼저 가져오기
-stockItemStore.getStockInfo(stockcode, currentTime)
+  stockItemStore.getStockInfo(stockcode, currentTime)
   // 일 차트 그리기
-stockItemStore.getDayInfo(stockcode, currentTime)
+  stockItemStore.getDayInfo(stockcode, currentTime)
 })
 
 const moveCommunity = function () {

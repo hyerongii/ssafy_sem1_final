@@ -15,8 +15,10 @@
 import { useStockItemStore } from '@/stores/stockitem'
 import { useWebsocketStore } from '@/stores/websocket'
 import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
-const stockcodeProps = defineProps({ stockcode: String })
+const route = useRoute()
+const stockcode = route.params.stock_id
 const stockItemStore = useStockItemStore()
 const websocketStore = useWebsocketStore()
 const chart = ref(null)
@@ -59,14 +61,17 @@ const chartOptions = ref({
     },
     axisTicks: {
       show: false
+    },
+    tooltip: {
+      enabled: false  // X축 툴팁 완전히 비활성화
     }
   },
   yaxis: {
     labels: {
       formatter: (value) => Math.round(value).toLocaleString()
     },
-    min: (min) => parseInt(min * 0.99),
-    max: (max) => parseInt(max * 1.01),
+    // min: (min) => parseInt(min * 0.99),
+    // max: (max) => parseInt(max * 1.01),
   },
   tooltip: {
     x: {
@@ -76,9 +81,7 @@ const chartOptions = ref({
       title: {
         formatter: () => '체결가: ' // 툴팁 타이틀 설정
       },
-      formatter: function(value) {
-        return value.toFixed(2).toLocaleString() + '원'
-      }
+      formatter: (value) => `${Math.round(value).toLocaleString()}원` // 가격 포맷 설정
     }
   }
 })
@@ -111,7 +114,9 @@ const series = computed(() => [{
   name: '주가',
   data: stockItemStore.dayChartData.map(item => ({
     x: new Date(item.time).getTime(), // timestamp로 변환
-    y: parseFloat(item.price)
+    y: isNaN(Number(stockcode)) 
+      ? parseFloat(item.price) * 1405 
+      : parseFloat(item.price)
   }))
 }])
 
@@ -122,11 +127,15 @@ watch(
   (newData) => {
     if (newData && newData.price && isFinite(newData.price)) {
       const timestamp = new Date(newData.time).getTime()
+      const price = isNaN(Number(stockcode))
+        ? parseFloat(newData.price) * 1405
+        : parseFloat(newData.price)
+        
       series.value[0].data.push({
         x: timestamp,
-        y: parseFloat(newData.price)
+        y: price
       })
-
+      
       // 전체 series 업데이트
       // series.value = [...series.value]
     }

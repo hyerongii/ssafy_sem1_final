@@ -14,8 +14,11 @@
 <script setup>
 import { useStockItemStore } from '@/stores/stockitem'
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 
 const stockItemStore = useStockItemStore()
+const route = useRoute()
+const stockcode = route.params.stock_id
 
 const chartOptions = ref({
   chart: {
@@ -24,6 +27,9 @@ const chartOptions = ref({
     animations: {
       enabled: true,
       easing: 'linear',
+      dynamicAnimation: {
+        speed: 1000
+      }
     },
     toolbar: {
       show: false
@@ -31,6 +37,9 @@ const chartOptions = ref({
     zoom: {
       enabled: false
     }
+  },
+  dataLabels: { // 이 부분 추가
+    enabled: false
   },
   stroke: {
     curve: 'smooth',
@@ -45,6 +54,12 @@ const chartOptions = ref({
     type: 'datetime',
     labels: {
       show: false
+    },
+    axisTicks: {
+      show: false
+    },
+    tooltip: {
+      enabled: false  // X축 툴팁 완전히 비활성화
     }
   },
   yaxis: {
@@ -57,6 +72,12 @@ const chartOptions = ref({
   tooltip: {
     x: {
       format: 'yyyy.MM.dd'
+    },
+    y: {
+      title: {
+        formatter: () => '종가: ' // 툴팁 타이틀 설정
+      },
+      formatter: (value) => `${Math.round(value).toLocaleString()}원` // 가격 포맷 설정
     }
   }
 })
@@ -71,7 +92,9 @@ const series = computed(() => [{
       item.date.substring(6, 8)
     ).getTime(),
     // 숫자를 안전하게 변환
-    y: parseFloat(item.clpr) || 0
+    y: isNaN(Number(stockcode)) 
+      ? parseFloat(item.clpr) * 1405 
+      : parseFloat(item.clpr)
   })) || []
 }])
 </script>
