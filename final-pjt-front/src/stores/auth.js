@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
       .then((res) => {
         console.log(res)
         console.log('회원가입 성공')
-
+        alert('회원가입 성공! 개인화된 테마를 추천받아보세요!')
         // 회원가입 성공 후 자동 로그인
         const password = password1
         logIn({username, password})
@@ -34,40 +34,46 @@ export const useAuthStore = defineStore('auth', () => {
   }
   
   const logIn = function (payload) {
-    const {username, password} = payload
+    const { username, password } = payload;
+    
+    if (!username || !password) {
+      alert('적절한 아이디와 비밀번호를 입력해주세요!');
+      return;
+    }
 
     axios({
       method: 'post',
       url: `${API_URL}/accounts/login/`,
-      data: {
-        username, password
-      }
+      data: { username, password },
     })
       .then((res) => {
-        token.value = res.data.access
-        console.log(res.data)
-        // 유저정보 저장
-        user.value = res.data.user
-        // 로그인 성공하면 다음 페이지로 이동 가능하게,,!
-        router.push({ name: 'HomeView'})
+        // 로그인 성공 처리
+        token.value = res.data.access;
+        user.value = res.data.user;
+        alert('로그인 성공! 개인화된 테마를 추천받아보세요!')
+        console.log('로그인 성공:', res.data);
+  
+        // 홈 화면으로 이동
+        router.push({ name: 'HomeView' });
       })
       .catch((err) => {
         console.log(err)
-      })
-
-    axios({
-      method:'get',
-      url: `${API_URL}/api/v1/token/`,
-    })
-      .then((res) => {
-        // 받아온 토큰 데이터 출력
-        websocketToken.value = res.data.websocket_token
-
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }
+        if (err.response) {
+          const errorMessage = err.response.data.detail;
+  
+          if (err.response.status === 404) {
+            alert('등록되지 않은 아이디입니다.');
+          } else if (err.response.status === 401) {
+            alert('비밀번호가 올바르지 않습니다.');
+          } else {
+            alert('로그인 중 문제가 발생했습니다. 다시 시도해주세요.');
+          }
+        } else {
+          console.error('네트워크 오류:', err);
+          alert('서버와의 연결이 원활하지 않습니다. 잠시 후 다시 시도해주세요.');
+        }
+      });
+  };
 
   const logOut = function () {
     axios({
@@ -80,6 +86,7 @@ export const useAuthStore = defineStore('auth', () => {
       .then(() => {
         // 로그아웃 성공 처리
         token.value = null
+        alert('로그아웃 성공!')
         // 로컬 스토리지나 쿠키에 저장된 토큰 제거
         localStorage.removeItem('token')
         user.value = null  // 로그아웃 시 사용자 정보도 초기화

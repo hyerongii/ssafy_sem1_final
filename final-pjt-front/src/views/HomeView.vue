@@ -50,15 +50,27 @@
     </swiper-slide>
 
   </swiper>
+  <!-- 진문수정 / Fixed 버튼 추가 -->
+  <button class="theme-recommend-btn" @click="goToThemeRecommendation">
+    테마 추천받기
+  </button>
 </template>
 
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Mousewheel } from 'swiper/modules';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
-
+// 진문수정
+import { computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/stores/auth';
 const modules = [Pagination, Mousewheel];
+
+// 진문수정
+const router = useRouter()
+const authStore = useAuthStore()
 
 const onSwiper = (swiper) => {
   console.log(swiper);
@@ -66,6 +78,22 @@ const onSwiper = (swiper) => {
 
 const onSlideChange = () => {
   console.log('slide change');
+};
+
+// 진문수정 / 버튼 클릭 시 라우팅 함수
+const isLoggedIn = computed(() => authStore.isAuthenticated)
+const goToThemeRecommendation = () => {
+  // 로그인 된 유저라면 
+  if (isLoggedIn.value) {
+    router.push({name: 'UserSelectView'})
+  // 로그인 되어 있지 않은 유저라면
+  } else {
+    // 1. <추천받기 위해 로그인을 진행해 주세요!> 라는 알림창 띄우기
+    alert('추천받기 위해 로그인을 진행해 주세요!')
+    // 2. 로그인 페이지로 이동(router.push 활용)
+    router.push({name: 'LogInView'})
+  }
+  
 };
 </script>
 
@@ -107,6 +135,26 @@ const onSlideChange = () => {
 .swiper-pagination-bullet-active {
   opacity: 1;
 }
+/* 진문수정 / Fixed 버튼 스타일 */
+.theme-recommend-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff; /* 파란색 */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 15px 25px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: rgba(0,0,0,0.15) 0px 4px 8px;
+  z-index: 1000; /* 다른 요소 위로 올리기 */
+}
+
+.theme-recommend-btn:hover {
+   background-color:#0056b3; /* hover시 더 어두운 파란색 */
+}
+
 </style>
 
 

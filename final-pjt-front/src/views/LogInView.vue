@@ -26,8 +26,10 @@
           >
           <label for="input_password">비밀번호</label>
         </div>
-        <div class="d-grid gap-2">
+        <!-- 버튼들을 가로로 배치 -->
+        <div class="button-group">
           <button type="submit" class="btn btn-primary btn-lg">로그인</button>
+          <button @click.prevent="goToSignupPage" class="btn btn-primary btn-lg">회원가입</button>
         </div>
         <!-- <div class="text-center mt-3">
           <a href="#" class="text-muted text-decoration-none">비밀번호를 잊으셨나요?</a>
@@ -40,7 +42,9 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth'
 import { ref } from 'vue'
-
+// 진문수정
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const store = useAuthStore()
 const username = ref(null)
 const password = ref(null)
@@ -51,6 +55,11 @@ const logIn = function() {
     password: password.value
   }
   store.logIn(payload)
+}
+
+// 진문 수정 / 회원가입 페이지로 이동
+const goToSignupPage = function () {
+  router.push({name:'SignUpView'})
 }
 </script>
 
@@ -93,6 +102,12 @@ const logIn = function() {
   border-color: #667eea;
   box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.25);
 }
+/* 진문수정 / 버튼 그룹 스타일 */
+.button-group {
+  display: flex; /* Flexbox로 가로 배치 */
+  justify-content: center; /* 중앙 정렬 */
+  gap: 15px; /* 버튼 간격 */
+}
 
 .btn-primary {
   background: linear-gradient(to right, #667eea, #764ba2);
@@ -104,6 +119,11 @@ const logIn = function() {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+  box-shadow: rgba(102,126,234,0.4) 0px 5px 15px;
+}
+
+/* 버튼 크기 통일 */
+.btn-lg {
+  width: calc(50% - calc(15px / 2)); /* 부모 Flexbox의 너비를 기준으로 균등 분배 */
 }
 </style>

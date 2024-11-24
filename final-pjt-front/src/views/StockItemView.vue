@@ -75,7 +75,7 @@
     <!-- 커뮤니티 섹션 -->
     <div class="community-section mt-5">
       <div class="community-header">
-        <h3 @click="moveCommunity">실시간 커뮤니티</h3>
+        <h3 @click="moveCommunity" class="community-btn">실시간 커뮤니티</h3>
         <button class="write-btn" @click="writeArticle">
           <i class="bi bi-pencil-fill"></i>
           새 글 작성
@@ -190,9 +190,13 @@ const writeArticle = () => {
 
 ////커뮤니티 관련
 // 최신 5개 게시글만 표시
+// 진문수정 / 백엔드 데이터 전달 형식을 vue 형식으로 변환
 const latestArticles = computed(() => {
-  return stockItemStore.stockInfo.articles_data?.articles.slice(0, 5) || []
-})
+  return stockItemStore.stockInfo.articles_data?.articles.map(article => ({
+    ...article,
+    author_nickname: article.author__nickname, // 키 변환
+  })).slice(0,5) || [];
+});
 
 const formatTime = (timestamp) => {
   // 한국 시간으로 변환
@@ -381,5 +385,27 @@ const moveArticleDetail = function (articleId) {
   color: white;
   border: none;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.community-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3); /* 파란색 그라데이션 */
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 25px; /* 둥근 모서리 */
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+.community-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #003d80); /* 호버 시 더 어두운 파란색 */
+  transform: translateY(-2px); /* 살짝 위로 올라가는 효과 */
+}
+
+.community-btn:active {
+  transform: translateY(2px); /* 클릭 시 눌리는 효과 */
 }
 </style>

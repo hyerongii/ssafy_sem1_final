@@ -5,7 +5,11 @@
         <RouterLink :to="{ name: 'HomeView' }" class="nav-link">Home</RouterLink>
         <RouterLink v-if="!isLoggedIn" :to="{ name: 'LogInView' }" class="nav-link">로그인</RouterLink>
         <RouterLink v-if="!isLoggedIn" :to="{ name: 'SignUpView' }" class="nav-link">회원가입</RouterLink>
-        <RouterLink v-if="isLoggedIn" :to="{ name: 'UserSelectView' }" class="nav-link">테마추천(테스트용)</RouterLink>
+        <!-- 진문수정 / 테스트용은 이제 없어도 될 것 같습니다. -->
+        <!-- <RouterLink v-if="isLoggedIn" :to="{ name: 'UserSelectView' }" class="nav-link">테마추천(테스트용)</RouterLink> -->
+        <RouterLink v-if="isLoggedIn" :to="{ name: 'UserSelectView' }" class="nav-link">재추천 받기</RouterLink>
+        <!-- 진문수정 / 인증된 사용자의 경우 추천받았던 테마들을 다시 볼 수 있도록 nav 탭 구성 -->
+        <RouterLink v-if="isLoggedIn" :to="{ name: 'ThemeListView' }" class="nav-link">추천받은 테마</RouterLink>
         <button v-if="isLoggedIn" @click="logOut" class="nav-link btn btn-link">로그아웃</button>
       </div>
     </nav>
