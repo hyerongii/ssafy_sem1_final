@@ -36,8 +36,9 @@ const logOut = function () {
 /* 전역 CSS 변수 설정 - scoped 밖에 작성 */
 :root {
   --primary-color: #8bc148;
-  --primary-light: #8bc148;
-  --primary-dark: #8bc148;
+  --primary-light: #DCCAF0;
+  /* --primary-dark: #A274D6; */ /* 보라색 */ 
+  --primary-dark: #D372A4;
 }
 </style>
 
@@ -74,6 +75,7 @@ const logOut = function () {
   min-height: 64px;
   padding: 0.5rem 0;   /* 상하 패딩만 적용 */
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  font-family: 'Godo', sans-serif;
 }
 
 /* 네비게이션 링크 스타일 */

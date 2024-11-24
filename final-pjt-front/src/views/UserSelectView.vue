@@ -7,41 +7,25 @@
       </div>
 
       <div class="survey-content">
-        <!-- Progress Bar -->
-        <div class="progress mb-4" style="height: 8px;">
-          <div class="progress-bar progress-gradient" role="progressbar" 
-              :style="{ width: progressWidth + '%' }" 
-              aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-          </div>
-        </div>
 
         <div class="survey-grid">
           <!-- MBTI 선택 -->
           <div class="survey-card">
-            <div class="card-icon">
-              <i class="bi bi-person-circle"></i>
-            </div>
             <MbtiSelect />
           </div>
 
           <!-- 관심 분야 선택 -->
           <div class="survey-card">
-            <div class="card-icon">
-              <i class="bi bi-graph-up"></i>
-            </div>
             <InterestSelect />
           </div>
 
           <!-- 투자 기간 선택 -->
           <div class="survey-card">
-            <div class="card-icon">
-              <i class="bi bi-calendar-check"></i>
-            </div>
             <PeriodSelect />
           </div>
         </div>
 
-        <div class="text-center mt-5">
+        <div class="text-center mt-2 ">
           <button @click="sendUserData" class="submit-btn">
             나만의 투자 테마 확인하기
             <i class="bi bi-arrow-right ms-2"></i>
@@ -75,21 +59,22 @@ const sendUserData = function () {
 
 <style scoped>
 .survey-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: linear-gradient(135deg, #f8faf5, #fff);
   padding: 20px;
+  margin-top: 64px;
 }
 
 .survey-box {
   background: white;
   border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+  padding: 20px;
+  box-shadow: 0 15px 25px rgba(139, 193, 72, 0.1);
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
 }
 
 .survey-header {
@@ -98,63 +83,80 @@ const sendUserData = function () {
 }
 
 .survey-header h2 {
-  color: #2d3748;
+  color: var(--primary-color);
   font-weight: 600;
+  margin-top: 30px;
   margin-bottom: 10px;
+  font-family: 'Godo', sans-serif;
+}
+
+.survey-header p {
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 40px;
 }
 
 .survey-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1.3fr 1fr;  /* InterestSelect를 더 넓게 설정 */
   gap: 30px;
   margin-top: 30px;
 }
 
 .survey-card {
-  background: #f8fafc;
+  background: #f8faf5;
   border-radius: 15px;
-  padding: 15px;
+  padding: 30px;  /* 패딩 증가 */
   text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(139, 193, 72, 0.1);
+  min-height: 400px;  /* 최소 높이 설정 */
 }
 
 .survey-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(139, 193, 72, 0.2);
+  border-color: var(--primary-color);
 }
 
 .card-icon {
-  font-size: 2.5rem;
-  color: #667eea;
+  font-size: 2rem;
+  color: var(--primary-color);
   margin-bottom: 20px;
 }
 
-.progress-gradient {
-  background: linear-gradient(to right, #667eea, #764ba2);
-}
-
 .submit-btn {
-  background: linear-gradient(to right, #667eea, #764ba2);
+  background: var(--primary-color);
   color: white;
   border: none;
-  padding: 15px 30px;
+  padding: 15px 40px;
   border-radius: 10px;
   font-size: 1.1rem;
   font-weight: 500;
   transition: all 0.3s ease;
+  font-family: 'Godo', sans-serif;
+  
 }
 
 .submit-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+  box-shadow: 0 5px 15px rgba(139, 193, 72, 0.3);
+  background: var(--primary-dark);
+
+}
+
+.text-muted {
+  color: #666 !important;
 }
 
 @media (max-width: 768px) {
-  .survey-box {
-    padding: 20px;
-  }
-  
   .survey-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;  /* 화면이 작아지면 세로로 배열 */
+  }
+
+  .survey-card {
+    min-height: auto;  /* 모바일에서는 자동 높이 */
   }
 }
+
 </style>

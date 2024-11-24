@@ -2,8 +2,8 @@
   <div class="interest-container">
     <div class="interest-box">
       <div class="interest-header text-center mb-4">
-        <h2>나의 관심사</h2>
-        <p class="text-muted">투자 성향에 맞는 테마를 추천해드립니다</p>
+        <h2>요즘 나의 관심사는?</h2>
+        <!-- <p class="text-muted">투자 성향에 맞는 테마를 추천해드립니다</p> -->
         <div class="selection-counter" :class="{ 'text-danger': selectedCategories.length < 3 }">
           {{ selectedCategories.length }}/3 선택됨
         </div>
@@ -30,6 +30,7 @@
 <script setup>
 import { ref, watch } from 'vue'
 import { useUserInterestStore } from '@/stores/userinterest'
+import { useAuthStore } from '@/stores/auth';
 
 // const getCategoryIcon = (value) => {
 //   const iconMap = {
@@ -102,6 +103,9 @@ const toggleCategory = (category) => {
 }
 
 const store = useUserInterestStore()
+const authstore = useAuthStore()
+
+
 
 // watch를 통해 userInterestMappings가 변경될 때마다 store.userinterest 업데이트
 watch(userInterestMappings, (newMappings) => {
@@ -111,38 +115,57 @@ watch(userInterestMappings, (newMappings) => {
 </script>
 
 <style scoped>
-/* .interest-container {
-  min-height: 100vh;
-  padding: 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-} */
+.interest-container {
+  padding: 0.5 rem;
+  font-family: 'Godo', sans-serif;
+}
 
 .interest-box {
   background: white;
   border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+  padding: 32px;
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.interest-header h2 {
+  color: var(--primary-color);
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+/* text-danger 클래스 스타일 수정 */
+.text-danger {
+  color: #D372A4 !important;
+  font-weight: 700; /* 더 굵게 */
 }
 
 .selection-counter {
   display: inline-block;
   padding: 8px 16px;
-  background: #f8fafc;
+  background: #f8faf5;
   border-radius: 20px;
-  font-weight: 500;
+  font-weight: 600; /* 폰트 굵기 증가 */
+  font-size: 1.1rem; /* 폰트 크기 증가 */
   margin-top: 15px;
+  border: 1px solid rgba(139, 193, 72, 0.2);
 }
 
-.category-wrapper {
-  width: calc(33.333% - 1rem);
-  min-width: 150px;
-  max-width: 200px;
+.d-flex {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding: 1rem;
 }
+  
+/* .category-wrapper {
+  width: 100%;
+} */
 
 .category-btn {
-  width: 50%;
+  width: 100%;
   padding: 0;
   border: none;
   background: transparent;
@@ -151,34 +174,37 @@ watch(userInterestMappings, (newMappings) => {
 }
 
 .circle-text {
-  aspect-ratio: 1;
   width: 100%;
+  aspect-ratio: 1;
   border-radius: 50%;
-  background: #f8fafc;
+  background: #f8faf5;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 15px;
-  font-size: 0.9rem;
-  color: #4a5568;
+  font-size: 1rem;
+  color: #333;
   transition: all 0.3s ease;
   text-align: center;
   word-break: keep-all;
+  border: 2px solid transparent;
 }
 
 .category-btn:hover .circle-text {
-  background: #edf2f7;
-  transform: scale(1.05);
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .category-btn.active .circle-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-color);
   color: white;
+  border-color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
-  .category-wrapper {
-    width: calc(50% - 1rem);
+  .d-flex {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
   }
   
   .interest-box {
@@ -187,8 +213,9 @@ watch(userInterestMappings, (newMappings) => {
 }
 
 @media (max-width: 480px) {
-  .category-wrapper {
-    width: calc(100% - 1rem);
+  .d-flex {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 </style>

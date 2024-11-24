@@ -40,7 +40,7 @@ import { ref, watch, onMounted } from 'vue'
 import { useUserInterestStore } from '@/stores/userinterest'
 
 const investmentDuration = ref(1)
-const durationLabel = ref('1달')
+const durationLabel = ref('1개월')
 const period = ref('단기') // 초기값 설정
 const store = useUserInterestStore()
 
@@ -49,7 +49,7 @@ const updateDurationLabel = () => {
     period.value = '장기'
     durationLabel.value = '1년 이상'
   } else {
-    durationLabel.value = `${investmentDuration.value}달`
+    durationLabel.value = `${investmentDuration.value}개월`
     if (investmentDuration.value <= 3) {
       period.value = '단기'
     } else {
@@ -70,19 +70,21 @@ watch(period, (newPeriod) => {
 
 <style scoped>
 .period-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   display: flex;
-  align-items: center;
+  /* align-items: center; */
+  border-radius: 20px;
   justify-content: center;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background: #fff;
   padding: 20px;
+  font-family: 'Godo', sans-serif;
 }
 
 .period-box {
   background: white;
   border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+  padding: 12px;
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
   width: 100%;
   max-width: 600px;
 }
@@ -93,33 +95,28 @@ watch(period, (newPeriod) => {
 }
 
 .period-header h2 {
-  color: #2d3748;
+  color: var(--primary-color);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 2rem;
 }
 
+
 .slider-wrapper {
+  margin-top: 70px;
   padding: 20px;
 }
 
 .duration-display {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .duration-value {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #667eea;
+  color: var(--primary-dark);
   margin-right: 10px;
-}
-
-.duration-type {
-  font-size: 1.2rem;
-  color: #718096;
-  padding: 5px 15px;
-  background: #f7fafc;
-  border-radius: 20px;
 }
 
 .slider-container {
@@ -140,24 +137,23 @@ watch(period, (newPeriod) => {
 
 .custom-range::-webkit-slider-thumb {
   -webkit-appearance: none;
-  appearance: none;
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-color);
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(139, 193, 72, 0.2);
 }
 
 .custom-range::-moz-range-thumb {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--primary-color);
   cursor: pointer;
   border: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 6px rgba(139, 193, 72, 0.2);
 }
 
 
@@ -169,8 +165,9 @@ watch(period, (newPeriod) => {
 }
 
 .range-labels span {
-  color: #718096;
-  font-size: 0.9rem;
+  color: #666;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 @media (max-width: 768px) {

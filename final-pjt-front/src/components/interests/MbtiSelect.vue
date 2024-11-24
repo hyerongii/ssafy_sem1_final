@@ -2,7 +2,7 @@
   <div class="mbti-container">
     <div class="mbti-header">
       <h2>나의 MBTI는?</h2>
-      <p class="text-muted">당신의 성향에 맞는 투자 스타일을 찾아드립니다</p>
+      <!-- <p class="text-muted">당신의 성향에 맞는 투자 스타일을 찾아드립니다</p> -->
     </div>
 
     <div class="mbti-grid">
@@ -12,14 +12,24 @@
         <div class="btn-group">
           <input type="radio" class="btn-check" id="E" v-model="selectedEI" value="E">
           <label class="mbti-btn" :class="{ active: selectedEI === 'E' }" for="E">
-            <span class="type">E</span>
-            <span class="description">외향형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">E</span>
+                <span class="description">외향형</span>
+              </div>
+              <span class="message">주식방에서 떠들면서 투자하는게 내 스타일!</span>
+            </div>
           </label>
           
           <input type="radio" class="btn-check" id="I" v-model="selectedEI" value="I">
           <label class="mbti-btn" :class="{ active: selectedEI === 'I' }" for="I">
-            <span class="type">I</span>
-            <span class="description">내향형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">I</span>
+                <span class="description">내향형</span>
+              </div>
+              <span class="message">혼자 차트 보면서 분석하는게 편해요</span>
+            </div>
           </label>
         </div>
       </div>
@@ -30,14 +40,24 @@
         <div class="btn-group">
           <input type="radio" class="btn-check" id="S" v-model="selectedSN" value="S">
           <label class="mbti-btn" :class="{ active: selectedSN === 'S' }" for="S">
-            <span class="type">S</span>
-            <span class="description">감각형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">S</span>
+                <span class="description">감각형</span>
+              </div>
+              <span class="message">실제 데이터로 승부하는 현실주의자</span>
+            </div>
           </label>
           
           <input type="radio" class="btn-check" id="N" v-model="selectedSN" value="N">
           <label class="mbti-btn" :class="{ active: selectedSN === 'N' }" for="N">
-            <span class="type">N</span>
-            <span class="description">직관형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">N</span>
+                <span class="description">직관형</span>
+              </div>
+              <span class="message">다음 테마주가 뭐가 될지 감이 와!</span>
+            </div>
           </label>
         </div>
       </div>
@@ -48,14 +68,24 @@
         <div class="btn-group">
           <input type="radio" class="btn-check" id="T" v-model="selectedTF" value="T">
           <label class="mbti-btn" :class="{ active: selectedTF === 'T' }" for="T">
-            <span class="type">T</span>
-            <span class="description">사고형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">T</span>
+                <span class="description">사고형</span>
+              </div>
+              <span class="message">차트와 데이터로만 얘기해주세요</span>
+            </div>
           </label>
           
           <input type="radio" class="btn-check" id="F" v-model="selectedTF" value="F">
           <label class="mbti-btn" :class="{ active: selectedTF === 'F' }" for="F">
-            <span class="type">F</span>
-            <span class="description">감정형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">F</span>
+                <span class="description">감정형</span>
+              </div>
+              <span class="message">이 기업 성장 스토리가 너무 감동적이야</span>
+            </div>
           </label>
         </div>
       </div>
@@ -66,14 +96,24 @@
         <div class="btn-group">
           <input type="radio" class="btn-check" id="J" v-model="selectedJP" value="J">
           <label class="mbti-btn" :class="{ active: selectedJP === 'J' }" for="J">
-            <span class="type">J</span>
-            <span class="description">판단형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">J</span>
+                <span class="description">판단형</span>
+              </div>
+              <span class="message">투자는 계획한 대로만 가야죠</span>
+            </div>
           </label>
           
           <input type="radio" class="btn-check" id="P" v-model="selectedJP" value="P">
           <label class="mbti-btn" :class="{ active: selectedJP === 'P' }" for="P">
-            <span class="type">P</span>
-            <span class="description">인식형</span>
+            <div class="btn-content">
+              <div class="type-info">
+                <span class="type">P</span>
+                <span class="description">인식형</span>
+              </div>
+              <span class="message">시장 흐름 따라 유연하게 갈래요</span>
+            </div>
           </label>
         </div>
       </div>
@@ -109,111 +149,160 @@ watch([selectedEI, selectedSN, selectedTF, selectedJP], ([newEI, newSN, newTF, n
   padding: 2rem;
   background: white;
   border-radius: 15px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
+  font-family: 'Godo', sans-serif;
 }
 
 .mbti-header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .mbti-header h2 {
   font-weight: 600;
-  color: #2d3748;
+  color: var(--primary-color);
   margin-bottom: 0.5rem;
+  font-size: 2rem;
 }
 
 .mbti-grid {
   display: grid;
-  gap: 1.5rem;
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 
 .mbti-group {
-  background: #f8fafc;
-  padding: 1.5rem;
+  background: #f8faf5;
+  padding: 1.3rem;
   border-radius: 12px;
   transition: all 0.3s ease;
+  border: 1px solid rgba(139, 193, 72, 0.1);
 }
 
 .mbti-group:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  border-color: var(--primary-color);
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .type-label {
   display: block;
   font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 1rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  text-align: center;
 }
+
 
 .btn-group {
   display: flex;
   gap: 1rem;
   width: 100%;
+  flex-direction: column;
+  /* justify-content: center; 중앙 정렬 */
 }
 
 .mbti-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
   padding: 1rem;
   border: 2px solid #e2e8f0;
   border-radius: 10px;
   background: white;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
+}
+
+.btn-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .mbti-btn:hover {
-  border-color: #667eea;
-  background: #f7fafc;
+  border-color: var(--primary-color);
+  background: #f8faf5;
 }
 
 .mbti-btn.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-color: transparent;
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
   color: white;
 }
 
+.mbti-btn.active .message{
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.type-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .type {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 700;
-  margin-bottom: 0.5rem;
 }
 
 .description {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.message {
   font-size: 0.9rem;
+  color: #666;
 }
 
 .mbti-result {
   text-align: center;
   margin-top: 2rem;
-  padding: 1rem;
-  background: #f8fafc;
+  padding: 1.2rem;
+  background: #f8faf5;
   border-radius: 10px;
+  border: 1px solid var(--primary-color);
 }
 
 .result-label {
-  color: #4a5568;
-  margin-right: 0.5rem;
+  color: #333;
+  margin-right: 0.8rem;
+  font-size: 1.1rem;
 }
 
 .result-value {
   font-weight: 600;
-  color: #667eea;
-  font-size: 1.2rem;
+  color: var(--primary-color);
+  font-size: 1.3rem;
 }
 
+/* 모바일 반응형 수정 */
 @media (max-width: 768px) {
-  .mbti-container {
-    padding: 1rem;
+  .btn-group {
+    flex-direction: row; /* 모바일에서도 가로 배치 유지 */
+    gap: 0.5rem; /* 간격 줄임 */
   }
   
-  .btn-group {
-    flex-direction: column;
+  .mbti-btn {
+    padding: 0.8rem;
+  }
+  
+  .type {
+    font-size: 1.2rem;
+  }
+  
+  .description {
+    font-size: 0.8rem;
+  }
+  
+  .message {
+    font-size: 0.7rem;
   }
 }
 </style>

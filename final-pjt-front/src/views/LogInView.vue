@@ -2,8 +2,8 @@
   <div class="login-container">
     <div class="login-box">
       <div class="login-header">
-        <h2>Welcome Back!</h2>
-        <p class="text-muted">당신의 투자 여정을 시작하세요</p>
+        <h2>또 오셨군요!</h2>
+        <p class="text-muted">주주랜드에 오신걸 환영해요</p>
       </div>
       <form @submit.prevent="logIn" class="login-form">
         <div class="form-floating mb-3">
@@ -26,14 +26,10 @@
           >
           <label for="input_password">비밀번호</label>
         </div>
-        <!-- 버튼들을 가로로 배치 -->
         <div class="button-group">
           <button type="submit" class="btn btn-primary btn-lg">로그인</button>
-          <button @click.prevent="goToSignupPage" class="btn btn-primary btn-lg">회원가입</button>
+          <button @click.prevent="goToSignupPage" class="btn btn-secondary btn-lg">회원가입</button>
         </div>
-        <!-- <div class="text-center mt-3">
-          <a href="#" class="text-muted text-decoration-none">비밀번호를 잊으셨나요?</a>
-        </div> -->
       </form>
     </div>
   </div>
@@ -65,19 +61,21 @@ const goToSignupPage = function () {
 
 <style scoped>
 .login-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f8faf5, #fff);
   padding: 20px;
+  margin-top: 64px;
+  font-family: 'Godo', sans-serif;
 }
 
 .login-box {
   background: white;
-  border-radius: 10px;
+  border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
   width: 100%;
   max-width: 400px;
 }
@@ -88,42 +86,62 @@ const goToSignupPage = function () {
 }
 
 .login-header h2 {
-  color: #2d3748;
+  color: var(--primary-color);
   margin-bottom: 10px;
   font-weight: 600;
+  font-size: 2rem;
 }
 
 .form-floating input {
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  padding: 1rem;
+  font-size: 1rem;
 }
 
 .form-floating input:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.25);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(139, 193, 72, 0.2);
 }
-/* 진문수정 / 버튼 그룹 스타일 */
+
 .button-group {
-  display: flex; /* Flexbox로 가로 배치 */
-  justify-content: center; /* 중앙 정렬 */
-  gap: 15px; /* 버튼 간격 */
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 2rem;
 }
 
 .btn-primary {
-  background: linear-gradient(to right, #667eea, #764ba2);
+  background-color: var(--primary-color);
   border: none;
-  padding: 12px;
-  border-radius: 8px;
+  padding: 12px 30px;
+  border-radius: 12px;
   transition: all 0.3s ease;
+  font-weight: 600;
 }
 
-.btn-primary:hover {
+.btn-secondary {
+  background-color: var(--primary-dark);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+.btn-primary:hover, .btn-secondary:hover {
   transform: translateY(-2px);
-  box-shadow: rgba(102,126,234,0.4) 0px 5px 15px;
+  filter: brightness(1.1);
 }
 
-/* 버튼 크기 통일 */
 .btn-lg {
-  width: calc(50% - calc(15px / 2)); /* 부모 Flexbox의 너비를 기준으로 균등 분배 */
+  width: calc(50% - 7.5px);
+  font-size: 1.1rem;
+}
+
+.text-muted {
+  color: #666 !important;
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
 }
 </style>

@@ -2,8 +2,8 @@
   <div class="signup-container">
     <div class="signup-box">
       <div class="signup-header">
-        <h2>Welcome!</h2>
-        <p class="text-muted">새로운 투자 여정을 시작하세요</p>
+        <h2>환영해요!</h2>
+        <p class="text-muted">새로운 투자 여정을 주주랜드에서 시작하세요</p>
       </div>
       
       <form @submit.prevent="signUp" class="signup-form">
@@ -107,19 +107,21 @@ const moveLogIn = function () {
 
 <style scoped>
 .signup-container {
-  min-height: 100vh;
+  min-height: calc(100vh - 64px);
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f8faf5, #fff);
   padding: 20px;
+  margin-top: 64px;
+  font-family: 'Godo', sans-serif;
 }
 
 .signup-box {
   background: white;
-  border-radius: 15px;
+  border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
   width: 100%;
   max-width: 500px;
 }
@@ -130,40 +132,58 @@ const moveLogIn = function () {
 }
 
 .signup-header h2 {
-  color: #2d3748;
+  color: var(--primary-color);
   margin-bottom: 10px;
   font-weight: 600;
+  font-size: 2rem;
+}
+
+.text-muted {
+  color: #666 !important;
+  font-size: 1.1rem;
 }
 
 .form-floating input {
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
+  padding: 1rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
 }
 
 .form-floating input:focus {
-  border-color: #667eea;
-  box-shadow: 0 0 0 0.2rem rgba(102,126,234,0.25);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(139, 193, 72, 0.2);
 }
 
 .signup-btn {
-  background: linear-gradient(to right, #667eea, #764ba2);
+  background-color: var(--primary-color);
   border: none;
   padding: 15px;
-  border-radius: 8px;
-  font-weight: 500;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
   transition: all 0.3s ease;
+  margin-top: 1rem;
 }
 
 .signup-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(102,126,234,0.4);
+  filter: brightness(1.1);
+  box-shadow: 0 5px 15px rgba(139, 193, 72, 0.3);
 }
 
 a {
-  color: #667eea;
+  color: var(--primary-dark);
+  cursor: pointer;
+  font-weight: 500;
 }
 
 a:hover {
-  color: #764ba2;
+  color: var(--primary-color);
+}
+
+.mt-3 {
+  margin-top: 2rem !important;
 }
 </style>

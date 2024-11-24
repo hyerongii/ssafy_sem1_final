@@ -124,6 +124,7 @@ const goToThemeRecommendation = () => {
   color: var(--primary-color);
   font-weight: bold;
   line-height: 1.2;
+  font-family: 'Godo', sans-serif;
 }
 
 .section p {
@@ -132,6 +133,7 @@ const goToThemeRecommendation = () => {
   line-height: 1.6;
   max-width: 800px;
   margin: 0 auto;
+  font-family: 'Godo', sans-serif;
 }
 
 /* 페이지네이션 스타일 */
@@ -149,24 +151,26 @@ const goToThemeRecommendation = () => {
 /* 진문수정 / Fixed 버튼 스타일 */
 .theme-recommend-btn {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
+  bottom: 40px; /* 하단에서 더 멀리 떨어지게 조정 */
+  left: 50%; /* 왼쪽 가장자리에서 50% 위치로 이동 */
+  transform: translateX(-50%); /* 버튼의 중앙이 화면 중앙에 오도록 조정 */
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 50px;
-  padding: 15px 30px;
-  font-size: 1.1rem;
-  font-weight: 500;
+  padding: 20px 40px;
+  font-size: 1.3rem;
+  font-weight: 600;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(255, 107, 98, 0.3);
   transition: all 0.3s ease;
   z-index: 1000; /* 다른 요소 위로 올리기 */
+  font-family: 'Godo', sans-serif;
 }
 
 .theme-recommend-btn:hover {
   background-color: var(--primary-dark);
-  transform: translateY(-2px);
+  transform: translateX(-50%) translateY(-5px);
   box-shadow: 0 6px 20px rgba(255, 107, 98, 0.4);
 }
 
