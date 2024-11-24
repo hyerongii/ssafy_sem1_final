@@ -113,46 +113,72 @@ const goToThemeRecommendation = () => {
 .section {
   text-align: center;
   padding: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.8s ease forwards;
 }
 
 .section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
+  font-size: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary-color);
+  font-weight: bold;
+  line-height: 1.2;
 }
 
 .section p {
-  font-size: 1.25rem;
+  font-size: 1.8rem;
+  color: #666;
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 /* 페이지네이션 스타일 */
 .swiper-pagination-bullet {
-  width: 10px;
-  height: 10px;
-  background: #000;
+  width: 12px;
+  height: 12px;
+  background: var(--primary-color);
   opacity: 0.5;
 }
 
 .swiper-pagination-bullet-active {
   opacity: 1;
+  background: var(--primary-color);
 }
 /* 진문수정 / Fixed 버튼 스타일 */
 .theme-recommend-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  background-color: #007bff; /* 파란색 */
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 50px;
-  padding: 15px 25px;
-  font-size: 1rem;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: 500;
   cursor: pointer;
-  box-shadow: rgba(0,0,0,0.15) 0px 4px 8px;
+  box-shadow: 0 4px 15px rgba(255, 107, 98, 0.3);
+  transition: all 0.3s ease;
   z-index: 1000; /* 다른 요소 위로 올리기 */
 }
 
 .theme-recommend-btn:hover {
-   background-color:#0056b3; /* hover시 더 어두운 파란색 */
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 107, 98, 0.4);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 </style>

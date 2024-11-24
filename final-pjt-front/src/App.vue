@@ -32,26 +32,64 @@ const logOut = function () {
 }
 </script>
 
+<style>
+/* 전역 CSS 변수 설정 - scoped 밖에 작성 */
+:root {
+  --primary-color: #8bc148;
+  --primary-light: #8bc148;
+  --primary-dark: #8bc148;
+}
+</style>
+
 <style scoped>
+
+/* .App {
+  font-family:'Godo'; 
+} */
+
+@font-face {
+  font-family: 'Godo';
+  font-style: normal;
+  font-weight: 400;
+  src: url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff2') format('woff2'), url('//cdn.jsdelivr.net/korean-webfonts/1/corps/godo/Godo/GodoM.woff') format('woff');
+}
 
 /* 전체 페이지 레이아웃 */
 .app-container {
   display: flex;
   flex-direction: column;
   height: 100vh; /* 전체 화면 높이 */
+  background: linear-gradient(135deg, #fff5f3, #fff);
+}
+
+.container-fluid {
+  padding-left: 2rem;  /* 왼쪽 여백 */
+  padding-right: 2rem; /* 오른쪽 여백 */
+  max-width: 1400px;   /* 최대 너비 설정 */
+  margin: 0 auto;      /* 중앙 정렬 */
+}
+
+.navbar {
+  background: var(--primary-color) !important;
+  min-height: 64px;
+  padding: 0.5rem 0;   /* 상하 패딩만 적용 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 /* 네비게이션 링크 스타일 */
 .nav-link {
   text-decoration: none; /* 밑줄 없애기 */
-  color: black; /* 글자 색상 검정으로 */
-  font-weight: bold; /* 글자 굵게 (선택 사항) */
-  margin-left: 1rem
-  
+  color: white !important;
+  font-weight: 500;
+  font-size: 1rem;
+  margin-left: 1.5rem;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-  color: #555; /* 마우스를 올렸을 때 색상 변경 (선택 사항) */
+  color: rgba(255,255,255,0.85) !important;
+  transform: translateY(-1px);
 }
 
 /* HomeView가 들어가는 컨텐츠 영역 */
