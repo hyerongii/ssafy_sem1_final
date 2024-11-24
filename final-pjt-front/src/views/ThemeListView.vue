@@ -89,7 +89,9 @@ const filterUsaStocks = (stocks) => stocks.filter(stock => checkUsa(stock.code))
 const filterKoreanStocks = (stocks) => stocks.filter(stock => !checkUsa(stock.code))
 
 const getStockLogo = (code) => {
-  return `https://assets.parqet.com/logos/symbol/${code}?format=png`
+  if (isNaN(Number(code))) {
+    return `https://assets.parqet.com/logos/symbol/${code}?format=png`
+  }
 }
 
 const goToThemeDetail = (theme_name) => {

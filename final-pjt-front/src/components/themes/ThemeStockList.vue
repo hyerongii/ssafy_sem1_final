@@ -83,9 +83,10 @@ const usaStocks = computed(() =>
 )
 
 const getStockLogo = (code) => {
-  return `/logos/${code}.png`
+  if (isNaN(Number(code))) {
+    return `https://assets.parqet.com/logos/symbol/${code}?format=png`
+  }
 }
-
 const formatPrice = (price) => {
   return price.toLocaleString('ko-KR')
 }
