@@ -306,7 +306,6 @@ def o_chart(request):
     
     response_data = {
         'chart_data': chart_data,
-        'articles_data': articles_data,
     }
     return Response(response_data)
 
@@ -330,7 +329,7 @@ def o_main_data(request):
 
     response_data = {
         'ratio_data': ratio_data,
-        'articles_data': articles_data,
+        'articles_data': articles_data
     }
     return Response(response_data)
 
