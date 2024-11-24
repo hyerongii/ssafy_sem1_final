@@ -24,6 +24,8 @@ from django.core.exceptions import ObjectDoesNotExist
 User = get_user_model()
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def get_user_info(request, user_pk):
     user = get_object_or_404(User, pk=user_pk)  # user_pk로 User 객체 가져오기 (없으면 404 반환)
     serializer = UserSerializer(user)  # User 객체를 직렬화
@@ -155,12 +157,17 @@ def get_stock_price(token, stock):
             current_price = current_price * 1391.50
     return max(current_price, 0)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def get_token(request):
     
     websocket_token = get_access_to_websocket()
     return JsonResponse({'websocket_token': websocket_token})
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def draw_theme_chart(request):
     try:
         user = request.user
@@ -240,6 +247,8 @@ def draw_theme_chart(request):
 # front에서 해당 종목의 code, 현재시각을 전달받음
 # 전달받은 시각 이전까지
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def d_chart(request):
 
     data = request.data
@@ -260,6 +269,8 @@ def d_chart(request):
     return Response(response_data)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def d_main_data(request):
     data = request.data
     stock_code = data.get('stock_code')
@@ -289,6 +300,8 @@ def d_main_data(request):
 # front로부터 stock_code를 받음
 # @csrf_exempt
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def o_chart(request):
     data = request.data
     stock_code = data.get('stock_code')
@@ -310,6 +323,8 @@ def o_chart(request):
     return Response(response_data)
 
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def o_main_data(request):
     data = request.data
     stock_code = data.get('stock_code')
@@ -336,6 +351,8 @@ def o_main_data(request):
 
 # front에게서 stock_code와 period를 받으면 함수 실행
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def d_chart_period(request):
     data = request.data
     stock_code = data.get('stock_code')
@@ -357,6 +374,8 @@ def d_chart_period(request):
 
 # front에게서 stock_code, period를 받으면 함수 실행
 @api_view(['POST'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def o_chart_period(request):
     data = request.data
     stock_code = data.get('stock_code')

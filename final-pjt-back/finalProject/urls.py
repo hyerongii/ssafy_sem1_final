@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
-
+from .auth_views import CustomTokenObtainPairView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,5 +33,5 @@ urlpatterns = [
     # 회원가입과 관련된 라이브러리 경로 설정
     path('accounts/signup/', include('dj_rest_auth.registration.urls')),
     # JWT토큰 기반 로그인기능   
-    path('accounts/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('accounts/login/', CustomTokenObtainPairView.as_view(), name='custom_token_obtain_pair'),
 ]
