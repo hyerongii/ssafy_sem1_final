@@ -126,7 +126,7 @@ def analyze(request):
                     "stocks": list(unique_stocks.values()),
                     "description": theme.description,
                 })
-  
+
             except ObjectDoesNotExist:
                 print(f"테마 {theme_name}을/를 찾을 수 없습니다.")
 
@@ -243,6 +243,58 @@ def draw_theme_chart(request):
             'message': str(e)
         }, status=500)
     
+
+def get_recommended_themes(request):
+    # 목표: 기존에 추천받았던 이력이 있는 유저는 "추천받은 테마" 탭을 누르면 
+    # 기존에 추천받았던 테마를 곧바로 보여주도록 하고자 함.
+    # 만약 기존에 추천받았던 이력이 없는 유저가 해당 탭을 누르는 경우
+    # "아직 추천받은 테마가 없어요! 개인화된 분석을 진행해 주세요!" 알림창 띄우기(접근제한)
+    # 1. UserInterest 테이블에 user_id와 interest_id 값이 저장되어 있음
+    # 2. 해당 테이블은 "user_id 1의 관심 테마는 1,2,5 interest_id 이다" 라는 의미를 가지고 있음
+    # 3. 유저가 "추천받은 테마" 탭을 누르는 경우 해당 함수가 실행됨
+    # 4. user_id를 식별하기
+    # 5. user_id를 이용해 UserInterest 테이블을 filtering
+    # 6. interest_id를 이용해 Theme 테이블의 테마명(name) 값과 해당 theme와 관계된 stock을 리스트에 담아서 반환
+    # 7. 단 아래의 형식으로 반환할 것. themes_info 에는 theme_name 키값과, stocks 키값(리스트)과 description 키값을 가짐.
+    # return JsonResponse({
+    #     "message": "저장이 완료되었습니다.",
+    #     "recommended_themes": themes_info,
+    # })
+
+    # user_id를 식별하기
+    user = request.user  # 로그인된 유저를 가져옴 (Django의 기본 인증 시스템 사용 가정)
+    
+    if not user.is_authenticated:
+        return JsonResponse({
+            "message": "로그인이 필요합니다.",
+        }, status=401)
+
+    # user_id를 이용해 UserInterest 테이블을 filtering
+    user_interests = UserInterest.objects.filter(user_id=user.id)
+    
+    if not user_interests.exists():
+        # 추천받은 이력이 없는 경우
+        return JsonResponse({
+            "message": "아직 추천받은 테마가 없어요! 개인화된 분석을 진행해 주세요!",
+        }, status=404)
+
+    # interest_id를 이용해 Theme 테이블의 테마명(name) 값과 관련 주식(stock)을 리스트에 담음
+    themes_info = []
+    for user_interest in user_interests:
+        theme = get_object_or_404(Theme, id=user_interest.interest_id)
+        related_stocks = Stock.objects.filter(theme_id=theme.id)  # Theme과 연결된 Stock 가져오기
+        
+        themes_info.append({
+            "theme_name": theme.name,
+            "description": theme.description,  # Theme의 설명 필드 (모델에 포함되어 있다고 가정)
+            "stocks": list(related_stocks.values_list('name', flat=True))  # 주식 이름만 리스트로 변환
+        })
+
+    # JSON 응답 반환
+    return JsonResponse({
+        "message": "저장이 완료되었습니다.",
+        "recommended_themes": themes_info,
+    })
 
 # front에서 해당 종목의 code, 현재시각을 전달받음
 # 전달받은 시각 이전까지
