@@ -303,7 +303,7 @@ def o_chart(request):
         stock_code=stock_code,
         excd=excd
     )
-    articles_data = get_stock_article_list(stock_code=stock_code)
+    
     response_data = {
         'chart_data': chart_data,
         'articles_data': articles_data,
@@ -319,6 +319,8 @@ def o_main_data(request):
     user = request.user
     user_profile = UserProfile.objects.get(user=user)
     access_token = user_profile.token
+
+    articles_data = get_stock_article_list(stock_code=stock_code)
     
     ratio_data = get_oversea_stock_main_info(
         access_token=access_token,
@@ -327,7 +329,8 @@ def o_main_data(request):
     )
 
     response_data = {
-        'ratio_data': ratio_data
+        'ratio_data': ratio_data,
+        'articles_data': articles_data,
     }
     return Response(response_data)
 
