@@ -4,27 +4,28 @@ import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from './auth'
 
-export const useStockItemStore = defineStore('article', () => {
-  const store = useAuthStore()
+export const useArticleStore = defineStore('article', () => {
+  const authstore = useAuthStore()
+  const userMbti = ref(null)
 
-  axios({
-    //백에서 받아오기
-    method: 'post',
-    url: `${store.API_URL}/api/v1/stock/indus_chart/`,
-    headers: {
-      Authorization: `Bearer ${store.token}`,
-    },
-    data: {
-
-    },
-  })
-    .then((res) => {
-      console.log(res.data)
+  const getUserInfo = function () {
+    console.log(authstore.user.pk)
+    axios({
+      //사용자 정보 요청
+      method: 'get',
+      url: `${authstore.API_URL}/api/v1/user_info/${authstore.user.pk}/`,
+      headers: {
+        Authorization: `Bearer ${authstore.token}`,
+      },
     })
-    .catch((err) => {
-      console.log(err)
-    })
-
+      .then((res) => {
+        console.log(res.data)
+        userMbti.value = res.data.user_info.mbti
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   
-  return {}
-})
+  return { getUserInfo, userMbti }
+},{persist: true})

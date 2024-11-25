@@ -28,7 +28,7 @@ User = get_user_model()
 @authentication_classes([JWTAuthentication])
 def get_user_info(request, user_pk):
     user = get_object_or_404(User, pk=user_pk)  # user_pk로 User 객체 가져오기 (없으면 404 반환)
-    user_info = get_object_or_404(UserProfile, user=user)
+    user_info = get_object_or_404(UserProfile, user=user_pk)
 
     user_serializer = UserSerializer(user)
     user_profile_serializer = UserProfileSerializer(user_info)
@@ -38,7 +38,7 @@ def get_user_info(request, user_pk):
         'user_info': user_profile_serializer.data,
     }
     # serializer = UserSerializer(user)  # User 객체를 직렬화
-    return response_data  # JSON 형태로 반환
+    return Response(response_data)  # JSON 형태로 반환
 
 # CSRF 보호 비활성화
 # @csrf_exempt

@@ -98,6 +98,7 @@ const securitiesWebsites = {
   'DB금융투자':'https://www.db-fi.com/main/main.do',
   '교보':'https://www.iprovest.com/index.jsp',
   '유진투자': 'https://www.eugenefn.com/main.do',
+  '다올투자':'https://www.daolsecurities.com/top.jsp'
 }
 
 const hasWebsite = (source) => {

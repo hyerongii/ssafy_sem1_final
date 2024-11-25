@@ -167,7 +167,9 @@ watch(
       currentSeries.value[0].data = formattedData
       
       // 웹소켓 연결 시작
-      websocketStore.webSocketStart(stockcode)
+      if (!isNaN(stockcode)) {
+        websocketStore.webSocketStart(stockcode)
+      }
     }
   },
   { immediate: true }

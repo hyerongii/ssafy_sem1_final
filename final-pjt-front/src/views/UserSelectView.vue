@@ -41,13 +41,17 @@ import MbtiSelect from '@/components/interests/MbtiSelect.vue'
 import InterestSelect from '@/components/interests/InterestSelect.vue'
 import PeriodSelect from '@/components/interests/PeriodSelect.vue'
 import { useUserInterestStore } from '@/stores/userinterest'
-import { ref, computed } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
+import { useArticleStore } from '@/stores/article'
 
-const store = useUserInterestStore()
+const userInterestStore = useUserInterestStore()
+const articleStore = useArticleStore()
 
 const sendUserData = function () {
-  store.analyze()
+  userInterestStore.analyze()
+  articleStore.getUserInfo()
 }
+
 </script>
 
 <style scoped>

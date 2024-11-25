@@ -21,6 +21,7 @@
               </div>
               <div class="user-details">
                 <span class="author">{{ article.author__nickname || '익명' }}</span>
+                <span class="mbti">{{ userMbti }}</span>
                 <span class="post-time">{{ article.created_at }}</span>
               </div>
             </div>
@@ -68,6 +69,7 @@
 </template>
 
 <script setup>
+import { useArticleStore } from '@/stores/article'
 import { useAuthStore } from '@/stores/auth'
 import { useStockItemStore } from '@/stores/stockitem'
 import axios from 'axios'
@@ -75,11 +77,15 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const authstore = useAuthStore()
+const articlestore = useArticleStore()
 const route = useRoute()
 const router = useRouter()
 const store = useStockItemStore()
 const stockcode = route.params.stock_id
 const userNickname = ref(null)
+const userMbti = ref(null)
+
+userMbti.value = articlestore.userMbti
 
 const getCurrentTime = () => {
   const now = new Date()
