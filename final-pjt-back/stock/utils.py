@@ -203,6 +203,7 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
         print(f"Error getting price for US stock {stock_code}: {str(e)}")
         return 0
 
+# 09시부터 현재 시간까지의 모든 차트 데이터를 받아오는 함수 / 현재 사용 X
 # def get_domestic_stock_chartdata_day(access_token, stock_code, current_time):
 #     base_url = settings.KIS_BASE_URL
 #     path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemconclusion"
@@ -271,72 +272,149 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
 
 #     return sorted(chart_data, key=lambda x: x['time'])
 
-def get_d_stock_chart_data_day(access_token, stock_code, current_time):
+def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_time):
     base_url = settings.KIS_BASE_URL
-    path = "/uapi/domestic-stock/v1/quotations/inquire-time-dailychartprice"
+    path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemchartprice"
     url = f"{base_url}{path}"
 
     headers = {
         "Content-Type": "application/json; charset=utf-8",
-        "authorization": f"Bearer {access_token}",  
+        "authorization": f"Bearer {access_token}",
         "appkey": settings.KIS_APP_KEY,
         "appsecret": settings.KIS_APP_SECRET,
-        "tr_id": "FHKST03010230"
+        "tr_id": "FHKST03010200"
     }
 
-    # 현재 날짜와 시간 계산
+    # current_time이 153000(장이 마감되는 시간)을 초과하면 153000으로 설정
+    if int(current_time) > 153000:
+        current_time = "153000"
+
+    # 주말일 경우 금요일 날짜로 설정
     today = datetime.now()
-    weekday = today.weekday()  # 월=0, 화=1, ..., 토=5, 일=6
-
-    # 토요일 또는 일요일인 경우 금요일 날짜 계산
-    if weekday == 5:  # 토요일
-        target_date = today - timedelta(days=1)
-    elif weekday == 6:  # 일요일
-        target_date = today - timedelta(days=2)
+    if today.weekday() >= 5:  # 토요일(5) 또는 일요일(6)
+        days_to_friday = today.weekday() - 4
+        friday_date = today - timedelta(days=days_to_friday)
+        current_date = friday_date.strftime("%Y%m%d")
     else:
-        target_date = today
+        current_date = today.strftime("%Y%m%d")
 
-    # 금요일 데이터 요청 시 시간 범위 설정 (09:00 ~ 15:30)
-    if weekday in [5, 6]:  # 토요일 또는 일요일
-        start_time = "0900"
-        end_time = "1530"
-        date_str = target_date.strftime("%Y%m%d")
-    else:
-        # 평일 데이터 요청 시 current_time ~ 09:00
-        start_time = current_time
-        end_time = "0900"
-        date_str = today.strftime("%Y%m%d")
+    # current_time에서 1시간 전 시간 계산 (HHMMSS 형식)
+    time_format = "%H%M%S"
+    current_datetime = datetime.strptime(current_time, time_format)
+    one_hour_ago = (current_datetime - timedelta(hours=1)).strftime(time_format)
 
     params = {
+        "FID_ETC_CLS_CODE": "",
         "FID_COND_MRKT_DIV_CODE": "J",
         "FID_INPUT_ISCD": stock_code,
-        "FID_INPUT_DATE_1": date_str,
-        "FID_INPUT_HOUR_1": start_time,
-        "FID_PW_DATA_INCU_YN": "Y",
-        "FID_FAKE_TICK_INCU_YN": "N",
+        "FID_INPUT_HOUR_1": current_time,
+        "FID_PW_DATA_INCU_YN": "N",
     }
 
     chart_data = []
     try:
-        response = requests.get(url, headers=headers, params=params)
-        response.raise_for_status()
-        data = response.json()
-
-        if data['rt_cd'] == '0':
-            for item in data['output2']:
-                time_value = item['stck_cntg_hour']
-                if start_time <= time_value <= end_time:
+        while True:
+            response = requests.get(url, headers=headers, params=params)
+            response.raise_for_status()
+            data = response.json()
+            
+            if data['rt_cd'] == '0':
+                for item in data['output2']:
+                    time_value = item['stck_cntg_hour']
+                    
+                    # 현재 데이터가 요청 범위를 벗어나면 중단
+                    if time_value < one_hour_ago:
+                        return chart_data
+                    
                     chart_data.append({
                         'time': time_value,
                         'price': float(item['stck_prpr'])
                     })
-            return chart_data
-        else:
-            raise Exception(f"API Error: {data['msg1']}")
-            
+                
+                # API 응답 데이터 중 가장 이른 시간 확인
+                earliest_time = data['output2'][-1]['stck_cntg_hour']
+                if earliest_time < one_hour_ago:
+                    break
+                
+                # 더 과거 데이터를 가져오기 위해 FID_INPUT_HOUR_1 업데이트
+                params["FID_INPUT_HOUR_1"] = earliest_time
+            else:
+                raise Exception(f"API Error: {data['msg1']}")
+        
+        return chart_data
+
     except Exception as e:
         print(f"Error getting price for stock {stock_code}: {str(e)}")
         return []
+
+
+
+# def get_d_stock_chart_data_day(access_token, stock_code, current_time):
+#     base_url = settings.KIS_BASE_URL
+#     path = "/uapi/domestic-stock/v1/quotations/inquire-time-dailychartprice"
+#     url = f"{base_url}{path}"
+
+#     headers = {
+#         "Content-Type": "application/json; charset=utf-8",
+#         "authorization": f"Bearer {access_token}",  
+#         "appkey": settings.KIS_APP_KEY,
+#         "appsecret": settings.KIS_APP_SECRET,
+#         "tr_id": "FHKST03010230"
+#     }
+
+#     # 현재 날짜와 시간 계산
+#     today = datetime.now()
+#     weekday = today.weekday()  # 월=0, 화=1, ..., 토=5, 일=6
+
+#     # 토요일 또는 일요일인 경우 금요일 날짜 계산
+#     if weekday == 5:  # 토요일
+#         target_date = today - timedelta(days=1)
+#     elif weekday == 6:  # 일요일
+#         target_date = today - timedelta(days=2)
+#     else:
+#         target_date = today
+
+#     # 금요일 데이터 요청 시 시간 범위 설정 (09:00 ~ 15:30)
+#     if weekday in [5, 6]:  # 토요일 또는 일요일
+#         start_time = "0900"
+#         end_time = "1530"
+#         date_str = target_date.strftime("%Y%m%d")
+#     else:
+#         # 평일 데이터 요청 시 09:00 ~ 15:30
+#         start_time = current_time
+#         end_time = "1530"
+#         date_str = today.strftime("%Y%m%d")
+
+#     params = {
+#         "FID_COND_MRKT_DIV_CODE": "J",
+#         "FID_INPUT_ISCD": stock_code,
+#         "FID_INPUT_DATE_1": date_str,
+#         "FID_INPUT_HOUR_1": start_time,
+#         "FID_PW_DATA_INCU_YN": "N",
+#         "FID_FAKE_TICK_INCU_YN": "N",
+#     }
+
+#     chart_data = []
+#     try:
+#         response = requests.get(url, headers=headers, params=params)
+#         response.raise_for_status()
+#         data = response.json()
+
+#         if data['rt_cd'] == '0':
+#             for item in data['output2']:
+#                 time_value = item['stck_cntg_hour']
+#                 if start_time <= time_value <= end_time:
+#                     chart_data.append({
+#                         'time': time_value,
+#                         'price': float(item['stck_prpr'])
+#                     })
+#             return chart_data
+#         else:
+#             raise Exception(f"API Error: {data['msg1']}")
+            
+#     except Exception as e:
+#         print(f"Error getting price for stock {stock_code}: {str(e)}")
+#         return []
 
 
 
