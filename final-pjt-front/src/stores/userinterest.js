@@ -49,5 +49,5 @@ export const useUserInterestStore = defineStore('interest', () => {
 
   return {analyze, usermbti, userinterest, userperiod, recommendthemes, samethemes, nickname}
 }
-// ,{persist: true}
+,{persist: true}
 )

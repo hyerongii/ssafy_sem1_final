@@ -46,7 +46,6 @@ onMounted(() => {
   font-family: 'Godo', sans-serif;
   padding: 3rem 2rem;
   background: white;
-  border-left: 4px solid var(--primary-color);
   margin-top: 80px;
   max-width: 1200px;
   margin-left: auto;
@@ -56,7 +55,6 @@ onMounted(() => {
 .theme-header {
   text-align: left;
   margin-bottom: 1rem;
-  padding-bottom: 1.5rem;
 }
 
 h2 {
@@ -77,7 +75,7 @@ h2 {
 }
 
 .chart-section {
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
   position: relative;
 }
 

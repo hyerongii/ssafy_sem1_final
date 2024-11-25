@@ -218,7 +218,7 @@ const moveStockItem = function (stockcode) {
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid var(--primary-light);
+  /* border: 2px solid var(--primary-light); */
 }
 
 .logo-image {

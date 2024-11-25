@@ -45,13 +45,6 @@ import { ref, computed } from 'vue'
 
 const store = useUserInterestStore()
 
-const progressWidth = computed(() => {
-  // 각 선택 항목이 완료되었는지 확인하고 진행률 계산
-  let progress = 0
-  // 진행률 계산 로직 구현
-  return progress
-})
-
 const sendUserData = function () {
   store.analyze()
 }

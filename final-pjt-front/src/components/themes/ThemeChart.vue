@@ -1,6 +1,11 @@
 <template>
   <div class="chart-wrapper">
-    <div class="chart-title">테마 주가 동향</div>
+    <div class="chart-header">
+      <!-- <div class="chart-title">테마 주가 동향</div> -->
+      <div class="trend-badge" :class="getTrendClass">
+        {{ getTrendMessage }}
+      </div>
+    </div>
     <apexchart
       width="100%"
       height="100%"
@@ -16,6 +21,37 @@ import { useStockStore } from '@/stores/stock'
 import { computed, ref } from 'vue'
 
 const stockStore = useStockStore()
+
+// 최근 추세 분석을 위한 computed 속성 추가
+const analyzeTrend = computed(() => {
+  const data = stockStore.chartdata
+  if (!data || data.length < 2) return 0
+  
+  // 최근 10개의 데이터 사용하여 추세 분석
+  const recentData = data.slice(-10)
+  const firstPrice = recentData[0].average_close
+  const lastPrice = recentData[recentData.length - 1].average_close
+  const changeRate = ((lastPrice - firstPrice) / firstPrice) * 100
+  
+  return changeRate
+})
+
+const getTrendMessage = computed(() => {
+  const change = analyzeTrend.value
+  console.log(change)
+  if (Math.abs(change) < 1) return '보합세'
+  if (change >= 3) return '강한 상승세'
+  if (change >= 1) return '상승세'
+  if (change <= -3) return '강한 하락세'
+  return '하락세'
+})
+
+const getTrendClass = computed(() => {
+  const change = analyzeTrend.value
+  if (0 < Math.abs(change) < 1) return 'neutral'
+  else if (change > 0) return 'up'
+  return 'down'
+})
 
 const chartOptions = {
   chart: {
@@ -73,6 +109,38 @@ const series = computed(() => [{
 </script>
 
 <style scoped>
+.chart-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+}
+
+.trend-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  font-family: 'Godo', sans-serif;
+}
+
+.trend-badge.up {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.trend-badge.down {
+  background-color: var(--primary-dark);
+  color: white;
+}
+
+.trend-badge.neutral {
+  background-color: #e2e8f0;
+  color: var(--primary-word);
+}
+
 .chart-wrapper {
   width: 100%;
   height: 400px;

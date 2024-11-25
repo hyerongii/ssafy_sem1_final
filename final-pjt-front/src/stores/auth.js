@@ -23,7 +23,7 @@ export const useAuthStore = defineStore('auth', () => {
       .then((res) => {
         console.log(res)
         console.log('회원가입 성공')
-        alert('회원가입 성공! 개인화된 테마를 추천받아보세요!')
+        // alert('회원가입 성공! 개인화된 테마를 추천받아보세요!')
         // 회원가입 성공 후 자동 로그인
         const password = password1
         logIn({username, password})
@@ -50,7 +50,6 @@ export const useAuthStore = defineStore('auth', () => {
         // 로그인 성공 처리
         token.value = res.data.access
         user.value = res.data.user
-        alert('로그인 성공! 개인화된 테마를 추천받아보세요!')
         console.log('로그인 성공:', res.data)
 
         axios({
