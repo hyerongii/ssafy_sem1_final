@@ -48,39 +48,54 @@ export const useAuthStore = defineStore('auth', () => {
     })
       .then((res) => {
         // 로그인 성공 처리
-        token.value = res.data.access;
-        user.value = res.data.user;
+        token.value = res.data.access
+        user.value = res.data.user
         alert('로그인 성공! 개인화된 테마를 추천받아보세요!')
-        console.log('로그인 성공:', res.data);
-  
+        console.log('로그인 성공:', res.data)
+
+        axios({
+          method: 'get',
+          url: `${API_URL}/api/v1/token/`,
+          headers: {
+            Authorization: `Bearer ${token.value}`,
+          },
+        })
+          .then((res) => {
+            // console.log(res.data)
+            console.log('웹소켓 토큰 발급 완료')
+            websocketToken.value = res.data
+          })
+          .catch((err) => {
+            console.log(err.data)
+          })
+
         // 홈 화면으로 이동
-        router.push({ name: 'HomeView' });
+        router.push({ name: 'HomeView' })
       })
       .catch((err) => {
         console.log(err)
         if (err.response) {
-          const errorMessage = err.response.data.detail;
-  
+          const errorMessage = err.response.data.detail
           if (err.response.status === 404) {
-            alert('등록되지 않은 아이디입니다.');
+            alert('등록되지 않은 아이디입니다.')
           } else if (err.response.status === 401) {
-            alert('비밀번호가 올바르지 않습니다.');
+            alert('비밀번호가 올바르지 않습니다.')
           } else {
-            alert('로그인 중 문제가 발생했습니다. 다시 시도해주세요.');
+            alert('로그인 중 문제가 발생했습니다. 다시 시도해주세요.')
           }
         } else {
-          console.error('네트워크 오류:', err);
-          alert('서버와의 연결이 원활하지 않습니다. 잠시 후 다시 시도해주세요.');
+          console.error('네트워크 오류:', err)
+          alert('서버와의 연결이 원활하지 않습니다. 잠시 후 다시 시도해주세요.')
         }
-      });
-  };
+      })
+  }
 
   const logOut = function () {
     axios({
       method: 'post',
       url: `${API_URL}/accounts/logout/`,
       headers: {
-        Authorization: `Token ${token.value}`
+        Authorization: `Bearer ${token.value}`
       }
     })
       .then(() => {

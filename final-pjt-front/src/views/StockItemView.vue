@@ -170,10 +170,10 @@ const currentTime = getCurrentTime()
 
 // 페이지 처음 들어왔을때
 onMounted(() => { 
-  // 종목 정보 먼저 가져오기
-  stockItemStore.getStockInfo(stockcode, currentTime)
-  // 일 차트 그리기
-  stockItemStore.getDayInfo(stockcode, currentTime)
+  // // 종목 정보 먼저 가져오기
+  // stockItemStore.getStockInfo(stockcode, currentTime)
+  // // 일 차트 그리기
+  // stockItemStore.getDayInfo(stockcode, currentTime)
 })
 
 const moveCommunity = function () {

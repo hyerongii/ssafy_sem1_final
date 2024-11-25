@@ -105,16 +105,19 @@ const goToThemeDetail = (theme_name) => {
 <style scoped>
 .theme-container {
   padding: 2rem;
+  font-family: 'Godo', sans-serif;
 }
 
 .title-bubble {
-  font-size: 2rem;
-  background-color: #f0f7ff;
-  padding: 1rem 2rem;
+  font-size: 1.8rem;
+  background-color: #f8faf5;
+  padding: 1.2rem 2rem;
   border-radius: 30px;
   display: inline-block;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 15px rgba(139, 193, 72, 0.1);
+  color: var(--primary-color);
+  font-weight: 600;
 }
 
 .tags-container {
@@ -125,17 +128,19 @@ const goToThemeDetail = (theme_name) => {
 }
 
 .theme-tag {
-  background-color: #e9ecef;
-  padding: 0.5rem 1.5rem;
+  background-color: #f8faf5;
+  padding: 0.8rem 1.5rem;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.3s ease;
+  border: 1px solid rgba(139, 193, 72, 0.2);
+  color: #333;
 }
 
 .theme-tag:hover {
-  background-color: #007bff;
+  background-color: var(--primary-color);
   color: white;
-  transform: scale(1.05);
+  transform: translateY(-2px);
 }
 
 .theme-grid {
@@ -146,16 +151,17 @@ const goToThemeDetail = (theme_name) => {
 
 .theme-card {
   background: white;
-  border-radius: 25px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
   transition: all 0.3s ease;
   cursor: pointer;
+  border: 1px solid rgba(139, 193, 72, 0.1);
 }
 
 .theme-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+  border-color: var(--primary-color);
 }
 
 .theme-header {
@@ -164,21 +170,23 @@ const goToThemeDetail = (theme_name) => {
 
 .theme-title {
   font-size: 1.5rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 0.8rem;
 }
 
 .theme-description {
-  color: #6c757d;
-  font-size: 0.9rem;
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .market-box {
-  background: #f8f9fa;
-  border-radius: 20px;
-  padding: 1rem;
+  background: #f8faf5;
+  border-radius: 15px;
+  padding: 1.2rem;
   margin-bottom: 1rem;
+  border: 1px solid rgba(139, 193, 72, 0.1);
 }
 
 .market-header {
@@ -189,8 +197,9 @@ const goToThemeDetail = (theme_name) => {
 }
 
 .market-label {
-  font-weight: bold;
+  font-weight: 600;
   font-size: 1.1rem;
+  color: #333;
 }
 
 .market-badge {
@@ -218,16 +227,18 @@ const goToThemeDetail = (theme_name) => {
 
 .stock-item {
   background: white;
-  border-radius: 15px;
+  border-radius: 12px;
   padding: 0.8rem;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
   transition: all 0.2s ease;
+  border: 1px solid rgba(139, 193, 72, 0.1);
 }
 
 .stock-item:hover {
-  transform: scale(1.05);
+  transform: translateY(-2px);
+  border-color: var(--primary-color);
 }
 
 .stock-logo {
@@ -238,7 +249,7 @@ const goToThemeDetail = (theme_name) => {
 }
 
 .stock-name {
-  font-size: 0.85rem;
-  color: #495057;
+  font-size: 0.9rem;
+  color: #333;
 }
 </style>

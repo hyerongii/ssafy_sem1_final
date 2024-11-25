@@ -23,6 +23,12 @@ const stockItemStore = useStockItemStore()
 const websocketStore = useWebsocketStore()
 const chart = ref(null)
 
+const currentSeries = ref([{
+  name: '주가',
+  data: []
+}])
+
+
 const chartOptions = ref({
   chart: {
     id: 'realtime-stock-chart',
@@ -86,40 +92,31 @@ const chartOptions = ref({
   }
 })
 
-// const series = ref([{
-//   name: '주가',
-//   data: []
-// }])
 
-
-// 초기 데이터 로드를 위한 watcher
-// watch(
-//   () => stockItemStore.dayChartData,
-//   (newData) => {
-//     if (newData && Array.isArray(newData)) {
-//       const formattedData = newData.map(item => ({
-//         x: new Date(item.time).getTime(), // timestamp로 변환
-//         y: parseFloat(item.price)
-//       }))
-//       series.value = [{
-//         name: '주가',
-//         data: formattedData
-//       }]
-//     }
-//   },
-//   { immediate: true }
-// )
-
+// 초기 차트 데이터 설정을 위한 computed 속성
 const series = computed(() => [{
   name: '주가',
-  data: stockItemStore.dayChartData.map(item => ({
-    x: new Date(item.time).getTime(), // timestamp로 변환
-    y: isNaN(Number(stockcode)) 
-      ? parseFloat(item.price) * 1405 
-      : parseFloat(item.price)
-  }))
+  data: currentSeries.value[0].data
 }])
 
+// 초기 데이터 로드를 위한 watcher
+watch(
+  () => stockItemStore.dayChartData,
+  (newData) => {
+    if (newData && Array.isArray(newData)) {
+      const formattedData = newData.map(item => ({
+        x: new Date(item.time).getTime(),
+        y: isNaN(Number(stockcode)) 
+          ? parseFloat(item.price) * 1405 
+          : parseFloat(item.price)
+      }))
+      
+      // 초기 데이터 설정
+      currentSeries.value[0].data = formattedData
+    }
+  },
+  { immediate: true }
+)
 
 // 실시간 데이터 업데이트를 위한 watcher
 watch(
@@ -130,17 +127,41 @@ watch(
       const price = isNaN(Number(stockcode))
         ? parseFloat(newData.price) * 1405
         : parseFloat(newData.price)
-        
-      series.value[0].data.push({
+      
+      // 새로운 데이터 추가
+      currentSeries.value[0].data.push({
         x: timestamp,
         y: price
       })
-      
-      // 전체 series 업데이트
-      // series.value = [...series.value]
+
+      // // 데이터가 너무 많아지면 오래된 데이터 제거
+      // if (currentSeries.value[0].data.length > 100) {
+      //   currentSeries.value[0].data.shift()
+      // }
+
+      // ApexCharts 업데이트
+      if (chart.value) {
+        chart.value.updateSeries([{
+          data: currentSeries.value[0].data
+        }])
+      }
     }
   }
 )
+
+onMounted(() => {
+  // 컴포넌트 마운트 시 초기 데이터 로드
+  if (stockItemStore.dayChartData.length === 0) {
+    const currentTime = new Date().toLocaleTimeString('en-US', { 
+      hour12: false, 
+      hour: '2-digit', 
+      minute: '2-digit', 
+      second: '2-digit' 
+    }).replace(/:/g, '')
+    stockItemStore.getDayInfo(stockcode, currentTime)
+  }
+})
+
 
 onUnmounted(() => {
   if (websocketStore.socket) {
