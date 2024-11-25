@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from .serializers import ThemeSerializer, ArticleSerializer, CommentSerializer, UserSerializer
+from .serializers import ThemeSerializer, ArticleSerializer, CommentSerializer, UserSerializer, UserProfileSerializer
 from django.contrib.auth import get_user_model
 from .utils import get_d_stock_chart_data_day_for_realtime, get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_consensus, get_oversea_stock_main_info, get_stocks_info
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
@@ -28,8 +28,17 @@ User = get_user_model()
 @authentication_classes([JWTAuthentication])
 def get_user_info(request, user_pk):
     user = get_object_or_404(User, pk=user_pk)  # user_pk로 User 객체 가져오기 (없으면 404 반환)
-    serializer = UserSerializer(user)  # User 객체를 직렬화
-    return Response(serializer.data)  # JSON 형태로 반환
+    user_info = get_object_or_404(UserProfile, user=user)
+
+    user_serializer = UserSerializer(user)
+    user_profile_serializer = UserProfileSerializer(user_info)
+
+    response_data = {
+        'user': user_serializer.data,
+        'user_info': user_profile_serializer.data,
+    }
+    # serializer = UserSerializer(user)  # User 객체를 직렬화
+    return response_data  # JSON 형태로 반환
 
 # CSRF 보호 비활성화
 # @csrf_exempt
