@@ -228,19 +228,71 @@ const moveArticleDetail = function (articleId) {
 </script>
 
 <style scoped>
+
+.container-fluid {
+  font-family: 'Godo', sans-serif;
+  padding: 2rem;
+}
+
 .stock-header {
   background: white;
-  padding: 1.5rem;
+  padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border-left: 4px solid var(--primary-color);
+  margin-bottom: 2rem;
+}
+
+.stock-title {
+  color: var(--primary-word);
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* 차트 네비게이션 */
+.chart-nav-container {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+}
+
+.chart-nav {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.nav-pills .nav-link {
+  color: var(--primary-word);
+  background: white;
+  border: 2px solid var(--primary-light);
+  padding: 0.5rem 1.5rem;
+  border-radius: 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link:hover {
+  background: var(--primary-light);
+  color: white;
+}
+
+.nav-pills .nav-link.active {
+  background: var(--primary-dark);
+  color: white;
+  box-shadow: 0 2px 8px rgba(139, 193, 72, 0.2);
 }
 
 .chart-card, .info-card {
   background: white;
   border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  padding: 0.5rem;
   height: calc(100vh - 250px);
+  transition: all 0.3s ease;
+}
+
+.chart-card:hover, .info-card:hover {
+  box-shadow: 0 5px 15px rgba(139, 193, 72, 0.1);
 }
 
 .period-tabs .nav-link {
@@ -250,40 +302,46 @@ const moveArticleDetail = function (articleId) {
   transition: all 0.3s ease;
 }
 
+/* 커뮤니티 섹션 */
 .community-section {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 2rem auto;
 }
+
 
 .community-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .write-btn {
-  background: #F78CA0;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
   border-radius: 25px;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: transform 0.3s ease;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 .write-btn:hover {
-  background: #D16A7C; /* 호버 시 더 어두운 파란색 */
-  transform: translateY(-2px); /* 살짝 위로 올라가는 효과 */
+  background: var(--primary-dark);
+  transform: translateY(-2px);
 }
 
 .post-card {
   background: white;
-  border-radius: 15px;
+  border-radius: 12px;
   padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 1rem;
+  border: 1px solid rgba(139, 193, 72, 0.1);
+  transition: all 0.3s ease;
+}
+
+.post-card:hover {
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .post-header {
@@ -300,10 +358,10 @@ const moveArticleDetail = function (articleId) {
 }
 
 .profile-img {
-  width: 45px;
-  height: 45px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  object-fit: cover;
+  border: 2px solid var(--primary-light);
 }
 
 .profile-info {
@@ -343,52 +401,14 @@ const moveArticleDetail = function (articleId) {
 }
 
 .action-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background: none;
-  border: none;
-  color: #666;
-  font-size: 0.9rem;
-  padding: 0.5rem;
-  border-radius: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.action-btn:hover {
-  background-color: #f0f2f5;
-}
-
-.chart-nav-container {
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border-radius: 15px;
-}
-
-.chart-nav {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.nav-pills .nav-link {
-  color: #495057;
-  background-color: white;
-  border: 1px solid #dee2e6;
-  padding: 0.5rem 1.5rem;
-  border-radius: 20px;
-  font-weight: 500;
+  color: var(--primary-word);
+  opacity: 0.8;
   transition: all 0.3s ease;
 }
 
-.nav-pills .nav-link:hover {
-  background-color: #e9ecef;
-}
-
-.nav-pills .nav-link.active {
-  background: #F78CA0;
-  color: white;
-  border: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+.action-btn:hover {
+  color: var(--primary-dark);
+  opacity: 1;
 }
 
 .community-btn {
@@ -405,8 +425,8 @@ const moveArticleDetail = function (articleId) {
 }
 
 .community-btn:hover {
-  background: #D16A7C; /* 호버 시 더 어두운 파란색 */
-  transform: translateY(-2px); /* 살짝 위로 올라가는 효과 */
+  background: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .community-btn:active {

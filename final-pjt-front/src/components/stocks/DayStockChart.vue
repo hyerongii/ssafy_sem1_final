@@ -34,11 +34,13 @@ const chartOptions = ref({
     id: 'realtime-stock-chart',
     events: {},
     height: '100%',
+    fontFamily: 'Godo, sans-serif',
+    background: 'transparent',
     animations: {
       enabled: true,
       easing: 'linear',
       dynamicAnimation: {
-        speed: 350  // 애니메이션 속도를 더 빠르게
+        speed: 350
       }
     },
     toolbar: {
@@ -48,23 +50,38 @@ const chartOptions = ref({
       enabled: false
     }
   },
-  colors: ['#F78CA0'],
-  dataLabels: { // 이 부분 추가
+  colors: ['var(--primary-dark)'],
+  dataLabels: {
     enabled: false
   },
   stroke: {
     curve: 'smooth',
     width: 3,
     lineCap: 'round',
+    colors: ['var(--primary-dark)']
   },
   title: {
     text: '실시간 주가',
     align: 'left',
+    style: {
+      fontSize: '1.2rem',
+      fontWeight: 600,
+      fontFamily: 'Godo, sans-serif',
+      color: 'var(--primary-word)'
+    },
+    margin: 40 // 제목 여백 추가
+  },
+  grid: {
+    borderColor: 'rgba(139, 193, 72, 0.1)',
+    strokeDashArray: 3
   },
   xaxis: {
     type: 'datetime',
     labels: {
-      show: false,
+      style: {
+        colors: 'var(--primary-word)',
+        fontFamily: 'Godo, sans-serif'
+      },
       datetimeUTC: false,
       format: 'HH:mm:ss',
       formatter: function(value) {
@@ -75,33 +92,47 @@ const chartOptions = ref({
           second: '2-digit',
           hour12: false
         });
-      },
+      }
     },
-    tooltip : false,
+    tooltip: {
+      enabled: false  // X축 툴팁 완전히 비활성화
+    },
+    axisBorder: {
+      color: 'rgba(139, 193, 72, 0.2)'
+    },
     axisTicks: {
-      show: false
+      color: 'rgba(139, 193, 72, 0.2)'
     }
   },
   yaxis: {
     labels: {
-      formatter: (value) => Math.round(value).toLocaleString()
+      formatter: (value) => Math.round(value).toLocaleString(),
+      style: {
+        colors: 'var(--primary-word)',
+        fontFamily: 'Godo, sans-serif'
+      }
     },
     min: (min) => parseInt(min * 0.999),
-    max: (max) => parseInt(max * 1.001),
+    max: (max) => parseInt(max * 1.001)
   },
   tooltip: {
+    theme: 'light',
+    style: {
+      fontSize: '12px',
+      fontFamily: 'Godo, sans-serif'
+    },
     x: {
-      show: true
+      show: true,
+      format: 'HH:mm:ss'
     },
     y: {
       title: {
-        formatter: () => '체결가: ' // 툴팁 타이틀 설정
+        formatter: () => '체결가: '
       },
-      formatter: (value) => `${Math.round(value).toLocaleString()}원` // 가격 포맷 설정
+      formatter: (value) => `${Math.round(value).toLocaleString()}원`
     }
-  }
+  },
 })
-
 // 초기 차트 데이터 설정
 watch(
   () => stockItemStore.dayChartData,
@@ -202,5 +233,14 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   min-height: calc(100vh - 300px);
+  font-family: 'Godo', sans-serif;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.chart-wrapper:hover {
+  box-shadow: 0 4px 12px rgba(237, 145, 156, 0.1);
 }
 </style>

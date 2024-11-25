@@ -107,7 +107,7 @@ const currentTime = getCurrentTime()
 .ratio-icon {
   font-size: 1.2rem;
   font-weight: 600;
-  color: #3b82f6;
+  color: #488bc1;
   margin-bottom: 0.5rem;
 }
 

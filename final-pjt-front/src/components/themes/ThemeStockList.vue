@@ -1,27 +1,29 @@
 <template>
-  <div class="container mt-4">
-    <div class="row">
+  <div class="stock-container mt-4">
+    <div class="row g-4">
       <!-- 국내 주식 칼럼 -->
       <div class="col-md-6">
-        <div class="card shadow-sm">
-          <div class="card-header bg-light">
-            <h2 class="h4 mb-0 fw-bold">국내</h2>
+        <div class="stock-card">
+          <div class="card-header d-flex">
+            <h2>국내 종목</h2>
+            <img class="flag mx-2" src="../../../public/img/flag-south-korea.png" alt="flag_korea">
           </div>
           <div class="card-body">
             <div class="stock-list">
               <div v-for="stock in koreanStocks" 
                   :key="stock.code" 
-                  class="stock-item">
-                <div class="d-flex align-items-center p-2 border-bottom" @click="moveStockItem(stock.code)">
-                  <div class="stock-logo me-3">
-                    <img :src="getStockLogo(stock.code)" 
-                        :alt="stock.name"
-                        class="rounded-circle"
-                        width="40"
-                        height="40">
+                  class="stock-item"
+                  @click="moveStockItem(stock.code)">
+                <div class="stock-content">
+                  <div class="stock-info">
+                    <div class="stock-logo">
+                      <img :src="getStockLogo(stock.code)" 
+                          :alt="stock.name"
+                          class="logo-image">
+                    </div>
+                    <span class="stock-name">{{ stock.name }}</span>
                   </div>
-                  <span class="stock-name">{{ stock.name }}</span>
-                  <span class="ms-auto">{{ formatPrice(stock.price) }}원</span>
+                  <span class="stock-price">{{ formatPrice(stock.price) }}원</span>
                 </div>
               </div>
             </div>
@@ -31,25 +33,27 @@
 
       <!-- 미국 주식 칼럼 -->
       <div class="col-md-6">
-        <div class="card shadow-sm">
-          <div class="card-header bg-light">
-            <h2 class="h4 mb-0 fw-bold">미국</h2>
+        <div class="stock-card">
+          <div class="card-header d-flex">
+            <h2>미국 종목</h2>
+            <img class="flag mx-2" src="../../../public/img/flag-united-states.png" alt="flag_us">
           </div>
           <div class="card-body">
             <div class="stock-list">
               <div v-for="stock in usaStocks" 
                   :key="stock.code" 
-                  class="stock-item">
-                <div class="d-flex align-items-center p-2 border-bottom" @click="moveStockItem(stock.code)">
-                  <div class="stock-logo me-3">
-                    <img :src="getStockLogo(stock.code)" 
-                        :alt="stock.name"
-                        class="rounded-circle"
-                        width="40"
-                        height="40">
+                  class="stock-item"
+                  @click="moveStockItem(stock.code)">
+                <div class="stock-content">
+                  <div class="stock-info">
+                    <div class="stock-logo">
+                      <img :src="getStockLogo(stock.code)" 
+                          :alt="stock.name"
+                          class="logo-image">
+                    </div>
+                    <span class="stock-name">{{ stock.name }}</span>
                   </div>
-                  <span class="stock-name">{{ stock.name }}</span>
-                  <span class="ms-auto">{{ formatPrice(stock.price) }}원</span>
+                  <span class="stock-price">{{ formatPrice(stock.price) }}원</span>
                 </div>
               </div>
             </div>
@@ -112,17 +116,100 @@ const moveStockItem = function (stockcode) {
 </script>
 
 <style scoped>
+.stock-container {
+  font-family: 'Godo', sans-serif;
+}
+
+.stock-card {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(237, 145, 156, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.stock-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(237, 145, 156, 0.15);
+}
+
+.card-header {
+  background: var(--primary-green);
+  padding: 1rem 1.5rem;
+  border-bottom: none;
+}
+
+.card-header h2 {
+  color: white;
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.flag {
+  width: 30px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.card-body {
+  padding: 0;
+}
+
 .stock-list {
-  max-height: 70vh;
+  max-height: 60vh;
   overflow-y: auto;
 }
 
+.stock-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(139, 193, 72, 0.1);
+}
+
 .stock-item:hover {
-  background-color: var(--primary-light_g);
+  background-color: #dcecc8;
+}
+
+.stock-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+}
+
+.stock-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.stock-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid var(--primary-light);
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .stock-name {
-  font-size: 0.95rem;
+  font-size: 1rem;
+  color: var(--primary-word);
+  font-weight: 500;
+}
+
+.stock-price {
+  font-weight: 600;
+  color: var(--primary-verydark);
 }
 
 /* 스크롤바 스타일링 */
@@ -131,15 +218,36 @@ const moveStockItem = function (stockcode) {
 }
 
 .stock-list::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f8f9fa;
+  border-radius: 3px;
 }
 
 .stock-list::-webkit-scrollbar-thumb {
-  background: #888;
+  background: var(--primary-light);
   border-radius: 3px;
 }
 
 .stock-list::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: var(--primary-dark);
+}
+
+@media (max-width: 768px) {
+  .stock-content {
+    padding: 0.6rem 1rem;
+  }
+  
+  .stock-name {
+    font-size: 0.9rem;
+  }
+  
+  .stock-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .card-header h2,
+  .flag {
+    font-size: 1rem;
+  }
 }
 </style>

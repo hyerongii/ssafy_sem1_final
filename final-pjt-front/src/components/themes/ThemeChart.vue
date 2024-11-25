@@ -1,8 +1,9 @@
 <template>
-  <div>
+  <div class="chart-wrapper">
+    <div class="chart-title">테마 주가 동향</div>
     <apexchart
-      width="1000"
-      height="400"
+      width="100%"
+      height="100%"
       type="line"
       :options="chartOptions"
       :series="series"
@@ -16,54 +17,54 @@ import { computed, ref } from 'vue'
 
 const stockStore = useStockStore()
 
-// 차트 기본 옵션 설정
 const chartOptions = {
   chart: {
     type: 'line',
     toolbar: {
-      show: false // 상단 툴바 숨김
+      show: false
     },
     zoom: {
-      enabled: false // 줌 기능 비활성화
-    }
+      enabled: false
+    },
+    fontFamily: 'Godo, sans-serif',
+    background: 'transparent'
   },
   grid: {
-    show: false // 그리드 숨김
+    show: true,
+    borderColor: '#f1f1f1',
+    strokeDashArray: 3,
+    position: 'back'
   },
   stroke: {
-    curve: 'smooth', // 부드러운 곡선
+    curve: 'smooth',
     width: 3,
     lineCap: 'round',
-    smoothing: 0.2 
+    colors: ['var(--primary-dark)']
   },
-  colors: ['#F78CA0'],
+  colors: ['var(--primary-dark)'],
   xaxis: {
     labels: {
-      show: false // x축 라벨 숨김
+      show: false,
     },
     axisBorder: {
-      show: false // x축 선 숨김
+      show: false
     },
     axisTicks: {
-      show: false // x축 틱 숨김
+      show: false
     }
   },
   yaxis: {
     labels: {
-      show: false // y축 라벨 숨김
-    },
-    axisBorder: {
-      show: false // y축 선 숨김
+      show: false
     }
   },
   tooltip: {
-    enabled: false // 툴팁 비활성화
+    enabled: false,
   }
 }
 
-// 차트 데이터 설정
 const series = computed(() => [{
-  name: 'Stock Price',
+  name: '평균 종가',
   data: stockStore.chartdata.map(item => ({
     x: item.date,
     y: item.average_close
@@ -72,4 +73,40 @@ const series = computed(() => [{
 </script>
 
 <style scoped>
+.chart-wrapper {
+  width: 100%;
+  height: 400px;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(237, 145, 156, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.chart-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(237, 145, 156, 0.15);
+}
+
+.chart-title {
+  position: absolute;
+  top: 1rem;
+  left: 1.5rem;
+  font-family: 'Godo', sans-serif;
+  font-size: 1.1rem;
+  color: var(--primary-word);
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .chart-wrapper {
+    height: 300px;
+    padding: 1rem;
+  }
+  
+  .chart-title {
+    font-size: 1rem;
+  }
+}
 </style>

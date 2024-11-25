@@ -22,13 +22,15 @@ const stockcode = route.params.stock_id
 
 const chartOptions = ref({
   chart: {
-    id: 'realtime-stock-chart',
+    id: 'year-stock-chart',
     height: '100%',
+    fontFamily: 'Godo, sans-serif',
+    background: 'transparent',
     animations: {
       enabled: true,
       easing: 'linear',
       dynamicAnimation: {
-        speed: 1000
+        speed: 350
       }
     },
     toolbar: {
@@ -38,6 +40,7 @@ const chartOptions = ref({
       enabled: false
     }
   },
+  colors: ['var(--primary-dark)'],
   dataLabels: { // 이 부분 추가
     enabled: false
   },
@@ -45,10 +48,22 @@ const chartOptions = ref({
     curve: 'smooth',
     width: 3,
     lineCap: 'round',
+    colors: ['var(--primary-dark)']
   },
   title: {
     text: '1년 주가',
     align: 'left',
+    style: {
+      fontSize: '1.2rem',
+      fontWeight: 600,
+      fontFamily: 'Godo, sans-serif',
+      color: 'var(--primary-word)'
+    },
+    margin: 40
+  },
+  grid: {
+    borderColor: 'rgba(139, 193, 72, 0.1)',
+    strokeDashArray: 3
   },
   xaxis: {
     type: 'datetime',
@@ -64,13 +79,21 @@ const chartOptions = ref({
   },
   yaxis: {
     labels: {
-      formatter: (value) => Math.round(value).toLocaleString()
+      formatter: (value) => Math.round(value).toLocaleString(),
+      style: {
+        colors: 'var(--primary-word)',
+        fontFamily: 'Godo, sans-serif'
+      }
     },
     // min: (min) => parseInt(min * 0.99),
     // max: (max) => parseInt(max * 1.01),
   },
-  colors: ['#F78CA0'],
   tooltip: {
+    theme: 'light',
+    style: {
+      fontSize: '12px',
+      fontFamily: 'Godo, sans-serif'
+    },
     x: {
       format: 'yyyy.MM.dd'
     },

@@ -3,7 +3,7 @@
     <div class="theme-container">
       <!-- 같은 MBTI 추천 테마 섹션 -->
       <div class="recommendation-section mb-5">
-        <h1 class="title-bubble">{{store.nickname}}님의 mbti와 같은 주주들은 이런 테마도 추천 받았어요! 🎈</h1>
+        <h1 class="title-bubble">{{store.nickname}} 주주님의 mbti와 같은 주주들은 이런 테마도 추천 받았어요! 🎈</h1>
         <div class="tags-container">
           <div v-for="sametheme in sameThemes.interests" 
               class="theme-tag"
@@ -15,7 +15,7 @@
 
       <!-- 메인 추천 테마 섹션 -->
       <div class="recommendation-section">
-        <h1 class="title-bubble">{{store.nickname}}의 추천 테마는 아래와 같습니다! 🎯</h1>
+        <h1 class="title-bubble">{{store.nickname}} 주주님의 추천 테마는 아래와 같습니다! 🎯</h1>
         <div class="theme-grid">
           <div v-for="theme in themes" 
               :key="theme.theme_name" 
