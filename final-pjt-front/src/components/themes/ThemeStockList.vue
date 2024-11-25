@@ -67,12 +67,13 @@
 <script setup>
 import { useStockStore } from '@/stores/stock'
 import { useStockItemStore } from '@/stores/stockitem'
-import { computed, onMounted } from 'vue'
+import { computed, onMounted , ref} from 'vue'
 import { useRouter } from 'vue-router'
 
 const stockStore = useStockStore()
 const stockItemStore = useStockItemStore()
 const router = useRouter()
+const stockLogos = ref({});
 
 const checkUsa = (stock_code) => isNaN(stock_code)
 
@@ -86,11 +87,45 @@ const usaStocks = computed(() =>
   
 )
 
+const checkImageExists = (url) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+};
+
 const getStockLogo = (code) => {
   if (isNaN(Number(code))) {
-    return `https://assets.parqet.com/logos/symbol/${code}?format=png`
+    const parqetLogoUrl = `https://assets.parqet.com/logos/symbol/${code}?format=png`;
+    const isParqetLogoValid = checkImageExists(parqetLogoUrl);
+    if (isParqetLogoValid) {
+      return parqetLogoUrl;
+    }
   }
-}
+  try {
+    return new URL(`../../assets/logos/${code}.png`, import.meta.url).href;
+  } catch {
+    console.error(`로컬 이미지가 존재하지 않습니다: @/assets/logos/${code}.png`);
+    return null;
+  }
+};
+
+// 모든 주식의 로고 URL을 초기화
+// const initializeStockLogos = () => {
+//   for (const stock of koreanStocks.value) {
+//     if (!stockLogos.value[stock.code]) {
+//       stockLogos.value[stock.code] =  getStockLogo(stock.code);
+//     }
+//   }
+//   for (const stock of usaStocks.value) {
+//     if (!stockLogos.value[stock.code]) {
+//       stockLogos.value[stock.code] =  getStockLogo(stock.code);
+//     }
+//   }
+// };
+
 const formatPrice = (price) => {
   return price.toLocaleString('ko-KR')
 }

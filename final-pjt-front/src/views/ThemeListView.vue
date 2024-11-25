@@ -6,6 +6,7 @@
         <h1 class="title-bubble">{{store.nickname}} 주주님의 mbti와 같은 주주들은 이런 테마도 추천 받았어요! 🎈</h1>
         <div class="tags-container">
           <div v-for="sametheme in sameThemes.interests" 
+              :key="sametheme"
               class="theme-tag"
               @click="goToThemeDetail(sametheme)">
             {{ sametheme }}
@@ -31,13 +32,13 @@
               <div class="market-box" v-if="hasUsaStocks(theme.stocks)">
                 <div class="market-header">
                   <span class="market-label">🇺🇸 미국</span>
-                  <!-- <span class="market-badge positive">+25.59%</span> -->
                 </div>
                 <div class="stocks-grid">
                   <div v-for="stock in filterUsaStocks(theme.stocks)" 
                       :key="stock.code"
                       class="stock-item">
-                    <img :src="getStockLogo(stock.code)" 
+                    <!-- stockLogos에서 동적으로 이미지 경로 가져오기 -->
+                    <img :src="stockLogos[stock.code]" 
                         class="stock-logo"
                         :alt="stock.name">
                     <span class="stock-name">{{ stock.name }}</span>
@@ -49,13 +50,13 @@
               <div class="market-box" v-if="hasKoreanStocks(theme.stocks)">
                 <div class="market-header">
                   <span class="market-label">🇰🇷 한국</span>
-                  <!-- <span class="market-badge negative">-0.04%</span> -->
                 </div>
                 <div class="stocks-grid">
                   <div v-for="stock in filterKoreanStocks(theme.stocks)" 
                       :key="stock.code"
                       class="stock-item">
-                    <img :src="getStockLogo(stock.code)" 
+                    <!-- stockLogos에서 동적으로 이미지 경로 가져오기 -->
+                    <img :src="stockLogos[stock.code]" 
                         class="stock-logo"
                         :alt="stock.name">
                     <span class="stock-name">{{ stock.name }}</span>
@@ -71,35 +72,76 @@
 </template>
 
 <script setup>
-import { useUserInterestStore } from "@/stores/userinterest"
-import { ref } from "vue"
-import { useRouter } from 'vue-router'
+import { useUserInterestStore } from "@/stores/userinterest";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
-const router = useRouter()
-const store = useUserInterestStore()
-const themes = store.recommendthemes
-const sameThemes = store.samethemes
+const router = useRouter();
+const store = useUserInterestStore();
+const themes = store.recommendthemes;
+const sameThemes = store.samethemes;
 
-const checkUsa = (stock_code) => isNaN(stock_code)
+// 로고 URL을 저장하는 반응형 객체
+const stockLogos = ref({});
 
-const hasUsaStocks = (stocks) => stocks.some(stock => checkUsa(stock.code))
-const hasKoreanStocks = (stocks) => stocks.some(stock => !checkUsa(stock.code))
+// 미국/한국 주식 필터링 함수
+const checkUsa = (stock_code) => isNaN(stock_code);
+const hasUsaStocks = (stocks) => stocks.some(stock => checkUsa(stock.code));
+const hasKoreanStocks = (stocks) => stocks.some(stock => !checkUsa(stock.code));
+const filterUsaStocks = (stocks) => stocks.filter(stock => checkUsa(stock.code));
+const filterKoreanStocks = (stocks) => stocks.filter(stock => !checkUsa(stock.code));
 
-const filterUsaStocks = (stocks) => stocks.filter(stock => checkUsa(stock.code))
-const filterKoreanStocks = (stocks) => stocks.filter(stock => !checkUsa(stock.code))
+// 이미지 존재 여부 확인 함수
+const checkImageExists = (url) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+};
 
-const getStockLogo = (code) => {
+// 비동기 로고 URL 가져오기
+const getStockLogo = async (code) => {
   if (isNaN(Number(code))) {
-    return `https://assets.parqet.com/logos/symbol/${code}?format=png`
+    const parqetLogoUrl = `https://assets.parqet.com/logos/symbol/${code}?format=png`;
+    const isParqetLogoValid = await checkImageExists(parqetLogoUrl);
+    if (isParqetLogoValid) {
+      return parqetLogoUrl;
+    }
   }
-}
 
+  try {
+    return new URL(`../assets/logos/${code}.png`, import.meta.url).href;
+  } catch {
+    console.error(`로컬 이미지가 존재하지 않습니다: @/assets/logos/${code}.png`);
+    return null;
+  }
+};
+
+// 모든 주식의 로고 URL을 초기화
+const initializeStockLogos = async () => {
+  for (const theme of themes) {
+    for (const stock of theme.stocks) {
+      if (!stockLogos.value[stock.code]) {
+        stockLogos.value[stock.code] = await getStockLogo(stock.code);
+      }
+    }
+  }
+};
+
+// 컴포넌트가 마운트될 때 로고 초기화
+onMounted(() => {
+  initializeStockLogos();
+});
+
+// 테마 상세 페이지 이동
 const goToThemeDetail = (theme_name) => {
   router.push({
-    name: 'ThemeItemView',
-    params: { theme_id: theme_name }
-  })
-}
+    name: "ThemeItemView",
+    params: { theme_id: theme_name },
+  });
+};
 </script>
 
 <style scoped>

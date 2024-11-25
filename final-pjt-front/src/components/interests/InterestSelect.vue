@@ -65,7 +65,7 @@ const categories = ref([
   { label: '식음료', value: 'food', mapping: ['갈증 해소', '프랜차이즈'] },
   { label: '반려동물', value: 'pet', mapping: ['반려동물'] },
   { label: '건설', value: 'construct', mapping: ['건물주의 꿈'] },
-  { label: '게임', value: 'game', mapping: ['게임월드', '메타버스 구현'] },
+  { label: '게임', value: 'game', mapping: ['게임월드', '메타버스구현'] },
   { label: '미디어/컨텐츠', value: 'media', mapping: ['컨텐츠강자', '스트리밍의 시대'] },
   { label: '여행', value: 'travel', mapping: ['이번 휴가는 어디?'] },
   { label: 'IT', value: 'it', mapping: ['인공지능', '스트리밍의 시대', '플랫폼 대표주자'] },
