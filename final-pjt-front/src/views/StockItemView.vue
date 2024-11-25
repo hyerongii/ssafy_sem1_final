@@ -9,7 +9,7 @@
       <!-- 차트 섹션 -->
       <div class="col-lg-8">
         <!-- 네비게이션 Pills -->
-        <div class="chart-nav-container mb-4">
+        <div class="chart-nav-container">
           <ul class="nav nav-pills chart-nav">
             <li class="nav-item">
               <RouterLink 
@@ -96,6 +96,7 @@
                     class="profile-img">
                 <div class="profile-info">
                   <span class="author">{{ article.author_nickname || '익명' }}</span>
+                  <!-- <span class="mbti-tag">{{  }}</span> -->
                   <span class="time">{{ formatTime(article.created_at) }}</span>
                 </div>
               </div>
@@ -140,6 +141,7 @@ import { computed, onMounted, onUpdated, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 
 const stockItemStore = useStockItemStore()
+const interestStore = useUserInterestStore()
 const route = useRoute()
 const router = useRouter()
 const stockcode = route.params.stock_id
@@ -272,23 +274,23 @@ const getProfileImage = function () {
 /* 차트 네비게이션 */
 .chart-nav-container {
   background: white;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 12px;
-  margin-bottom: 1rem;
 }
 
 .chart-nav {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.3rem;
 }
 
 .nav-pills .nav-link {
   color: var(--primary-word);
   background: white;
-  border: 2px solid var(--primary-light);
-  padding: 0.5rem 1.5rem;
-  border-radius: 20px;
+  border: 1px solid var(--primary-light); /* 테두리 두께 감소 */
+  padding: 0.3rem 1rem; /* 패딩 감소 */
+  border-radius: 15px; /* 둥글기 조정 */
   font-weight: 500;
+  font-size: 0.9rem; /* 폰트 크기 감소 */
   transition: all 0.3s ease;
 }
 
@@ -300,7 +302,7 @@ const getProfileImage = function () {
 .nav-pills .nav-link.active {
   background: var(--primary-dark);
   color: white;
-  box-shadow: 0 2px 8px rgba(139, 193, 72, 0.2);
+  box-shadow: 0 2px 4px rgba(139, 193, 72, 0.1); /* 그림자 효과 감소 */
 }
 
 .chart-card, .info-card {
@@ -355,7 +357,7 @@ const getProfileImage = function () {
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 1rem;
-  border: 1px solid rgba(139, 193, 72, 0.1);
+  border: 2px solid rgba(139, 193, 72, 0.05); /* 더 은은한 보더 색상 */
   transition: all 0.3s ease;
 }
 
@@ -386,17 +388,30 @@ const getProfileImage = function () {
 
 .profile-info {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.mbti-tag {
+  font-size: 0.8rem;
+  color: var(--primary-dark);
+  background: var(--primary-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .author {
   font-weight: 600;
   font-size: 1rem;
+  color: var(--primary-word);
 }
 
 .time {
   font-size: 0.8rem;
   color: #666;
+  margin-left: auto;
 }
 
 .post-content {
@@ -417,13 +432,16 @@ const getProfileImage = function () {
   display: flex;
   gap: 1.5rem;
   padding-top: 1rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(139, 193, 72, 0.05); /* 더 은은한 보더 색상 */
 }
 
 .action-btn {
+  background: none;
+  border: none;
   color: var(--primary-word);
   opacity: 0.8;
   transition: all 0.3s ease;
+  padding: 0;
 }
 
 .action-btn:hover {

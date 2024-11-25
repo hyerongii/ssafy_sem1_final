@@ -13,7 +13,7 @@
                     <h6 class="mb-0">{{ article?.article.author }}</h6>
                     <span class="mbti-badge">{{ article?.article.author_mbti }}</span>
                   </div>
-                  <small class="text-muted">{{ article?.article.created_at }}</small>
+                  <small class="text-muted">{{ formatDateTime(article?.article.created_at) }}</small>
                 </div>
               </div>
             </div>
@@ -36,7 +36,7 @@
                 <div class="comment-content w-100">
                   <div class="d-flex justify-content-between align-items-center mb-1">
                     <small class="text-muted">{{ comment.user }}</small>
-                    <div class="comment-actions" v-if="comment.user === userNickname">
+                    <div class="comment-actions" v-if="comment.user === intereststore.nickname">
                       <button class="btn btn-sm btn-link text-muted" @click="startEdit(comment)">
                         <i class="bi-pencil-square"></i>
                       </button>
@@ -57,7 +57,7 @@
                     </div>
                   </div>
                   <p v-else class="comment-text mb-1">{{ comment.content }}</p>
-                  <small class="text-muted">{{ formatDateTime(article?.article.created_at) }}</small>
+                  <small class="text-muted">{{ formatDateTime(comment.created_at) }}</small>
                 </div>
               </div>
             </li>
@@ -85,10 +85,12 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/auth'
+import { useUserInterestStore } from '@/stores/userinterest';
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 
+const intereststore = useUserInterestStore()
 const authstore = useAuthStore()
 const route = useRoute()
 const articleId = route.params.article_id
@@ -254,14 +256,14 @@ onMounted(() => {
 
 .card-title {
   color: var(--primary-word);
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 600;
   margin-bottom: 1rem;
 }
 
 .card-text {
   color: #555;
-  line-height: 1.6;
+  line-height: 2;
 }
 
 .user-info {

@@ -99,33 +99,88 @@ const submitArticle = function () {
 </script>
 
 <style scoped>
+
+.container {
+  font-family: 'Godo', sans-serif;
+  padding: 2rem;
+}
+
 .card {
-  border: none;
+  background: white;
+  border: 1px solid rgba(139, 193, 72, 0.1);
   border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(139, 193, 72, 0.1);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 6px 16px rgba(139, 193, 72, 0.15);
 }
 
 .card-header {
-  border-bottom: 1px solid #eee;
-  padding: 1.5rem;
+  background: white;
+  border-bottom: 1px solid rgba(139, 193, 72, 0.1);
+  padding: 1.8rem;
+}
+
+.card-header h2 {
+  color: var(--primary-word);
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .card-body {
   padding: 2rem;
 }
 
-.form-control {
-  border-radius: 8px;
-  padding: 0.8rem;
-  border: 1px solid #dee2e6;
+.form-label {
+  color: var(--primary-word);
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
 }
 
+.form-control {
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid rgba(139, 193, 72, 0.2);
+  transition: all 0.3s ease;
+  font-size: 1rem;
+  color: var(--primary-word);
+}
 .form-control:focus {
-  border-color: #80bdff;
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(139, 193, 72, 0.1);
+}
+
+.form-control::placeholder {
+  color: #999;
+  font-size: 0.95rem;
 }
 
 .btn-primary {
-  padding: 0.8rem;
-  border-radius: 8px;
+  background: var(--primary-color);
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 193, 72, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 193, 72, 0.25);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+textarea {
+  min-height: 200px;
+  resize: vertical;
 }
 </style>

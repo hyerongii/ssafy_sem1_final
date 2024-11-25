@@ -35,12 +35,12 @@
           <!-- 게시글 내용 -->
           <div class="post-content" >
             <h5 class="post-title">{{ article.title }}</h5>
-            <p class="post-text">{{ article.content }}</p>
-            <!-- <div class="theme-tag">
+            <!-- <p class="post-text">{{ article.content }}</p> -->
+            <div class="theme-tag">
               <span class="badge rounded-pill bg-light text-dark">
                 # {{ article.theme__name }}
               </span>
-            </div> -->
+            </div>
           </div>
         </div>
           <!-- 게시글 액션 버튼 -->
@@ -193,6 +193,7 @@ const navigateToStock = function (stock_id) {
 .community-header h1 {
   font-size: 1.8rem;
   color: var(--primary-word);
+  margin-top: 2rem;
   margin-bottom: 2rem;
   font-weight: 600;
 }
@@ -258,7 +259,7 @@ const navigateToStock = function (stock_id) {
 
 .author {
   font-weight: 600;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   color: var(--primary-word);
 }
 

@@ -98,7 +98,10 @@ const securitiesWebsites = {
   'DB금융투자':'https://www.db-fi.com/main/main.do',
   '교보':'https://www.iprovest.com/index.jsp',
   '유진투자': 'https://www.eugenefn.com/main.do',
-  '다올투자':'https://www.daolsecurities.com/top.jsp'
+  '다올투자':'https://www.daolsecurities.com/top.jsp',
+  '부국': 'http://www.bookook.co.kr/',
+  '상상인': 'https://www.sangsanginib.com/',
+  'SK': 'https://www.direct-sks.co.kr/'
 }
 
 const hasWebsite = (source) => {
