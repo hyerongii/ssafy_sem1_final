@@ -36,6 +36,7 @@ const chartOptions = {
     lineCap: 'round',
     smoothing: 0.2 
   },
+  colors: ['#F78CA0'],
   xaxis: {
     labels: {
       show: false // x축 라벨 숨김

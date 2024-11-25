@@ -263,7 +263,7 @@ const moveArticleDetail = function (articleId) {
 }
 
 .write-btn {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  background: #F78CA0;
   color: white;
   border: none;
   padding: 0.8rem 1.5rem;
@@ -272,6 +272,10 @@ const moveArticleDetail = function (articleId) {
   align-items: center;
   gap: 0.5rem;
   transition: transform 0.3s ease;
+}
+.write-btn:hover {
+  background: #D16A7C; /* 호버 시 더 어두운 파란색 */
+  transform: translateY(-2px); /* 살짝 위로 올라가는 효과 */
 }
 
 .post-card {
@@ -381,14 +385,14 @@ const moveArticleDetail = function (articleId) {
 }
 
 .nav-pills .nav-link.active {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  background: #F78CA0;
   color: white;
   border: none;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .community-btn {
-  background: linear-gradient(135deg, #007bff, #0056b3); /* 파란색 그라데이션 */
+  background: #F78CA0; 
   color: white;
   padding: 0.8rem 1.5rem;
   border: none;
@@ -401,7 +405,7 @@ const moveArticleDetail = function (articleId) {
 }
 
 .community-btn:hover {
-  background: linear-gradient(135deg, #0056b3, #003d80); /* 호버 시 더 어두운 파란색 */
+  background: #D16A7C; /* 호버 시 더 어두운 파란색 */
   transform: translateY(-2px); /* 살짝 위로 올라가는 효과 */
 }
 

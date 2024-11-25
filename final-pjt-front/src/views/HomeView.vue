@@ -10,7 +10,7 @@
     @slideChange="onSlideChange"
     class="mySwiper"
   >
-    <swiper-slide class="slide">
+    <swiper-slide class="slide" >
       <section class="section">
         <h2>야 너두 미국주식 할 수 있어!</h2>
         <p>당신만의 투자 동반자, 맞춤형 투자 추천 서비스!</p>
@@ -34,7 +34,7 @@
     </swiper-slide>
 
     <!-- 4. 주린이여도 괜찮아! -->
-    <swiper-slide class="slide">
+    <swiper-slide class="slide zoo-background">
       <section class="section">
         <h2>주린이여도 괜찮아!</h2>
         <p>초보 투자자도 쉽게 따라할 수 있는 가이드와 추천 종목 제공.</p>
@@ -119,7 +119,7 @@ const goToThemeRecommendation = () => {
 }
 
 .section h2 {
-  font-size: 3.5rem;
+  font-size: 3.0rem;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
   font-weight: bold;
@@ -169,7 +169,7 @@ const goToThemeRecommendation = () => {
 }
 
 .theme-recommend-btn:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--primary-color_g);
   transform: translateX(-50%) translateY(-5px);
   box-shadow: 0 6px 20px rgba(255, 107, 98, 0.4);
 }
@@ -185,6 +185,11 @@ const goToThemeRecommendation = () => {
   }
 }
 
+.zoo-background {
+  background-image: url('@/assets/zoo-background.png'); /* 이미지 경로 */
+  background-size: cover; /* 이미지 크기 조정 */
+  background-position: center; /* 이미지 위치 */
+}
 </style>
 
 

@@ -39,6 +39,8 @@ const logOut = function () {
   --primary-light: #DCCAF0;
   /* --primary-dark: #A274D6; */ /* 보라색 */ 
   --primary-dark: #D372A4;
+  --primary-color_g: #F78CA0; /* 구아바 핑크 (기본 색상) */
+  --primary-light_g: #FFD1DC;
 }
 </style>
 
@@ -90,7 +92,7 @@ const logOut = function () {
 }
 
 .nav-link:hover {
-  color: rgba(255,255,255,0.85) !important;
+  color:#D16A7C !important;
   transform: translateY(-1px);
 }
 

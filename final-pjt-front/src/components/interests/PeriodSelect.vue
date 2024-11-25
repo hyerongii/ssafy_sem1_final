@@ -140,7 +140,7 @@ watch(period, (newPeriod) => {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: var(--primary-dark);
   cursor: pointer;
   border: none;
   box-shadow: 0 2px 6px rgba(139, 193, 72, 0.2);

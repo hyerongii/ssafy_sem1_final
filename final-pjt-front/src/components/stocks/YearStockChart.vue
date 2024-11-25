@@ -69,6 +69,7 @@ const chartOptions = ref({
     // min: (min) => parseInt(min * 0.99),
     // max: (max) => parseInt(max * 1.01),
   },
+  colors: ['#F78CA0'],
   tooltip: {
     x: {
       format: 'yyyy.MM.dd'

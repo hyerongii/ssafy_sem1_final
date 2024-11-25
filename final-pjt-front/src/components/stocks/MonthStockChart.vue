@@ -62,6 +62,7 @@ const chartOptions = ref({
       enabled: false  // X축 툴팁 완전히 비활성화
     }
   },
+  colors: ['#F78CA0'],
   yaxis: {
     labels: {
       formatter: (value) => Math.round(value).toLocaleString()

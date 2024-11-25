@@ -191,14 +191,14 @@ watch(userInterestMappings, (newMappings) => {
 }
 
 .category-btn:hover .circle-text {
-  border-color: var(--primary-color);
+  border-color: var(--primary-dark);
   transform: translateY(-2px);
 }
 
 .category-btn.active .circle-text {
-  background: var(--primary-color);
+  background: var(--primary-dark);
   color: white;
-  border-color: var(--primary-color);
+  border-color: var(--primary-dark);
 }
 
 @media (max-width: 768px) {

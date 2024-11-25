@@ -40,5 +40,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
-
+/* 진문수정 / top과 margin 설정 / 반응형 아님 ㅠ */
+h2 {
+  margin-top: 100px;
+  font-size: 24px;
+  font-weight: bold;
+}
 </style>

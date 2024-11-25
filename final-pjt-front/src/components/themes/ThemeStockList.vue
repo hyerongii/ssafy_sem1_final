@@ -118,7 +118,7 @@ const moveStockItem = function (stockcode) {
 }
 
 .stock-item:hover {
-  background-color: #f8f9fa;
+  background-color: var(--primary-light_g);
 }
 
 .stock-name {

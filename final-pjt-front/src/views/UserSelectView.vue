@@ -121,7 +121,7 @@ const sendUserData = function () {
 
 .card-icon {
   font-size: 2rem;
-  color: var(--primary-color);
+  color: var(--primary-dark);
   margin-bottom: 20px;
 }
 

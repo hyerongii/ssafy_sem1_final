@@ -225,13 +225,13 @@ watch([selectedEI, selectedSN, selectedTF, selectedJP], ([newEI, newSN, newTF, n
 }
 
 .mbti-btn:hover {
-  border-color: var(--primary-color);
+  border-color: var(--primary-color_g);
   background: #f8faf5;
 }
 
 .mbti-btn.active {
-  background: var(--primary-dark);
-  border-color: var(--primary-dark);
+  background: var(--primary-color_g);
+  border-color: var(--primary-color_g);
   color: white;
 }
 
