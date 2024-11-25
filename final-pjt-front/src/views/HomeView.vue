@@ -169,7 +169,7 @@ const goToThemeRecommendation = () => {
 }
 
 .theme-recommend-btn:hover {
-  background-color: var(--primary-color_g);
+  background-color: var(--primary-dark);
   transform: translateX(-50%) translateY(-5px);
   box-shadow: 0 6px 20px rgba(255, 107, 98, 0.4);
 }

@@ -138,7 +138,7 @@ watch(userInterestMappings, (newMappings) => {
 
 /* text-danger 클래스 스타일 수정 */
 .text-danger {
-  color: #D372A4 !important;
+  color: #e24f61 !important;
   font-weight: 700; /* 더 굵게 */
 }
 

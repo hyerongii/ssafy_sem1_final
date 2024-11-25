@@ -6,6 +6,11 @@
     </div>
 
     <div class="mbti-grid">
+      <div class="mbti-result" v-if="store.usermbti">
+        <span class="result-label"></span>
+        <span class="result-value">{{ store.usermbti }}</span>
+      </div>
+
       <!-- E/I 선택 -->
       <div class="mbti-group">
         <span class="type-label">에너지 방향</span>
@@ -119,10 +124,7 @@
       </div>
     </div>
 
-    <div class="mbti-result" v-if="store.usermbti">
-      <span class="result-label">선택한 MBTI:</span>
-      <span class="result-value">{{ store.usermbti }}</span>
-    </div>
+
   </div>
 </template>
 
@@ -211,7 +213,7 @@ watch([selectedEI, selectedSN, selectedTF, selectedJP], ([newEI, newSN, newTF, n
 .mbti-btn {
   width: 100%;
   padding: 1rem;
-  border: 2px solid #e2e8f0;
+  border: 1.5px solid #e2e8f0;
   border-radius: 10px;
   background: white;
   cursor: pointer;
@@ -225,18 +227,18 @@ watch([selectedEI, selectedSN, selectedTF, selectedJP], ([newEI, newSN, newTF, n
 }
 
 .mbti-btn:hover {
-  border-color: var(--primary-color_g);
-  background: #f8faf5;
+  /* border-color: var(--primary-dark); */
+  background: var(--primary-light);
 }
 
 .mbti-btn.active {
-  background: var(--primary-color_g);
-  border-color: var(--primary-color_g);
-  color: white;
+  background: var(--primary-light);
+  border-color: var(--primary-light);
+  color: var(--primary-word);
 }
 
 .mbti-btn.active .message{
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--primary-word);
 }
 
 .type-info {
@@ -263,11 +265,12 @@ watch([selectedEI, selectedSN, selectedTF, selectedJP], ([newEI, newSN, newTF, n
 
 .mbti-result {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   padding: 1.2rem;
   background: #f8faf5;
   border-radius: 10px;
-  border: 1px solid var(--primary-color);
+  border: 1px solid var(--primary-dark);
+  border: 1px solid rgba(139, 193, 72, 0.1);
 }
 
 .result-label {
@@ -278,8 +281,8 @@ watch([selectedEI, selectedSN, selectedTF, selectedJP], ([newEI, newSN, newTF, n
 
 .result-value {
   font-weight: 600;
-  color: var(--primary-color);
-  font-size: 1.3rem;
+  color: var(--primary-verydark);
+  font-size: 2rem;
 }
 
 /* 모바일 반응형 수정 */

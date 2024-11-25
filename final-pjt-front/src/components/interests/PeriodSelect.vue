@@ -115,7 +115,7 @@ watch(period, (newPeriod) => {
 .duration-value {
   font-size: 2.5rem;
   font-weight: 700;
-  color: var(--primary-dark);
+  color: #e97583;
   margin-right: 10px;
 }
 

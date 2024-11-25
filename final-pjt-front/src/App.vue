@@ -36,19 +36,16 @@ const logOut = function () {
 /* 전역 CSS 변수 설정 - scoped 밖에 작성 */
 :root {
   --primary-color: #8bc148;
-  --primary-light: #DCCAF0;
+  --primary-light: #f6c8cd;
   /* --primary-dark: #A274D6; */ /* 보라색 */ 
-  --primary-dark: #D372A4;
-  --primary-color_g: #F78CA0; /* 구아바 핑크 (기본 색상) */
-  --primary-light_g: #FFD1DC;
+  --primary-dark: 	#ed919c;
+  --primary-verydark: #e97b88;
+  --primary-word: #412d26;
 }
 </style>
 
 <style scoped>
 
-/* .App {
-  font-family:'Godo'; 
-} */
 
 @font-face {
   font-family: 'Godo';
@@ -73,9 +70,17 @@ const logOut = function () {
 }
 
 .navbar {
-  background: var(--primary-color) !important;
+  /* background: var(--primary-color) !important; 기존 코드를 아래와 같이 수정 */
+  background: rgba(139, 193, 72, 0.8) !important; /* var(--primary-color)의 rgba 버전 */
+  /* 또는 */
+  /* background: rgba(139, 193, 72, 0.7) !important; */ /* 더 투명하게 */
+  
+  /* 블러 효과를 주고 싶다면 backdrop-filter 추가 */
+  /* backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);  */
+  
   min-height: 64px;
-  padding: 0.5rem 0;   /* 상하 패딩만 적용 */
+  padding: 0.5rem 0;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   font-family: 'Godo', sans-serif;
 }

@@ -158,8 +158,8 @@ def get_stock_price(token, stock):
     return max(current_price, 0)
 
 @api_view(['GET'])
-# @permission_classes([IsAuthenticated])
-# @authentication_classes([JWTAuthentication])
+@permission_classes([IsAuthenticated])
+@authentication_classes([JWTAuthentication])
 def get_token(request):
     websocket_token = get_access_to_websocket()
     return JsonResponse({'websocket_token': websocket_token})
