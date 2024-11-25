@@ -65,20 +65,20 @@ const categories = ref([
   { label: '식음료', value: 'food', mapping: ['갈증 해소', '프랜차이즈'] },
   { label: '반려동물', value: 'pet', mapping: ['반려동물'] },
   { label: '건설', value: 'construct', mapping: ['건물주의 꿈'] },
-  { label: '게임', value: 'game', mapping: ['게임월드', '메타버스구현'] },
-  { label: '미디어/컨텐츠', value: 'media', mapping: ['컨텐츠 강자', '스트리밍의 시대'] },
+  { label: '게임', value: 'game', mapping: ['게임월드', '메타버스 구현'] },
+  { label: '미디어/컨텐츠', value: 'media', mapping: ['컨텐츠강자', '스트리밍의 시대'] },
   { label: '여행', value: 'travel', mapping: ['이번 휴가는 어디?'] },
-  { label: 'IT', value: 'it', mapping: ['인공지능(AI)', '스트리밍의 시대', '플랫폼 대표주자'] },
-  { label: '전기차', value: 'ev', mapping: ['리튬 & 배터리', '자율주행차'] },
+  { label: 'IT', value: 'it', mapping: ['인공지능', '스트리밍의 시대', '플랫폼 대표주자'] },
+  { label: '전기차', value: 'ev', mapping: ['리튬&배터리', '자율주행차'] },
   { label: '반도체', value: 'semiconductor', mapping: ['반도체', '소재/원자재'] },
-  { label: '우주항공 & 방위산업', value: 'aerospace', mapping: ['항공우주 & 방위산업'] },
+  { label: '우주항공 & 방위산업', value: 'aerospace', mapping: ['항공우주&방위산업'] },
   { label: '메타버스', value: 'metaverse', mapping: ['메타버스구현'] },
   { label: '가상현실', value: 'vr', mapping: ['가상현실(VR)'] },
   { label: '증권', value: 'bankingSecurities', mapping: ['핀테크', '플랫폼 대표주자', '언택트 경제'] },
   { label: '블록체인', value: 'blockchain', mapping: ['블록체인'] },
   { label: '부동산', value: 'realestateReits', mapping:['건물주의 꿈']},
-  { label: '신재생에너지' ,value:'renewableEnergy' ,mapping:['클린 에너지','자원/에너지' ]},
-  { label: '2차전지' ,value:'battery' ,mapping:['리튬 & 배터리']}
+  { label: '신재생에너지' ,value:'renewableEnergy' ,mapping:['클린 에너지','자원/에너지']},
+  { label: '2차전지' ,value:'battery' ,mapping:['리튬&배터리']}
 ])
 
 // 사용자가 선택한 카테고리를 저장하는 배열

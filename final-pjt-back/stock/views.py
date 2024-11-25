@@ -82,6 +82,7 @@ def analyze(request):
         processed_stocks = set()  # 전역 수준에서 처리된 주식 코드 추적
         themes_info = []
         theme_names = set(interest_names)
+        print(theme_names)
 
         # 필요한 경우 추가 테마 선택
         if len(theme_names) < 6:
