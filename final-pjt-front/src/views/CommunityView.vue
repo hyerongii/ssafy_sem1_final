@@ -1,7 +1,9 @@
 <template>
   <div class="container mt-5" v-if="store.articles?.articles_data">
     <div class="community-header">
-      <h1 class="text-center mb-4">{{ store.articles?.articles_data?.stock_name }} 주주님들 모이세요!</h1>
+      <h1 class="text-center mb-4">
+        <span @click="navigateToStock(stockcode)">{{ store.articles?.articles_data?.stock_name }}</span> 주주님들 모이세요!
+      </h1>
       <div class="d-flex justify-content-end mb-4">
         <button class="btn btn-primary rounded-pill px-4" @click="articleCreate">
           <i class="bi bi-pencil-fill me-2"></i>글 작성하기
@@ -173,6 +175,10 @@ const toggleComments = function(article) {
 
 const moveArticleDetail = function (articleId) {
   router.push({name: 'ArticleDetailView', params:{ article_id : articleId }})
+}
+
+const navigateToStock = function (stock_id) {
+  router.push({name: 'StockItemView', params:{ stock_id : stock_id }})
 }
 
 </script>

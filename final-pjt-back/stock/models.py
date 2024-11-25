@@ -4,7 +4,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 # Create your models here.
 class UserProfile(models.Model):
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
     mbti = models.CharField(max_length=4)
     period = models.CharField(max_length=10)
     token = models.TextField(null=True)

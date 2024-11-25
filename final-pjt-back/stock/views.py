@@ -528,26 +528,38 @@ def get_stock_article_list(stock_code):
             }
             
         # 2. stock을 참조하고 있는 article 리스트 조회
+        # articles = Article.objects.filter(
+        #     stock_id=stock.pk
+        # ).values(
+        #     'id',
+        #     'title',
+        #     'content',
+        #     'author__nickname',  # User 모델의 nickname
+        #     'created_at',
+        #     'updated_at',
+        #     'like_article',
+        #     'theme__name'  # Theme 모델의 name
+        # ).order_by('-created_at')  # 최신순 정렬
+        
+        # 2. stock을 참조하고 있는 article 리스트 조회
         articles = Article.objects.filter(
             stock_id=stock.pk
-        ).values(
-            'id',
-            'title',
-            'content',
-            'author__nickname',  # User 모델의 nickname
-            'created_at',
-            'updated_at',
-            'like_article',
-            'theme__name'  # Theme 모델의 name
-        ).order_by('-created_at')  # 최신순 정렬
-        
-        # QuerySet을 리스트로 변환하여 JSON serializable하게 만듦
-        article_list = list(articles)
-        
-        # datetime 객체를 문자열로 변환
-        for article in article_list:
-            article['created_at'] = article['created_at'].strftime('%Y-%m-%d %H:%M:%S')
-            article['updated_at'] = article['updated_at'].strftime('%Y-%m-%d %H:%M:%S')
+        ).select_related('author', 'author__userprofile', 'theme')  # 관련 모델을 미리 로드
+        # 3. article 데이터를 리스트로 변환
+        article_list = []
+        for article in articles:
+            article_data = {
+                'id': article.id,
+                'title': article.title,
+                'content': article.content,
+                'author_nickname': article.author.username,  # User 모델의 username
+                'author_mbti': article.author.userprofile.mbti if hasattr(article.author, 'userprofile') else None,  # UserProfile의 mbti
+                'created_at': article.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+                'updated_at': article.updated_at.strftime('%Y-%m-%d %H:%M:%S'),
+                'like_count': article.like_article.count(),  # 좋아요 수
+                'theme_name': article.theme.name if article.theme else None,  # Theme 모델의 name
+            }
+            article_list.append(article_data)
         
         return {
             'status': 'success',
