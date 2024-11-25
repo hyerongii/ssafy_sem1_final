@@ -156,6 +156,7 @@ const getUserInfo = function() {
       console.log('유저정보조회완료')
       console.log(res.data)
       userNickname.value = res.data.nickname
+      userMbti.value = res.data.user_info.mbti
     })
     .catch((err) => {
       console.log(err)
@@ -177,9 +178,31 @@ const moveArticleDetail = function (articleId) {
 </script>
 
 <style scoped>
-.community-header {
-  max-width: 800px;
-  margin: 0 auto;
+
+.container {
+  font-family: 'Godo', sans-serif;
+  padding: 2rem;
+}
+
+.community-header h1 {
+  font-size: 1.8rem;
+  color: var(--primary-word);
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background-color: var(--primary-dark);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 193, 72, 0.2);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
 }
 
 .posts-container {
@@ -189,17 +212,23 @@ const moveArticleDetail = function (articleId) {
 
 .post-card {
   background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
+  border-radius: 16px;
+  padding: 1.8rem;
   margin-bottom: 1.5rem;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  border: 1px solid rgba(139, 193, 72, 0.1);
+  transition: all 0.3s ease;
+}
+
+.post-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
 }
 
 .post-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
 }
 
 .user-info {
@@ -209,39 +238,54 @@ const moveArticleDetail = function (articleId) {
 }
 
 .user-avatar img {
-  width: 45px;
-  height: 45px;
-  object-fit: cover;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-light);
 }
 
 .user-details {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
 }
 
 .author {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.4rem;
+  color: var(--primary-word);
+}
+
+.mbti {
+  font-size: 0.9rem;
+  color: var(--primary-verydark);
+  background: var(--primary-light);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .post-time {
   font-size: 0.8rem;
   color: #666;
+  margin-left: auto;
 }
 
 .post-content {
-  margin: 1rem 0;
+  padding: 0.5rem 0;
 }
 
 .post-title {
   font-size: 1.2rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  color: var(--primary-word);
+  margin-bottom: 1rem;
 }
 
 .post-text {
-  color: #444;
-  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.6;
   margin-bottom: 1rem;
 }
 
@@ -251,9 +295,9 @@ const moveArticleDetail = function (articleId) {
 
 .post-actions {
   display: flex;
-  gap: 1.5rem;
+  gap: 1.2rem;
   padding-top: 1rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid rgba(139, 193, 72, 0.1);
 }
 
 .action-btn {
@@ -262,27 +306,19 @@ const moveArticleDetail = function (articleId) {
   gap: 0.5rem;
   background: none;
   border: none;
-  color: #666;
+  color: var(--primary-word);
   font-size: 0.9rem;
-  padding: 0.5rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 20px;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .action-btn:hover {
-  background-color: #f0f2f5;
-  color: #2575fc;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-  border: none;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+.action-btn i {
+  font-size: 1.1rem;
 }
 </style>

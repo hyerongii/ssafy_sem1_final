@@ -20,7 +20,6 @@ export const useArticleStore = defineStore('article', () => {
     })
       .then((res) => {
         console.log(res.data)
-        userMbti.value = res.data.user_info.mbti
       })
       .catch((err) => {
         console.log(err)

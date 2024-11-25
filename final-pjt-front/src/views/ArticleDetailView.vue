@@ -8,8 +8,11 @@
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center">
                 <img src="" alt="프로필" class="rounded-circle" style="width: 40px; height: 40px;">
-                <div class="ms-3">
-                  <h6 class="mb-0">{{ article?.article.author }}</h6>
+                <div class="user-info ms-3">
+                  <div class="d-flex align-items-center gap-2">
+                    <h6 class="mb-0">{{ article?.article.author }}</h6>
+                    <span class="mbti-badge">{{ article?.article.author_mbti }}</span>
+                  </div>
                   <small class="text-muted">{{ article?.article.created_at }}</small>
                 </div>
               </div>
@@ -54,7 +57,7 @@
                     </div>
                   </div>
                   <p v-else class="comment-text mb-1">{{ comment.content }}</p>
-                  <small class="text-muted">{{ comment.created_at }}</small>
+                  <small class="text-muted">{{ formatDateTime(article?.article.created_at) }}</small>
                 </div>
               </div>
             </li>
@@ -92,6 +95,19 @@ const articleId = route.params.article_id
 const comment = ref('')
 const article = ref(null)
 const userNickname = ref(null)
+
+// 시간 포맷팅 함수 추가
+const formatDateTime = (timestamp) => {
+  if (!timestamp) return ''
+  const date = new Date(timestamp)
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  
+  return `${year}.${month}.${day} ${hours}:${minutes}`
+}
 
 const startEdit = (comment) => {
   comment.isEditing = true;
@@ -216,30 +232,108 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.container {
+  font-family: 'Godo', sans-serif;
+  padding: 2rem;
+}
+
 .card {
-  border: none;
-  border-radius: 10px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(139, 193, 72, 0.1);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(139, 193, 72, 0.1);
+  margin-bottom: 2rem;
 }
 
 .card-header {
-  border-bottom: 1px solid rgba(0,0,0,.125);
+  background: white;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(139, 193, 72, 0.1);
 }
 
-.btn-primary {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
+.card-title {
+  color: var(--primary-word);
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
-.form-control:focus {
-  box-shadow: none;
-  border-color: #ced4da;
+.card-text {
+  color: #555;
+  line-height: 1.6;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+/* 댓글 섹션 */
+.list-group-item {
+  padding: 1.2rem;
+  border-bottom: 1px solid rgba(139, 193, 72, 0.1);
+  transition: all 0.2s ease;
+}
+
+.list-group-item:hover {
+  background-color: #f8faf5;
+}
+
+.comment-content small {
+  color: var(--primary-dark);
+  font-weight: 500;
 }
 
 .comment-text {
-  font-size: 1rem;
-  color: #212529;
+  color: var(--primary-word);
+  margin: 0.5rem 0;
 }
 
+/* 댓글 작성 폼 */
+.card-footer {
+  padding: 1.5rem;
+  background: white;
+}
+
+.form-control {
+  border: 1px solid rgba(139, 193, 72, 0.2);
+  border-radius: 12px;
+  padding: 0.8rem;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(139, 193, 72, 0.1);
+}
+
+/* 버튼 스타일 */
+.btn-primary {
+  background: var(--primary-color);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+.btn-link {
+  color: var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+.btn-link:hover {
+  color: var(--primary-dark);
+}
+
+/* 댓글 수정/삭제 버튼 */
 .comment-actions {
   opacity: 0;
   transition: opacity 0.2s ease;
@@ -249,12 +343,38 @@ onMounted(() => {
   opacity: 1;
 }
 
-.btn-link {
-  padding: 0.25rem 0.5rem;
-  text-decoration: none;
+.comment-actions .btn {
+  padding: 0.4rem;
+  margin-left: 0.5rem;
 }
 
-.comment-content {
-  width: 100%;
+/* 수정 폼 */
+.input-group {
+  gap: 0.5rem;
 }
+
+.input-group .btn {
+  border-radius: 12px;
+}
+
+.btn-outline-primary {
+  color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+.btn-outline-secondary {
+  color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.btn-outline-secondary:hover {
+  background: var(--primary-dark);
+  color: white;
+}
+
 </style>

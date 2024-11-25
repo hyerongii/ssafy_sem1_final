@@ -6,22 +6,42 @@
         <h3 class="section-title">재무비율 정보</h3>
         <div class="ratio-grid">
           <div class="ratio-card">
-            <div class="ratio-icon">PER</div>
+            <div class="ratio-header">
+              <div class="ratio-icon">PER</div>
+              <div class="info-icon" data-tooltip="주가가 1주당 순이익의 몇 배인지 나타내는 수치로, 숫자가 낮을수록 주가가 저평가되어 있어요!">
+                <i class="bi bi-info-circle-fill"></i>
+              </div>
+            </div>
             <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].PER }}</div>
             <div class="ratio-label">주가수익비율</div>
           </div>
           <div class="ratio-card">
-            <div class="ratio-icon">PBR</div>
+            <div class="ratio-header">
+              <div class="ratio-icon">PBR</div>
+              <div class="info-icon" data-tooltip="회사의 장부 가치 대비 현재 주가가 몇 배인지 보여주는 지표에요!">
+                <i class="bi bi-info-circle-fill"></i>
+              </div>
+            </div>
             <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].PBR }}</div>
             <div class="ratio-label">주가순자산비율</div>
           </div>
           <div class="ratio-card">
-            <div class="ratio-icon">EPS</div>
+            <div class="ratio-header">
+              <div class="ratio-icon">EPS</div>
+              <div class="info-icon" data-tooltip="회사가 1년 동안 번 돈을 총 주식 수로 나눈 값으로, &#10;1주당 얼마를 벌었는지 보여줘요!">
+                <i class="bi bi-info-circle-fill"></i>
+              </div>
+            </div>
             <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].EPS }}</div>
             <div class="ratio-label">주당순이익</div>
           </div>
           <div class="ratio-card">
-            <div class="ratio-icon">BPS</div>
+            <div class="ratio-header">
+              <div class="ratio-icon">BPS</div>
+              <div class="info-icon" data-tooltip="주식 한 주당 회사의 순자산(자산-부채)이 얼마인지 나타내는 지표에요!">
+                <i class="bi bi-info-circle-fill"></i>
+              </div>
+            </div>
             <div class="ratio-value">{{ stockItemStore.stockInfo.ratio_data[0].BPS }}</div>
             <div class="ratio-label">주당순자산</div>
           </div>
@@ -64,15 +84,85 @@ const currentTime = getCurrentTime()
   padding: 1rem;
 }
 
+.ratio-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.info-icon {
+  position: absolute;
+  left: 0;
+  color: #64748b;
+  cursor: help;
+  justify-content: center;
+}
+
+
+.info-icon i {
+  font-size: 0.7rem;
+  font-weight: bold; /* 아이콘 두께 증가 */
+}
+
+.info-icon:hover::before {
+  content: attr(data-tooltip);
+  position: fixed;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 350px;
+  padding: 0.8rem;
+  background:  #f8fafc;
+  /* border: 2px solid #64748b; */
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #1e293b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 9999;
+  opacity: 0;
+  animation: fadeIn 0.2s ease-in-out forwards;
+  white-space: pre-line; /* 줄바꿈 허용 */
+}
+
+.info-icon:hover::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+  z-index: 1000;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -5px);
+  }
+}
+
+
 .info-card {
   background: white;
   border-radius: 12px;
-  overflow: hidden;
+  overflow: visible !important; /* overflow 제한 해제 */
 }
 
 .info-section {
-  padding: 1.5rem;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  margin-top: 2rem;
   border-bottom: 1px solid #eef2f6;
+  overflow: visible !important; /* overflow 제한 해제 */
 }
 
 .info-section:last-child {
@@ -108,7 +198,6 @@ const currentTime = getCurrentTime()
   font-size: 1.2rem;
   font-weight: 600;
   color: #488bc1;
-  margin-bottom: 0.5rem;
 }
 
 .ratio-value {
@@ -119,7 +208,7 @@ const currentTime = getCurrentTime()
 }
 
 .ratio-label {
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: #64748b;
 }
 
@@ -127,26 +216,6 @@ const currentTime = getCurrentTime()
   background: #f8fafc;
   padding: 1.2rem;
   border-radius: 8px;
-}
-
-.consensus-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.consensus-badge {
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  background: #e2e8f0;
-  color: #64748b;
-}
-
-.consensus-badge.buy {
-  background: #dcfce7;
-  color: #166534;
 }
 
 .consensus-source {
@@ -162,6 +231,11 @@ const currentTime = getCurrentTime()
   
   .ratio-card {
     padding: 1rem;
+  }
+
+  .info-icon:hover::before {
+    width: 250px;
+    font-size: 0.8rem;
   }
 }
 
