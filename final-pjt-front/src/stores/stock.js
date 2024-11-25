@@ -10,6 +10,7 @@ export const useStockStore = defineStore('stock', () => {
   const stocklist = ref([])
   const chartdata = ref([])
   const themeinfo = ref({})
+  const fluctuation_rate = ref({})
 
   const getStockChart = function (themename) {
     axios({
@@ -29,7 +30,9 @@ export const useStockStore = defineStore('stock', () => {
         stocklist.value = res.data.theme_info.stocks
         chartdata.value = res.data.chart_data
         themeinfo.value = res.data.theme_info
+        fluctuation_rate.value = res.data.stock_fluctuation_rates
         console.log(themeinfo.value)
+        console.log(fluctuation_rate.value)
       })
       .then((stocklist) => {
         

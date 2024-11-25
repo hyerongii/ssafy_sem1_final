@@ -1,7 +1,7 @@
 from rest_framework.response import Response
 from .serializers import ThemeSerializer, ArticleSerializer, CommentSerializer, UserSerializer, UserProfileSerializer
 from django.contrib.auth import get_user_model
-from .utils import get_d_stock_chart_data_day_for_realtime, get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_consensus, get_oversea_stock_main_info, get_stocks_info
+from .utils import d_get_stock_day_fluctuation_rate,o_get_stock_day_fluctuation_rate, get_d_stock_chart_data_day_for_realtime, get_theme_price_series, get_current_stock_price, get_current_us_stock_price, get_domestic_stock_chartdata_period, get_oversea_stock_chartdata_day, get_oversea_stock_chartdata_period, get_domestic_stock_consensus, get_oversea_stock_main_info, get_stocks_info
 from utils.token import get_access_token,get_access_to_websocket  # 프로젝트 레벨의 token 유틸리티 import
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.permissions import IsAuthenticated
@@ -201,12 +201,18 @@ def draw_theme_chart(request):
         # 중복 제거를 위한 처리
         stocks = theme.stock_set.all()
         unique_stocks = {}
-        
+        stock_fluctuation_rates = {}  # 변동률 데이터를 저장할 딕셔너리
+
         for stock in stocks:
             # 1. Stock 모델을 조회해 stock.code가 동일한 모든 인스턴스 파악
             duplicate_stocks = Stock.objects.filter(code=stock.code)
             # 2. 해당 인스턴스의 모든 stock.per / stock.pbr / stock.eps 수정
             stock_info = get_stocks_info(access_token, stock.code, stock.excd)
+            # 한국주식의 경우
+            if stock.code.isdigit():
+                stock_day_fluctuation_rate = d_get_stock_day_fluctuation_rate(access_token, stock.code)
+            else:
+                stock_day_fluctuation_rate = o_get_stock_day_fluctuation_rate(access_token, stock.code, stock.excd)
             per = stock_info[0]['PER']
             pbr = stock_info[0]['PBR']
             eps = stock_info[0]['EPS']
@@ -219,7 +225,9 @@ def draw_theme_chart(request):
             # 동일한 코드를 가진 주식이 없는 경우에만 추가
             if stock.code not in unique_stocks:
                 unique_stocks[stock.code] = stock
-        
+            # 변동률 데이터를 저장 (key: 주식 코드, value: 변동률)
+            stock_fluctuation_rates[stock.code] = stock_day_fluctuation_rate
+
         # Theme 객체의 stock_set을 중복이 제거된 주식들로 업데이트
         theme.stock_set.set(unique_stocks.values())
         
@@ -236,7 +244,8 @@ def draw_theme_chart(request):
         # 응답 데이터 구성
         response_data = {
             'theme_info': theme_serializer.data,
-            'chart_data': chart_data['data']
+            'chart_data': chart_data['data'],
+            'stock_fluctuation_rates': stock_fluctuation_rates  # 변동률 데이터 추가
         }
         
         return Response(response_data)

@@ -18,7 +18,7 @@ def get_industry_price_series(access_token, industry_code, start_date, end_date)
     
     Returns:
         dict: 상태 및 시계열 데이터를 포함한 JSON
-          형태의 응답
+        형태의 응답
     """
     
     base_url = settings.KIS_BASE_URL
@@ -415,6 +415,73 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
 #     except Exception as e:
 #         print(f"Error getting price for stock {stock_code}: {str(e)}")
 #         return []
+
+def d_get_stock_day_fluctuation_rate(access_token, stock_code):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/domestic-stock/v1/quotations/inquire-daily-price"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",  
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "FHKST01010400"
+    }
+    params = {
+        "FID_COND_MRKT_DIV_CODE": "J",
+        "FID_INPUT_ISCD": stock_code,
+        "FID_PERIOD_DIV_CODE": "D",
+        "FID_ORG_ADJ_PRC": "1",
+    }
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['rt_cd'] == '0':
+            for item in data['output']:
+                return item['prdy_ctrt']
+        else:
+            raise Exception(f"API Error: {data['msg1']}")
+            
+    except Exception as e:
+        print(f"Error getting price for stock {stock_code}: {str(e)}")
+        return []
+    
+def o_get_stock_day_fluctuation_rate(access_token, stock_code, stock_excd):
+    base_url = settings.KIS_BASE_URL
+    path = "/uapi/overseas-price/v1/quotations/price"
+    url = f"{base_url}{path}"
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "authorization": f"Bearer {access_token}",
+        "appkey": settings.KIS_APP_KEY,
+        "appsecret": settings.KIS_APP_SECRET,
+        "tr_id": "HHDFS00000300"
+    }
+
+    params = {
+        "AUTH": "",
+        "EXCD": stock_excd,
+        "SYMB": stock_code,
+    }
+
+    try:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+        
+        if data['rt_cd'] == '0' and 'output' in data and 'last' in data['output']:
+            rate = data['output']['rate']
+            return rate
+        else:
+            raise Exception(f"API Error: {data.get('msg1', 'Unknown error')}")
+            
+    except Exception as e:
+        print(f"Error getting price for US stock {stock_code}: {str(e)}")
+        return 0
 
 
 

@@ -91,7 +91,7 @@
             <!-- 작성자 프로필 -->
             <div class="post-header" >
               <div class="profile">
-                <img :src="article.author_nickname ? `/profiles/${article.author_nickname}.jpg` : '/default-avatar.png'" 
+                <img :src="profileImage" 
                     alt="프로필" 
                     class="profile-img">
                 <div class="profile-info">
@@ -174,6 +174,7 @@ onMounted(() => {
   stockItemStore.getStockInfo(stockcode, currentTime)
   // 일 차트 그리기
   stockItemStore.getDayInfo(stockcode, currentTime)
+  getProfileImage()
 })
 
 const moveCommunity = function () {
@@ -223,6 +224,25 @@ const formatTime = (timestamp) => {
 
 const moveArticleDetail = function (articleId) {
   router.push({name: 'ArticleDetailView', params:{ article_id : articleId }})
+}
+
+const profileImage = ref(null)
+const getProfileImage = function () {
+  const profileImages = [
+        require('@/assets/profile/penguin.png'),
+        require('@/assets/profile/elephant.png'),
+        require('@/assets/profile/lion.png'),
+        require('@/assets/profile/dog.png'),
+        require('@/assets/profile/cat.png'),
+        require('@/assets/profile/pig.png'),
+        require('@/assets/profile/sheep.png'),
+        require('@/assets/profile/monkey.png'),
+        require('@/assets/profile/rabbit.png'),
+        require('@/assets/profile/tiger.png'),
+      ];
+      const randomIndex = Math.floor(Math.random() * profileImages.length);
+      console.log(randomIndex);
+      profileImage.value = profileImages[randomIndex]
 }
 
 </script>
