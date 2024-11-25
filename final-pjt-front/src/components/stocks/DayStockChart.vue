@@ -23,11 +23,11 @@ const stockItemStore = useStockItemStore()
 const websocketStore = useWebsocketStore()
 const chart = ref(null)
 
+
 const currentSeries = ref([{
   name: '주가',
   data: []
 }])
-
 
 const chartOptions = ref({
   chart: {
@@ -38,7 +38,7 @@ const chartOptions = ref({
       enabled: true,
       easing: 'linear',
       dynamicAnimation: {
-        speed: 1000
+        speed: 350  // 애니메이션 속도를 더 빠르게
       }
     },
     toolbar: {
@@ -64,24 +64,33 @@ const chartOptions = ref({
     type: 'datetime',
     labels: {
       show: false,
+      datetimeUTC: false,
+      format: 'HH:mm:ss',
+      formatter: function(value) {
+        const date = new Date(value);
+        return date.toLocaleTimeString('ko-KR', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false
+        });
+      },
     },
+    tooltip : false,
     axisTicks: {
       show: false
-    },
-    tooltip: {
-      enabled: false  // X축 툴팁 완전히 비활성화
     }
   },
   yaxis: {
     labels: {
       formatter: (value) => Math.round(value).toLocaleString()
     },
-    // min: (min) => parseInt(min * 0.99),
-    // max: (max) => parseInt(max * 1.01),
+    min: (min) => parseInt(min * 0.999),
+    max: (max) => parseInt(max * 1.001),
   },
   tooltip: {
     x: {
-      show: false // 툴팁의 X값 숨기기
+      show: true
     },
     y: {
       title: {
@@ -92,52 +101,82 @@ const chartOptions = ref({
   }
 })
 
-
-// 초기 차트 데이터 설정을 위한 computed 속성
-const series = computed(() => [{
-  name: '주가',
-  data: currentSeries.value[0].data
-}])
-
-// 초기 데이터 로드를 위한 watcher
+// 초기 차트 데이터 설정
 watch(
   () => stockItemStore.dayChartData,
   (newData) => {
     if (newData && Array.isArray(newData)) {
-      const formattedData = newData.map(item => ({
-        x: new Date(item.time).getTime(),
-        y: isNaN(Number(stockcode)) 
-          ? parseFloat(item.price) * 1405 
-          : parseFloat(item.price)
-      }))
-      
-      // 초기 데이터 설정
+      const formattedData = newData.map(item => {
+        // 시간 문자열을 파싱
+        const timeStr = item.time;
+        const hours = timeStr.substring(0, 2);
+        const minutes = timeStr.substring(2, 4);
+        const seconds = timeStr.substring(4, 6);
+        
+        // 오늘 날짜 기준으로 timestamp 생성
+        const today = new Date();
+        const timestamp = new Date(
+          today.getFullYear(),
+          today.getMonth(),
+          today.getDate(),
+          parseInt(hours),
+          parseInt(minutes),
+          parseInt(seconds)
+        ).getTime();
+
+        return {
+          x: timestamp,
+          y: isNaN(Number(stockcode)) 
+            ? parseFloat(item.price) * 1405 
+            : parseFloat(item.price)
+        }
+      })
+
       currentSeries.value[0].data = formattedData
+      
+      // 웹소켓 연결 시작
+      websocketStore.webSocketStart(stockcode)
     }
   },
   { immediate: true }
 )
 
-// 실시간 데이터 업데이트를 위한 watcher
+// series computed 속성 수정
+const series = computed(() => [{
+  name: '주가',
+  data: currentSeries.value[0].data
+}])
+
+
+// 실시간 데이터 업데이트
 watch(
   () => websocketStore.processedData,
   (newData) => {
     if (newData && newData.price && isFinite(newData.price)) {
-      const timestamp = new Date(newData.time).getTime()
+      // 시간 문자열을 올바른 Date 객체로 변환
+      const timeStr = newData.time;
+      const hours = timeStr.substring(0, 2);
+      const minutes = timeStr.substring(2, 4);
+      const seconds = timeStr.substring(4, 6);
+      
+      const today = new Date();
+      const timestamp = new Date(
+        today.getFullYear(),
+        today.getMonth(),
+        today.getDate(),
+        parseInt(hours),
+        parseInt(minutes),
+        parseInt(seconds)
+      ).getTime();
+      
       const price = isNaN(Number(stockcode))
         ? parseFloat(newData.price) * 1405
         : parseFloat(newData.price)
       
-      // 새로운 데이터 추가
       currentSeries.value[0].data.push({
         x: timestamp,
         y: price
       })
-
-      // // 데이터가 너무 많아지면 오래된 데이터 제거
-      // if (currentSeries.value[0].data.length > 100) {
-      //   currentSeries.value[0].data.shift()
-      // }
 
       // ApexCharts 업데이트
       if (chart.value) {
@@ -148,20 +187,6 @@ watch(
     }
   }
 )
-
-onMounted(() => {
-  // 컴포넌트 마운트 시 초기 데이터 로드
-  if (stockItemStore.dayChartData.length === 0) {
-    const currentTime = new Date().toLocaleTimeString('en-US', { 
-      hour12: false, 
-      hour: '2-digit', 
-      minute: '2-digit', 
-      second: '2-digit' 
-    }).replace(/:/g, '')
-    stockItemStore.getDayInfo(stockcode, currentTime)
-  }
-})
-
 
 onUnmounted(() => {
   if (websocketStore.socket) {

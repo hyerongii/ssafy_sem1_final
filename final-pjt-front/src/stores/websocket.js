@@ -44,22 +44,23 @@ export const useWebsocketStore = defineStore('websocket', () => {
   }
 
   const sendMessage = () => {
-    const newCode = stockCode.value
     if (socket.value && socket.value.readyState === WebSocket.OPEN) {
-      socket.value.send(JSON.stringify({
+      const message = {
         header: {
-          approval_key: authStore.websocketToken,
+          approval_key: authStore.websocketToken.websocket_token,
           custtype: "P",
-          tr_type: "1",
+          tr_type: "1",  // 문자열로 전송
           content_type: "utf-8"
         },
         body: {
           input: {
-            tr_id: requestStr.value,
+            tr_id: "H0STCNT0",  // 'H0STCNT0' 대신 저장된 값 사용
             tr_key: stockCode.value
           }
         }
-      }))
+      }
+      console.log('Sending message:', message) // 디버깅용
+      socket.value.send(JSON.stringify(message))
     }
   }
 
@@ -68,20 +69,10 @@ export const useWebsocketStore = defineStore('websocket', () => {
   const receiveMessage = () => {
     return new Promise((resolve) => {
       socket.value.onmessage = (event) => {
-        try {
-          console.log('Received websocket data:', event.data)
-          const result = stockspurchaseDomestic(event.data)
-          if (result && !isNaN(result.price)) {
-            processedData.value = result
-            resolve(result)
-          } else {
-            console.warn('Invalid data processed')
-            resolve(null)
-          }
-        } catch (error) {
-          console.error('Data processing error:', error)
-          resolve(null)
-        }
+        // console.log('Raw data:', event.data)
+        const processedData = stockspurchaseDomestic(event.data)
+        console.log('Processed data:', processedData)
+        resolve(processedData)
       }
     })
   }
@@ -115,7 +106,7 @@ export const useWebsocketStore = defineStore('websocket', () => {
       return null
     }
 
-    const price = parseFloat(pValue[2]) // parseInt 대신 parseFloat 사용
+    const price = parseInt(pValue[2]) // parseInt 대신 parseFloat 사용
     // 현재 시간을 Date 객체로 변환
     const date = new Date()
     
