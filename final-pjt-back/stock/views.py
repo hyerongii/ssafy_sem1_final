@@ -552,7 +552,7 @@ def get_stock_article_list(stock_code):
                 'id': article.id,
                 'title': article.title,
                 'content': article.content,
-                'author_nickname': article.author.nickname,  # User 모델의 username
+                'author_nickname': article.author.nickname,  # User 모델의 nickname
                 'author_mbti': article.author.userprofile.mbti if hasattr(article.author, 'userprofile') else None,  # UserProfile의 mbti
                 'created_at': article.created_at.strftime('%Y-%m-%d %H:%M:%S'),
                 'updated_at': article.updated_at.strftime('%Y-%m-%d %H:%M:%S'),

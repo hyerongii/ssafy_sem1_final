@@ -80,6 +80,24 @@
       </div>
     </div>
   </div>
+  <!-- 댓글 삭제 확인 모달 추가 -->
+  <div class="modal fade" id="deleteCommentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">댓글 삭제</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          정말 이 댓글을 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-danger" @click="confirmDeleteComment">삭제</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
@@ -89,6 +107,8 @@ import { useUserInterestStore } from '@/stores/userinterest';
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+// 기존 imports에 bootstrap 추가
+import * as bootstrap from 'bootstrap'
 
 const intereststore = useUserInterestStore()
 const authstore = useAuthStore()
@@ -97,6 +117,43 @@ const articleId = route.params.article_id
 const comment = ref('')
 const article = ref(null)
 const userNickname = ref(null)
+
+// 삭제할 댓글 ID 저장용 ref 추가
+const deleteCommentId = ref(null)
+
+// 댓글 삭제 버튼 클릭 시 모달 표시
+const showDeleteCommentModal = (commentId) => {
+  deleteCommentId.value = commentId
+  const modalElement = document.getElementById('deleteCommentModal')
+  if (modalElement) {
+    const modal = new bootstrap.Modal(modalElement)
+    modal.show()
+  }
+}
+
+// 모달에서 삭제 확인 시 실행
+const confirmDeleteComment = () => {
+  if (deleteCommentId.value) {
+    axios({
+      method: 'delete',
+      url: `${authstore.API_URL}/api/v1/stock/comment/${deleteCommentId.value}/`,
+      headers: {
+        Authorization: `Bearer ${authstore.token}`,
+      }
+    })
+      .then(() => {
+        const modalElement = document.getElementById('deleteCommentModal')
+        const modal = bootstrap.Modal.getInstance(modalElement)
+        if (modal) {
+          modal.hide()
+        }
+        getArticleDetail(articleId)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+}
 
 // 시간 포맷팅 함수 추가
 const formatDateTime = (timestamp) => {
@@ -191,22 +248,9 @@ const editComment = function(commentId, commentText) {
 }
 
 // 댓글 삭제
-const deleteComment = function(commentId) {
-  if (!confirm('댓글을 삭제하시겠습니까?')) return;
-  
-  axios({
-    method: 'delete',
-    url: `${authstore.API_URL}/api/v1/stock/comment/${commentId}/`,
-    headers: {
-      Authorization: `Bearer ${authstore.token}`,
-    }
-  })
-    .then(() => {
-      getArticleDetail(articleId)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+// 기존 deleteComment 함수 수정
+const deleteComment = (commentId) => {
+  showDeleteCommentModal(commentId)
 }
 
 const getUserInfo = function() {
@@ -291,6 +335,67 @@ onMounted(() => {
 .comment-text {
   color: var(--primary-word);
   margin: 0.5rem 0;
+}
+
+/* 모달 스타일 */
+.modal-content {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
+  font-family: 'Godo', sans-serif;
+}
+
+.modal-header {
+  background: white;
+  border-bottom: 1px solid rgba(139, 193, 72, 0.1);
+  padding: 1.5rem;
+}
+
+.modal-title {
+  color: var(--primary-word);
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.modal-body {
+  padding: 2rem;
+  color: var(--primary-word);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(139, 193, 72, 0.1);
+  padding: 1rem 1.5rem;
+}
+
+.btn-secondary {
+  background-color: #f8faf5;
+  color: var(--primary-word);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: var(--primary-dark);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: var(--primary-verydark);
+  transform: translateY(-2px);
 }
 
 /* 댓글 작성 폼 */

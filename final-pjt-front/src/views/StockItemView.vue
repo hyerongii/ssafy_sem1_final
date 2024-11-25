@@ -96,7 +96,7 @@
                     class="profile-img">
                 <div class="profile-info">
                   <span class="author">{{ article.author_nickname || '익명' }}</span>
-                  <!-- <span class="mbti-tag">{{  }}</span> -->
+                  <span class="mbti-tag">{{ article.author_mbti }}</span>
                   <span class="time">{{ formatTime(article.created_at) }}</span>
                 </div>
               </div>
@@ -137,7 +137,8 @@
 import DomesticStockInfo from '@/components/stocks/DomesticStockInfo.vue'
 import UsaStockInfo from '@/components/stocks/UsaStockInfo.vue'
 import { useStockItemStore } from '@/stores/stockitem'
-import { computed, onMounted, onUpdated, ref, watch } from 'vue'
+import { useUserInterestStore } from '@/stores/userinterest'
+import { computed, onMounted, ref, watch } from 'vue'
 import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
 
 const stockItemStore = useStockItemStore()
@@ -197,7 +198,6 @@ const writeArticle = () => {
 const latestArticles = computed(() => {
   return stockItemStore.stockInfo.articles_data?.articles.map(article => ({
     ...article,
-    author_nickname: article.author__nickname, // 키 변환
   })).slice(0,5) || [];
 });
 

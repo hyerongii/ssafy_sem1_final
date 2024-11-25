@@ -22,8 +22,8 @@
                 <img src="" alt="프로필" class="rounded-circle">
               </div>
               <div class="user-details">
-                <span class="author">{{ article.author__nickname || '익명' }}</span>
-                <span class="mbti">{{ userMbti }}</span>
+                <span class="author">{{ article.author_nickname || '익명' }}</span>
+                <span class="mbti">{{ article.author_mbti}}</span>
                 <span class="post-time">{{ article.created_at }}</span>
               </div>
             </div>
@@ -38,7 +38,7 @@
             <!-- <p class="post-text">{{ article.content }}</p> -->
             <div class="theme-tag">
               <span class="badge rounded-pill bg-light text-dark">
-                # {{ article.theme__name }}
+                # {{ article.theme_name }}
               </span>
             </div>
           </div>
@@ -54,7 +54,7 @@
               <span>댓글</span>
             </button>
             <!-- 작성자와 현재 로그인한 사용자가 같을 때만 수정/삭제 버튼 표시 -->
-            <template v-if="article.author__nickname === userNickname">
+            <template v-if="article.author_nickname === userNickname">
               <button class="action-btn" @click.stop="editArticle(article)">
                 <i class="bi bi-pencil"></i>
                 <span>수정</span>
@@ -68,9 +68,27 @@
       </div>
     </div>
   </div>
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">게시글 삭제</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          정말 이 게시글을 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-danger" @click="confirmDelete">삭제</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
+import * as bootstrap from 'bootstrap'
 import { useArticleStore } from '@/stores/article'
 import { useAuthStore } from '@/stores/auth'
 import { useStockItemStore } from '@/stores/stockitem'
@@ -88,6 +106,50 @@ const userNickname = ref(null)
 const userMbti = ref(null)
 
 userMbti.value = articlestore.userMbti
+
+// 삭제할 게시글 ID 저장용 ref 추가
+const deleteArticleId = ref(null)
+
+// 삭제 버튼 클릭 시 모달 표시
+const showDeleteModal = (articleId) => {
+  deleteArticleId.value = articleId
+  const modalElement = document.getElementById('deleteModal')
+  if (modalElement) {
+    const modal = new bootstrap.Modal(modalElement)
+    modal.show()
+  }
+}
+
+const deleteArticle = function (article_id) {
+  showDeleteModal(article_id)  // 먼저 모달을 보여주고
+}
+
+// 모달에서 삭제 확인 시 실행되는 함수
+const confirmDelete = () => {
+  if (deleteArticleId.value) {
+    axios({
+      method: 'delete',
+      url: `${authstore.API_URL}/api/v1/stock/article/update_or_delete/`,
+      headers: {
+        Authorization: `Bearer ${authstore.token}`,
+      },
+      data: {
+        article_id: deleteArticleId.value,
+      }
+    })
+      .then(() => {
+        const modalElement = document.getElementById('deleteModal')
+        const modal = bootstrap.Modal.getInstance(modalElement)
+        if (modal) {
+          modal.hide()
+        }
+        store.getArticleInfo(stockcode, getCurrentTime())
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+}
 
 const getCurrentTime = () => {
   const now = new Date()
@@ -111,26 +173,27 @@ const articleCreate = function () {
 }
 
 // 게시글 삭제
-const deleteArticle = function (article_id) {
-  axios({
-    method: 'delete',
-    url: `${authstore.API_URL}/api/v1/stock/article/update_or_delete/`,
-    headers: {
-      Authorization: `Bearer ${authstore.token}`,
-    },
-    data: {
-      article_id: article_id, 
-    }
-  })
-    .then((res) => {
-      console.log('게시글 삭제 성공')
-      // 게시글 목록 새로고침
-      store.getArticleInfo(stockcode, getCurrentTime())
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-}
+// const deleteArticle = function (article_id) {
+//   showDeleteModal(article_id)
+//   axios({
+//     method: 'delete',
+//     url: `${authstore.API_URL}/api/v1/stock/article/update_or_delete/`,
+//     headers: {
+//       Authorization: `Bearer ${authstore.token}`,
+//     },
+//     data: {
+//       article_id: article_id, 
+//     }
+//   })
+//     .then((res) => {
+//       console.log('게시글 삭제 성공')
+//       // 게시글 목록 새로고침
+//       store.getArticleInfo(stockcode, getCurrentTime())
+//     })
+//     .catch((err) => {
+//       console.log(err)
+//     })
+// }
 
 // 게시글 수정
 const editArticle = function (article) {
@@ -157,7 +220,7 @@ const getUserInfo = function() {
     .then((res) => {
       console.log('유저정보조회완료')
       console.log(res.data)
-      userNickname.value = res.data.nickname
+      userNickname.value = res.data.user.nickname
       userMbti.value = res.data.user_info.mbti
     })
     .catch((err) => {
@@ -188,6 +251,73 @@ const navigateToStock = function (stock_id) {
 .container {
   font-family: 'Godo', sans-serif;
   padding: 2rem;
+}
+
+/* 모달 스타일 */
+.modal-content {
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(139, 193, 72, 0.1);
+  font-family: 'Godo', sans-serif;
+}
+
+.modal-header {
+  background: white;
+  border-bottom: 1px solid rgba(139, 193, 72, 0.1);
+  border-radius: 15px 15px 0 0;
+  padding: 1.5rem;
+}
+
+.modal-title {
+  color: var(--primary-word);
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.modal-body {
+  padding: 2rem;
+  color: var(--primary-word);
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(139, 193, 72, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 0 0 15px 15px;
+}
+
+.btn-secondary {
+  background-color: #f8faf5;
+  color: var(--primary-word);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #e9ecef;
+  transform: translateY(-2px);
+}
+
+.btn-danger {
+  background-color: var(--primary-dark);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: var(--primary-verydark);
+  transform: translateY(-2px);
+}
+
+.btn-close:focus {
+  box-shadow: none;
 }
 
 .community-header h1 {

@@ -42,7 +42,7 @@ export const useStockStore = defineStore('stock', () => {
       })
   }
 
-  return {getStockChart, todaydate, chartdata, stocklist, themeinfo}
+  return {getStockChart, todaydate, chartdata, stocklist, themeinfo, fluctuation_rate}
 }
 // ,{persist: true}
 )

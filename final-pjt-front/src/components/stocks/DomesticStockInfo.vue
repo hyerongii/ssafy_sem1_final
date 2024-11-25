@@ -101,7 +101,12 @@ const securitiesWebsites = {
   '다올투자':'https://www.daolsecurities.com/top.jsp',
   '부국': 'http://www.bookook.co.kr/',
   '상상인': 'https://www.sangsanginib.com/',
-  'SK': 'https://www.direct-sks.co.kr/'
+  'SK': 'https://www.direct-sks.co.kr/',
+  '한국투자': 'https://securities.koreainvestment.com/main/Main.jsp',
+  '신영': 'https://www.shinyoung.com/',
+  'LS증권': 'https://m.ls-sec.co.kr/',
+  'IBK투자': 'https://www.ibks.com/main.do',
+  
 }
 
 const hasWebsite = (source) => {

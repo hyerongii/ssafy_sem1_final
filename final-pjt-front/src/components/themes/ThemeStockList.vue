@@ -23,7 +23,13 @@
                     </div>
                     <span class="stock-name">{{ stock.name }}</span>
                   </div>
-                  <span class="stock-price">{{ formatPrice(stock.price) }}원</span>
+                  <div class="price-info">
+                    <span class="stock-price">{{ formatPrice(stock.price) }}원</span>
+                    <span class="fluctuation-rate" 
+                          :class="getFluctuationClass(stock.code)">
+                      {{ formatFluctuation(stock.code) }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -53,7 +59,13 @@
                     </div>
                     <span class="stock-name">{{ stock.name }}</span>
                   </div>
-                  <span class="stock-price">{{ formatPrice(stock.price) }}원</span>
+                  <div class="price-info">
+                    <span class="stock-price">{{ formatPrice(stock.price) }}원</span>
+                    <span class="fluctuation-rate" 
+                          :class="getFluctuationClass(stock.code)">
+                      {{ formatFluctuation(stock.code) }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -136,7 +148,20 @@ const moveStockItem = function (stockcode) {
     name: 'day',
     params: { stock_id: stockcode }
   })
+}
 
+// 등락률 포맷팅
+const formatFluctuation = (code) => {
+  const rate = stockStore.fluctuation_rate[code]
+  if (!rate) return ''
+  return rate.startsWith('+') ? `${rate}%` : rate > 0 ? `+${rate}%` : `${rate}%`
+}
+
+// 등락률에 따른 클래스 반환
+const getFluctuationClass = (code) => {
+  const rate = stockStore.fluctuation_rate[code]
+  if (!rate) return ''
+  return rate > 0 ? 'increase' : 'decrease'
 }
 
 </script>
@@ -275,5 +300,32 @@ const moveStockItem = function (stockcode) {
   .flag {
     font-size: 1rem;
   }
+}
+
+/* 기존 스타일 유지하고 아래 스타일 추가 */
+.price-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fluctuation-rate {
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.increase {
+  color: #e8384c;
+}
+
+.decrease {
+  color: #2b95eb;
+}
+
+.stock-price {
+  font-weight: 600;
+  color: var(--primary-word);
 }
 </style>
