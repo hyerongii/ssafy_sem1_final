@@ -40,7 +40,7 @@ const chartOptions = ref({
       enabled: true,
       easing: 'linear',
       dynamicAnimation: {
-        speed: 100
+        speed: 500
       }
     },
     toolbar: {
@@ -49,6 +49,18 @@ const chartOptions = ref({
     zoom: {
       enabled: false
     }
+  },
+  markers: {
+    // size: 0,  // 기본 마커 크기는 0으로 설정
+    discrete: [{
+      seriesIndex: 0,
+      dataPointIndex: -1,  // 마지막 포인트
+      fillColor: '#FFF',
+      strokeColor: 'var(--primary-dark)',
+      size: 3,
+      shape: "circle",  // circle, square, rect 등 선택 가능
+      pulsing: true,  // 펄싱 효과 활성화
+    }]
   },
   colors: ['var(--primary-dark)'],
   dataLabels: {
@@ -115,8 +127,8 @@ const chartOptions = ref({
         fontFamily: 'Godo, sans-serif'
       }
     },
-    min: (min) => parseInt(min * 0.9995),
-    max: (max) => parseInt(max * 1.0005)
+    min: (min) => parseInt(min * 0.995),
+    max: (max) => parseInt(max * 1.005)
   },
   tooltip: {
     theme: 'light',
@@ -138,17 +150,89 @@ const chartOptions = ref({
 })
 
 // 초기 차트 데이터 설정
+// watch(
+//   () => stockItemStore.dayChartData,
+//   (newData) => {
+//     if (newData && Array.isArray(newData)) {
+//       const formattedData = newData.map(item => {
+//         const timeStr = item.time;
+//         const hours = timeStr.substring(0, 2);
+//         const minutes = timeStr.substring(2, 4);
+//         const seconds = timeStr.substring(4, 6);
+        
+//         const today = new Date();
+//         const timestamp = new Date(
+//           today.getFullYear(),
+//           today.getMonth(),
+//           today.getDate(),
+//           parseInt(hours),
+//           parseInt(minutes),
+//           parseInt(seconds)
+//         ).getTime();
+
+//         return {
+//           x: timestamp,
+//           y: isNaN(Number(stockcode)) 
+//             ? parseFloat(item.price) * 1405 
+//             : parseFloat(item.price)
+//         }
+//       }).sort((a, b) => a.x - b.x) // 시간순으로 정렬
+
+//       currentSeries.value[0].data = formattedData
+      
+//       if (!isNaN(stockcode)) {
+//         websocketStore.webSocketStart(stockcode)
+//       }
+//     }
+//   },
+//   { immediate: true }
+// )
+
+// 차트 옵션 설정을 동적으로 변경하는 함수
+const getChartOptions = (isUSStock) => {
+  const today = new Date()
+  
+  const xaxisConfig = {
+    min: new Date().setHours(9, 30, 0, 0), // 오전 9시
+    max: new Date().setHours(16, 0, 0, 0) // 오후 3시 30분
+  }
+
+  return {
+    ...chartOptions.value,
+    xaxis: {
+      ...chartOptions.value.xaxis,
+      ...xaxisConfig,
+      labels: {
+        ...chartOptions.value.xaxis.labels,
+        formatter: function(value) {
+          const date = new Date(value)
+          return date.toLocaleTimeString('ko-KR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+          })
+        }
+      }
+    }
+  }
+}
+
+// 초기 차트 데이터 설정 시 차트 옵션 업데이트
 watch(
   () => stockItemStore.dayChartData,
   (newData) => {
     if (newData && Array.isArray(newData)) {
+      const isUSStock = isNaN(Number(stockcode))
+      chartOptions.value = getChartOptions(isUSStock)
+      
       const formattedData = newData.map(item => {
-        const timeStr = item.time;
-        const hours = timeStr.substring(0, 2);
-        const minutes = timeStr.substring(2, 4);
-        const seconds = timeStr.substring(4, 6);
+        const timeStr = item.time
+        const hours = timeStr.substring(0, 2)
+        const minutes = timeStr.substring(2, 4)
+        const seconds = timeStr.substring(4, 6)
         
-        const today = new Date();
+        const today = new Date()
         const timestamp = new Date(
           today.getFullYear(),
           today.getMonth(),
@@ -156,25 +240,26 @@ watch(
           parseInt(hours),
           parseInt(minutes),
           parseInt(seconds)
-        ).getTime();
+        ).getTime()
 
         return {
           x: timestamp,
-          y: isNaN(Number(stockcode)) 
+          y: isUSStock 
             ? parseFloat(item.price) * 1405 
             : parseFloat(item.price)
         }
-      }).sort((a, b) => a.x - b.x) // 시간순으로 정렬
+      }).sort((a, b) => a.x - b.x)
 
       currentSeries.value[0].data = formattedData
       
-      if (!isNaN(stockcode)) {
+      if (!isUSStock) {
         websocketStore.webSocketStart(stockcode)
       }
     }
   },
   { immediate: true }
 )
+
 
 
 // series computed 속성 수정
@@ -229,7 +314,24 @@ watch(
         chart.value.updateSeries([{
           data: currentSeries.value[0].data
         }], true, false) // animate=true, updateAllSeries=false
+
+        // // 마지막 데이터 포인트의 마커 업데이트
+        // chart.value.updateOptions({
+        //   markers: {
+        //     size: 0,
+        //     discrete: [{
+        //       seriesIndex: 0,
+        //       dataPointIndex: currentSeries.value[0].data.length - 1,
+        //       fillColor: '#FFF',
+        //       strokeColor: 'var(--primary-dark)',
+        //       size: 6,
+        //       shape: "circle"
+        //     }]
+        //   }
+        // })
       }
+
+
     }
   }
 )
