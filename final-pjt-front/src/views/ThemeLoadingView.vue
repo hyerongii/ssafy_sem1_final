@@ -15,16 +15,23 @@
   
   <script setup>
   import { ref, onMounted } from 'vue'
-  import { useRouter } from "vue-router"
+  import { useRoute, useRouter } from "vue-router"
   
   // Vue Router 인스턴스를 가져옵니다.
   const router = useRouter()
   const randomMessage = ref('')
+  const route = useRoute()
+  const themeId = route.params.theme_id
   
   const messages = [
-    "ZooZoo님만을 위한 특별한 투자 레시피를 준비하고 있어요 🌱",
-    "ZooZoo님의 투자 테마을 분석하는 중이에요... 잠시만요! 🔍",
-    "ZooZoo님을 위한 맞춤 테마를 찾아보는 중... 거의 다 왔어요! ✨"
+    "특별한 테마의 세계로 안내하고 있어요 🌟",
+    "테마 정보를 한 데 모으는 중이에요... 잠시만 기다려주세요 📊",
+    "투자 테마의 숨겨진 이야기를 찾아가는 중이에요 🔍",
+    "테마의 모든 것을 담아내고 있어요, 곧 만나요! 💫",
+    "시장의 흐름을 읽어내는 중... 거의 다 왔어요 🌊",
+    "시장의 트렌드를 분석하는 중이에요... 조금만 더! 📈",
+    "테마의 전체적인 그림을 그리고 있어요 🎨",
+    "최신 테마 동향을 불러오는 중이에요 ⭐️"
   ]
   
   onMounted(() => {
@@ -37,8 +44,8 @@
   // 컴포넌트가 마운트되면 1초 후 ThemeItemView로 이동합니다.
   setTimeout(() => {
     // 여기 수정해야 합니다.
-    // router.push({ name: "ThemeItemView", params:{theme_id:}})
-  }, 1000)
+    router.push({ name: "ThemeItemView", params: { theme_id : themeId } })
+  }, 2000)
   </script>
   
   <style scoped>
@@ -91,7 +98,7 @@
     height: 100%;
     background: var(--primary-dark);
     border-radius: 4px;
-    animation: loading 4s linear infinite;
+    animation: loading 2s linear infinite;
   }
   
   @keyframes loading {

@@ -12,7 +12,8 @@
   >
     <swiper-slide class="slide" >
       <section class="section">
-        <h2>야 너두 미국주식 할 수 있어!</h2>
+        <h2>Welcome, ZooZoo 랜드</h2>
+        <p>주주가 </p>
         <p>당신만의 투자 동반자, 맞춤형 투자 추천 서비스!</p>
       </section>
     </swiper-slide>
@@ -21,15 +22,15 @@
     <swiper-slide class="slide">
       <section class="section">
         <h2>MBTI 기반 개인화 추천 서비스</h2>
-        <p>당신의 성향에 맞는 맞춤형 투자 전략을 제안합니다.</p>
+        <p>당신의 성향에 맞는 맞춤형 투자 전략을 제안합니다</p>
       </section>
     </swiper-slide>
 
     <!-- 3. 국내주식부터 해외주식까지 한눈에! -->
     <swiper-slide class="slide">
       <section class="section">
-        <h2>국내주식부터 해외주식까지 한눈에!</h2>
-        <p>국내외 다양한 주식 정보를 한 곳에서 확인하세요.</p>
+        <h2>국내주식부터 미국주식까지 한눈에!</h2>
+        <p>다양한 주식 정보를 한 곳에서 확인하세요</p>
       </section>
     </swiper-slide>
 
@@ -37,7 +38,7 @@
     <swiper-slide class="slide zoo-background">
       <section class="section">
         <h2>주린이여도 괜찮아!</h2>
-        <p>초보 투자자도 쉽게 따라할 수 있는 가이드와 추천 종목 제공.</p>
+        <p>초보 투자자도 쉽게 따라할 수 있는 가이드와 추천 종목 제공</p>
       </section>
     </swiper-slide>
 
@@ -119,7 +120,7 @@ const goToThemeRecommendation = () => {
 }
 
 .section h2 {
-  font-size: 3.0rem;
+  font-size: 4.0rem;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
   font-weight: bold;

@@ -138,10 +138,10 @@ onMounted(() => {
 // 테마 상세 페이지 이동
 const goToThemeDetail = (theme_name) => {
   router.push({
-    name: "ThemeItemView",
-    params: { theme_id: theme_name },
-  });
-};
+    name: "ThemeLoadingView",
+    params: {theme_id : theme_name}
+  })
+}
 </script>
 
 <style scoped>

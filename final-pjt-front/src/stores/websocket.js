@@ -6,7 +6,7 @@ import { useAuthStore } from './auth'
 export const useWebsocketStore = defineStore('websocket', () => {
 
   const socket = ref(null)
-  let isRunning = true
+  let isRunning = ref(true)
   const authStore = useAuthStore()
   const stockCode = ref(null)
   const requestStr = ref(null)
@@ -137,6 +137,14 @@ export const useWebsocketStore = defineStore('websocket', () => {
     }
   }
 
+  const webSocketClose = function () {
+    isRunning.value = false
+    if (socket.value && socket.value.readyState === WebSocket.OPEN) {
+      socket.value.close()
+      socket.value = null
+    }
+  }
 
-return { webSocketStart, socket, processedData}
+
+return { webSocketStart, socket, processedData, webSocketClose, isRunning}
 })

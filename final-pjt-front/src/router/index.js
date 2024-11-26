@@ -15,6 +15,7 @@ import YearStockChart from '@/components/stocks/YearStockChart.vue'
 import CommunityView from '@/views/CommunityView.vue'
 import CreateArticleView from '@/views/CreateArticleView.vue'
 import ArticleDetailView from '@/views/ArticleDetailView.vue'
+import ThemeLoadingView from '@/views/ThemeLoadingView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -45,9 +46,9 @@ const router = createRouter({
       component: LoadingView,
     },
     {
-      path: '/loading/theme',
+      path: '/loading/:theme_id',
       name: 'ThemeLoadingView',
-      component: LoadingView,
+      component: ThemeLoadingView,
     },
     {
       path: '/themelist',

@@ -115,8 +115,8 @@ const chartOptions = ref({
         fontFamily: 'Godo, sans-serif'
       }
     },
-    min: (min) => parseInt(min * 0.9999),
-    max: (max) => parseInt(max * 1.0001)
+    min: (min) => parseInt(min * 0.9995),
+    max: (max) => parseInt(max * 1.0005)
   },
   tooltip: {
     theme: 'light',
@@ -136,7 +136,7 @@ const chartOptions = ref({
     }
   },
 })
-// 초기 차트 데이터 설정
+
 // 초기 차트 데이터 설정
 watch(
   () => stockItemStore.dayChartData,
@@ -235,10 +235,23 @@ watch(
 )
 
 onUnmounted(() => {
+  stopWebSocket()
+})
+
+// DayStockChart.vue
+const stopWebSocket = () => {
   if (websocketStore.socket) {
-    websocketStore.socket.close()
+    websocketStore.webSocketClose()
+  }
+}
+
+// 라우트가 변경될 때도 웹소켓 종료
+watch(() => route.params.stock_id, (newId, oldId) => {
+  if (newId !== oldId) {
+    stopWebSocket()
   }
 })
+
 </script>
 
 
