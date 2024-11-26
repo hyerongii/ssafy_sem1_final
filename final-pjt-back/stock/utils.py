@@ -288,6 +288,7 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
     # current_time이 153000(장이 마감되는 시간)을 초과하면 153000으로 설정
     if int(current_time) > 153000:
         current_time = "153000"
+    print(current_time)
 
     # 주말일 경우 금요일 날짜로 설정
     today = datetime.now()
@@ -300,8 +301,13 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
 
     # current_time에서 1시간 전 시간 계산 (HHMMSS 형식)
     time_format = "%H%M%S"
+    start_time = '090000'
     current_datetime = datetime.strptime(current_time, time_format)
-    one_hour_ago = (current_datetime - timedelta(hours=1)).strftime(time_format)
+    one_hour_ago = (current_datetime - timedelta(minutes=30)).strftime(time_format)
+
+    if int(one_hour_ago) < 90000:
+        one_hour_ago = start_time
+        print(type(one_hour_ago))
 
     params = {
         "FID_ETC_CLS_CODE": "",
@@ -313,34 +319,27 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
 
     chart_data = []
     try:
-        while True:
-            response = requests.get(url, headers=headers, params=params)
-            response.raise_for_status()
-            data = response.json()
-            
-            if data['rt_cd'] == '0':
-                for item in data['output2']:
-                    time_value = item['stck_cntg_hour']
-                    
-                    # 현재 데이터가 요청 범위를 벗어나면 중단
-                    if time_value < one_hour_ago:
-                        return chart_data
-                    
-                    chart_data.append({
-                        'time': time_value,
-                        'price': float(item['stck_prpr'])
-                    })
-                
-                # API 응답 데이터 중 가장 이른 시간 확인
-                earliest_time = data['output2'][-1]['stck_cntg_hour']
-                if earliest_time < one_hour_ago:
+        response = requests.get(url, headers=headers, params=params)
+        response.raise_for_status()
+        data = response.json()
+
+        if data['rt_cd'] == '0':  # Successful response
+            for item in data['output2']:
+                time_value = item['stck_cntg_hour']
+
+                # Stop if data is outside the requested range
+                if time_value < one_hour_ago:
                     break
-                
-                # 더 과거 데이터를 가져오기 위해 FID_INPUT_HOUR_1 업데이트
-                params["FID_INPUT_HOUR_1"] = earliest_time
-            else:
-                raise Exception(f"API Error: {data['msg1']}")
-        
+
+                chart_data.append({
+                    'time': time_value,
+                    'price': float(item['stck_prpr'])
+                })
+
+
+        else:  # Handle API error
+            raise Exception(f"API Error: {data['msg1']}")
+        print(chart_data)
         return chart_data
 
     except Exception as e:

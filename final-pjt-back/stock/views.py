@@ -227,7 +227,11 @@ def draw_theme_chart(request):
                 unique_stocks[stock.code] = stock
             # 변동률 데이터를 저장 (key: 주식 코드, value: 변동률)
             stock_fluctuation_rates[stock.code] = stock_day_fluctuation_rate
-
+            # 추가: 현재가 업데이트
+            current_price = get_current_stock_price(access_token, duplicate_stock.code)
+            if current_price > 0 and duplicate_stock.price != current_price:
+                duplicate_stock.price = current_price  # 최신 가격으로 업데이트
+                duplicate_stock.save()
         # Theme 객체의 stock_set을 중복이 제거된 주식들로 업데이트
         theme.stock_set.set(unique_stocks.values())
         
