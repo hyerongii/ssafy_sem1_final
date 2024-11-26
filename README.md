@@ -33,7 +33,8 @@
   	 
 - 최초 아이디어 회의 시 주린이 캐릭터를 만들고 리워드 시스템을 구성해 주식 교육을 진행, 주린이를 성장시킬 수 있도록 구성하고자 하였음.
 
-- 하지만 필수기능들(현재 구현된 기능)의 우선순위에 밀려 구현되지 못함 :cry:
+- 하지만 필수기능들(현재 구현된 기능)의 우선순위에 밀려 구현되지 못함 :cry:  
+ 
 
 ### 3. 데이터베이스 모델링(ERD)
 ![ERD](README_src/image.png)  
@@ -53,16 +54,16 @@
 - 한국과 미국 실제 개별종목의 실시간(동적) 차트와 과거(정적) 차트를 `시각화` 하기 위해 vue.js의 `ApexChart 라이브러리` 활용.
   	- 한국주식의 경우 Websocket을 통해 외부 API와 실시간 통신을 통해 받아오는 데이터와 접속시간부터 장 시작시간까지의 과거 데이터를 `결합`하여 하나의 차트에 그리는 과정이 매우 힘든 과정이었음.
   	- Day Chart를 비롯해 다양한 `Period`(week / 1 month/ 6 month / year) Chart 정보를 제공.
-		![alt text](image-3.png)
+		![alt text](./README_src/image-3.png)
   	
 		- 테마 자체에 대한 평균치 시각화 차트를 제공함으로써 업종의 `전반적인 시황 파악`이 용이한 정보 제공
-  	![alt text](image-2.png)  
+  	![alt text](./README_src/image-2.png)  
 
 - `접근성`이 좋은 입력값(mbti 등)을 활용, 커뮤니티 환경과 동일 MBTI user의 추천 테마를 보여줌으로써 선정한 금융상품(주식)에 대한 접근도 간편하다는 인식 고취.
-	![alt text](image.png)
-	![alt text](image-1.png)
+	![alt text](./README_src/image-5.png)
+	![alt text](./README_src/image-1.png)
 - 최종적으로 개별 종목에 대한 정보와 개별 종목 자체 커뮤니티 서비스를 제공. `공통` 관심사면서 `공통`으로 관심있는 주식에 대해 `소통`할 수 있는 환경 조성. 추가적으로 작성자의 MBTI 정보를 제공해 접근성 고취.
-  ![alt text](image-4.png)  
+  ![alt text](./README_src/image-4.png)  
 
 ### 6. 생성형 AI를 활용한 부분  
 
