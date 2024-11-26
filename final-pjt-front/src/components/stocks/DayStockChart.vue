@@ -341,7 +341,7 @@ watch(
 onUnmounted(() => {
   stopWebSocket()
   // stockItemStore.dayChartData = []  
-  stockItemStore.$reset() // store 리셋
+  // stockItemStore.$reset() // store 리셋
 })
 
 // DayStockChart.vue
