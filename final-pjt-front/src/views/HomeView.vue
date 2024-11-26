@@ -10,18 +10,20 @@
     @slideChange="onSlideChange"
     class="mySwiper"
   >
-    <swiper-slide class="slide" >
+      <swiper-slide class="slide zoo-background2">
       <section class="section">
-        <!-- zoozoo랜드만 색 변환 -->
-        <h2>Welcome to ZooZoo랜드</h2>
-        <!-- 주린이만 색변환 -->
-        <p>주린이의 주린이에 의한 주린이를 위한</p>
-        <p>맞춤형 투자 추천 서비스!</p>
+        <div class="content-wrapper">
+          <img src="@/assets/zoo-logo.png" alt="zoo logo" class="floating-logo">
+          <div class="text-content">
+            <!-- <h2>Welcome to <span class="highlight">ZooZoo랜드</span></h2> -->
+            <p><span class="highlight-text">주린이</span>의 <span class="highlight-text">주린이</span>에 의한 <span class="highlight-text">주린이</span>를 위한 맞춤형 투자 추천 서비스!</p>
+          </div>
+        </div>
       </section>
     </swiper-slide>
 
     <!-- 2. MBTI 기반 개인화 추천 서비스 -->
-    <swiper-slide class="slide">
+    <swiper-slide class="slide zoo-background2">
       <section class="section">
         <h2>MBTI 기반 커뮤니티 서비스</h2>
         <p>나랑 같은 MBTI 사람들은 어떤 테마를 추천받았을까?</p>
@@ -29,7 +31,7 @@
     </swiper-slide>
 
     <!-- 3. 국내주식부터 해외주식까지 한눈에! -->
-    <swiper-slide class="slide">
+    <swiper-slide class="slide zoo-background2">
       <section class="section">
         <h2>야! 너두 미국주식 할 수 있어!</h2>
         <p>(속닥속닥) 미국 주식은 하루라도 일찍 사는게 이득이래 🤭</p>
@@ -37,7 +39,7 @@
     </swiper-slide>
 
     <!-- 4. 주린이여도 괜찮아! -->
-    <swiper-slide class="slide zoo-background">
+    <swiper-slide class="slide zoo-background2">
       <section class="section">
         <h2>주린이여도 괜찮아!</h2>
         <p>초보 투자자도 쉽게 접할 수 있는 가이드와 추천 종목 제공</p>
@@ -106,16 +108,21 @@ const goToThemeRecommendation = () => {
   background: #fff;
 }
 
+.mainbackground {
+  background: #EEF5E7;
+}
+
 .section {
   text-align: center;
   padding: 20px;
   opacity: 0;
   transform: translateY(20px);
   animation: fadeInUp 0.8s ease forwards;
+  position: relative;
 }
 
 .section h2 {
-  font-size: 4.0rem;
+  font-size: 4.5rem;
   margin-bottom: 1.5rem;
   color: var(--primary-color);
   font-weight: bold;
@@ -179,6 +186,39 @@ const goToThemeRecommendation = () => {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.highlight {
+  color: var(--primary-dark);
+}
+
+.highlight-text {
+  color: var(--primary-dark);
+}
+
+.content-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.floating-logo {
+  width: 500px; /* 로고 크기 조정 */
+  height: auto;
+  margin-bottom: 10px; /* 텍스트와의 간격 조정 */
+  z-index: 2;
+}
+
+.text-content {
+  position: relative;
+  z-index: 1;
+}
+
+.zoo-background2 {
+  background-image: url('@/assets/zoo-background2.png'); /* 이미지 경로 */
+  background-size: cover; /* 이미지 크기 조정 */
+  background-position: center; /* 이미지 위치 */
 }
 
 .zoo-background {

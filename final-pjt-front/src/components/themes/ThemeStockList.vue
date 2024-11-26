@@ -185,7 +185,7 @@ const getFluctuationClass = (code) => {
 }
 
 .card-header {
-  background: var(--primary-green);
+  background: var(--primary-color);
   padding: 1rem 1.5rem;
   border-bottom: none;
 }
