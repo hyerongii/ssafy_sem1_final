@@ -272,6 +272,80 @@ def get_current_us_stock_price(access_token, stock_code, stock_excd):
 
 #     return sorted(chart_data, key=lambda x: x['time'])
 
+# def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_time):
+#     base_url = settings.KIS_BASE_URL
+#     path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemchartprice"
+#     url = f"{base_url}{path}"
+
+#     headers = {
+#         "Content-Type": "application/json; charset=utf-8",
+#         "authorization": f"Bearer {access_token}",
+#         "appkey": settings.KIS_APP_KEY,
+#         "appsecret": settings.KIS_APP_SECRET,
+#         "tr_id": "FHKST03010200"
+#     }
+
+#     # current_time이 153000(장이 마감되는 시간)을 초과하면 153000으로 설정
+#     if int(current_time) > 153000:
+#         current_time = "153000"
+#     print(current_time)
+
+#     # 주말일 경우 금요일 날짜로 설정
+#     today = datetime.now()
+#     if today.weekday() >= 5:  # 토요일(5) 또는 일요일(6)
+#         days_to_friday = today.weekday() - 4
+#         friday_date = today - timedelta(days=days_to_friday)
+#         current_date = friday_date.strftime("%Y%m%d")
+#     else:
+#         current_date = today.strftime("%Y%m%d")
+
+#     # current_time에서 1시간 전 시간 계산 (HHMMSS 형식)
+#     time_format = "%H%M%S"
+#     start_time = '090000'
+#     current_datetime = datetime.strptime(current_time, time_format)
+#     one_hour_ago = (current_datetime - timedelta(minutes=30)).strftime(time_format)
+
+#     if int(one_hour_ago) < 90000:
+#         one_hour_ago = start_time
+#         print(type(one_hour_ago))
+
+#     params = {
+#         "FID_ETC_CLS_CODE": "",
+#         "FID_COND_MRKT_DIV_CODE": "J",
+#         "FID_INPUT_ISCD": stock_code,
+#         "FID_INPUT_HOUR_1": current_time,
+#         "FID_PW_DATA_INCU_YN": "N",
+#     }
+
+#     chart_data = []
+#     try:
+#         response = requests.get(url, headers=headers, params=params)
+#         response.raise_for_status()
+#         data = response.json()
+
+#         if data['rt_cd'] == '0':  # Successful response
+#             for item in data['output2']:
+#                 time_value = item['stck_cntg_hour']
+
+#                 # Stop if data is outside the requested range
+#                 if time_value < one_hour_ago:
+#                     break
+
+#                 chart_data.append({
+#                     'time': time_value,
+#                     'price': float(item['stck_prpr'])
+#                 })
+
+
+#         else:  # Handle API error
+#             raise Exception(f"API Error: {data['msg1']}")
+#         print(chart_data)
+#         return chart_data
+
+#     except Exception as e:
+#         print(f"Error getting price for stock {stock_code}: {str(e)}")
+#         return []
+
 def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_time):
     base_url = settings.KIS_BASE_URL
     path = "/uapi/domestic-stock/v1/quotations/inquire-time-itemchartprice"
@@ -288,7 +362,6 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
     # current_time이 153000(장이 마감되는 시간)을 초과하면 153000으로 설정
     if int(current_time) > 153000:
         current_time = "153000"
-    print(current_time)
 
     # 주말일 경우 금요일 날짜로 설정
     today = datetime.now()
@@ -299,53 +372,53 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
     else:
         current_date = today.strftime("%Y%m%d")
 
-    # current_time에서 1시간 전 시간 계산 (HHMMSS 형식)
+    # current_time에서 30분 전 시간 계산 (HHMMSS 형식)
     time_format = "%H%M%S"
     start_time = '090000'
     current_datetime = datetime.strptime(current_time, time_format)
-    one_hour_ago = (current_datetime - timedelta(minutes=30)).strftime(time_format)
+    # 30분 전 데이터가 유효한지 확인하는 변수
+    thirty_minutes_ago_time = (current_datetime - timedelta(minutes=30)).strftime(time_format)
+    dummy = datetime.strptime(thirty_minutes_ago_time, time_format)
 
-    if int(one_hour_ago) < 90000:
-        one_hour_ago = start_time
-        print(type(one_hour_ago))
+    # 조회 시간 이전으로 돌아가며 호출하는데 
+    # 장 시작시간 이전을 조회하려 하면 09시로 고정
+    if int(thirty_minutes_ago_time) < 90000:
+        thirty_minutes_ago_time = start_time
 
-    params = {
+
+    chart_data = []
+    while int(current_time) >= 90000:
+        params = {
         "FID_ETC_CLS_CODE": "",
         "FID_COND_MRKT_DIV_CODE": "J",
         "FID_INPUT_ISCD": stock_code,
+        # current_time을 30분 전으로 계속 수정하면서 반복조회
         "FID_INPUT_HOUR_1": current_time,
         "FID_PW_DATA_INCU_YN": "N",
-    }
+        } 
+        try:
+            response = requests.get(url, headers=headers, params=params)
+            response.raise_for_status()
+            data = response.json()
 
-    chart_data = []
-    try:
-        response = requests.get(url, headers=headers, params=params)
-        response.raise_for_status()
-        data = response.json()
-
-        if data['rt_cd'] == '0':  # Successful response
-            for item in data['output2']:
-                time_value = item['stck_cntg_hour']
-
-                # Stop if data is outside the requested range
-                if time_value < one_hour_ago:
-                    break
-
-                chart_data.append({
-                    'time': time_value,
-                    'price': float(item['stck_prpr'])
-                })
-
-
-        else:  # Handle API error
-            raise Exception(f"API Error: {data['msg1']}")
-        print(chart_data)
-        return chart_data
-
-    except Exception as e:
-        print(f"Error getting price for stock {stock_code}: {str(e)}")
-        return []
-
+            if data['rt_cd'] == '0':  
+                for item in data['output2']:
+                    time_value = item['stck_cntg_hour']
+                    # api통신을 통해 받은 시간 데이터가 장 시작 전일경우 함수 종료 및 리턴
+                    if time_value >= thirty_minutes_ago_time:
+                        break
+                    chart_data.append({
+                        'time': time_value,
+                        'price': float(item['stck_prpr'])
+                    })
+            else:  # Handle API error
+                raise Exception(f"API Error: {data['msg1']}")
+        except Exception as e:
+            print(f"Error getting price for stock {stock_code}: {str(e)}")
+            return []
+        current_datetime -= timedelta(minutes=30)
+        current_time = current_datetime.strftime('%H%M%S')
+    return chart_data
 
 
 # def get_d_stock_chart_data_day(access_token, stock_code, current_time):

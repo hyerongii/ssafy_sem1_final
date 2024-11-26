@@ -3,12 +3,12 @@
     <div class="theme-container">
       <!-- 같은 MBTI 추천 테마 섹션 -->
       <div class="recommendation-section mb-5">
-        <h1 class="title-bubble">{{store.nickname}} 주주님의 mbti와 같은 주주들은 이런 테마도 추천 받았어요! 🎈</h1>
+        <h1 class="title-bubble">{{ store.nickname }}님의 mbti와 같은 주주들은 이런 테마도 추천 받았어요! 🎈</h1>
         <div class="tags-container">
           <div v-for="sametheme in sameThemes.interests" 
               :key="sametheme"
               class="theme-tag"
-              @click="goToThemeLoading(sametheme)">
+              @click="goToThemeDetail(sametheme)">
             {{ sametheme }}
           </div>
         </div>
@@ -16,12 +16,12 @@
 
       <!-- 메인 추천 테마 섹션 -->
       <div class="recommendation-section">
-        <h1 class="title-bubble">{{store.nickname}} 주주님의 추천 테마는 아래와 같습니다! 🎯</h1>
+        <h1 class="title-bubble">{{ store.nickname }}의 추천 테마는 아래와 같습니다! 🎯</h1>
         <div class="theme-grid">
           <div v-for="theme in themes" 
               :key="theme.theme_name" 
               class="theme-card"
-              @click="goToThemeLoading(theme.theme_name)">
+              @click="goToThemeDetail(theme.theme_name)">
             <div class="theme-header">
               <h3 class="theme-title">{{ theme.theme_name }}</h3>
               <p class="theme-description">{{ theme.description }}</p>
@@ -72,28 +72,14 @@
 </template>
 
 <script setup>
-import { useUserInterestStore } from "@/stores/userinterest"
-import { ref, onMounted } from "vue"
-import { useRouter } from "vue-router"
+import { useUserInterestStore } from "@/stores/userinterest";
+import { ref, onMounted } from "vue";
+import { useRouter } from "vue-router";
 
 const router = useRouter();
 const store = useUserInterestStore();
 const themes = store.recommendthemes;
 const sameThemes = store.samethemes;
-
-// 컴포넌트가 마운트될 때 데이터 확인 및 초기화
-onMounted(async () => {
-  // store에 데이터가 없는 경우에만 analyze 실행
-  if (!store.recommendthemes || store.recommendthemes.length === 0) {
-    await store.analyze();
-    // analyze 완료 후 데이터 업데이트
-    themes.value = store.recommendthemes;
-    sameThemes.value = store.samethemes;
-  }
-  
-  // 로고 초기화는 데이터 유무와 관계없이 실행
-  await initializeStockLogos();
-})
 
 // 로고 URL을 저장하는 반응형 객체
 const stockLogos = ref({});
@@ -108,27 +94,27 @@ const filterKoreanStocks = (stocks) => stocks.filter(stock => !checkUsa(stock.co
 // 이미지 존재 여부 확인 함수
 const checkImageExists = (url) => {
   return new Promise((resolve) => {
-    const img = new Image()
-    img.onload = () => resolve(true)
-    img.onerror = () => resolve(false)
-    img.src = url
-  })
-}
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+};
 
 // 비동기 로고 URL 가져오기
 const getStockLogo = async (code) => {
   if (isNaN(Number(code))) {
     const parqetLogoUrl = `https://assets.parqet.com/logos/symbol/${code}?format=png`;
-    const isParqetLogoValid = await checkImageExists(parqetLogoUrl)
+    const isParqetLogoValid = await checkImageExists(parqetLogoUrl);
     if (isParqetLogoValid) {
-      return parqetLogoUrl
+      return parqetLogoUrl;
     }
   }
 
   try {
-    return new URL(`../assets/logos/${code}.png`, import.meta.url).href
+    return new URL(`../assets/logos/${code}.png`, import.meta.url).href;
   } catch {
-    console.error(`로컬 이미지가 존재하지 않습니다: @/assets/logos/${code}.png`)
+    console.error(`로컬 이미지가 존재하지 않습니다: @/assets/logos/${code}.png`);
     return null;
   }
 };
@@ -138,7 +124,7 @@ const initializeStockLogos = async () => {
   for (const theme of themes) {
     for (const stock of theme.stocks) {
       if (!stockLogos.value[stock.code]) {
-        stockLogos.value[stock.code] = await getStockLogo(stock.code)
+        stockLogos.value[stock.code] = await getStockLogo(stock.code);
       }
     }
   }
@@ -146,15 +132,16 @@ const initializeStockLogos = async () => {
 
 // 컴포넌트가 마운트될 때 로고 초기화
 onMounted(() => {
-  initializeStockLogos()
-})
+  initializeStockLogos();
+});
 
 // 테마 상세 페이지 이동
-const goToThemeLoading = (theme_name) => {
+const goToThemeDetail = (theme_name) => {
   router.push({
-    name: "ThemeLoadingView",
-  })
-}
+    name: "ThemeItemView",
+    params: { theme_id: theme_name },
+  });
+};
 </script>
 
 <style scoped>
