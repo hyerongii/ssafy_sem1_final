@@ -372,30 +372,21 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
     else:
         current_date = today.strftime("%Y%m%d")
 
-    # current_time에서 30분 전 시간 계산 (HHMMSS 형식)
-    time_format = "%H%M%S"
+    # 주식 시장의 시작 시간
     start_time = '090000'
-    current_datetime = datetime.strptime(current_time, time_format)
-    # 30분 전 데이터가 유효한지 확인하는 변수
-    thirty_minutes_ago_time = (current_datetime - timedelta(minutes=30)).strftime(time_format)
-    dummy = datetime.strptime(thirty_minutes_ago_time, time_format)
-
-    # 조회 시간 이전으로 돌아가며 호출하는데 
-    # 장 시작시간 이전을 조회하려 하면 09시로 고정
-    if int(thirty_minutes_ago_time) < 90000:
-        thirty_minutes_ago_time = start_time
-
-
+    
+    # chart_data 초기화
     chart_data = []
-    while int(current_time) >= 90000:
+
+    # 반복적으로 데이터를 요청하며 chart_data에 추가
+    while int(current_time) >= int(start_time):
         params = {
-        "FID_ETC_CLS_CODE": "",
-        "FID_COND_MRKT_DIV_CODE": "J",
-        "FID_INPUT_ISCD": stock_code,
-        # current_time을 30분 전으로 계속 수정하면서 반복조회
-        "FID_INPUT_HOUR_1": current_time,
-        "FID_PW_DATA_INCU_YN": "N",
-        } 
+            "FID_ETC_CLS_CODE": "",
+            "FID_COND_MRKT_DIV_CODE": "J",
+            "FID_INPUT_ISCD": stock_code,
+            "FID_INPUT_HOUR_1": current_time,
+            "FID_PW_DATA_INCU_YN": "N",
+        }
         try:
             response = requests.get(url, headers=headers, params=params)
             response.raise_for_status()
@@ -404,20 +395,28 @@ def get_d_stock_chart_data_day_for_realtime(access_token, stock_code, current_ti
             if data['rt_cd'] == '0':  
                 for item in data['output2']:
                     time_value = item['stck_cntg_hour']
-                    # api통신을 통해 받은 시간 데이터가 장 시작 전일경우 함수 종료 및 리턴
-                    if time_value >= thirty_minutes_ago_time:
-                        break
-                    chart_data.append({
-                        'time': time_value,
-                        'price': float(item['stck_prpr'])
-                    })
+                    price_value = float(item['stck_prpr'])
+                    
+                    # 중복 데이터 방지: 이미 저장된 시간은 추가하지 않음
+                    if not any(d['time'] == time_value for d in chart_data):
+                        chart_data.append({
+                            'time': time_value,
+                            'price': price_value
+                        })
             else:  # Handle API error
                 raise Exception(f"API Error: {data['msg1']}")
         except Exception as e:
             print(f"Error getting price for stock {stock_code}: {str(e)}")
             return []
-        current_datetime -= timedelta(minutes=30)
+
+        # 30분 전으로 시간 감소
+        current_datetime = datetime.strptime(current_time, "%H%M%S") - timedelta(minutes=30)
         current_time = current_datetime.strftime('%H%M%S')
+
+        # 장 시작 시간 이전으로 가면 종료
+        if int(current_time) < int(start_time):
+            break
+
     return chart_data
 
 
