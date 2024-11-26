@@ -626,15 +626,15 @@ def get_oversea_stock_chartdata_day(access_token,stock_code,excd):
         "AUTH": "",
         "EXCD": excd,
         "SYMB": stock_code,
-        "NMIN": "",
-        # 시차가 있음...이건 추후 더 분석이 필요하다 
-        "PINC": "1",
-        "NREC": "120", # 5,0,120 함으로써 한국시간 기준 장 시작부터 마감까지의 정보를 받아올 수 있음
+        "NMIN": "10",
+        # 전일 포함 여부
+        "PINC": "0",
+        # 레코드 요청 개수
+        "NREC": "120", 
         "NEXT":"",
         "NREC":"",
         "FILL":"",
         "KEYB":""
-
     }
     chart_data = []
     try:

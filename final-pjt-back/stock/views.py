@@ -390,6 +390,7 @@ def o_chart(request):
         stock_code=stock_code,
         excd=excd
     )
+    print(chart_data)
     
     response_data = {
         'chart_data': chart_data,
