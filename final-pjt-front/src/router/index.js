@@ -45,6 +45,11 @@ const router = createRouter({
       component: LoadingView,
     },
     {
+      path: '/loading/theme',
+      name: 'ThemeLoadingView',
+      component: LoadingView,
+    },
+    {
       path: '/themelist',
       name: 'ThemeListView',
       component: ThemeListView,

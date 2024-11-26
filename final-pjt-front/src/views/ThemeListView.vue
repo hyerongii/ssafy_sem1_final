@@ -8,7 +8,7 @@
           <div v-for="sametheme in sameThemes.interests" 
               :key="sametheme"
               class="theme-tag"
-              @click="goToThemeDetail(sametheme)">
+              @click="goToThemeLoading(sametheme)">
             {{ sametheme }}
           </div>
         </div>
@@ -21,7 +21,7 @@
           <div v-for="theme in themes" 
               :key="theme.theme_name" 
               class="theme-card"
-              @click="goToThemeDetail(theme.theme_name)">
+              @click="goToThemeLoading(theme.theme_name)">
             <div class="theme-header">
               <h3 class="theme-title">{{ theme.theme_name }}</h3>
               <p class="theme-description">{{ theme.description }}</p>
@@ -150,10 +150,9 @@ onMounted(() => {
 })
 
 // 테마 상세 페이지 이동
-const goToThemeDetail = (theme_name) => {
+const goToThemeLoading = (theme_name) => {
   router.push({
-    name: "ThemeItemView",
-    params: { theme_id: theme_name },
+    name: "ThemeLoadingView",
   })
 }
 </script>
