@@ -100,9 +100,12 @@ export const useAuthStore = defineStore('auth', () => {
       .then(() => {
         // 로그아웃 성공 처리
         token.value = null
+        websocketToken.value = null
         alert('로그아웃 성공!')
         // 로컬 스토리지나 쿠키에 저장된 토큰 제거
-        localStorage.removeItem('token')
+        localStorage.removeItem('auth')
+        localStorage.removeItem('interest')
+        localStorage.removeItem('article')
         user.value = null  // 로그아웃 시 사용자 정보도 초기화
         // 홈 페이지나 로그인 페이지로 리다이렉트
         router.push({ name: 'HomeView' })

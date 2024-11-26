@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <!-- 게시글 카드 -->
@@ -7,7 +7,7 @@
           <div class="card-header bg-white">
             <div class="d-flex justify-content-between align-items-center">
               <div class="d-flex align-items-center">
-                <img src="" alt="프로필" class="rounded-circle" style="width: 40px; height: 40px;">
+                <img :src="profileImage" alt="프로필" class="rounded-circle" style="width: 40px; height: 40px;">
                 <div class="user-info ms-3">
                   <div class="d-flex align-items-center gap-2">
                     <h6 class="mb-0">{{ article?.article.author }}</h6>
@@ -269,10 +269,32 @@ const getUserInfo = function() {
     })
 }
 
+// 프로필 사진 
+
+const profileImage = ref(null)
+const getProfileImage = function () {
+  const profileImages = [
+    'penguin.png',
+    'elephant.png',
+    'lion.png',
+    'dog.png',
+    'cat.png',
+    'pig.png',
+    'sheep.png',
+    'monkey.png',
+    'rabbit.png',
+    'tiger.png'
+  ]
+  const randomIndex = Math.floor(Math.random() * profileImages.length)
+  const imageName = profileImages[randomIndex]
+  profileImage.value = new URL(`../assets/profile/${imageName}`, import.meta.url).href
+}
+
 
 onMounted(() => {
   getArticleDetail(articleId)
   getUserInfo()
+  getProfileImage()
 })
 
 </script>
@@ -281,6 +303,7 @@ onMounted(() => {
 .container {
   font-family: 'Godo', sans-serif;
   padding: 2rem;
+  margin-top: 5rem;
 }
 
 .card {

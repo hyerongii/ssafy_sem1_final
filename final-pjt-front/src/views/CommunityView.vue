@@ -19,12 +19,12 @@
           <div class="post-header">
             <div class="user-info">
               <div class="user-avatar">
-                <img src="" alt="프로필" class="rounded-circle">
+                <img :src="profileImage" alt="프로필" class="rounded-circle">
               </div>
               <div class="user-details">
                 <span class="author">{{ article.author_nickname || '익명' }}</span>
                 <span class="mbti">{{ article.author_mbti}}</span>
-                <span class="post-time">{{ article.created_at }}</span>
+                <span class="post-time">{{formatDateTime(article.updated_at) }}</span>
               </div>
             </div>
             <div class="post-menu dropdown">
@@ -110,6 +110,48 @@ userMbti.value = articlestore.userMbti
 // 삭제할 게시글 ID 저장용 ref 추가
 const deleteArticleId = ref(null)
 
+
+// 프로필 사진 
+
+const profileImage = ref(null)
+const getProfileImage = function () {
+  const profileImages = [
+    'penguin.png',
+    'elephant.png',
+    'lion.png',
+    'dog.png',
+    'cat.png',
+    'pig.png',
+    'sheep.png',
+    'monkey.png',
+    'rabbit.png',
+    'tiger.png'
+  ]
+  const randomIndex = Math.floor(Math.random() * profileImages.length)
+  const imageName = profileImages[randomIndex]
+  profileImage.value = new URL(`../assets/profile/${imageName}`, import.meta.url).href
+}
+
+// 시간 포맷팅 함수 추가
+const formatDateTime = (timestamp) => {
+  if (!timestamp) return ''
+  
+  // UTC 시간을 Date 객체로 변환
+  const date = new Date(timestamp)
+  
+  // 9시간을 더해서 KST로 변환
+  date.setHours(date.getHours() + 9)
+  
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  const hours = String(date.getHours()).padStart(2, '0')
+  const minutes = String(date.getMinutes()).padStart(2, '0')
+  const seconds = String(date.getSeconds()).padStart(2, '0')
+  
+  return `${year}-${month}-${day} ${hours}:${minutes}`
+}
+
 // 삭제 버튼 클릭 시 모달 표시
 const showDeleteModal = (articleId) => {
   deleteArticleId.value = articleId
@@ -151,6 +193,7 @@ const confirmDelete = () => {
   }
 }
 
+
 const getCurrentTime = () => {
   const now = new Date()
   const hours = String(now.getHours()).padStart(2, '0')
@@ -166,6 +209,7 @@ onMounted(() => {
   store.getArticleInfo(stockcode, currentTime)
   console.log(authstore.user.pk)
   getUserInfo()
+  getProfileImage()
 })
 
 const articleCreate = function () {

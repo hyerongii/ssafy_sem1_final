@@ -14,13 +14,21 @@ export const useWebsocketStore = defineStore('websocket', () => {
 
   const webSocketStart = function (stockcode) {
     stockCode.value = stockcode
-    
     requestStr.value = 'H0STCNT0'
+
+        // 웹소켓 연결 전에 토큰이 있는지 확인
+    if (!authStore.websocketToken?.websocket_token) {
+      console.error('웹소켓 토큰이 없습니다')
+      return
+    }
+    
     socket.value = new WebSocket('ws://ops.koreainvestment.com:21000')
 
     socket.value.onopen = () => {
       console.log('WebSocket 연결이 열렸습니다.')
-      dataFetchLoop()
+      setTimeout(() => {
+        dataFetchLoop()
+      }, 1000)
     }
     
     socket.value.onerror = (error) => {
@@ -54,7 +62,7 @@ export const useWebsocketStore = defineStore('websocket', () => {
         },
         body: {
           input: {
-            tr_id: "H0STCNT0",  // 'H0STCNT0' 대신 저장된 값 사용
+            tr_id: requestStr.value,  // 'H0STCNT0' 대신 저장된 값 사용
             tr_key: stockCode.value
           }
         }
@@ -69,8 +77,8 @@ export const useWebsocketStore = defineStore('websocket', () => {
   const receiveMessage = () => {
     return new Promise((resolve) => {
       socket.value.onmessage = (event) => {
-        // console.log('Raw data:', event.data)
-        const processedData = stockspurchaseDomestic(event.data)
+        console.log('Raw data:', event.data)
+        processedData.value = stockspurchaseDomestic(event.data)
         console.log('Processed data:', processedData)
         resolve(processedData)
       }

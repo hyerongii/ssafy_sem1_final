@@ -40,7 +40,7 @@ const chartOptions = ref({
       enabled: true,
       easing: 'linear',
       dynamicAnimation: {
-        speed: 350
+        speed: 100
       }
     },
     toolbar: {
@@ -77,6 +77,8 @@ const chartOptions = ref({
   },
   xaxis: {
     type: 'datetime',
+    min: new Date().setHours(9, 0, 0, 0), // 오전 9시
+    max: new Date().setHours(15, 30, 0, 0), // 오후 3시 30분
     labels: {
       style: {
         colors: 'var(--primary-word)',
@@ -94,6 +96,7 @@ const chartOptions = ref({
         });
       }
     },
+    tickAmount: 6, // x축 눈금 개수 조정
     tooltip: {
       enabled: false  // X축 툴팁 완전히 비활성화
     },
@@ -112,8 +115,8 @@ const chartOptions = ref({
         fontFamily: 'Godo, sans-serif'
       }
     },
-    min: (min) => parseInt(min * 0.999),
-    max: (max) => parseInt(max * 1.001)
+    min: (min) => parseInt(min * 0.9999),
+    max: (max) => parseInt(max * 1.0001)
   },
   tooltip: {
     theme: 'light',
@@ -134,18 +137,17 @@ const chartOptions = ref({
   },
 })
 // 초기 차트 데이터 설정
+// 초기 차트 데이터 설정
 watch(
   () => stockItemStore.dayChartData,
   (newData) => {
     if (newData && Array.isArray(newData)) {
       const formattedData = newData.map(item => {
-        // 시간 문자열을 파싱
         const timeStr = item.time;
         const hours = timeStr.substring(0, 2);
         const minutes = timeStr.substring(2, 4);
         const seconds = timeStr.substring(4, 6);
         
-        // 오늘 날짜 기준으로 timestamp 생성
         const today = new Date();
         const timestamp = new Date(
           today.getFullYear(),
@@ -162,11 +164,10 @@ watch(
             ? parseFloat(item.price) * 1405 
             : parseFloat(item.price)
         }
-      })
+      }).sort((a, b) => a.x - b.x) // 시간순으로 정렬
 
       currentSeries.value[0].data = formattedData
       
-      // 웹소켓 연결 시작
       if (!isNaN(stockcode)) {
         websocketStore.webSocketStart(stockcode)
       }
@@ -175,6 +176,7 @@ watch(
   { immediate: true }
 )
 
+
 // series computed 속성 수정
 const series = computed(() => [{
   name: '주가',
@@ -182,12 +184,11 @@ const series = computed(() => [{
 }])
 
 
-// 실시간 데이터 업데이트
+// 실시간 데이터 업데이트 최적화
 watch(
   () => websocketStore.processedData,
   (newData) => {
-    if (newData && newData.price && isFinite(newData.price)) {
-      // 시간 문자열을 올바른 Date 객체로 변환
+    if (newData?.price && isFinite(newData.price)) {
       const timeStr = newData.time;
       const hours = timeStr.substring(0, 2);
       const minutes = timeStr.substring(2, 4);
@@ -207,16 +208,27 @@ watch(
         ? parseFloat(newData.price) * 1405
         : parseFloat(newData.price)
       
-      currentSeries.value[0].data.push({
-        x: timestamp,
-        y: price
-      })
+      // 중복 데이터 체크 및 제거
+      const existingDataIndex = currentSeries.value[0].data.findIndex(
+        item => item.x === timestamp
+      )
+      
+      if (existingDataIndex !== -1) {
+        // 같은 시간의 데이터가 있으면 업데이트
+        currentSeries.value[0].data[existingDataIndex].y = price
+      } else {
+        // 새로운 데이터 추가
+        currentSeries.value[0].data.push({
+          x: timestamp,
+          y: price
+        })
+      }
 
-      // ApexCharts 업데이트
+      // 차트 업데이트
       if (chart.value) {
         chart.value.updateSeries([{
           data: currentSeries.value[0].data
-        }])
+        }], true, false) // animate=true, updateAllSeries=false
       }
     }
   }

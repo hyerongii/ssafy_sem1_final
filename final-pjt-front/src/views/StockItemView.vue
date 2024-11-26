@@ -231,20 +231,20 @@ const moveArticleDetail = function (articleId) {
 const profileImage = ref(null)
 const getProfileImage = function () {
   const profileImages = [
-        '@/assets/profile/penguin.png',
-        '@/assets/profile/elephant.png',
-        '@/assets/profile/lion.png',
-        '@/assets/profile/dog.png',
-        '@/assets/profile/cat.png',
-        '@/assets/profile/pig.png',
-        '@/assets/profile/sheep.png',
-        '@/assets/profile/monkey.png',
-        '@/assets/profile/rabbit.png',
-        '@/assets/profile/tiger.png',
-      ];
-      const randomIndex = Math.floor(Math.random() * profileImages.length);
-      console.log(randomIndex);
-      profileImage.value = profileImages[randomIndex]
+    'penguin.png',
+    'elephant.png',
+    'lion.png',
+    'dog.png',
+    'cat.png',
+    'pig.png',
+    'sheep.png',
+    'monkey.png',
+    'rabbit.png',
+    'tiger.png'
+  ]
+  const randomIndex = Math.floor(Math.random() * profileImages.length)
+  const imageName = profileImages[randomIndex]
+  profileImage.value = new URL(`../assets/profile/${imageName}`, import.meta.url).href
 }
 
 </script>
