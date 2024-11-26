@@ -12,25 +12,27 @@
   >
     <swiper-slide class="slide" >
       <section class="section">
-        <h2>Welcome, ZooZoo 랜드</h2>
-        <p>주주가 </p>
-        <p>당신만의 투자 동반자, 맞춤형 투자 추천 서비스!</p>
+        <!-- zoozoo랜드만 색 변환 -->
+        <h2>Welcome to ZooZoo랜드</h2>
+        <!-- 주린이만 색변환 -->
+        <p>주린이의 주린이에 의한 주린이를 위한</p>
+        <p>맞춤형 투자 추천 서비스!</p>
       </section>
     </swiper-slide>
 
     <!-- 2. MBTI 기반 개인화 추천 서비스 -->
     <swiper-slide class="slide">
       <section class="section">
-        <h2>MBTI 기반 개인화 추천 서비스</h2>
-        <p>당신의 성향에 맞는 맞춤형 투자 전략을 제안합니다</p>
+        <h2>MBTI 기반 커뮤니티 서비스</h2>
+        <p>나랑 같은 MBTI 사람들은 어떤 테마를 추천받았을까?</p>
       </section>
     </swiper-slide>
 
     <!-- 3. 국내주식부터 해외주식까지 한눈에! -->
     <swiper-slide class="slide">
       <section class="section">
-        <h2>국내주식부터 미국주식까지 한눈에!</h2>
-        <p>다양한 주식 정보를 한 곳에서 확인하세요</p>
+        <h2>야! 너두 미국주식 할 수 있어!</h2>
+        <p>(속닥속닥) 미국 주식은 하루라도 일찍 사는게 이득이래 🤭</p>
       </section>
     </swiper-slide>
 
@@ -38,17 +40,10 @@
     <swiper-slide class="slide zoo-background">
       <section class="section">
         <h2>주린이여도 괜찮아!</h2>
-        <p>초보 투자자도 쉽게 따라할 수 있는 가이드와 추천 종목 제공</p>
+        <p>초보 투자자도 쉽게 접할 수 있는 가이드와 추천 종목 제공</p>
       </section>
     </swiper-slide>
 
-    <!-- 5. 커뮤니티 (다양한 사람들과 종목에 대해 토의해봐요!) -->
-    <swiper-slide class="slide">
-      <section class="section">
-        <h2>커뮤니티</h2>
-        <p>다양한 사람들과 종목에 대해 토론하고 의견을 나누세요!</p>
-      </section>
-    </swiper-slide>
 
   </swiper>
   <!-- 진문수정 / Fixed 버튼 추가 -->

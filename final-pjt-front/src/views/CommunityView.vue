@@ -2,7 +2,7 @@
   <div class="container mt-5" v-if="store.articles?.articles_data">
     <div class="community-header">
       <h1 class="text-center mb-4">
-        <span @click="navigateToStock(stockcode)">{{ store.articles?.articles_data?.stock_name }}</span> 주주님들 모이세요!
+        <span id="stock-name" @click="navigateToStock(stockcode)">{{ store.articles?.articles_data?.stock_name }}</span> 주주님들 모이세요!
       </h1>
       <div class="d-flex justify-content-end mb-4">
         <button class="btn btn-primary rounded-pill px-4" @click="articleCreate">
@@ -27,28 +27,25 @@
                 <span class="post-time">{{formatDateTime(article.updated_at) }}</span>
               </div>
             </div>
-            <div class="post-menu dropdown">
-              <i class="bi bi-three-dots-vertical"></i>
-            </div>
           </div>
   
           <!-- 게시글 내용 -->
           <div class="post-content" >
             <h5 class="post-title">{{ article.title }}</h5>
             <!-- <p class="post-text">{{ article.content }}</p> -->
-            <div class="theme-tag">
+            <!-- <div class="theme-tag">
               <span class="badge rounded-pill bg-light text-dark">
                 # {{ article.theme_name }}
               </span>
-            </div>
+            </div> -->
           </div>
         </div>
           <!-- 게시글 액션 버튼 -->
           <div class="post-actions">
-            <button class="action-btn">
+            <!-- <button class="action-btn">
               <i class="bi bi-heart"></i>
               <span>좋아요</span>
-            </button>
+            </button> -->
             <button class="action-btn" @click="moveArticleDetail(article.id)">
               <i class="bi bi-chat"></i>
               <span>댓글</span>
@@ -285,7 +282,7 @@ const moveArticleDetail = function (articleId) {
 }
 
 const navigateToStock = function (stock_id) {
-  router.push({name: 'StockItemView', params:{ stock_id : stock_id }})
+  router.push({name: 'day', params:{ stock_id : stock_id }})
 }
 
 </script>
@@ -295,6 +292,14 @@ const navigateToStock = function (stock_id) {
 .container {
   font-family: 'Godo', sans-serif;
   padding: 2rem;
+}
+
+#stock-name {
+  color: var(--primary-color);
+  font-size: 2.5rem;
+  border: 1px solid #f8faf5;
+  background-color: #f8faf5;
+  border-radius: 12px;
 }
 
 /* 모달 스타일 */

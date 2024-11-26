@@ -116,10 +116,10 @@
   
             <!-- 게시글 액션 -->
             <div class="post-actions">
-              <button class="action-btn">
+              <!-- <button class="action-btn">
                 <i class="bi bi-heart"></i>
                 <span>좋아요</span>
-              </button>
+              </button> -->
               <button class="action-btn">
                 <i class="bi bi-chat"></i>
                 <span>댓글</span>
@@ -225,7 +225,7 @@ const formatTime = (timestamp) => {
 }
 
 const moveArticleDetail = function (articleId) {
-  router.push({name: 'ArticleDetailView', params:{ article_id : articleId }})
+  router.push({name: 'ArticleDetailView', params:{ article_id : articleId, stock_id : stockcode }})
 }
 
 const profileImage = ref(null)
@@ -260,8 +260,8 @@ const getProfileImage = function () {
   background: white;
   padding: 2rem;
   border-radius: 15px;
-  border-left: 4px solid var(--primary-color);
-  margin-bottom: 2rem;
+  /* border-left: 4px solid var(--primary-color); */
+  margin-bottom: 1rem;
 }
 
 .stock-title {

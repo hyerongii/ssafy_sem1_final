@@ -3,6 +3,11 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <!-- 게시글 카드 -->
+        <div class="back-button-container mb-3">
+          <button class="btn btn-outline-primary rounded-pill" @click="backToCommunity">
+            <i class="bi bi-arrow-left me-2"></i>커뮤니티로 돌아가기
+          </button>
+        </div>
         <div class="card shadow-sm mb-4">
           <div class="card-header bg-white">
             <div class="d-flex justify-content-between align-items-center">
@@ -15,6 +20,15 @@
                   </div>
                   <small class="text-muted">{{ formatDateTime(article?.article.created_at) }}</small>
                 </div>
+              </div>
+              <!-- 작성자 본인일 경우에만 수정/삭제 버튼 표시 -->
+              <div class="article-actions" v-if="article?.article.author === intereststore.nickname">
+                <button class="btn btn-sm btn-link text-muted" @click="editArticle">
+                  <i class="bi-pencil-square"></i> 수정
+                </button>
+                <button class="btn btn-sm btn-link text-danger" @click="showDeleteModal">
+                  <i class="bi-trash"></i> 삭제
+                </button>
               </div>
             </div>
           </div>
@@ -98,6 +112,24 @@
       </div>
     </div>
   </div>
+  <!-- 삭제 확인 모달 추가 -->
+  <div class="modal fade" id="deleteArticleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">게시글 삭제</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          정말 이 게시글을 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+          <button type="button" class="btn btn-danger" @click="confirmDeleteArticle">삭제</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 
@@ -106,20 +138,87 @@ import { useAuthStore } from '@/stores/auth'
 import { useUserInterestStore } from '@/stores/userinterest';
 import axios from 'axios'
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 // 기존 imports에 bootstrap 추가
 import * as bootstrap from 'bootstrap'
 
+const router = useRouter()
 const intereststore = useUserInterestStore()
 const authstore = useAuthStore()
 const route = useRoute()
 const articleId = route.params.article_id
+const stockCode = route.params.stock_id
 const comment = ref('')
 const article = ref(null)
 const userNickname = ref(null)
 
 // 삭제할 댓글 ID 저장용 ref 추가
 const deleteCommentId = ref(null)
+
+const backToCommunity = () => {
+  router.push({ 
+    name: 'CommunityView', 
+    params: { 
+      stock_id: article.value.article.stock_code 
+    } 
+  })
+}
+
+// 게시글 수정 페이지로 이동
+const editArticle = () => {
+  router.push({ 
+    name: 'CreateArticleView', 
+    params: { 
+      stock_id: article.value.article.stock_code 
+    }, 
+    query: { 
+      edit: true, 
+      articleId: articleId,
+      title: article.value.article.title,
+      content: article.value.article.content 
+    } 
+  })
+}
+
+// 게시글 삭제 모달 표시
+const showDeleteModal = () => {
+  const modalElement = document.getElementById('deleteArticleModal')
+  if (modalElement) {
+    const modal = new bootstrap.Modal(modalElement)
+    modal.show()
+  }
+}
+
+// 게시글 삭제 확인
+const confirmDeleteArticle = () => {
+  axios({
+    method: 'delete',
+    url: `${authstore.API_URL}/api/v1/stock/article/update_or_delete/`,
+    headers: {
+      Authorization: `Bearer ${authstore.token}`,
+    },
+    data: {
+      article_id: articleId,
+    }
+  })
+    .then(() => {
+      const modalElement = document.getElementById('deleteArticleModal')
+      const modal = bootstrap.Modal.getInstance(modalElement)
+      if (modal) {
+        modal.hide()
+      }
+      // 삭제 후 목록 페이지로 이동
+      router.push({ 
+        name: 'CommunityView', 
+        params: { 
+          stock_id: stockCode 
+        } 
+      })
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+}
 
 // 댓글 삭제 버튼 클릭 시 모달 표시
 const showDeleteCommentModal = (commentId) => {
@@ -339,6 +438,25 @@ onMounted(() => {
   gap: 0.2rem;
 }
 
+.article-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.article-actions .btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.article-actions .btn:hover {
+  transform: translateY(-2px);
+}
+
+.article-actions .btn-link {
+  text-decoration: none;
+}
+
 /* 댓글 섹션 */
 .list-group-item {
   padding: 1.2rem;
@@ -505,6 +623,29 @@ onMounted(() => {
 .btn-outline-secondary:hover {
   background: var(--primary-dark);
   color: white;
+}
+
+.back-button-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.back-button-container .btn {
+  font-size: 0.95rem;
+  padding: 0.6rem 1.2rem;
+  transition: all 0.3s ease;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.back-button-container .btn:hover {
+  background-color: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.back-button-container .bi {
+  font-size: 1.1rem;
 }
 
 </style>

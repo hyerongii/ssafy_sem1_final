@@ -35,7 +35,7 @@ const logOut = function () {
 <style>
 /* 전역 CSS 변수 설정 - scoped 밖에 작성 */
 :root {
-  --primary-color: #8bc148;
+  --primary-color: #659031;
   --primary-green: #add37e;
   --primary-light: #f6c8cd;
   --primary-dark: 	#ed919c;
@@ -71,7 +71,7 @@ const logOut = function () {
 
 .navbar {
   /* background: var(--primary-color) !important; 기존 코드를 아래와 같이 수정 */
-  background: rgba(139, 193, 72, 0.8) !important; /* var(--primary-color)의 rgba 버전 */
+  background: #659031 !important; /* var(--primary-color)의 rgba 버전 */
   /* 또는 */
   /* background: rgba(139, 193, 72, 0.7) !important; */ /* 더 투명하게 */
   

@@ -138,11 +138,10 @@ export const useWebsocketStore = defineStore('websocket', () => {
   }
 
   const webSocketClose = function () {
-    isRunning.value = false
-    if (socket.value && socket.value.readyState === WebSocket.OPEN) {
-      socket.value.close()
-      socket.value = null
-    }
+    // isRunning.value = false
+    // if (socket.value && socket.value.readyState === WebSocket.OPEN) {
+    //   socket.value.close()
+    // }
   }
 
 

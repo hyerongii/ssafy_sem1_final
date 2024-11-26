@@ -108,7 +108,7 @@ const router = createRouter({
       component: CreateArticleView,
     },
     {
-      path : '/community/:article_id',
+      path : '/:stock_id/community/:article_id',
       name : 'ArticleDetailView',
       component : ArticleDetailView,
     }

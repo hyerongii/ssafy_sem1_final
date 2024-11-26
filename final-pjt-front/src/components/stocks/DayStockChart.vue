@@ -316,21 +316,21 @@ watch(
           data: currentSeries.value[0].data
         }], true, false) // animate=true, updateAllSeries=false
 
-        // 마지막 데이터 포인트의 마커 업데이트
-        chart.value.updateOptions({
-          markers: {
-            size: 0,
-            discrete: [{
-              seriesIndex: 0,
-              dataPointIndex: currentSeries.value[0].data.length - 1,
-              fillColor: 'var(--primary-color)',
-              strokeColor: 'var(--primary-color)',
-              size: 6,
-              shape: "circle",
-              pulsing: true
-            }]
-          }
-        })
+        // // 마지막 데이터 포인트의 마커 업데이트
+        // chart.value.updateOptions({
+        //   markers: {
+        //     size: 0,
+        //     discrete: [{
+        //       seriesIndex: 0,
+        //       dataPointIndex: currentSeries.value[0].data.length - 1,
+        //       fillColor: 'var(--primary-color)',
+        //       strokeColor: 'var(--primary-color)',
+        //       size: 6,
+        //       shape: "circle",
+        //       pulsing: true
+        //     }]
+        //   }
+        // })
       }
 
 
@@ -340,6 +340,8 @@ watch(
 
 onUnmounted(() => {
   stopWebSocket()
+  // stockItemStore.dayChartData = []  
+  stockItemStore.$reset() // store 리셋
 })
 
 // DayStockChart.vue
