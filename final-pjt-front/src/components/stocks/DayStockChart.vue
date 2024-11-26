@@ -189,8 +189,8 @@ const chartOptions = ref({
 // )
 
 // 차트 옵션 설정을 동적으로 변경하는 함수
-const getChartOptions = (isUSStock) => {
-  const today = new Date()
+const getChartOptions = () => {
+  // const today = new Date()
   
   const xaxisConfig = {
     min: new Date().setHours(9, 30, 0, 0), // 오전 9시
@@ -224,7 +224,9 @@ watch(
   (newData) => {
     if (newData && Array.isArray(newData)) {
       const isUSStock = isNaN(Number(stockcode))
-      chartOptions.value = getChartOptions(isUSStock)
+      if(isUSStock) {
+        chartOptions.value = getChartOptions()
+      }
       
       const formattedData = newData.map(item => {
         const timeStr = item.time
