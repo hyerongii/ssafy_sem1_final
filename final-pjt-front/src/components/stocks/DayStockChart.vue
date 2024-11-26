@@ -40,7 +40,7 @@ const chartOptions = ref({
       enabled: true,
       easing: 'linear',
       dynamicAnimation: {
-        speed: 500
+        speed: 200
       }
     },
     toolbar: {
@@ -50,18 +50,17 @@ const chartOptions = ref({
       enabled: false
     }
   },
-  markers: {
-    // size: 0,  // 기본 마커 크기는 0으로 설정
-    discrete: [{
-      seriesIndex: 0,
-      dataPointIndex: -1,  // 마지막 포인트
-      fillColor: '#FFF',
-      strokeColor: 'var(--primary-dark)',
-      size: 3,
-      shape: "circle",  // circle, square, rect 등 선택 가능
-      pulsing: true,  // 펄싱 효과 활성화
-    }]
-  },
+  // markers: {
+  //   size: 0,  // 기본적으로 모든 마커 숨김
+  //   discrete: [{
+  //     seriesIndex: 0,
+  //     dataPointIndex: -1,  // 마지막 데이터 포인트
+  //     fillColor: '#FFF',
+  //     strokeColor: 'var(--primary-dark)',
+  //     size: 6,
+  //     shape: "circle"
+  //   }]
+  // },
   colors: ['var(--primary-dark)'],
   dataLabels: {
     enabled: false
@@ -317,20 +316,21 @@ watch(
           data: currentSeries.value[0].data
         }], true, false) // animate=true, updateAllSeries=false
 
-        // // 마지막 데이터 포인트의 마커 업데이트
-        // chart.value.updateOptions({
-        //   markers: {
-        //     size: 0,
-        //     discrete: [{
-        //       seriesIndex: 0,
-        //       dataPointIndex: currentSeries.value[0].data.length - 1,
-        //       fillColor: '#FFF',
-        //       strokeColor: 'var(--primary-dark)',
-        //       size: 6,
-        //       shape: "circle"
-        //     }]
-        //   }
-        // })
+        // 마지막 데이터 포인트의 마커 업데이트
+        chart.value.updateOptions({
+          markers: {
+            size: 0,
+            discrete: [{
+              seriesIndex: 0,
+              dataPointIndex: currentSeries.value[0].data.length - 1,
+              fillColor: 'var(--primary-color)',
+              strokeColor: 'var(--primary-color)',
+              size: 6,
+              shape: "circle",
+              pulsing: true
+            }]
+          }
+        })
       }
 
 

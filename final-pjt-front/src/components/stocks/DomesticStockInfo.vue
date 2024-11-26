@@ -106,6 +106,7 @@ const securitiesWebsites = {
   '신영': 'https://www.shinyoung.com/',
   'LS증권': 'https://m.ls-sec.co.kr/',
   'IBK투자': 'https://www.ibks.com/main.do',
+  'IM증권': 'https://www.imfnsec.com/main/main.html'
   
 }
 
