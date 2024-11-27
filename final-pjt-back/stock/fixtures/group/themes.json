@@ -1,0 +1,290 @@
+[
+  {
+    "model": "stock.theme",
+    "pk": 1,
+    "fields": {
+      "name": "핀테크",
+      "code": "PIN",
+      "description": "결제, 대출, 증권 등 금융 분야에 기술을 결합한 새로운 서비스의 도입으로 변화를 일으키고 있는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 2,
+    "fields": {
+      "name": "언택트 경제",
+      "code": "UNT",
+      "description": "비대면 비접촉 시대. 집에만 있어도 쇼핑, 영화, 음악, 음식 운동까지 마음껏 즐길 수 있게 해주는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 3,
+    "fields": {
+      "name": "게임월드",
+      "code": "GAM",
+      "description": "현실에서는 못하는 일들을 마음껏 할 수 있는 신나는 가상세계를 만드는 기업들"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 4,
+    "fields": {
+      "name": "카리스마창업자",
+      "code": "ENT",
+      "description": "꿈을 현실로 만드는 마법사들이 이끄는 기업들로, 불가능을 가능으로 바꾸는 놀라운 혁신을 보여주는 곳"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 5,
+    "fields": {
+      "name": "자율주행차",
+      "code": "AUT",
+      "description": "'운전은 제가 할게요, 편하게 쉬세요~'라고 말하는 똑똑한 자동차를 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 6,
+    "fields": {
+      "name": "컨텐츠강자",
+      "code": "CON",
+      "description": "우리의 눈과 귀를 즐겁게 해주는 재미있는 이야기와 노래를 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 7,
+    "fields": {
+      "name": "신나는 드라이빙",
+      "code": "DRV",
+      "description": "'부릉부릉' 소리만 들어도 심장이 두근거리게 만드는 멋진 자동차들을 만드는 기업들의 모임"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 8,
+    "fields": {
+      "name": "이번 휴가는 어디?",
+      "code": "TRV",
+      "description": "'에메랄드빛 바다가 보고 싶어요'라는 당신의 소원을 이뤄주는 여행의 요정 같은 기업들"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 9,
+    "fields": {
+      "name": "가상현실(VR)",
+      "code": "VRT",
+      "description": "안경만 쓰면 신비한 세계로 순간이동할 수 있게 해주는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 10,
+    "fields": {
+      "name": "메타버스 구현",
+      "code": "MET",
+      "description": "현실과 상상의 세계를 섞어 새로운 차원의 놀이터를 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 11,
+    "fields": {
+      "name": "인공지능",
+      "code": "AIN",
+      "description": "냉장고가 알아서 우유를 주문해주는 똑똑한 세상을 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 12,
+    "fields": {
+      "name": "클라우드",
+      "code": "CLD",
+      "description": "인터넷 구름 속에 우리의 모든 데이터를 안전하게 보관해주는 마법사 같은 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 13,
+    "fields": {
+      "name": "항공우주&방위산업",
+      "code": "AER",
+      "description": "우주로 날아가는 로켓부터 첨단 무기까지, 영화 속 첨단 장비를 현실로 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 14,
+    "fields": {
+      "name": "통신",
+      "code": "COM",
+      "description": "유무선 네트워크를 통해 음성, 데이터 통신 서비스를 제공하는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 15,
+    "fields": {
+      "name": "프랜차이즈",
+      "code": "FRC",
+      "description": "'우리 맛있는 거 어디서나 먹을 수 있어요!'를 실현시켜주는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 16,
+    "fields": {
+      "name": "스트리밍의 시대",
+      "code": "STR",
+      "description": "영화관에 가지 않고도 집에서 팝콘 먹으며 최신 영화를 볼 수 있게 해주는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 17,
+    "fields": {
+      "name": "어디 옷이야?",
+      "code": "FSH",
+      "description": "'주식도 사고 옷도 입는' 패션 투자의 달인들이 주목하는 멋쟁이 기업들"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 18,
+    "fields": {
+      "name": "리튬&배터리",
+      "code": "BAT",
+      "description": "'에너지 먹방'으로 세상을 움직이는 파워 넘치는 기업들"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 19,
+    "fields": {
+      "name": "반도체",
+      "code": "SEM",
+      "description": "스마트폰부터 우주선까지, 모든 전자기기의 두뇌를 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 20,
+    "fields": {
+      "name": "플랫폼 대표주자",
+      "code": "PLT",
+      "description": "'모든 길은 우리 앱으로 통한다'를 외치는 디지털 세상의 만능 슈퍼히어로들"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 21,
+    "fields": {
+      "name": "건물주의 꿈",
+      "code": "BLD",
+      "description": "'건물주가 되고 싶어요'를 현실로 만들어주는 부동산의 마법사들"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 22,
+    "fields": {
+      "name": "클린 에너지",
+      "code": "CLN",
+      "description": "지구에게 미안해하지 않고 에너지를 사용할 수 있게 해주는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 23,
+    "fields": {
+      "name": "갈증 해소",
+      "code": "BEV",
+      "description": "'목마르세요? 우리가 있잖아요!'를 외치는 음료계의 시원한 영웅들"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 24,
+    "fields": {
+      "name": "럭셔리",
+      "code": "LUX",
+      "description": "고급 패션, 주얼리, 시계 등 프리미엄 제품을 생산하고 판매하는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 25,
+    "fields": {
+      "name": "소비/원자재",
+      "code": "RAW",
+      "description": "일상생활에 꼭 필요한 원자재를 만드는 든든한 기업들이 모여있는 보물창고 같은 테마"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 26,
+    "fields": {
+      "name": "자원/에너지",
+      "code": "ENR",
+      "description": "지구의 보물을 찾아 우리 생활에 필요한 에너지를 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 27,
+    "fields": {
+      "name": "소셜미디어",
+      "code": "SOC",
+      "description": "전 세계 사람들과 손쉽게 친구가 될 수 있게 해주는 온라인 놀이터를 만드는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 28,
+    "fields": {
+      "name": "블록체인",
+      "code": "BLC",
+      "description": "'비트코인 주세요~'의 뒤에 숨겨진 복잡한 기술을 개발하는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 29,
+    "fields": {
+      "name": "리테일/유통",
+      "code": "RET",
+      "description": "소비자에게 상품을 판매하는 온/오프라인 유통 채널을 운영하는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 30,
+    "fields": {
+      "name": "사물인터넷(IOT)",
+      "code": "IOT",
+      "description": "일상 기기들을 인터넷으로 연결하여 스마트한 생활을 구현하는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 31,
+    "fields": {
+      "name": "반려동물",
+      "code": "PET",
+      "description": "우리 집 멍멍이, 야옹이를 위한 모든 것을 책임지는 기업"
+    }
+  },
+  {
+    "model": "stock.theme",
+    "pk": 32,
+    "fields": {
+      "name": "뷰티의 세계",
+      "code": "BTY",
+      "description": "'거울아 거울아, 누가 제일 예쁘니?'에 '당신이요!'라고 대답하게 만드는 기업"
+    }
+  }
+]

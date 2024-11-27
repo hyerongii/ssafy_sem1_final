@@ -1,0 +1,5166 @@
+[
+    {
+        "model": "stock.stock",
+        "pk": 1,
+        "fields": {
+          "name": "업스타트 홀딩스",
+          "code": "UPST",
+          "description": "핀테크 기업",
+          "theme": 1,
+          "excd":"NAS",
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 2,
+        "fields": {
+          "name": "소파이 테크놀로지",
+          "code": "SOFI",
+          "excd":"NAS",
+          "description": "핀테크 기업",
+          "theme": 1,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 3,
+        "fields": {
+          "name": "로빈후드 마켓",
+          "code": "HOOD",
+          "excd":"NAS",
+          "description": "핀테크 기업",
+          "theme": 1 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 4,
+        "fields": {
+          "name": "NAVER",
+          "code": "035420",
+          "description": "국내 대표 인터넷 기업",
+          "theme": 1 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 5,
+        "fields": {
+          "name": "테슬라",
+          "code": "TSLA",
+          "excd":"NAS",
+          "description": "전기자동차 및 자율주행 선도기업",
+          "theme": 5 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 6,
+        "fields": {
+          "name": "인텔",
+          "code": "INTC",
+          "excd":"NAS",
+          "description": "반도체 제조 기업",
+          "theme": 5 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 7,
+        "fields": {
+          "name": "알파벳 A주",
+          "code": "GOOGL",
+          "excd":"NAS",
+          "description": "구글의 지주회사",
+          "theme": 5 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 8,
+        "fields": {
+          "name": "워너 브로스 디스커버리",
+          "code": "WBD",
+          "excd":"NAS",
+          "description": "글로벌 미디어 엔터테인먼트 기업",
+          "theme": 6 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 9,
+        "fields": {
+          "name": "넷플릭스",
+          "code": "NFLX",
+          "excd":"NAS",
+          "description": "글로벌 스트리밍 서비스 기업",
+          "theme": 6 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 10,
+        "fields": {
+          "name": "제너럴 모터스",
+          "code": "GM",
+          "excd":"NYS",
+          "description": "미국의 자동차 제조 기업",
+          "theme": 7 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 11,
+        "fields": {
+          "name": "델타 에어 라인",
+          "code": "DAL",
+          "excd":"NYS",
+          "description": "미국의 항공사",
+          "theme": 8 ,
+          "price": 0,    
+        "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 12,
+        "fields": {
+          "name": "메리어트 인터내셔널",
+          "code": "MAR",
+          "excd":"NAS",
+          "description": "글로벌 호텔 체인",
+          "theme": 8 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 13,
+        "fields": {
+          "name": "인텔",
+          "code": "INTC",
+          "excd":"NAS",
+          "description": "반도체 및 VR 기술 기업",
+          "theme": 9 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 14,
+        "fields": {
+          "name": "알파벳 C주",
+          "code": "GOOG",
+          "excd":"NAS",
+          "description": "구글의 지주회사",
+          "theme": 9 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 15,
+        "fields": {
+          "name": "메타 플랫폼스",
+          "code": "META",
+          "excd":"NAS",
+          "description": "메타버스 선도 기업",
+          "theme": 9 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 16,
+        "fields": {
+          "name": "LG이노텍",
+          "code": "011070",
+          "description": "전자부품 제조 기업",
+          "theme": 9 ,
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 17,
+        "fields": {
+          "name": "오토데스크",
+          "code": "ADSK",
+          "excd":"NAS",
+          "description": "3D 설계 소프트웨어 기업",
+          "theme": 10,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 18,
+        "fields": {
+          "name": "엔비디아",
+          "code": "NVDA",
+          "excd":"NAS",
+          "description": "그래픽 처리 장치 제조 기업",
+          "theme": 10,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 19,
+        "fields": {
+          "name": "유니티 소프트웨어",
+          "code": "U",
+          "excd":"NYS",
+          "description": "게임 엔진 개발 기업",
+          "theme": 10,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 20,
+        "fields": {
+          "name": "아마존닷컴",
+          "code": "AMZN",
+          "excd":"NAS",
+          "description": "전자상거래 및 클라우드 컴퓨팅 기업",
+          "theme": 11,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 21,
+        "fields": {
+          "name": "마이크로소프트",
+          "code": "MSFT",
+          "excd":"NAS",
+          "description": "소프트웨어 및 클라우드 서비스 기업",
+          "theme": 11,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 22,
+        "fields": {
+          "name": "IBM",
+          "code": "IBM",
+          "excd":"NYS",
+          "description": "정보 기술 및 컨설팅 기업",
+          "theme": 11,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 23,
+        "fields": {
+          "name": "SK텔레콤",
+          "code": "017670",
+          "description": "국내 최대 통신사",
+          "theme": 11,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 24,
+        "fields": {
+          "name": "삼성전자",
+          "code": "005930",
+          "description": "글로벌 전자기기 제조기업",
+          "theme": 11,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 25,
+        "fields": {
+          "name": "롯데칠성",
+          "code": "005300",
+          "description": "음료 제조 기업",
+          "theme": 23,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 26,
+        "fields": {
+          "name": "하이트진로",
+          "code": "000080",
+          "description": "주류 제조 기업",
+          "theme": 23,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 27,
+        "fields": {
+          "name": "빙그레",
+          "code": "005180",
+          "description": "식품 제조 기업",
+          "theme": 23,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 28,
+        "fields": {
+          "name": "코카콜라",
+          "code": "KO",
+          "excd":"NYS",
+          "description": "글로벌 음료 제조 기업",
+          "theme": 23,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 29,
+        "fields": {
+          "name": "펩시코",
+          "code": "PEP",
+          "excd":"NAS",
+          "description": "글로벌 음료 및 과자 제조 기업",
+          "theme": 23,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 32,
+        "fields": {
+          "name": "포스코홀딩스",
+          "code": "005490",
+          "description": "철강 제조 기업",
+          "theme": 25,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 33,
+        "fields": {
+          "name": "LG화학",
+          "code": "051910",
+          "description": "화학 제품 제조 기업",
+          "theme": 25,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 34,
+        "fields": {
+          "name": "엑슨모빌",
+          "code": "XOM",
+          "excd":"NYS",
+          "description": "글로벌 에너지 기업",
+          "theme": 26,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 35,
+        "fields": {
+          "name": "쉐브론",
+          "code": "CVX",
+          "excd":"NYS",
+          "description": "글로벌 에너지 기업",
+          "theme": 26,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 36,
+        "fields": {
+          "name": "스냅",
+          "code": "SNAP",
+          "excd":"NYS",
+          "description": "소셜 미디어 플랫폼",
+          "theme": 27,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 37,
+        "fields": {
+          "name": "핀터레스트",
+          "code": "PINS",
+          "excd":"NYS",
+          "description": "이미지 기반 소셜 미디어 플랫폼",
+          "theme": 27,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 38,
+        "fields": {
+          "name": "코인베이스",
+          "code": "COIN",
+          "excd":"NAS",
+          "description": "암호화폐 거래소",
+          "theme": 28,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 39,
+        "fields": {
+          "name": "블록",
+          "code": "SQ",
+          "excd":"NYS",
+          "description": "디지털 결제 및 금융 서비스 기업",
+          "theme": 28,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 40,
+        "fields": {
+          "name": "월마트",
+          "code": "WMT",
+          "excd":"NYS",
+          "description": "글로벌 유통 기업",
+          "theme": 29,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 41,
+        "fields": {
+          "name": "코스트코",
+          "code": "COST",
+          "excd":"NAS",
+          "description": "회원제 창고형 할인점",
+          "theme": 29,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 42,
+        "fields": {
+          "name": "홈디포",
+          "code": "HD",
+          "excd":"NYS",
+          "description": "주택 개선 용품 유통업체",
+          "theme": 29, 
+          "price": 0,     
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 43,
+        "fields": {
+          "name": "시스코",
+          "code": "CSCO",
+          "excd":"NAS",
+          "description": "네트워크 장비 제조 기업",
+          "theme": 30,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 44,
+        "fields": {
+          "name": "퀄컴",
+          "code": "QCOM",
+          "excd":"NAS",
+          "description": "무선통신 기술 기업",
+          "theme": 30,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 45,
+        "fields": {
+          "name": "처브",
+          "code": "CB",
+          "excd":"NYS",
+          "description": "온라인 반려동물 용품 유통업체",
+          "theme": 31,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 46,
+        "fields": {
+          "name": "아이데시코",
+          "code": "IDXX",
+          "excd":"NAS",
+          "description": "동물 진단기기 제조업체",
+          "theme": 31,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 47,
+        "fields": {
+          "name": "에스티 로더",
+          "code": "EL",
+          "excd":"NYS",
+          "description": "글로벌 화장품 기업",
+          "theme": 32,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 49,
+        "fields": {
+          "name": "아모레퍼시픽",
+          "code": "090430",
+          "description": "국내 대표 화장품 기업",
+          "theme": 32,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 50,
+        "fields": {
+          "name": "LG생활건강",
+          "code": "051900",
+          "description": "생활용품 및 화장품 제조 기업",
+          "theme": 32,
+          "price": 0,      
+          "per": "0.00",
+        "pbr": "0.00",
+        "consensus": "",
+        "eps": "0.00",
+        "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 51,
+        "fields": {
+          "name": "로블록스",
+          "code": "RBLX", 
+          "excd":"NYS",
+          "description": "온라인 게임 플랫폼",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock", 
+        "pk": 52,
+        "fields": {
+          "name": "테이크-투 인터렉티브",
+          "code": "TTWO",
+          "excd":"NAS",
+          "description": "비디오 게임 제작사",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 53,
+        "fields": {
+          "name": "아마존닷컴",
+          "code": "AMZN",
+          "excd":"NAS",
+          "description": "게임 스트리밍 서비스 제공 기업",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 54,
+        "fields": {
+          "name": "일렉트로닉 아츠",
+          "code": "EA",
+          "excd":"NAS",
+          "description": "글로벌 게임 제작사",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 55,
+        "fields": {
+          "name": "마이크로소프트",
+          "code": "MSFT",
+          "excd":"NAS",
+          "description": "게임 콘솔 및 게임 제작사",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 56,
+        "fields": {
+          "name": "엔씨소프트",
+          "code": "036570",
+          "description": "온라인 게임 개발사",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 57,
+        "fields": {
+          "name": "펄어비스",
+          "code": "263750",
+          "description": "게임 개발 및 서비스 기업",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 58,
+        "fields": {
+          "name": "크래프톤",
+          "code": "259960",
+          "description": "게임 개발사",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 59,
+        "fields": {
+          "name": "카카오게임즈",
+          "code": "293490",
+          "description": "모바일 게임 개발사",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 60,
+        "fields": {
+          "name": "넷마블",
+          "code": "251270",
+          "description": "모바일 게임 개발 및 퍼블리싱",
+          "theme": 3,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 61,
+        "fields": {
+          "name": "펠로톤 인터렉티브",
+          "code": "PTON",
+          "excd":"NAS",
+          "description": "온라인 피트니스 플랫폼",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 62,
+        "fields": {
+          "name": "도어대시",
+          "code": "DASH",
+          "excd":"NAS",
+          "description": "음식 배달 플랫폼",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 63,
+        "fields": {
+          "name": "아마존닷컴",
+          "code": "AMZN",
+          "excd":"NAS",
+          "description": "전자상거래 플랫폼",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 64,
+        "fields": {
+          "name": "넷플릭스",
+          "code": "NFLX",
+          "excd":"NAS",
+          "description": "온라인 스트리밍 서비스",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 65,
+        "fields": {
+          "name": "이마트",
+          "code": "139480",
+          "description": "대형 유통업체",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 66,
+        "fields": {
+          "name": "NAVER",
+          "code": "035420",
+          "description": "인터넷 플랫폼 기업",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 67,
+        "fields": {
+          "name": "지니뮤직",
+          "code": "043610",
+          "description": "음원 스트리밍 서비스",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 68,
+        "fields": {
+          "name": "카카오",
+          "code": "035720",
+          "description": "모바일 플랫폼 기업",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 69,
+        "fields": {
+          "name": "CJ ENM",
+          "code": "035760",
+          "description": "엔터테인먼트 미디어 기업",
+          "theme": 2,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 70,
+        "fields": {
+          "name": "테슬라",
+          "code": "TSLA",
+          "excd":"NAS",
+          "description": "전기차 및 클린에너지 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 71,
+        "fields": {
+          "name": "아마존닷컴",
+          "code": "AMZN",
+          "excd":"NAS",
+          "description": "글로벌 전자상거래 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 72,
+        "fields": {
+          "name": "엔비디아",
+          "code": "NVDA",
+          "excd":"NAS",
+          "description": "반도체 및 AI 기술 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 73,
+        "fields": {
+          "name": "넷플릭스",
+          "code": "NFLX",
+          "excd":"NAS",
+          "description": "글로벌 스트리밍 서비스 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 74,
+        "fields": {
+          "name": "스포티파이 테크놀리지",
+          "code": "SPOT",
+          "excd":"NYS",
+          "description": "음원 스트리밍 서비스 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 75,
+        "fields": {
+          "name": "하이브",
+          "code": "352820",
+          "description": "엔터테인먼트 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 76,
+        "fields": {
+          "name": "엔씨소프트",
+          "code": "036570",
+          "description": "게임 개발 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 77,
+        "fields": {
+          "name": "NAVER",
+          "code": "035420",
+          "description": "인터넷 플랫폼 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 78,
+        "fields": {
+          "name": "카카오",
+          "code": "035720",
+          "description": "모바일 플랫폼 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 79,
+        "fields": {
+          "name": "셀트리온",
+          "code": "068270",
+          "description": "바이오 제약 기업",
+          "theme": 4,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 80,
+        "fields": {
+          "name": "아마존닷컴",
+          "code": "AMZN", 
+          "excd":"NAS",
+          "description": "글로벌 미디어 스트리밍 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 81,
+        "fields": {
+          "name": "컴캐스트",
+          "code": "CMCSA",
+          "excd":"NAS",
+          "description": "글로벌 미디어 및 엔터테인먼트 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 82,
+        "fields": {
+          "name": "월트 디즈니",
+          "code": "DIS",
+          "excd":"NYS",
+          "description": "글로벌 엔터테인먼트 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 83,
+        "fields": {
+          "name": "스튜디오 드래곤",
+          "code": "253450",
+          "description": "드라마 제작 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 84,
+        "fields": {
+          "name": "초록뱀미디어",
+          "code": "047820",
+          "description": "드라마 제작 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 85,
+        "fields": {
+          "name": "에이스토리",
+          "code": "241840",
+          "description": "드라마 제작 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 86,
+        "fields": {
+          "name": "CJ ENM",
+          "code": "035760",
+          "description": "엔터테인먼트 미디어 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 87,
+        "fields": {
+          "name": "NEW",
+          "code": "160550",
+          "description": "영화 및 드라마 제작 기업",
+          "theme": 6,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 88,
+        "fields": {
+          "name": "테슬라",
+          "code": "TSLA",
+          "excd":"NAS",
+          "description": "전기차 및 클린에너지 기업",
+          "theme": 7,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 89,
+        "fields": {
+          "name": "포드 모터",
+          "code": "F",
+          "excd":"NYS",
+          "description": "글로벌 자동차 제조 기업",
+          "theme": 7,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 90,
+        "fields": {
+          "name": "페라리",
+          "code": "RACE",
+          "excd":"NYS",
+          "description": "럭셔리 스포츠카 제조 기업",
+          "theme": 7,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 91,
+        "fields": {
+          "name": "할리-데이비슨",
+          "code": "HOG",
+          "excd":"NYS",
+          "description": "모터사이클 제조 기업",
+          "theme": 7,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 92,
+        "fields": {
+          "name": "기아",
+          "code": "000270",
+          "description": "글로벌 자동차 제조 기업",
+          "theme": 7,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 93,
+        "fields": {
+          "name": "KG모빌리티",
+          "code": "003620",
+          "description": "모빌리티 솔루션 기업",
+          "theme": 7,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 94,
+        "fields": {
+          "name": "현대차",
+          "code": "005380",
+          "description": "글로벌 자동차 제조 기업",
+          "theme": 7,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 95,
+        "fields": {
+          "name": "엔비디아",
+          "code": "NVDA",
+          "excd":"NAS",
+          "description": "자율주행 AI칩 제조 기업",
+          "theme": 5,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 96,
+        "fields": {
+          "name": "우버 테크놀로지스",
+          "code": "UBER",
+          "excd":"NYS",
+          "description": "자율주행 모빌리티 기업",
+          "theme": 5,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 97,
+        "fields": {
+          "name": "현대모비스",
+          "code": "012330",
+          "description": "자동차 부품 제조 기업",
+          "theme": 5,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 98,
+        "fields": {
+          "name": "엠씨넥스",
+          "code": "097520",
+          "description": "자동차 카메라 모듈 제조 기업",
+          "theme": 5,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 99,
+        "fields": {
+          "name": "드림텍",
+          "code": "192650",
+          "description": "자율주행 센서 제조 기업",
+          "theme": 5,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 100,
+        "fields": {
+          "name": "HL만도",
+          "code": "204320",
+          "description": "자동차 부품 제조 기업",
+          "theme": 5,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 101,
+        "fields": {
+          "name": "LG이노텍",
+          "code": "011070",
+          "description": "자율주행 부품 제조 기업",
+          "theme": 5,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 102,
+        "fields": {
+          "name": "카니발",
+          "code": "CCL",
+          "excd":"NYS",
+          "description": "크루즈 여행 기업",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 103,
+        "fields": {
+          "name": "부킹 홀딩스",
+          "code": "BKNG",
+          "excd":"NAS",
+          "description": "온라인 여행 예약 플랫폼",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 104,
+        "fields": {
+          "name": "힐튼 월드와이드",
+          "code": "HLT",
+          "excd":"NYS",
+          "description": "글로벌 호텔 체인",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 105,
+        "fields": {
+          "name": "사우스웨스트 에어라인",
+          "code": "LUV",
+          "excd":"NYS",
+          "description": "미국 항공사",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 106,
+        "fields": {
+          "name": "라스베가스 샌즈",
+          "code": "LVS",
+          "excd":"NYS",
+          "description": "카지노 리조트 운영 기업",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 107,
+        "fields": {
+          "name": "대한항공",
+          "code": "003490",
+          "description": "국내 대표 항공사",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 108,
+        "fields": {
+          "name": "강원랜드",
+          "code": "035250",
+          "description": "카지노 리조트 운영 기업",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 109,
+        "fields": {
+          "name": "아시아나항공",
+          "code": "020560",
+          "description": "국내 항공사",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 110,
+        "fields": {
+          "name": "파라다이스",
+          "code": "034230",
+          "description": "카지노 리조트 운영 기업",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 111,
+        "fields": {
+          "name": "호텔신라",
+          "code": "008770",
+          "description": "호텔 및 면세점 운영 기업",
+          "theme": 8,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 112,
+        "fields": {
+          "name": "LG이노텍",
+          "code": "011070",
+          "description": "VR 디스플레이 부품 제조 기업",
+          "theme": 9,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 113,
+        "fields": {
+          "name": "자이언트스텝",
+          "code": "289220",
+          "description": "VR 콘텐츠 제작 기업",
+          "theme": 9,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 114,
+        "fields": {
+          "name": "맥스트",
+          "code": "377030",
+          "description": "AR/VR 솔루션 개발 기업",
+          "theme": 9,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 115,
+        "fields": {
+          "name": "메터포트",
+          "code": "MTTR",
+          "excd":"NAS",
+          "description": "3D 공간 데이터 플랫폼 기업",
+          "theme": 10,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 116,
+        "fields": {
+          "name": "어도비",
+          "code": "ADBE",
+          "excd":"NAS",
+          "description": "디지털 미디어 소프트웨어 기업",
+          "theme": 10,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 118,
+        "fields": {
+          "name": "메타플랫폼스",
+          "code": "META",
+          "excd":"NAS",
+          "description": "메타버스 선도 기업",
+          "theme": 10,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 119,
+        "fields": {
+          "name": "위메이드",
+          "code": "112040",
+          "description": "메타버스 게임 개발사",
+          "theme": 10,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 120,
+        "fields": {
+          "name": "자이언트스텝",
+          "code": "289220",
+          "description": "메타버스 콘텐츠 제작 기업",
+          "theme": 10,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 121,
+        "fields": {
+          "name": "코세스",
+          "code": "089890",
+          "description": "메타버스 디스플레이 부품 제조",
+          "theme": 10,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 122,
+        "fields": {
+          "name": "알파벳 A주",
+          "code": "GOOGL",
+          "excd":"NAS",
+          "description": "AI 연구 및 개발 선도 기업",
+          "theme": 11,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 123,
+        "fields": {
+          "name": "메타 플랫폼스",
+          "code": "META",
+          "excd":"NAS",
+          "description": "AI 기반 소셜미디어 기업",
+          "theme": 11,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 124,
+        "fields": {
+          "name": "KT",
+          "code": "030200",
+          "description": "AI 기반 통신 서비스 기업",
+          "theme": 11,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 125,
+        "fields": {
+          "name": "NAVER",
+          "code": "035420",
+          "description": "AI 기술 기반 인터넷 기업",
+          "theme": 11,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 126,
+        "fields": {
+          "name": "카카오",
+          "code": "035720",
+          "description": "AI 기반 모바일 플랫폼 기업",
+          "theme": 11,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 127,
+        "fields": {
+          "name": "세일즈포스닷컴",
+          "code": "CRM",
+          "excd":"NYS",
+          "description": "클라우드 기반 CRM 솔루션 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 128,
+        "fields": {
+          "name": "알파벳 A주",
+          "code": "GOOGL",
+          "excd":"NAS",
+          "description": "클라우드 컴퓨팅 서비스 제공 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 129,
+        "fields": {
+          "name": "아마존닷컴",
+          "code": "AMZN",
+          "excd":"NAS",
+          "description": "클라우드 컴퓨팅 선도 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 130,
+        "fields": {
+          "name": "마이크로소프트",
+          "code": "MSFT",
+          "excd":"NAS",
+          "description": "클라우드 플랫폼 서비스 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 131,
+        "fields": {
+          "name": "IBM",
+          "code": "IBM",
+          "excd":"NYS",
+          "description": "클라우드 및 IT 서비스 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 132,
+        "fields": {
+          "name": "더존비즈온",
+          "code": "012510",
+          "description": "기업용 클라우드 서비스 제공 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 133,
+        "fields": {
+          "name": "삼성에스디에스",
+          "code": "018260",
+          "description": "IT 서비스 및 클라우드 솔루션 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 134,
+        "fields": {
+          "name": "NHN",
+          "code": "181710",
+          "description": "클라우드 및 IT 인프라 서비스 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 135,
+        "fields": {
+          "name": "가비아",
+          "code": "079940",
+          "description": "클라우드 호스팅 서비스 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 136,
+        "fields": {
+          "name": "케이아이엔엑스",
+          "code": "093320",
+          "description": "데이터센터 및 클라우드 인프라 기업",
+          "theme": 12,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 137,
+        "fields": {
+          "name": "레이시온 테크놀로지스",
+          "code": "RTX",
+          "excd":"NYS",
+          "description": "방위산업 및 항공우주 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 138,
+        "fields": {
+          "name": "보잉",
+          "code": "BA",
+          "excd":"NYS",
+          "description": "항공기 제조 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 139,
+        "fields": {
+          "name": "록히드 마틴",
+          "code": "LMT",
+          "excd":"NYS",
+          "description": "방위산업 및 항공우주 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 140,
+        "fields": {
+          "name": "노스롭 그루먼",
+          "code": "NOC",
+          "excd":"NYS",
+          "description": "방위산업 및 우주항공 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 141,
+        "fields": {
+          "name": "제너럴 다이내믹스",
+          "code": "GD",
+          "excd":"NYS",
+          "description": "방위산업 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 142,
+        "fields": {
+          "name": "한화시스템",
+          "code": "272210",
+          "description": "방위산업 시스템 개발 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 143,
+        "fields": {
+          "name": "한국항공우주",
+          "code": "047810",
+          "description": "항공기 부품 제조 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 144,
+        "fields": {
+          "name": "HD현대중공업",
+          "code": "329180",
+          "description": "조선 및 방위산업 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 145,
+        "fields": {
+          "name": "현대로템",
+          "code": "064350",
+          "description": "방위산업 및 철도차량 제조 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 146,
+        "fields": {
+          "name": "한화에어로스페이스",
+          "code": "012450",
+          "description": "항공우주 및 방위산업 기업",
+          "theme": 13,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 147,
+        "fields": {
+          "name": "차터 커뮤니케이션스",
+          "code": "CHTR",
+          "excd":"NAS",
+          "description": "통신 서비스 제공 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 148,
+        "fields": {
+          "name": "T-모바일 US",
+          "code": "TMUS",
+          "excd":"NAS",
+          "description": "이동통신 서비스 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 149,
+        "fields": {
+          "name": "AT&T",
+          "code": "T",
+          "excd":"NYS",
+          "description": "통신 서비스 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 150,
+        "fields": {
+          "name": "컴캐스트",
+          "code": "CMCSA",
+          "excd":"NAS",
+          "description": "통신 및 미디어 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 151,
+        "fields": {
+          "name": "버라이존 커뮤니케이션스",
+          "code": "VZ",
+          "excd":"NYS",
+          "description": "통신 서비스 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 152,
+        "fields": {
+          "name": "LG유플러스",
+          "code": "032640",
+          "description": "통신 서비스 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 153,
+        "fields": {
+          "name": "SK텔레콤",
+          "code": "017670",
+          "description": "이동통신 서비스 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 154,
+        "fields": {
+          "name": "KT",
+          "code": "030200",
+          "description": "통신 서비스 기업",
+          "theme": 14,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 155,
+        "fields": {
+          "name": "쉐이크 쉑",
+          "code": "SHAK",
+          "excd":"NYS",
+          "description": "글로벌 햄버거 프랜차이즈",
+          "theme": 15,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 156,
+        "fields": {
+          "name": "도미노 피자",
+          "code": "DPZ",
+          "excd":"NYS",
+          "description": "글로벌 피자 프랜차이즈",
+          "theme": 15,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 157,
+        "fields": {
+          "name": "스타벅스",
+          "code": "SBUX",
+          "excd":"NAS",
+          "description": "글로벌 커피 프랜차이즈",
+          "theme": 15,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 158,
+        "fields": {
+          "name": "얌! 브랜드",
+          "code": "YUM",
+          "excd":"NYS",
+          "description": "글로벌 패스트푸드 프랜차이즈",
+          "theme": 15,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 159,
+        "fields": {
+          "name": "맥도날드",
+          "code": "MCD",
+          "excd":"NYS",
+          "description": "글로벌 패스트푸드 프랜차이즈",
+          "theme": 15,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 160,
+        "fields": {
+          "name": "교촌에프앤비",
+          "code": "339770",
+          "description": "치킨 프랜차이즈",
+          "theme": 15,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 161,
+        "fields": {
+          "name": "SPC삼립",
+          "code": "005610",
+          "description": "제과제빵 프랜차이즈",
+          "theme": 15,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 165,
+        "fields": {
+          "name": "스포티파이 테크놀로지",
+          "code": "SPOT",
+          "excd":"NYS",
+          "description": "글로벌 음원 스트리밍 서비스",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 166,
+        "fields": {
+          "name": "월트 디즈니",
+          "code": "DIS",
+          "excd":"NYS",
+          "description": "글로벌 미디어 스트리밍 기업",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 167,
+        "fields": {
+          "name": "넷플릭스",
+          "code": "NFLX",
+          "excd":"NAS",
+          "description": "글로벌 동영상 스트리밍 서비스",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 168,
+        "fields": {
+          "name": "알파벳 A주",
+          "code": "GOOGL",
+          "excd":"NAS",
+          "description": "유튜브 스트리밍 서비스 운영",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 169,
+        "fields": {
+          "name": "아마존닷컴",
+          "code": "AMZN",
+          "excd":"NAS",
+          "description": "프라임 비디오 스트리밍 서비스",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 170,
+        "fields": {
+          "name": "애플",
+          "code": "AAPL",
+          "excd":"NAS",
+          "description": "애플TV+ 스트리밍 서비스",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 172,
+        "fields": {
+          "name": "SK텔레콤",
+          "code": "017670",
+          "description": "wavve 스트리밍 서비스 운영",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 173,
+        "fields": {
+          "name": "CJ ENM",
+          "code": "035760",
+          "description": "티빙 스트리밍 서비스 운영",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 174,
+        "fields": {
+          "name": "지니뮤직",
+          "code": "043610",
+          "description": "음원 스트리밍 서비스",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 175,
+        "fields": {
+          "name": "NHN벅스",
+          "code": "104200",
+          "description": "음원 스트리밍 서비스",
+          "theme": 16,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 176,
+        "fields": {
+          "name": "랄프 로렌",
+          "code": "RL",
+          "excd":"NYS",
+          "description": "글로벌 패션 브랜드",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 177,
+        "fields": {
+          "name": "VF",
+          "code": "VFC",
+          "excd":"NYS",
+          "description": "글로벌 의류 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 178,
+        "fields": {
+          "name": "PVH",
+          "code": "PVH",
+          "excd":"NYS",
+          "description": "글로벌 패션 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 179,
+        "fields": {
+          "name": "갭",
+          "code": "GAP",
+          "excd":"NYS",
+          "description": "글로벌 의류 소매 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 180,
+        "fields": {
+          "name": "리바이 스트라우스",
+          "code": "LEVI",
+          "excd":"NYS",
+          "description": "글로벌 데님 의류 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 181,
+        "fields": {
+          "name": "LF",
+          "code": "093050",
+          "description": "패션 브랜드 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 182,
+        "fields": {
+          "name": "휠라홀딩스",
+          "code": "081660",
+          "description": "스포츠 의류 브랜드",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 183,
+        "fields": {
+          "name": "한섬",
+          "code": "020000",
+          "description": "패션 브랜드 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 184,
+        "fields": {
+          "name": "F&F",
+          "code": "007700",
+          "description": "패션 브랜드 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 185,
+        "fields": {
+          "name": "신세계인터내셔날",
+          "code": "031430",
+          "description": "패션 유통 기업",
+          "theme": 17,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 186,
+        "fields": {
+          "name": "테슬라",
+          "code": "TSLA",
+          "excd":"NAS",
+          "description": "전기차 및 배터리 제조 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 187,
+        "fields": {
+          "name": "퀀텀스케이프",
+          "code": "QS",
+          "excd":"NYS",
+          "description": "고체 배터리 개발 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 188,
+        "fields": {
+          "name": "엔페이즈 에너지",
+          "code": "ENPH",
+          "excd":"NAS",
+          "description": "에너지 저장 시스템 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 189,
+        "fields": {
+          "name": "알비마리 리튬",
+          "code": "ALB",
+          "excd":"NYS",
+          "description": "리튬 생산 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 191,
+        "fields": {
+          "name": "엘앤에프",
+          "code": "066970",
+          "description": "2차전지 양극재 제조 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 192,
+        "fields": {
+          "name": "LG에너지솔루션",
+          "code": "373220",
+          "description": "2차전지 제조 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 193,
+        "fields": {
+          "name": "SK이노베이션",
+          "code": "096770",
+          "description": "배터리 및 석유화학 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 194,
+        "fields": {
+          "name": "삼성SDI",
+          "code": "006400",
+          "description": "2차전지 및 전자재료 기업",
+          "theme": 18,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 195,
+        "fields": {
+          "name": "엔비디아",
+          "code": "NVDA",
+          "excd":"NAS",
+          "description": "GPU 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 196,
+        "fields": {
+          "name": "인텔",
+          "code": "INTC",
+          "excd":"NAS",
+          "description": "CPU 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 197,
+        "fields": {
+          "name": "퀄컴",
+          "code": "QCOM",
+          "excd":"NAS",
+          "description": "모바일 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 198,
+        "fields": {
+          "name": "AMD",
+          "code": "AMD",
+          "excd":"NAS",
+          "description": "CPU/GPU 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 199,
+        "fields": {
+          "name": "마이크론 테크놀로지",
+          "code": "MU",
+          "excd":"NAS",
+          "description": "메모리 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 200,
+        "fields": {
+          "name": "삼성전자",
+          "code": "005930",
+          "description": "종합 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 201,
+        "fields": {
+          "name": "LX세미콘",
+          "code": "108320",
+          "description": "시스템 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 202,
+        "fields": {
+          "name": "SK하이닉스",
+          "code": "000660",
+          "description": "메모리 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 203,
+        "fields": {
+          "name": "DB하이텍",
+          "code": "000990",
+          "description": "시스템 반도체 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 204,
+        "fields": {
+          "name": "리노공업",
+          "code": "058470",
+          "description": "반도체 검사 장비 제조 기업",
+          "theme": 19,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 205,
+        "fields": {
+          "name": "부킹 홀딩스",
+          "code": "BKNG",
+          "excd":"NAS",
+          "description": "글로벌 여행 예약 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 206,
+        "fields": {
+          "name": "알파벳 A주",
+          "code": "GOOGL",
+          "excd":"NAS",
+          "description": "검색 및 광고 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 207,
+        "fields": {
+          "name": "메타 플랫폼스",
+          "code": "META",
+          "excd":"NAS",
+          "description": "소셜미디어 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 208,
+        "fields": {
+          "name": "애플",
+          "code": "AAPL",
+          "excd":"NAS",
+          "description": "앱스토어 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 209,
+        "fields": {
+          "name": "우버 테크놀로지스",
+          "code": "UBER",
+          "excd":"NYS",
+          "description": "모빌리티 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 210,
+        "fields": {
+          "name": "NAVER",
+          "code": "035420",
+          "description": "국내 대표 인터넷 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 211,
+        "fields": {
+          "name": "카카오",
+          "code": "035720",
+          "description": "모바일 메신저 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 212,
+        "fields": {
+          "name": "크래프톤",
+          "code": "259960",
+          "description": "게임 플랫폼",
+          "theme": 20,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 215,
+        "fields": {
+          "name": "사이먼 프로퍼티 그룹",
+          "code": "SPG",
+          "excd":"NYS",
+          "description": "상업용 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 216,
+        "fields": {
+          "name": "아발론베이 커뮤니티",
+          "code": "AVB",
+          "excd":"NYS",
+          "description": "주거용 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 217,
+        "fields": {
+          "name": "에쿼티 레지덴셜",
+          "code": "EQR",
+          "excd":"NYS",
+          "description": "주거용 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 218,
+        "fields": {
+          "name": "호스트 호텔 앤 리조트",
+          "code": "HST",
+          "excd":"NAS",
+          "description": "호텔 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 219,
+        "fields": {
+          "name": "프로로지스",
+          "code": "PLD",
+          "excd":"NYS",
+          "description": "물류 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 220,
+        "fields": {
+          "name": "SK리츠",
+          "code": "395400",
+          "description": "오피스 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 221,
+        "fields": {
+          "name": "신한알파리츠",
+          "code": "293940",
+          "description": "오피스 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 222,
+        "fields": {
+          "name": "롯데리츠",
+          "code": "330590",
+          "description": "리테일 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 223,
+        "fields": {
+          "name": "이리츠코크렙",
+          "code": "088260",
+          "description": "물류 부동산 리츠",
+          "theme": 21,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 224,
+        "fields": {
+          "name": "셈프라에너지",
+          "code": "SRE",
+          "excd":"NYS",
+          "description": "청정에너지 발전 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 226,
+        "fields": {
+          "name": "에디슨 인터내셔널",
+          "code": "EIX",
+          "excd":"NYS",
+          "description": "전력 및 신재생에너지 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 227,
+        "fields": {
+          "name": "넥스트에라 에너지",
+          "code": "NEE",
+          "excd":"NYS",
+          "description": "신재생에너지 발전 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 228,
+        "fields": {
+          "name": "플러그 파워",
+          "code": "PLUG",
+          "excd":"NAS",
+          "description": "수소연료전지 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 229,
+        "fields": {
+          "name": "두산에너빌리티",
+          "code": "034020",
+          "description": "발전설비 제조 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 230,
+        "fields": {
+          "name": "두산퓨얼셀",
+          "code": "336260",
+          "description": "연료전지 제조 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 231,
+        "fields": {
+          "name": "OCI",
+          "code": "010060",
+          "description": "태양광 소재 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 232,
+        "fields": {
+          "name": "LS",
+          "code": "006260",
+          "description": "전력 인프라 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 233,
+        "fields": {
+          "name": "씨에스윈드",
+          "code": "112610",
+          "description": "풍력발전 기자재 기업",
+          "theme": 22,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 234,
+        "fields": {
+          "name": "컨스텔레이션브랜드",
+          "code": "STZ",
+          "excd":"NYS",
+          "description": "주류 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 235,
+        "fields": {
+          "name": "몬스터베버리지",
+          "code": "MNST",
+          "excd":"NAS",
+          "description": "에너지 음료 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 236,
+        "fields": {
+          "name": "펩시코",
+          "code": "PEP",
+          "excd":"NAS",
+          "description": "글로벌 음료 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 237,
+        "fields": {
+          "name": "코카콜라",
+          "code": "KO",
+          "excd":"NYS",
+          "description": "글로벌 음료 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 238,
+        "fields": {
+          "name": "큐리그 닥터 페퍼",
+          "code": "KDP",
+          "excd":"NAS",
+          "description": "음료 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 239,
+        "fields": {
+          "name": "동서",
+          "code": "026960",
+          "description": "커피 및 음료 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 240,
+        "fields": {
+          "name": "빙그레",
+          "code": "005180",
+          "description": "음료 및 유제품 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 241,
+        "fields": {
+          "name": "하이트진로",
+          "code": "000080",
+          "description": "주류 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 242,
+        "fields": {
+          "name": "롯데칠성",
+          "code": "005300",
+          "description": "음료 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 243,
+        "fields": {
+          "name": "광동제약",
+          "code": "009290",
+          "description": "음료 및 제약 제조 기업",
+          "theme": 23,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 244,
+        "fields": {
+          "name": "테슬라",
+          "code": "TSLA",
+          "excd":"NAS",
+          "description": "프리미엄 전기차 제조 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 245,
+        "fields": {
+          "name": "PVH",
+          "code": "PVH",
+          "excd":"NYS",
+          "description": "글로벌 럭셔리 패션 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 246,
+        "fields": {
+          "name": "할리-데이비슨",
+          "code": "HOG",
+          "excd":"NYS",
+          "description": "프리미엄 모터사이클 제조 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 247,
+        "fields": {
+          "name": "페라리",
+          "code": "RACE",
+          "excd":"NYS",
+          "description": "슈퍼카 제조 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 248,
+        "fields": {
+          "name": "에스티 로더",
+          "code": "EL",
+          "excd":"NYS",
+          "description": "글로벌 럭셔리 화장품 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 249,
+        "fields": {
+          "name": "현대백화점",
+          "code": "069960",
+          "description": "럭셔리 유통 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 250,
+        "fields": {
+          "name": "신세계인터내셔날",
+          "code": "031430",
+          "description": "럭셔리 브랜드 유통 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 251,
+        "fields": {
+          "name": "한섬",
+          "code": "020000",
+          "description": "프리미엄 패션 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 252,
+        "fields": {
+          "name": "호텔신라",
+          "code": "008770",
+          "description": "면세점 및 호텔 운영 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 253,
+        "fields": {
+          "name": "코오롱인더",
+          "code": "120110",
+          "description": "프리미엄 패션 및 소재 기업",
+          "theme": 24,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 254,
+        "fields": {
+          "name": "코닝",
+          "code": "GLW",
+          "excd":"NYS",
+          "description": "특수 유리 및 세라믹 제조 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 255,
+        "fields": {
+          "name": "듀폰",
+          "code": "DD",
+          "excd":"NYS",
+          "description": "화학 및 소재 과학 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 256,
+        "fields": {
+          "name": "앰코",
+          "code": "AMKR",
+          "excd":"NAS",
+          "description": "반도체 패키징 및 테스트 서비스 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 257,
+        "fields": {
+          "name": "다우",
+          "code": "DOW",
+          "excd":"NYS",
+          "description": "화학 소재 제조 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 258,
+        "fields": {
+          "name": "뉴몬트",
+          "code": "NEM",
+          "excd":"NYS",
+          "description": "금광 채굴 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 259,
+        "fields": {
+          "name": "고려아연",
+          "code": "010130",
+          "description": "아연 제련 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 260,
+        "fields": {
+          "name": "영풍",
+          "code": "000670",
+          "description": "아연 제련 및 전기동 생산 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 261,
+        "fields": {
+          "name": "동국제강",
+          "code": "001230",
+          "description": "철강 제조 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 262,
+        "fields": {
+          "name": "POSCO홀딩스",
+          "code": "005490",
+          "description": "철강 제조 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 263,
+        "fields": {
+          "name": "현대제철",
+          "code": "004020",
+          "description": "철강 제조 기업",
+          "theme": 25,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 264,
+        "fields": {
+          "name": "쉐브론",
+          "code": "CVX",
+          "excd":"NYS",
+          "description": "글로벌 종합 에너지 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 265,
+        "fields": {
+          "name": "애트모스에너지",
+          "code": "ATO",
+          "excd":"NYS",
+          "description": "천연가스 공급 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 266,
+        "fields": {
+          "name": "엑슨모빌",
+          "code": "XOM",
+          "excd":"NYS",
+          "description": "글로벌 석유 에너지 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 267,
+        "fields": {
+          "name": "듀크에너지",
+          "code": "DUK",
+          "excd":"NYS",
+          "description": "전력 에너지 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 268,
+        "fields": {
+          "name": "넥스트에라 에너지",
+          "code": "NEE",
+          "excd":"NYS",
+          "description": "재생 에너지 발전 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 269,
+        "fields": {
+          "name": "한국전력",
+          "code": "015760",
+          "description": "전력 공급 공기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 270,
+        "fields": {
+          "name": "한국가스공사",
+          "code": "036460",
+          "description": "천연가스 공급 공기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 271,
+        "fields": {
+          "name": "S-OIL",
+          "code": "010950",
+          "description": "정유 및 석유화학 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 272,
+        "fields": {
+          "name": "SK이노베이션",
+          "code": "096770",
+          "description": "종합 에너지 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 273,
+        "fields": {
+          "name": "서울가스",
+          "code": "017390",
+          "description": "도시가스 공급 기업",
+          "theme": 26,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 274,
+        "fields": {
+          "name": "스냅",
+          "code": "SNAP",
+          "excd":"NYS",
+          "description": "소셜미디어 플랫폼",
+          "theme": 27,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 275,
+        "fields": {
+          "name": "메타 플랫폼스",
+          "code": "META",
+          "excd":"NAS",
+          "description": "글로벌 소셜미디어 기업",
+          "theme": 27,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 276,
+        "fields": {
+          "name": "핀터레스트",
+          "code": "PINS",
+          "excd":"NYS",
+          "description": "이미지 기반 소셜미디어 플랫폼",
+          "theme": 27,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 277,
+        "fields": {
+          "name": "NAVER",
+          "code": "035420",
+          "description": "소셜미디어 및 인터넷 서비스 기업",
+          "theme": 27,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 278,
+        "fields": {
+          "name": "카카오",
+          "code": "035720",
+          "description": "모바일 소셜 플랫폼 기업",
+          "theme": 27,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 279,
+        "fields": {
+          "name": "엔비디아",
+          "code": "NVDA",
+          "excd":"NAS",
+          "description": "블록체인 채굴용 GPU 제조 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 280,
+        "fields": {
+          "name": "마이크로소프트",
+          "code": "MSFT",
+          "excd":"NAS",
+          "description": "엔터프라이즈 블록체인 솔루션 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 281,
+        "fields": {
+          "name": "메타 플랫폼스",
+          "code": "META",
+          "excd":"NAS",
+          "description": "블록체인 기반 메타버스 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 282,
+        "fields": {
+          "name": "IBM",
+          "code": "IBM",
+          "excd":"NYS",
+          "description": "기업용 블록체인 솔루션 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 283,
+        "fields": {
+          "name": "AMD",
+          "code": "AMD",
+          "excd":"NAS",
+          "description": "블록체인 채굴용 프로세서 제조 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 284,
+        "fields": {
+          "name": "NAVER",
+          "code": "035420",
+          "description": "블록체인 기술 개발 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 285,
+        "fields": {
+          "name": "삼성에스디에스",
+          "code": "018260",
+          "description": "블록체인 플랫폼 개발 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 286,
+        "fields": {
+          "name": "SK텔레콤",
+          "code": "017670",
+          "description": "통신 기반 블록체인 서비스 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 287,
+        "fields": {
+          "name": "KT",
+          "code": "030200",
+          "description": "블록체인 기반 통신 서비스 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 288,
+        "fields": {
+          "name": "카카오",
+          "code": "035720",
+          "description": "블록체인 플랫폼 개발 기업",
+          "theme": 28,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 289,
+        "fields": {
+          "name": "월마트",
+          "code": "WMT",
+          "excd":"NYS",
+          "description": "글로벌 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 290,
+        "fields": {
+          "name": "코스트코 홀세일",
+          "code": "COST",
+          "excd":"NAS",
+          "description": "회원제 창고형 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 291,
+        "fields": {
+          "name": "타겟",
+          "code": "TGT",
+          "excd":"NYS",
+          "description": "대형 할인점 체인",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 292,
+        "fields": {
+          "name": "홈 디포",
+          "code": "HD",
+          "excd":"NYS",
+          "description": "주택 개선 용품 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 293,
+        "fields": {
+          "name": "달러 제너럴",
+          "code": "DG",
+          "excd":"NYS",
+          "description": "할인점 체인",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 294,
+        "fields": {
+          "name": "베스트 바이",
+          "code": "BBY",
+          "excd":"NYS",
+          "description": "가전제품 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 295,
+        "fields": {
+          "name": "이마트",
+          "code": "139480",
+          "description": "대형마트 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 296,
+        "fields": {
+          "name": "현대백화점",
+          "code": "069960",
+          "description": "백화점 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 297,
+        "fields": {
+          "name": "롯데쇼핑",
+          "code": "023530",
+          "description": "종합 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 298,
+        "fields": {
+          "name": "신세계",
+          "code": "004170",
+          "description": "백화점 및 유통 기업",
+          "theme": 29,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 299,
+        "fields": {
+          "name": "PTC",
+          "code": "PTC",
+          "excd":"NAS",
+          "description": "IoT 소프트웨어 솔루션 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 300,
+        "fields": {
+          "name": "NXP 세미컨덕터",
+          "code": "NXPI",
+          "excd":"NAS",
+          "description": "IoT 반도체 제조 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 301,
+        "fields": {
+          "name": "아나로그 디바이스",
+          "code": "ADI",
+          "excd":"NAS",
+          "description": "아날로그 반도체 제조 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 302,
+        "fields": {
+          "name": "센서타 테크놀러지스 홀딩",
+          "code": "ST",
+          "excd":"NYS",
+          "description": "센서 솔루션 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 303,
+        "fields": {
+          "name": "스카이웍스 솔루션",
+          "code": "SWKS",
+          "excd":"NAS",
+          "description": "무선통신 반도체 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 304,
+        "fields": {
+          "name": "실리콘 레버러토리",
+          "code": "SLAB",
+          "excd":"NAS",
+          "description": "IoT 반도체 솔루션 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 305,
+        "fields": {
+          "name": "삼성전자",
+          "code": "005930",
+          "description": "IoT 기기 및 반도체 제조 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 306,
+        "fields": {
+          "name": "SK하이닉스",
+          "code": "000660",
+          "description": "메모리 반도체 제조 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 307,
+        "fields": {
+          "name": "현대오토에버",
+          "code": "307950",
+          "description": "자동차 IoT 솔루션 기업",
+          "theme": 30,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 308,
+        "fields": {
+          "name": "츄이",
+          "code": "CHWY",
+          "excd":"NYS",
+          "description": "온라인 반려동물용품 유통 기업",
+          "theme": 31,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 309,
+        "fields": {
+          "name": "엘랑코 애니멀 헬스",
+          "code": "ELAN",
+          "excd":"NYS",
+          "description": "동물 의약품 제조 기업",
+          "theme": 31,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 310,
+        "fields": {
+          "name": "조에티스",
+          "code": "ZTS",
+          "excd":"NYS",
+          "description": "동물 의약품 및 백신 제조 기업",
+          "theme": 31,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 311,
+        "fields": {
+          "name": "아이덱스 래버러토리",
+          "code": "IDXX",
+          "excd":"NAS",
+          "description": "동물 진단기기 제조 기업",
+          "theme": 31,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 312,
+        "fields": {
+          "name": "카카오게임즈",
+          "code": "293490",
+          "description": "반려동물 플랫폼 운영 기업",
+          "theme": 31,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 313,
+        "fields": {
+          "name": "우리손에프앤지",
+          "code": "073560",
+          "description": "반려동물 사료 제조 기업",
+          "theme": 31,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 314,
+        "fields": {
+          "name": "대한뉴팜",
+          "code": "054670",
+          "description": "동물 의약품 제조 기업",
+          "theme": 31,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 315,
+        "fields": {
+          "name": "프록터 앤드 갬블",
+          "code": "PG",
+          "excd":"NYS",
+          "description": "글로벌 생활용품 및 뷰티 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 316,
+        "fields": {
+          "name": "얼타 뷰티",
+          "code": "ULTA",
+          "excd":"NAS",
+          "description": "뷰티 제품 유통 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 317,
+        "fields": {
+          "name": "존슨앤드존슨",
+          "code": "JNJ",
+          "excd":"NYS",
+          "description": "제약 및 생활용품 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 318,
+        "fields": {
+          "name": "코티",
+          "code": "COTY",
+          "excd":"NYS",
+          "description": "글로벌 화장품 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 319,
+        "fields": {
+          "name": "에스티로더",
+          "code": "EL",
+          "excd":"NYS",
+          "description": "글로벌 프리미엄 화장품 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 320,
+        "fields": {
+          "name": "LG생활건강",
+          "code": "051900",
+          "description": "생활용품 및 화장품 제조 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 321,
+        "fields": {
+          "name": "아모레G",
+          "code": "002790",
+          "description": "화장품 지주회사",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 322,
+        "fields": {
+          "name": "코스맥스",
+          "code": "192820",
+          "description": "화장품 연구개발 및 제조 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 323,
+        "fields": {
+          "name": "아모레퍼시픽",
+          "code": "090430",
+          "description": "화장품 제조 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      },
+      {
+        "model": "stock.stock",
+        "pk": 324,
+        "fields": {
+          "name": "한국콜마",
+          "code": "161890",
+          "description": "화장품 연구개발 및 제조 기업",
+          "theme": 32,
+          "price": 0,
+          "per": "0.00",
+          "pbr": "0.00",
+          "consensus": "",
+          "eps": "0.00",
+          "logo_img": ""
+        }
+      }
+]
